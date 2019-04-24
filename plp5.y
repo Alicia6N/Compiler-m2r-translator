@@ -26,7 +26,13 @@ extern int yylex();
 extern char *yytext;
 extern FILE *yyin;
 int yyerror(char *s);
-
+//Constantes
+const int ENTERO=1;
+const int REAL=2;
+const int ARRAY=3;
+const int MEM = 16384;
+int actual_mem = 0;
+TablaSimbolos *ts = new TablaSimbolos(NULL);
 %}
 
 S : class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
@@ -36,23 +42,35 @@ S : class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
 
 Metodos : int main pari pard Bloque {};
 
-Tipo : int {}
-     | float {};
+Tipo : int {$$.tipo = 1 }
+     | float {$$.tipo = 2 };
 
 Bloque : llavei BDecl SeqInstr llaved {};
 
-BDecl : BDecl DVar {}
-      | {};
+BDecl : BDecl DVar {$$.code = "";}
+      | {$$.code = "";};
 
-DVar : Tipo LIdent pyc {};
+DVar : Tipo {$$.tipo = $1.tipo;} LIdent pyc {$$.code = "";};
 
 LIdent : LIdent coma Variable {}
        | Variable {};
 
-Variable : id V {};
+Variable : id V {
+                $1.tipo = $0.tipo;
+                if(!buscarAmbito(ts,$1.lexema))  {
+                  Simbolo s;
+                  s.nombre = $1.lexema;
+                  s.tipo = $1.tipo;
+                  anyadir(ts,s);
+                  actual_mem++;
+                }    
+                else{
+                   msgError(ERRYADECL,$1.nlin,$1.ncol,$1.lexema);  
+                }        
+               };
 
 V : cori nentero cord V {}
-  | {};
+    | {};
 
 SeqInstr : SeqInstr Instr {};
 
@@ -185,4 +203,42 @@ int main(int argc, char *argv[]){
    }
    else
       fprintf(stderr, "Uso: ejemplo <nombre de fichero>\n");
+}
+/*****TABLA SIMBOLOS*********/
+bool buscarAmbito(TablaSimbolos *root,string nombre){
+  for(size_t i=0;i<root->simbolos.size();i++){
+        if(root->simbolos[i].nombre == nombre){
+            return true;
+        }
+    }
+    return false;
+}
+bool anyadir(TablaSimbolos *t,Simbolo s){
+    for(size_t i=0; i<t->simbolos.size();i++){
+        if(t->simbolos[i].nombre==s.nombre){
+            return false;
+        }
+
+    }
+    t->simbolos.push_back(s);
+    return true;
+
+}
+Simbolo buscar(TablaSimbolos *root,string nombre){
+    for(size_t i=0;i<root->simbolos.size();i++){
+        if(root->simbolos[i].nombre == nombre){
+            
+            return root->simbolos[i];
+        }
+    }
+    if(root->root != NULL){ 
+        return buscar(root->root,nombre);
+    }
+
+}
+TablaSimbolos* create_scope(TablaSimbolos* root){
+    TablaSimbolos* child = new TablaSimbolos(root);
+    child->root = root;
+    return child;
+
 }

@@ -5,9 +5,23 @@ using namespace std;
 
 typedef struct {
    char *lexema;
-   string trad;
+   string code;
    int nlin, ncol;
+   int tipo;
+   int size;
+   int dir;
 } MITIPO;
+
+struct Simbolo {
+    string nombre;
+    int tipo;
+    string nomtrad;
+};
+struct TablaSimbolos {
+    TablaSimbolos *root;
+    std::vector<Simbolo> simbolos;
+    TablaSimbolos(TablaSimbolos *t){root=t;}
+};
 
 #define YYSTYPE MITIPO
 
