@@ -28,18 +28,22 @@ void msgError(int nerror, int nlin,int ncol,const char *s); // funcion para prod
 [\n]                {nlin++;ncol=1;}
 "//"(.)*            {; /* comentarios de una linea, no hacer nada */}
 
-"class"             {return ret(class);}
+"class"             {return ret(_class);}
 "attributes"        {return ret(attributes);}
 "methods"           {return ret(methods);}
-"int"               {return ret(int);}
-"float"             {return ret(float);}
-"main"              {return ret(main);}
-"print"             {return ret(print);}
-"scan"              {return ret(scan);}
-"if"                {return ret(if);}
-"else"              {return ret(else);}
-"while"             {return ret(while);}
-"this"              {return ret(this);}
+"int"               {return ret(_int);}
+"float"             {return ret(_float);}
+"main"              {return ret(_main);}
+"print"             {return ret(_print);}
+"scan"              {return ret(_scan);}
+"if"                {return ret(_if);}
+"else"              {return ret(_else);}
+"while"             {return ret(_while);}
+"this"              {return ret(_this);}
+
+
+"return"            {return ret(_return);}
+
 
 {L}({LD})*          {return ret(id);}
 {D}+                {return ret(nentero);}

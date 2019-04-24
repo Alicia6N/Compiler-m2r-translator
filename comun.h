@@ -16,6 +16,7 @@ struct Simbolo {
     string nombre;
     int tipo;
     int dir;
+    int size;
     string nomtrad;
 };
 struct TablaSimbolos {

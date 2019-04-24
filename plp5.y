@@ -4,10 +4,10 @@
 %token nentero nreal _float
 %token  dosp coma pyc punto
 %token pari pard relop addop
-%token mulop assig cori cord
-%token llavei llaved
+%token mulop asig cori cord
+%token llavei llaved 
 
-%token return
+%token _return
 
 %{
 
@@ -18,6 +18,7 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <string>
 #include "comun.h"
 using namespace std;
 
@@ -35,19 +36,29 @@ const int MEM = 16384;
 int ACTUAL_MEM = 0;
 int TEMP_VAR = 0;
 TablaSimbolos *ts = new TablaSimbolos(NULL);
+void deleteScope(TablaSimbolos* root);
+TablaSimbolos* createScope(TablaSimbolos* root);
+Simbolo buscarClase(TablaSimbolos *root, string nombre);
+Simbolo buscar(TablaSimbolos *root,string nombre);
+bool anyadir(TablaSimbolos *t,Simbolo s);
+bool buscarAmbito(TablaSimbolos *root,string nombre);
 %}
-
-S : class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
+%%
+S : _class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
                                                                            int tk = yylex();
                                                                            if (tk != 0) yyerror("");
                                                                         };
 
-Metodos : int main pari pard Bloque {};
+Metodos : _int _main pari pard Bloque {};
 
-Tipo : int {$$.tipo = ENTERO; }
-     | float {$$.tipo = REAL; };
+Tipo : _int {$$.tipo = ENTERO; }
+     | _float {$$.tipo = REAL; };
 
-Bloque : llavei BDecl SeqInstr llaved {};
+Bloque : llavei {ts = new TablaSimbolos(ts);} BDecl SeqInstr llaved {
+                                                                     $$.code = $3.code;
+                                                                     deleteScope(ts);
+                                                                     ts = ts->root;
+                                                                    };
 
 BDecl : BDecl DVar {$$.code = "";}
       | {$$.code = "";};
@@ -67,6 +78,7 @@ Variable : id { $$.array = 1; } V   {
                                           s.tipo = $1.tipo;
                                           ACTUAL_MEM += $3.size;
                                           s.dir = ACTUAL_MEM;
+                                          s.size = $3.size;
                                           anyadir(ts,s);
                                           if (ACTUAL_MEM >= MEM)
                                              msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);
@@ -89,19 +101,19 @@ SeqInstr : SeqInstr Instr { $$.code = $1.code + $2.code; }
 Instr : pyc {  }
       | Bloque { $$.code = $1.code; }
       | Ref asig Expr pyc {  }
-      | print pari Expr pard pyc {}
-      | scan pari Ref pard pyc {}
-      | if pari Expr pard Instr {}
-      | if pari Expr pard Instr else Instr {}
-      | while pari Expr pard Instr {};
+      | _print pari Expr pard pyc {}
+      | _scan pari Ref pard pyc {}
+      | _if pari Expr pard Instr {}
+      | _if pari Expr pard Instr _else Instr {}
+      | _while pari Expr pard Instr {};
 
-Expr : Exptr relop Esimple {}
-     | Esimple{};
+Expr : Expr relop Esimple {}
+     | Esimple {};
 
-Esimple : Esimple addop Term{}
-        | Term{};
+Esimple : Esimple addop Term {}
+        | Term {};
 
-Term : Term mulop Factor{}
+Term : Term mulop Factor {}
      | Factor {};
 
 Factor : Ref {}
@@ -109,7 +121,7 @@ Factor : Ref {}
        | nreal {}
        | pari Expr pard {};
 
-Ref : this punto id  {
+Ref : _this punto id  {
                         Simbolo s = buscarClase(ts, $1.lexema);
                         if (s.nombre != ""){
                            $$.tipo = s.tipo;
@@ -118,7 +130,7 @@ Ref : this punto id  {
                               TEMP_VAR++;
                               if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
                                  msgError(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);  
-                              $$.code = "mov " + id.dir + " " + (ACTUAL_MEM + TEMP_VAR) + "; Ref -> this.id (" + s.nombre + ")";
+                              $$.code = "mov " + to_string(s.dir) + " "  + to_string((ACTUAL_MEM + TEMP_VAR)) + "; Ref -> this.id (" + s.nombre + ")";
                            }
                         }
                         else
@@ -133,12 +145,14 @@ Ref : this punto id  {
                   TEMP_VAR++;
                   if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
                      msgError(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);  
-                  $$.code = "mov " + id.dir + " " + (ACTUAL_MEM + TEMP_VAR) + "; Ref -> id (" + s.nombre + ")";
-               }
+                  int aux = (ACTUAL_MEM + TEMP_VAR);
+                  $$.code = "mov " +  to_string(s.dir) + " "  + to_string((ACTUAL_MEM + TEMP_VAR)) + "; Ref -> this.id (" + s.nombre + ")";
+                                   
             }
             else
                msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
          }
+     }
     | Ref cori Esimple cord {};
 
 
@@ -154,7 +168,7 @@ CArg : Tipo id CArgp {};
 CArgp : coma Tipo id CArgp {}
       | {};
 
-Instr : return Expr pyc {};
+Instr : _return Expr pyc {};
 
 Factor : id pari Par pard {};
 
@@ -166,7 +180,7 @@ CPar : {}
 
 %%
 
-%%
+
 
 void msgError(int nerror, int nlin, int ncol, const char *s){
      switch (nerror) {
@@ -284,8 +298,14 @@ Simbolo buscarClase(TablaSimbolos *root, string nombre){
       }
    }
 }
-TablaSimbolos* create_scope(TablaSimbolos* root){
+TablaSimbolos* createScope(TablaSimbolos* root){
     TablaSimbolos* child = new TablaSimbolos(root);
     child->root = root;
     return child;
+}
+void deleteScope(TablaSimbolos* root){
+   for(size_t i = 0; i < root->simbolos.size(); i++){
+      ACTUAL_MEM-=root->simbolos[i].size;
+   }
+   TEMP_VAR = 0;
 }
