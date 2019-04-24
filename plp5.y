@@ -14,6 +14,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstdlib>
 #include <string>
 #include <iostream>
 #include <algorithm>
@@ -31,19 +32,20 @@ const int ENTERO=1;
 const int REAL=2;
 const int ARRAY=3;
 const int MEM = 16384;
-int actual_mem = 0;
+int ACTUAL_MEM = 0;
+int TEMP_VAR = 0;
 TablaSimbolos *ts = new TablaSimbolos(NULL);
 %}
 
 S : class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
-                                                                            int tk = yylex();
-                                                                            if (tk != 0) yyerror("");
+                                                                           int tk = yylex();
+                                                                           if (tk != 0) yyerror("");
                                                                         };
 
 Metodos : int main pari pard Bloque {};
 
-Tipo : int {$$.tipo = 1 }
-     | float {$$.tipo = 2 };
+Tipo : int {$$.tipo = ENTERO; }
+     | float {$$.tipo = REAL; };
 
 Bloque : llavei BDecl SeqInstr llaved {};
 
@@ -52,31 +54,41 @@ BDecl : BDecl DVar {$$.code = "";}
 
 DVar : Tipo {$$.tipo = $1.tipo;} LIdent pyc {$$.code = "";};
 
-LIdent : LIdent coma Variable {}
-       | Variable {};
+LIdent : LIdent coma {$$.tipo = $0.tipo;} Variable {}
+       | {$$.tipo = $0.tipo;} Variable {};
 
-Variable : id V {
-                $1.tipo = $0.tipo;
-                if(!buscarAmbito(ts,$1.lexema))  {
-                  Simbolo s;
-                  s.nombre = $1.lexema;
-                  s.tipo = $1.tipo;
-                  anyadir(ts,s);
-                  actual_mem++;
-                }    
-                else{
-                   msgError(ERRYADECL,$1.nlin,$1.ncol,$1.lexema);  
-                }        
-               };
+Variable : id { $$.array = 1; } V   {
+                                       $1.tipo = $0.tipo;
+                                       if ($3.tipo == ARRAY)
+                                          $1.tipo = ARRAY;
+                                       if(!buscarAmbito(ts,$1.lexema))  {
+                                          Simbolo s;
+                                          s.nombre = $1.lexema;
+                                          s.tipo = $1.tipo;
+                                          ACTUAL_MEM += $3.size;
+                                          s.dir = ACTUAL_MEM;
+                                          anyadir(ts,s);
+                                          if (ACTUAL_MEM >= MEM)
+                                             msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);
+                                       }    
+                                       else{
+                                          msgError(ERRYADECL,$1.nlin,$1.ncol,$1.lexema);  
+                                       }        
+                                    };
 
-V : cori nentero cord V {}
-    | {};
+V : cori nentero cord { $$.array = $0.array * atoi($2.lexema); } V   { 
+                                                                        $$.size = $5.size;
+                                                                        if ($$.size > 1)
+                                                                           $$.tipo = ARRAY;
+                                                                     }
+  | { $$.size = $0.size; };
 
-SeqInstr : SeqInstr Instr {};
+SeqInstr : SeqInstr Instr { $$.code = $1.code + $2.code; }
+         | {  };
 
-Instr : pyc {}
-      | Bloque {}
-      | Ref asig Expr pyc {}
+Instr : pyc {  }
+      | Bloque { $$.code = $1.code; }
+      | Ref asig Expr pyc {  }
       | print pari Expr pard pyc {}
       | scan pari Ref pard pyc {}
       | if pari Expr pard Instr {}
@@ -97,8 +109,36 @@ Factor : Ref {}
        | nreal {}
        | pari Expr pard {};
 
-Ref : this punto id {}
-    | id {}
+Ref : this punto id  {
+                        Simbolo s = buscarClase(ts, $1.lexema);
+                        if (s.nombre != ""){
+                           $$.tipo = s.tipo;
+                           $$.dir = s.dir;
+                           if ($$.tipo != 3){
+                              TEMP_VAR++;
+                              if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
+                                 msgError(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);  
+                              $$.code = "mov " + id.dir + " " + (ACTUAL_MEM + TEMP_VAR) + "; Ref -> this.id (" + s.nombre + ")";
+                           }
+                        }
+                        else
+                           msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
+                     }
+    | id { 
+            Simbolo s = buscar(ts, $1.lexema);
+            if (s.nombre != ""){
+               $$.tipo = s.tipo;
+               $$.dir = s.dir;
+               if ($$.tipo != 3){
+                  TEMP_VAR++;
+                  if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
+                     msgError(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);  
+                  $$.code = "mov " + id.dir + " " + (ACTUAL_MEM + TEMP_VAR) + "; Ref -> id (" + s.nombre + ")";
+               }
+            }
+            else
+               msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
+         }
     | Ref cori Esimple cord {};
 
 
@@ -225,20 +265,27 @@ bool anyadir(TablaSimbolos *t,Simbolo s){
 
 }
 Simbolo buscar(TablaSimbolos *root,string nombre){
-    for(size_t i=0;i<root->simbolos.size();i++){
-        if(root->simbolos[i].nombre == nombre){
-            
-            return root->simbolos[i];
-        }
-    }
-    if(root->root != NULL){ 
-        return buscar(root->root,nombre);
-    }
-
+   for(size_t i = 0; i < root->simbolos.size(); i++){
+      if(root->simbolos[i].nombre == nombre){
+         return root->simbolos[i];
+      }
+   }
+   if(root->root != NULL){ 
+      return buscar(root->root, nombre);
+   }
+}
+Simbolo buscarClase(TablaSimbolos *root, string nombre){
+   if (root->root != NULL)
+      buscarClase(root->root, nombre);
+   
+   for(size_t i = 0; i < root->simbolos.size(); i++){
+      if(root->simbolos[i].nombre == nombre){
+         return root->simbolos[i];
+      }
+   }
 }
 TablaSimbolos* create_scope(TablaSimbolos* root){
     TablaSimbolos* child = new TablaSimbolos(root);
     child->root = root;
     return child;
-
 }

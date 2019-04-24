@@ -8,13 +8,14 @@ typedef struct {
    string code;
    int nlin, ncol;
    int tipo;
-   int size;
+   int size, array;
    int dir;
 } MITIPO;
 
 struct Simbolo {
     string nombre;
     int tipo;
+    int dir;
     string nomtrad;
 };
 struct TablaSimbolos {
