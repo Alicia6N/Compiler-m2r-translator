@@ -1,0 +1,30 @@
+
+
+
+
+                    a = 3 + 2 + 1 + 4.5 - 3
+
+                        itor (3 + 2 + 1) + 4.5 - itor(3)
+
+
+                    mov #3 tmp
+                    mov tmp a
+                    addi #2
+                    mov a tmp
+                    mov tmp a
+                    addi #1
+                    mov a tmp
+
+                    mov tmp a
+                    itor
+                    addr $4.5   ;tipo = 2
+                    mov a tmp
+
+                    ; if (tipo = 2)
+                    mov #3 a
+                    itor
+                    addr tmp
+                    mov a tmp
+
+                    ; igual
+                    ...

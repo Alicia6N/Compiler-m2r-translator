@@ -42,6 +42,8 @@ Simbolo buscarClase(TablaSimbolos *root, string nombre);
 Simbolo buscar(TablaSimbolos *root,string nombre);
 bool anyadir(TablaSimbolos *t,Simbolo s);
 bool buscarAmbito(TablaSimbolos *root,string nombre);
+int nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
+
 %}
 %%
 S : _class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
@@ -117,9 +119,17 @@ Term : Term mulop Factor {}
      | Factor {};
 
 Factor : Ref {}
-       | nentero {}
-       | nreal {}
-       | pari Expr pard {};
+       | nentero  {
+                     int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
+                     $$.code = "mov #" + $1.lexema + " "  + to_string(temp) + "\t; Factor -> nentero (" + $1.lexema + ")";
+                  }
+       | nreal    {
+                     int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
+                     $$.code = "mov $" + $1.lexema + " "  + to_string(temp) + "\t; Factor -> nreal (" + $1.lexema + ")";
+                  }
+       | pari Expr pard { 
+                           $$.code = "\t; Factor -> pari Expr pard" + $2.code;
+                        };
 
 Ref : _this punto id  {
                         Simbolo s = buscarClase(ts, $1.lexema);
@@ -127,10 +137,8 @@ Ref : _this punto id  {
                            $$.tipo = s.tipo;
                            $$.dir = s.dir;
                            if ($$.tipo != 3){
-                              TEMP_VAR++;
-                              if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
-                                 msgError(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);  
-                              $$.code = "mov " + to_string(s.dir) + " "  + to_string((ACTUAL_MEM + TEMP_VAR)) + "; Ref -> this.id (" + s.nombre + ")";
+                              int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
+                              $$.code = "mov " + to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")";
                            }
                         }
                         else
@@ -142,12 +150,8 @@ Ref : _this punto id  {
                $$.tipo = s.tipo;
                $$.dir = s.dir;
                if ($$.tipo != 3){
-                  TEMP_VAR++;
-                  if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
-                     msgError(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);  
-                  int aux = (ACTUAL_MEM + TEMP_VAR);
-                  $$.code = "mov " +  to_string(s.dir) + " "  + to_string((ACTUAL_MEM + TEMP_VAR)) + "; Ref -> this.id (" + s.nombre + ")";
-                                   
+                  int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                  $$.code = "mov " +  to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")";
             }
             else
                msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
@@ -179,8 +183,6 @@ CPar : {}
      | coma Expr CPar {};
 
 %%
-
-
 
 void msgError(int nerror, int nlin, int ncol, const char *s){
      switch (nerror) {
@@ -240,6 +242,14 @@ bool equalsIgnoreCase(string s1, char* lexema){
       return true;
 
    return false;
+}
+
+int nuevoTemporal(int nerror, int nlin, int ncol, const char *s){
+   TEMP_VAR++;
+   if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
+      msgError(nerror, nlin, ncol, s);
+
+   return (ACTUAL_MEM + TEMP_VAR);
 }
 
 int main(int argc, char *argv[]){
