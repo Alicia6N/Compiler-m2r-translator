@@ -1,0 +1,45 @@
+a = 1 + 2 * 3 * 5 + 4
+
+asumiendo que tenemos hasta 8500 en memoria.
+
+
+
+
+//Term mulop Factor
+mov #2 8501
+mov 8501 A
+
+mov #3 8502
+muli 8502
+mov #5 8503
+muli 8503
+
+mov A 8501
+
+
+//Esimple addop Term
+mov #1 A
+addi 8501
+addi #4
+
+mov A a.dir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mov #2 1.ftemp
+mov 1.ftemp A
+muli 3.ftemp
+muli 5.ftemp
+mov A 8501

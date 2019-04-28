@@ -5,7 +5,7 @@ using namespace std;
 
 typedef struct {
    char *lexema;
-   string code;
+   string code, ftemp;
    int nlin, ncol;
    int tipo;
    int size, array;

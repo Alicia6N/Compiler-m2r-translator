@@ -33,7 +33,7 @@ const int ENTERO=1;
 const int REAL=2;
 const int ARRAY=3;
 const int MEM = 16384;
-int ACTUAL_MEM = 0;
+int ACTUAL_MEM = 8499;
 int TEMP_VAR = 0;
 TablaSimbolos *ts = new TablaSimbolos(NULL);
 void deleteScope(TablaSimbolos* root);
@@ -102,7 +102,10 @@ SeqInstr : SeqInstr Instr { $$.code = $1.code + $2.code; }
 
 Instr : pyc {  }
       | Bloque { $$.code = $1.code; }
-      | Ref asig Expr pyc {  }
+      | Ref asig Expr pyc  { 
+                              $$.code = $3.code;
+                              cout << $$.code << endl;
+                           }
       | _print pari Expr pard pyc {}
       | _scan pari Ref pard pyc {}
       | _if pari Expr pard Instr {}
@@ -112,20 +115,38 @@ Instr : pyc {  }
 Expr : Expr relop Esimple {}
      | Esimple {};
 
-Esimple : Esimple addop Term {}
-        | Term {};
+Esimple : Esimple addop Term  {   
+                                 $$.code = $1.code;
+                                 int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                                 $$.code += "mov A " + to_string(temp); 
+                              }
+        | Term { 
+                  $$.code = $1.code;
+                  int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                  $$.code += "mov A " + to_string(temp);
+               };
 
-Term : Term mulop Factor {}
-     | Factor {};
+Term : Term mulop Factor   {
+                              $$.code = $1.code;
+                              $$.code += $3.code;
+                              $$.code += "muli " + $3.ftemp + "\n";
+                           }
+     | Factor  { 
+                  $$.code = $1.code;
+                  $$.code += "mov " + $1.ftemp + " A\n";
+               };
 
 Factor : Ref {}
        | nentero  {
-                     int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
-                     $$.code = "mov #" + $1.lexema + " "  + to_string(temp) + "\t; Factor -> nentero (" + $1.lexema + ")";
+                     int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                     string aux_lex = $1.lexema;
+                     $$.code = "mov #" + aux_lex + " "  + to_string(temp) + "\t; Factor -> nentero (" + aux_lex + ")\n";
+                     $$.ftemp = to_string(temp);
                   }
        | nreal    {
-                     int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
-                     $$.code = "mov $" + $1.lexema + " "  + to_string(temp) + "\t; Factor -> nreal (" + $1.lexema + ")";
+                     int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                     string aux_lex = $1.lexema;
+                     $$.code = "mov $" + aux_lex + " "  + to_string(temp) + "\t; Factor -> nreal (" + aux_lex + ")\n";
                   }
        | pari Expr pard { 
                            $$.code = "\t; Factor -> pari Expr pard" + $2.code;
