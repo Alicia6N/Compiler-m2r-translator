@@ -1,0 +1,23 @@
+class errsem1 {
+ attributes:
+
+  int a,b,c,d,e,f,g;
+
+ methods:
+
+  int main() {
+    float a,b;
+
+    a = 8;
+    {
+       int b,c,h;
+
+       b = 9;
+       {
+         this.a = 10+b;
+
+         this.h = 11;
+       }
+    } 
+  }
+}

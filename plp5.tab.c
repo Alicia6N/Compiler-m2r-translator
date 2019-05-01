@@ -87,19 +87,27 @@ const int ENTERO=1;
 const int REAL=2;
 const int ARRAY=3;
 const int MEM = 16384;
-int ACTUAL_MEM = 8499;
+int ACTUAL_MEM = 0;
 int TEMP_VAR = 0;
 TablaSimbolos *ts = new TablaSimbolos(NULL);
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
 Simbolo buscarClase(TablaSimbolos *root, string nombre);
-Simbolo buscar(TablaSimbolos *root,string nombre);
+Simbolo buscar(TablaSimbolos *root, string nombre);
 bool anyadir(TablaSimbolos *t,Simbolo s);
-bool buscarAmbito(TablaSimbolos *root,string nombre);
+bool buscarAmbito(TablaSimbolos *root, string nombre);
 int nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
 
+// TO DO: - en "Ref : id" estar seguros de poder coger el del ambito más cercano que lo tenga declarado | y en "Ref : this"?
+//        - poner el error de NO ES DE AMBITO CLASE en el "Ref : this"
+//        - liberar memoria despues de hacer movs que ya no necesitemos en el futuro (mirar ultimo arbol)
+//        - pasar los tipos por atributos heredados
+//        - si el tipo cambia de 1 a 2, entonces hacer itor | mirar para cuando es rtor!
+//        - hacer las multiplicaciones tambien
+//        - mover los resultados de una variable a su dir
 
-#line 103 "plp5.tab.c" /* yacc.c:339  */
+
+#line 111 "plp5.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -183,7 +191,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 187 "plp5.tab.c" /* yacc.c:358  */
+#line 195 "plp5.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -483,12 +491,12 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    49,    49,    54,    56,    57,    59,    59,    65,    66,
-      68,    68,    70,    70,    71,    71,    73,    73,    93,    93,
-      98,   100,   101,   103,   104,   105,   109,   110,   111,   112,
-     113,   115,   116,   118,   123,   129,   134,   139,   140,   146,
-     151,   155,   168,   181,   184,   186,   188,   189,   191,   193,
-     194,   196,   198,   200,   201,   203,   204
+       0,    57,    57,    62,    64,    65,    67,    67,    74,    75,
+      77,    77,    79,    79,    80,    80,    82,    82,   102,   102,
+     107,   109,   110,   112,   113,   114,   117,   118,   119,   120,
+     121,   123,   124,   126,   131,   137,   142,   147,   152,   158,
+     163,   167,   181,   195,   197,   199,   201,   202,   204,   206,
+     207,   209,   211,   213,   214,   216,   217
 };
 #endif
 
@@ -1339,104 +1347,105 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 49 "plp5.y" /* yacc.c:1646  */
+#line 57 "plp5.y" /* yacc.c:1646  */
     {
                                                                            int tk = yylex();
                                                                            if (tk != 0) yyerror("");
                                                                         }
-#line 1348 "plp5.tab.c" /* yacc.c:1646  */
+#line 1356 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 54 "plp5.y" /* yacc.c:1646  */
+#line 62 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1354 "plp5.tab.c" /* yacc.c:1646  */
+#line 1362 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 56 "plp5.y" /* yacc.c:1646  */
+#line 64 "plp5.y" /* yacc.c:1646  */
     {(yyval).tipo = ENTERO; }
-#line 1360 "plp5.tab.c" /* yacc.c:1646  */
+#line 1368 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 57 "plp5.y" /* yacc.c:1646  */
+#line 65 "plp5.y" /* yacc.c:1646  */
     {(yyval).tipo = REAL; }
-#line 1366 "plp5.tab.c" /* yacc.c:1646  */
+#line 1374 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 59 "plp5.y" /* yacc.c:1646  */
+#line 67 "plp5.y" /* yacc.c:1646  */
     {ts = new TablaSimbolos(ts);}
-#line 1372 "plp5.tab.c" /* yacc.c:1646  */
+#line 1380 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 59 "plp5.y" /* yacc.c:1646  */
+#line 67 "plp5.y" /* yacc.c:1646  */
     {
-                                                                     (yyval).code = (yyvsp[-2]).code;
+                                                                     (yyval).code = (yyvsp[-2]).code + (yyvsp[-1]).code;
                                                                      deleteScope(ts);
                                                                      ts = ts->root;
+                                                                     cout << (yyval).code << endl;
                                                                     }
-#line 1382 "plp5.tab.c" /* yacc.c:1646  */
+#line 1391 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 65 "plp5.y" /* yacc.c:1646  */
+#line 74 "plp5.y" /* yacc.c:1646  */
     {(yyval).code = "";}
-#line 1388 "plp5.tab.c" /* yacc.c:1646  */
+#line 1397 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 66 "plp5.y" /* yacc.c:1646  */
+#line 75 "plp5.y" /* yacc.c:1646  */
     {(yyval).code = "";}
-#line 1394 "plp5.tab.c" /* yacc.c:1646  */
+#line 1403 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 68 "plp5.y" /* yacc.c:1646  */
+#line 77 "plp5.y" /* yacc.c:1646  */
     {(yyval).tipo = (yyvsp[0]).tipo;}
-#line 1400 "plp5.tab.c" /* yacc.c:1646  */
+#line 1409 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 68 "plp5.y" /* yacc.c:1646  */
+#line 77 "plp5.y" /* yacc.c:1646  */
     {(yyval).code = "";}
-#line 1406 "plp5.tab.c" /* yacc.c:1646  */
+#line 1415 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 70 "plp5.y" /* yacc.c:1646  */
+#line 79 "plp5.y" /* yacc.c:1646  */
     {(yyval).tipo = (yyvsp[-2]).tipo;}
-#line 1412 "plp5.tab.c" /* yacc.c:1646  */
+#line 1421 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 70 "plp5.y" /* yacc.c:1646  */
+#line 79 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1418 "plp5.tab.c" /* yacc.c:1646  */
+#line 1427 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 71 "plp5.y" /* yacc.c:1646  */
+#line 80 "plp5.y" /* yacc.c:1646  */
     {(yyval).tipo = (yyvsp[0]).tipo;}
-#line 1424 "plp5.tab.c" /* yacc.c:1646  */
+#line 1433 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 71 "plp5.y" /* yacc.c:1646  */
+#line 80 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1430 "plp5.tab.c" /* yacc.c:1646  */
+#line 1439 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 73 "plp5.y" /* yacc.c:1646  */
+#line 82 "plp5.y" /* yacc.c:1646  */
     { (yyval).array = 1; }
-#line 1436 "plp5.tab.c" /* yacc.c:1646  */
+#line 1445 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 73 "plp5.y" /* yacc.c:1646  */
+#line 82 "plp5.y" /* yacc.c:1646  */
     {
                                        (yyvsp[-2]).tipo = (yyvsp[-3]).tipo;
                                        if ((yyvsp[0]).tipo == ARRAY)
@@ -1456,182 +1465,185 @@ yyreduce:
                                           msgError(ERRYADECL,(yyvsp[-2]).nlin,(yyvsp[-2]).ncol,(yyvsp[-2]).lexema);  
                                        }        
                                     }
-#line 1460 "plp5.tab.c" /* yacc.c:1646  */
+#line 1469 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 93 "plp5.y" /* yacc.c:1646  */
+#line 102 "plp5.y" /* yacc.c:1646  */
     { (yyval).array = (yyvsp[-3]).array * atoi((yyvsp[-1]).lexema); }
-#line 1466 "plp5.tab.c" /* yacc.c:1646  */
+#line 1475 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 93 "plp5.y" /* yacc.c:1646  */
+#line 102 "plp5.y" /* yacc.c:1646  */
     { 
                                                                         (yyval).size = (yyvsp[0]).size;
                                                                         if ((yyval).size > 1)
                                                                            (yyval).tipo = ARRAY;
                                                                      }
-#line 1476 "plp5.tab.c" /* yacc.c:1646  */
+#line 1485 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 98 "plp5.y" /* yacc.c:1646  */
+#line 107 "plp5.y" /* yacc.c:1646  */
     { (yyval).size = (yyvsp[0]).size; }
-#line 1482 "plp5.tab.c" /* yacc.c:1646  */
+#line 1491 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 100 "plp5.y" /* yacc.c:1646  */
+#line 109 "plp5.y" /* yacc.c:1646  */
     { (yyval).code = (yyvsp[-1]).code + (yyvsp[0]).code; }
-#line 1488 "plp5.tab.c" /* yacc.c:1646  */
+#line 1497 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 101 "plp5.y" /* yacc.c:1646  */
+#line 110 "plp5.y" /* yacc.c:1646  */
     {  }
-#line 1494 "plp5.tab.c" /* yacc.c:1646  */
+#line 1503 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 103 "plp5.y" /* yacc.c:1646  */
+#line 112 "plp5.y" /* yacc.c:1646  */
     {  }
-#line 1500 "plp5.tab.c" /* yacc.c:1646  */
+#line 1509 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 104 "plp5.y" /* yacc.c:1646  */
+#line 113 "plp5.y" /* yacc.c:1646  */
     { (yyval).code = (yyvsp[0]).code; }
-#line 1506 "plp5.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 25:
-#line 105 "plp5.y" /* yacc.c:1646  */
-    { 
-                              (yyval).code = (yyvsp[-1]).code;
-                              cout << (yyval).code << endl;
-                           }
 #line 1515 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
+  case 25:
+#line 114 "plp5.y" /* yacc.c:1646  */
+    { 
+                              (yyval).code = (yyvsp[-1]).code;
+                           }
+#line 1523 "plp5.tab.c" /* yacc.c:1646  */
+    break;
+
   case 26:
-#line 109 "plp5.y" /* yacc.c:1646  */
+#line 117 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1521 "plp5.tab.c" /* yacc.c:1646  */
+#line 1529 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 110 "plp5.y" /* yacc.c:1646  */
+#line 118 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1527 "plp5.tab.c" /* yacc.c:1646  */
+#line 1535 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 111 "plp5.y" /* yacc.c:1646  */
+#line 119 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1533 "plp5.tab.c" /* yacc.c:1646  */
+#line 1541 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 112 "plp5.y" /* yacc.c:1646  */
+#line 120 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1539 "plp5.tab.c" /* yacc.c:1646  */
+#line 1547 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 113 "plp5.y" /* yacc.c:1646  */
+#line 121 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1545 "plp5.tab.c" /* yacc.c:1646  */
+#line 1553 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 115 "plp5.y" /* yacc.c:1646  */
+#line 123 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1551 "plp5.tab.c" /* yacc.c:1646  */
+#line 1559 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 116 "plp5.y" /* yacc.c:1646  */
+#line 124 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1557 "plp5.tab.c" /* yacc.c:1646  */
+#line 1565 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 118 "plp5.y" /* yacc.c:1646  */
+#line 126 "plp5.y" /* yacc.c:1646  */
     {   
                                  (yyval).code = (yyvsp[-2]).code;
                                  int temp = nuevoTemporal(ERR_MAXTMP, (yyvsp[-2]).nlin, (yyvsp[-2]).ncol, (yyvsp[-2]).lexema);
-                                 (yyval).code += "mov A " + to_string(temp); 
+                                 (yyval).code += "mov A " + to_string(temp) + "\t; Esimple : Esimple addop Term \n"; 
                               }
-#line 1567 "plp5.tab.c" /* yacc.c:1646  */
+#line 1575 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 123 "plp5.y" /* yacc.c:1646  */
+#line 131 "plp5.y" /* yacc.c:1646  */
     { 
                   (yyval).code = (yyvsp[0]).code;
                   int temp = nuevoTemporal(ERR_MAXTMP, (yyvsp[0]).nlin, (yyvsp[0]).ncol, (yyvsp[0]).lexema);
-                  (yyval).code += "mov A " + to_string(temp);
+                  (yyval).code += "mov A " + to_string(temp) + "\t; Esimple : Term \n";
                }
-#line 1577 "plp5.tab.c" /* yacc.c:1646  */
+#line 1585 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 129 "plp5.y" /* yacc.c:1646  */
+#line 137 "plp5.y" /* yacc.c:1646  */
     {
                               (yyval).code = (yyvsp[-2]).code;
                               (yyval).code += (yyvsp[0]).code;
                               (yyval).code += "muli " + (yyvsp[0]).ftemp + "\n";
                            }
-#line 1587 "plp5.tab.c" /* yacc.c:1646  */
+#line 1595 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 134 "plp5.y" /* yacc.c:1646  */
+#line 142 "plp5.y" /* yacc.c:1646  */
     { 
                   (yyval).code = (yyvsp[0]).code;
                   (yyval).code += "mov " + (yyvsp[0]).ftemp + " A\n";
                }
-#line 1596 "plp5.tab.c" /* yacc.c:1646  */
+#line 1604 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 139 "plp5.y" /* yacc.c:1646  */
-    {}
-#line 1602 "plp5.tab.c" /* yacc.c:1646  */
+#line 147 "plp5.y" /* yacc.c:1646  */
+    { 
+                     (yyval).code = (yyvsp[0]).code;
+                     (yyval).ftemp = (yyvsp[0]).ftemp;
+                     cout << "((( ftemp = " + (yyval).ftemp + " )))" << endl;
+                  }
+#line 1614 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 140 "plp5.y" /* yacc.c:1646  */
+#line 152 "plp5.y" /* yacc.c:1646  */
     {
                      int temp = nuevoTemporal(ERR_MAXTMP, (yyvsp[0]).nlin, (yyvsp[0]).ncol, (yyvsp[0]).lexema);
                      string aux_lex = (yyvsp[0]).lexema;
                      (yyval).code = "mov #" + aux_lex + " "  + to_string(temp) + "\t; Factor -> nentero (" + aux_lex + ")\n";
                      (yyval).ftemp = to_string(temp);
                   }
-#line 1613 "plp5.tab.c" /* yacc.c:1646  */
+#line 1625 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 146 "plp5.y" /* yacc.c:1646  */
+#line 158 "plp5.y" /* yacc.c:1646  */
     {
                      int temp = nuevoTemporal(ERR_MAXTMP, (yyvsp[0]).nlin, (yyvsp[0]).ncol, (yyvsp[0]).lexema);
                      string aux_lex = (yyvsp[0]).lexema;
                      (yyval).code = "mov $" + aux_lex + " "  + to_string(temp) + "\t; Factor -> nreal (" + aux_lex + ")\n";
                   }
-#line 1623 "plp5.tab.c" /* yacc.c:1646  */
+#line 1635 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 151 "plp5.y" /* yacc.c:1646  */
+#line 163 "plp5.y" /* yacc.c:1646  */
     { 
                            (yyval).code = "\t; Factor -> pari Expr pard" + (yyvsp[-1]).code;
                         }
-#line 1631 "plp5.tab.c" /* yacc.c:1646  */
+#line 1643 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 155 "plp5.y" /* yacc.c:1646  */
+#line 167 "plp5.y" /* yacc.c:1646  */
     {
                         Simbolo s = buscarClase(ts, (yyvsp[-2]).lexema);
                         if (s.nombre != ""){
@@ -1639,17 +1651,18 @@ yyreduce:
                            (yyval).dir = s.dir;
                            if ((yyval).tipo != 3){
                               int temp = nuevoTemporal(ERR_MAXTMP, (yyvsp[0]).nlin, (yyvsp[0]).ncol, (yyvsp[0]).lexema);
-                              (yyval).code = "mov " + to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")";
+                              (yyval).code = "mov " + to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")\n";
+                              (yyval).ftemp = s.dir;
                            }
                         }
                         else
                            msgError(ERRNODECL, (yyvsp[-2]).nlin, (yyvsp[-2]).ncol, (yyvsp[-2]).lexema);
                      }
-#line 1649 "plp5.tab.c" /* yacc.c:1646  */
+#line 1662 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 168 "plp5.y" /* yacc.c:1646  */
+#line 181 "plp5.y" /* yacc.c:1646  */
     { 
             Simbolo s = buscar(ts, (yyvsp[0]).lexema);
             if (s.nombre != ""){
@@ -1657,101 +1670,102 @@ yyreduce:
                (yyval).dir = s.dir;
                if ((yyval).tipo != 3){
                   int temp = nuevoTemporal(ERR_MAXTMP, (yyvsp[0]).nlin, (yyvsp[0]).ncol, (yyvsp[0]).lexema);
-                  (yyval).code = "mov " +  to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")";
+                  (yyval).code = "mov " +  to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> id (" + s.nombre + ")\n";
+                  (yyval).ftemp = s.dir;
             }
             else
                msgError(ERRNODECL, (yyvsp[0]).nlin, (yyvsp[0]).ncol, (yyvsp[0]).lexema);
          }
      }
-#line 1667 "plp5.tab.c" /* yacc.c:1646  */
+#line 1681 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 181 "plp5.y" /* yacc.c:1646  */
+#line 195 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1673 "plp5.tab.c" /* yacc.c:1646  */
+#line 1687 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 184 "plp5.y" /* yacc.c:1646  */
+#line 197 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1679 "plp5.tab.c" /* yacc.c:1646  */
+#line 1693 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 186 "plp5.y" /* yacc.c:1646  */
+#line 199 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1685 "plp5.tab.c" /* yacc.c:1646  */
+#line 1699 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 188 "plp5.y" /* yacc.c:1646  */
+#line 201 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1691 "plp5.tab.c" /* yacc.c:1646  */
+#line 1705 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 189 "plp5.y" /* yacc.c:1646  */
+#line 202 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1697 "plp5.tab.c" /* yacc.c:1646  */
+#line 1711 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 191 "plp5.y" /* yacc.c:1646  */
+#line 204 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1703 "plp5.tab.c" /* yacc.c:1646  */
+#line 1717 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 193 "plp5.y" /* yacc.c:1646  */
+#line 206 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1709 "plp5.tab.c" /* yacc.c:1646  */
+#line 1723 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 194 "plp5.y" /* yacc.c:1646  */
+#line 207 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1715 "plp5.tab.c" /* yacc.c:1646  */
+#line 1729 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 196 "plp5.y" /* yacc.c:1646  */
+#line 209 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1721 "plp5.tab.c" /* yacc.c:1646  */
+#line 1735 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 198 "plp5.y" /* yacc.c:1646  */
+#line 211 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1727 "plp5.tab.c" /* yacc.c:1646  */
+#line 1741 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 200 "plp5.y" /* yacc.c:1646  */
+#line 213 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1733 "plp5.tab.c" /* yacc.c:1646  */
+#line 1747 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 201 "plp5.y" /* yacc.c:1646  */
+#line 214 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1739 "plp5.tab.c" /* yacc.c:1646  */
+#line 1753 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 203 "plp5.y" /* yacc.c:1646  */
+#line 216 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1745 "plp5.tab.c" /* yacc.c:1646  */
+#line 1759 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 204 "plp5.y" /* yacc.c:1646  */
+#line 217 "plp5.y" /* yacc.c:1646  */
     {}
-#line 1751 "plp5.tab.c" /* yacc.c:1646  */
+#line 1765 "plp5.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1755 "plp5.tab.c" /* yacc.c:1646  */
+#line 1769 "plp5.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1979,7 +1993,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 206 "plp5.y" /* yacc.c:1906  */
+#line 219 "plp5.y" /* yacc.c:1906  */
 
 
 void msgError(int nerror, int nlin, int ncol, const char *s){

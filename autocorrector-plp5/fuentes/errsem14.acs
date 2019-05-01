@@ -1,0 +1,12 @@
+class errsem13 {
+ attributes:
+
+  float a[10][5][2];
+
+ methods:
+
+  int main()
+  {
+    a[6][3][10.0/10] = 7;
+  }
+}

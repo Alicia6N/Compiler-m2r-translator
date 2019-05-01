@@ -1,0 +1,49 @@
+class prcorrecto3 {
+ attributes:
+
+  int a,b,c;
+  float p[4][4];
+  
+ methods:
+
+  int main()
+  {
+    int i,j;
+    
+    i=0;
+    while (i<4)
+    {
+      j=0;
+      while (j<4)
+      {
+        scan(p[i][j]);
+        j=j+1;
+      }
+      i=i+1;
+    }
+  
+    if (i==j)
+    {
+      float sumafila,sumatotal;
+      int div;
+      scan(div);
+    
+      i=0;
+      sumatotal=0;
+      while (i<4)
+      {
+        j=0;
+        sumafila=0;
+        while (j<4)
+        {
+          sumafila=sumafila+this.p[i][j];
+          j=j+1;
+        }
+        print(sumafila);
+        i=i+1;
+        sumatotal = sumatotal+sumafila;
+      }
+      print(sumatotal/div);
+    }
+  }
+}
