@@ -140,7 +140,13 @@ Esimple : Esimple addop Term  {
 Term : Term mulop Factor   {
                               $$.code = $1.code;
                               $$.code += $3.code;
-                              $$.code += "muli " + $3.ftemp + "\n";
+                              if(strcmp($2.lexema,"*")) {
+                                $$.code += "muli " + $3.ftemp + "\n";
+                              }
+                              else {
+								$$.code += "divi " + $3.ftemp + "\n";
+                              }
+
                            }
      | Factor  { 
                   $$.code = $1.code;
