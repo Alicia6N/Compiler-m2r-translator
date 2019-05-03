@@ -8,6 +8,7 @@ typedef struct {
    string code, ftemp; //ftemp = dirección del valor.
    int nlin, ncol;
    int tipo;
+   string valor;
    int size, array;
 } MITIPO;
 
