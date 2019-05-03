@@ -93,9 +93,11 @@ Variable : id { $$.array = 1; } V   {
                                           s.nombre = $1.lexema;
                                           s.tipo = $1.tipo;
                                           ACTUAL_MEM += $3.size;
+                                          cout << ACTUAL_MEM;
                                           s.dir = ACTUAL_MEM;
                                           s.size = $3.size;
                                           anyadir(ts,s);
+
                                           if (ACTUAL_MEM >= MEM)
                                              msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);
                                        }    
