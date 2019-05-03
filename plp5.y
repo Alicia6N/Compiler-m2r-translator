@@ -46,15 +46,16 @@ int nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
 
 // DONE:  - mirar la declaracion de variables en Variable y V, no se guarda bien la s.dir
 //        - poner el error de NO ES DE AMBITO CLASE en el "Ref : this"
-//		  - en "Ref : id" estar seguros de poder coger el del ambito más cercano que lo tenga declarado
+
+//        - pasar los tipos por atributos heredados
+//        - si el tipo cambia de 1 a 2, entonces hacer itor | mirar para cuando es rtor!
 //        - mover los resultados de una variable a su dir
-//        - tipo y hacer itor/rtor muli/muld divi/divd cuando se tenga que hacer
-//        - liberar memoria despues de hacer movs que ya no necesitemos en el futuro (mirar ultimo arbol)
+//- en "Ref : id" estar seguros de poder coger el del ambito más cercano que lo tenga declarado | y en "Ref : this"?
+//        - hacer las divisiones en la parte de mulop
+//        - pasar el tipo por heredado y hacer itor/rtor muli/muld cuando se tenga que hacer
 
 // TO DO: 
-
-
-
+	//        - liberar memoria despues de hacer movs que ya no necesitemos en el futuro (mirar ultimo arbol)	
 %}
 %%
 S : _class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
@@ -77,7 +78,7 @@ Bloque : llavei {ts = new TablaSimbolos(ts);} BDecl SeqInstr llaved {
 BDecl : BDecl DVar {$$.code = "";}
 	  | {$$.code = "";};
 
-DVar : Tipo {$$.tipo = $1.tipo;} LIdent pyc {$$.code = "";};
+DVar : Tipo  LIdent pyc {$$.code = "";};
 
 LIdent : LIdent coma {$$.tipo = $0.tipo;} Variable {}
 	   | {$$.tipo = $0.tipo;} Variable {};
@@ -203,6 +204,10 @@ Factor :  Ref      {
 
 Ref : _this punto id  {
 						Simbolo s = buscarClase(ts, $3.lexema);
+<<<<<<< HEAD
+=======
+						cout << s.nombre;
+>>>>>>> b96a1457daa8234aee7479b1639a1718c132e111
 						if (s.nombre != ""){
 						   if ($$.tipo != 3){
 							  $$.tipo = s.tipo;
@@ -364,14 +369,14 @@ Simbolo buscar(TablaSimbolos *root,string nombre){
    }
 }
 Simbolo buscarClase(TablaSimbolos *root, string nombre){
-	if (root->root != NULL)
-		return buscarClase(root->root, nombre);
-	
-	for(size_t i = 0; i < root->simbolos.size(); i++){
-		if(root->simbolos[i].nombre == nombre){
-			return root->simbolos[i];
-		}
-	}
+   if (root->root != NULL)
+	  return buscarClase(root->root, nombre);
+   
+   for(size_t i = 0; i < root->simbolos.size(); i++){
+	  if(root->simbolos[i].nombre == nombre){
+		 return root->simbolos[i];
+	  }
+   }
 }
 TablaSimbolos* createScope(TablaSimbolos* root){
 	TablaSimbolos* child = new TablaSimbolos(root);
