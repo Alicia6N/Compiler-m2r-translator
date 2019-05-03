@@ -89,9 +89,11 @@ Variable : id { $$.array = 1; } V   {
                                           s.nombre = $1.lexema;
                                           s.tipo = $1.tipo;
                                           ACTUAL_MEM += $3.size;
+                                          cout << ACTUAL_MEM;
                                           s.dir = ACTUAL_MEM;
                                           s.size = $3.size;
                                           anyadir(ts,s);
+
                                           if (ACTUAL_MEM >= MEM)
                                              msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);
                                        }    
@@ -105,7 +107,7 @@ V : cori nentero cord { $$.array = $0.array * atoi($2.lexema); } V   {
                                                                         if ($$.size > 1)
                                                                            $$.tipo = ARRAY;
                                                                      }
-  | { $$.size = $0.size; };
+  | { $$.size = 1; };
 
 SeqInstr : SeqInstr Instr { $$.code = $1.code + $2.code; }
          | {  };
@@ -169,11 +171,10 @@ Ref : _this punto id  {
                         Simbolo s = buscarClase(ts, $1.lexema);
                         if (s.nombre != ""){
                            $$.tipo = s.tipo;
-                           $$.dir = s.dir;
                            if ($$.tipo != 3){
                               int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
                               $$.code = "mov " + to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")\n";
-                              $$.ftemp = s.dir;
+                              $$.ftemp = to_string(s.dir);
                            }
                         }
                         else
@@ -183,11 +184,10 @@ Ref : _this punto id  {
             Simbolo s = buscar(ts, $1.lexema);
             if (s.nombre != ""){
                $$.tipo = s.tipo;
-               $$.dir = s.dir;
                if ($$.tipo != 3){
                   int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
                   $$.code = "mov " +  to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> id (" + s.nombre + ")\n";
-                  $$.ftemp = s.dir;
+                  $$.ftemp = to_string(s.dir);
             }
             else
                msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
