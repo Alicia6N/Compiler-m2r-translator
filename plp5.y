@@ -44,14 +44,18 @@ bool anyadir(TablaSimbolos *t,Simbolo s);
 bool buscarAmbito(TablaSimbolos *root, string nombre);
 int nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
 
+// DONE:  - mirar la declaracion de variables en Variable y V, no se guarda bien la s.dir
+
 // TO DO: - en "Ref : id" estar seguros de poder coger el del ambito más cercano que lo tenga declarado | y en "Ref : this"?
 //        - poner el error de NO ES DE AMBITO CLASE en el "Ref : this"
 //        - liberar memoria despues de hacer movs que ya no necesitemos en el futuro (mirar ultimo arbol)
 //        - pasar los tipos por atributos heredados
 //        - si el tipo cambia de 1 a 2, entonces hacer itor | mirar para cuando es rtor!
-//        - hacer las multiplicaciones tambien
 //        - mover los resultados de una variable a su dir
-//        - mirar la declaracion de variables en Variable y V
+
+
+//        - hacer las divisiones en la parte de mulop
+//        - pasar el tipo por heredado y hacer itor/rtor muli/muld cuando se tenga que hacer
 
 %}
 %%
