@@ -1,0 +1,23 @@
+Autocorrector de la práctica 5 de PL, curso 2018-19
+=====================================================
+
+Instrucciones de uso:
+
+1) Copia los ficheros plp5.l, plp5.y y comun.h en el 
+directorio (o carpeta) en el que está este fichero LEEME
+
+
+2) Ejecuta el autocorrector:
+
+ ./autocorrector-plp5.sh
+
+ Si la salida es muy larga, es mejor dirigirla a un fichero:
+
+ ./autocorrector-plp5.sh > salida-autocorrector
+
+
+
+ El autocorrector ejecuta la práctica con programas fuentes incorrectos y
+correctos; con estos últimos, guarda la salida en un archivo, y ejecuta el
+intérprete de m2r con ese archivo, y lo que se compara es la salida del
+intérprete con la salida esperada.

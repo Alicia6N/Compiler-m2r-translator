@@ -26,6 +26,7 @@ void msgError(int nerror, int nlin,int ncol,const char *s); // funcion para prod
 " "                 {ncol++;}
 [\t]                {ncol++;}
 [\n]                {nlin++;ncol=1;}
+[\r]                {nlin++;ncol=1;}
 "//"(.)*            {; /* comentarios de una linea, no hacer nada */}
 
 "class"             {return ret(_class);}

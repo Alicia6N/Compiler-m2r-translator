@@ -1,0 +1,14 @@
+class prc1 {
+ attributes:
+
+ int a,b,c;
+
+ methods:
+
+  int main()
+	{
+	float a, b;
+	a = 2 * b;
+	print(a);
+	}
+}

@@ -39,9 +39,20 @@ TablaSimbolos *ts = new TablaSimbolos(NULL);
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
 Simbolo buscarClase(TablaSimbolos *root, string nombre);
-Simbolo buscar(TablaSimbolos *root,string nombre);
+Simbolo buscar(TablaSimbolos *root, string nombre);
 bool anyadir(TablaSimbolos *t,Simbolo s);
-bool buscarAmbito(TablaSimbolos *root,string nombre);
+bool buscarAmbito(TablaSimbolos *root, string nombre);
+int nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
+
+// TO DO: - en "Ref : id" estar seguros de poder coger el del ambito más cercano que lo tenga declarado | y en "Ref : this"?
+//        - poner el error de NO ES DE AMBITO CLASE en el "Ref : this"
+//        - liberar memoria despues de hacer movs que ya no necesitemos en el futuro (mirar ultimo arbol)
+//        - pasar los tipos por atributos heredados
+//        - si el tipo cambia de 1 a 2, entonces hacer itor | mirar para cuando es rtor!
+//        - hacer las multiplicaciones tambien
+//        - mover los resultados de una variable a su dir
+//        - mirar la declaracion de variables en Variable y V
+
 %}
 %%
 S : _class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
@@ -55,9 +66,10 @@ Tipo : _int {$$.tipo = ENTERO; }
      | _float {$$.tipo = REAL; };
 
 Bloque : llavei {ts = new TablaSimbolos(ts);} BDecl SeqInstr llaved {
-                                                                     $$.code = $3.code;
+                                                                     $$.code = $3.code + $4.code;
                                                                      deleteScope(ts);
                                                                      ts = ts->root;
+                                                                     cout << $$.code << endl;
                                                                     };
 
 BDecl : BDecl DVar {$$.code = "";}
@@ -100,7 +112,9 @@ SeqInstr : SeqInstr Instr { $$.code = $1.code + $2.code; }
 
 Instr : pyc {  }
       | Bloque { $$.code = $1.code; }
-      | Ref asig Expr pyc {  }
+      | Ref asig Expr pyc  { 
+                              $$.code = $3.code;
+                           }
       | _print pari Expr pard pyc {}
       | _scan pari Ref pard pyc {}
       | _if pari Expr pard Instr {}
@@ -110,16 +124,46 @@ Instr : pyc {  }
 Expr : Expr relop Esimple {}
      | Esimple {};
 
-Esimple : Esimple addop Term {}
-        | Term {};
+Esimple : Esimple addop Term  {   
+                                 $$.code = $1.code;
+                                 int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                                 $$.code += "mov A " + to_string(temp) + "\t; Esimple : Esimple addop Term \n"; 
+                              }
+        | Term { 
+                  $$.code = $1.code;
+                  int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                  $$.code += "mov A " + to_string(temp) + "\t; Esimple : Term \n";
+               };
 
-Term : Term mulop Factor {}
-     | Factor {};
+Term : Term mulop Factor   {
+                              $$.code = $1.code;
+                              $$.code += $3.code;
+                              $$.code += "muli " + $3.ftemp + "\n";
+                           }
+     | Factor  { 
+                  $$.code = $1.code;
+                  $$.code += "mov " + $1.ftemp + " A\n";
+               };
 
-Factor : Ref {}
-       | nentero {}
-       | nreal {}
-       | pari Expr pard {};
+Factor : Ref      { 
+                     $$.code = $1.code;
+                     $$.ftemp = $1.ftemp;
+                     cout << "((( ftemp = " + $$.ftemp + " )))" << endl;
+                  }
+       | nentero  {
+                     int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                     string aux_lex = $1.lexema;
+                     $$.code = "mov #" + aux_lex + " "  + to_string(temp) + "\t; Factor -> nentero (" + aux_lex + ")\n";
+                     $$.ftemp = to_string(temp);
+                  }
+       | nreal    {
+                     int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                     string aux_lex = $1.lexema;
+                     $$.code = "mov $" + aux_lex + " "  + to_string(temp) + "\t; Factor -> nreal (" + aux_lex + ")\n";
+                  }
+       | pari Expr pard { 
+                           $$.code = "\t; Factor -> pari Expr pard" + $2.code;
+                        };
 
 Ref : _this punto id  {
                         Simbolo s = buscarClase(ts, $1.lexema);
@@ -127,10 +171,9 @@ Ref : _this punto id  {
                            $$.tipo = s.tipo;
                            $$.dir = s.dir;
                            if ($$.tipo != 3){
-                              TEMP_VAR++;
-                              if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
-                                 msgError(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);  
-                              $$.code = "mov " + to_string(s.dir) + " "  + to_string((ACTUAL_MEM + TEMP_VAR)) + "; Ref -> this.id (" + s.nombre + ")";
+                              int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
+                              $$.code = "mov " + to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")\n";
+                              $$.ftemp = s.dir;
                            }
                         }
                         else
@@ -142,19 +185,15 @@ Ref : _this punto id  {
                $$.tipo = s.tipo;
                $$.dir = s.dir;
                if ($$.tipo != 3){
-                  TEMP_VAR++;
-                  if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
-                     msgError(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);  
-                  int aux = (ACTUAL_MEM + TEMP_VAR);
-                  $$.code = "mov " +  to_string(s.dir) + " "  + to_string((ACTUAL_MEM + TEMP_VAR)) + "; Ref -> this.id (" + s.nombre + ")";
-                                   
+                  int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+                  $$.code = "mov " +  to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> id (" + s.nombre + ")\n";
+                  $$.ftemp = s.dir;
             }
             else
                msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
          }
      }
     | Ref cori Esimple cord {};
-
 
 Metodos : Met Metodos {};
 
@@ -179,8 +218,6 @@ CPar : {}
      | coma Expr CPar {};
 
 %%
-
-
 
 void msgError(int nerror, int nlin, int ncol, const char *s){
      switch (nerror) {
@@ -240,6 +277,14 @@ bool equalsIgnoreCase(string s1, char* lexema){
       return true;
 
    return false;
+}
+
+int nuevoTemporal(int nerror, int nlin, int ncol, const char *s){
+   TEMP_VAR++;
+   if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
+      msgError(nerror, nlin, ncol, s);
+
+   return (ACTUAL_MEM + TEMP_VAR);
 }
 
 int main(int argc, char *argv[]){

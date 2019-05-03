@@ -1,0 +1,12 @@
+class errsem12 {
+ attributes:
+
+  int a[5][4][3][2][1][0];
+
+ methods:
+ 
+  int main() 
+  {
+    ;
+  }
+}

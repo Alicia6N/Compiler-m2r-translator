@@ -1,0 +1,14 @@
+class errsem1 {
+ attributes:
+
+  int a,b,C;
+
+ methods:
+
+  int main() {
+
+    a = 7;
+    c = a;
+    print(c);
+  }
+}

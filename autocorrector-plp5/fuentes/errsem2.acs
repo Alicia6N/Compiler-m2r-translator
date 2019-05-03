@@ -1,0 +1,15 @@
+class errsem2 {
+ attributes:
+
+  int i,j,k;
+  int a[100][200][300];
+
+ methods:
+
+  int main() 
+  {
+    i=8;
+    j=9;
+    print(j);
+  }
+}
