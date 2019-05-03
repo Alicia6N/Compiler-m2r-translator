@@ -44,14 +44,18 @@ bool anyadir(TablaSimbolos *t,Simbolo s);
 bool buscarAmbito(TablaSimbolos *root, string nombre);
 int nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
 
+// DONE:  - mirar la declaracion de variables en Variable y V, no se guarda bien la s.dir
+
 // TO DO: - en "Ref : id" estar seguros de poder coger el del ambito más cercano que lo tenga declarado | y en "Ref : this"?
 //        - poner el error de NO ES DE AMBITO CLASE en el "Ref : this"
 //        - liberar memoria despues de hacer movs que ya no necesitemos en el futuro (mirar ultimo arbol)
 //        - pasar los tipos por atributos heredados
 //        - si el tipo cambia de 1 a 2, entonces hacer itor | mirar para cuando es rtor!
-//        - hacer las multiplicaciones tambien
 //        - mover los resultados de una variable a su dir
-//        - mirar la declaracion de variables en Variable y V
+
+
+//        - hacer las divisiones en la parte de mulop
+//        - pasar el tipo por heredado y hacer itor/rtor muli/muld cuando se tenga que hacer
 
 %}
 %%
@@ -105,7 +109,7 @@ V : cori nentero cord { $$.array = $0.array * atoi($2.lexema); } V   {
                                                                         if ($$.size > 1)
                                                                            $$.tipo = ARRAY;
                                                                      }
-  | { $$.size = $0.size; };
+  | { $$.size = 1; };
 
 SeqInstr : SeqInstr Instr { $$.code = $1.code + $2.code; }
          | {  };
@@ -169,11 +173,10 @@ Ref : _this punto id  {
                         Simbolo s = buscarClase(ts, $1.lexema);
                         if (s.nombre != ""){
                            $$.tipo = s.tipo;
-                           $$.dir = s.dir;
                            if ($$.tipo != 3){
                               int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
                               $$.code = "mov " + to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")\n";
-                              $$.ftemp = s.dir;
+                              $$.ftemp = to_string(s.dir);
                            }
                         }
                         else
@@ -183,11 +186,10 @@ Ref : _this punto id  {
             Simbolo s = buscar(ts, $1.lexema);
             if (s.nombre != ""){
                $$.tipo = s.tipo;
-               $$.dir = s.dir;
                if ($$.tipo != 3){
                   int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
                   $$.code = "mov " +  to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> id (" + s.nombre + ")\n";
-                  $$.ftemp = s.dir;
+                  $$.ftemp = to_string(s.dir);
             }
             else
                msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);

@@ -9,7 +9,6 @@ typedef struct {
    int nlin, ncol;
    int tipo;
    int size, array;
-   int dir;
 } MITIPO;
 
 struct Simbolo {
