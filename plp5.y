@@ -58,6 +58,7 @@ int nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
 %}
 %%
 S : _class id llavei attributes dosp BDecl methods dosp Metodos llaved   {
+																			
 																		   int tk = yylex();
 																		   if (tk != 0) yyerror("");
 																		};
@@ -91,7 +92,6 @@ Variable : id { $$.array = 1; } V   {
 										  s.nombre = $1.lexema;
 										  s.tipo = $1.tipo;
 										  ACTUAL_MEM += $3.size;
-										  cout << ACTUAL_MEM;
 										  s.dir = ACTUAL_MEM;
 										  s.size = $3.size;
 										  anyadir(ts,s);
@@ -104,98 +104,123 @@ Variable : id { $$.array = 1; } V   {
 									   }        
 									};
 
-V : cori nentero cord { $$.array = $0.array * atoi($2.lexema); } V   { 
+V : cori nentero cord { $$.array = $0.array * atoi($2.lexema); } V  { 
 																		$$.size = $5.size;
 																		if ($$.size > 1)
 																		   $$.tipo = ARRAY;
-																	 }
+																	}
   | { $$.size = 1; };
 
-SeqInstr : SeqInstr Instr { $$.code = $1.code + $2.code; }
+SeqInstr : SeqInstr Instr 								{ $$.code = $1.code + $2.code; }
 		 | {  };
 
 Instr : pyc {  }
 	  | Bloque { $$.code = $1.code; }
-	  | Ref asig Expr pyc  { 
-							  $$.code = $3.code;
-						   }
+	  | Ref asig Expr pyc  								{ 	
+															$$.code = $3.code;
+															$$.code += "mov A " + $1.valor + "\t; Instr : Ref asig Expr pyc \n";
+														}
 	  | _print pari Expr pard pyc {}
 	  | _scan pari Ref pard pyc {}
 	  | _if pari Expr pard Instr {}
 	  | _if pari Expr pard Instr _else Instr {}
 	  | _while pari Expr pard Instr {};
 
-Expr : Expr relop Esimple {}
-	 | Esimple {};
+	Expr : Expr relop  Esimple 							{
+															$$.tipo = $3.tipo;	
+														}
+	 |  Esimple 							{ 
+															$$.tipo = $1.tipo;	
+														};
 
 Esimple : Esimple addop Term  {   
-								 $$.code = $1.code;
-								 int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-								 $$.code += "mov A " + to_string(temp) + "\t; Esimple : Esimple addop Term \n"; 
+								$$.code = $1.code;
 							  }
 		| Term { 
-				  $$.code = $1.code;
-				  int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-				  $$.code += "mov A " + to_string(temp) + "\t; Esimple : Term \n";
+				$$.code = $1.code;
 			   };
 
-Term : Term mulop Factor   	{	
-								$$.code = $1.code;
-								$$.code += $3.code;
-								if(strcmp($2.lexema,"*")==0) {
-									$$.code += "muli " + $3.ftemp + "\n";
-								}
-								else {
-									$$.code += "divi " + $3.ftemp + "\n";
-								}
-						   	}
-	 | Factor  	{ 
-					$$.code = $1.code;
-					$$.code += "mov " + $1.ftemp + " A\n";
-			   	};
+Term : Term mulop Factor   {
+							$$.code = $1.code;
+							$$.code += $3.code;	
+							string op = "";
+							if(strcmp($2.lexema,"*")==0){
+								op = "mul";
+							}
+							else op = "div";
+							if($1.tipo == 1 && $3.tipo == 1){
+								$$.code += op +"i " + $3.valor + "\n";
+								$$.tipo = 1;
+							}
+							
+							else if($1.tipo == 1 && $3.tipo == 2){
+								$$.code += "itor \n";
+								$$.code += op + "r " + $3.valor + "\n";
+								$$.tipo = 2;
+							}
+							else if($1.tipo == 2 && $3.tipo == 1){
+								int temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+								$$.code += "mov A " + to_string(temp1) + "\n";
+								$$.code += "mov " + $3.valor + " A\n";
+								$$.code += "itor\n";
+								int temp2 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+								$$.code += "mov A " + to_string(temp2) + "\n";
+								$$.code += "mov " + to_string(temp1) + " A\n";
+								$$.code += op+"r " + to_string(temp2) + "\n";
+								$$.tipo = 2;
+								ACTUAL_MEM -= 2;
+							}	
+							else { //reales
+								$$.code += op + "r " + $3.valor + "\n";
+								$$.tipo = 2;
+							}	
 
-Factor : Ref    	{ 
-						$$.code = $1.code;
-						$$.ftemp = $1.ftemp;
-						cout << "((( ftemp = " + $$.ftemp + " )))" << endl;
-					}
-	   | nentero  	{
-						int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-						string aux_lex = $1.lexema;
-						$$.code = "mov #" + aux_lex + " "  + to_string(temp) + "\t; Factor -> nentero (" + aux_lex + ")\n";
-						$$.ftemp = to_string(temp);
-				  	}
-	   | nreal    	{
-						int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-						string aux_lex = $1.lexema;
-						$$.code = "mov $" + aux_lex + " "  + to_string(temp) + "\t; Factor -> nreal (" + aux_lex + ")\n";
-				  	}
+
+						   }
+	 | Factor  { 
+					$$.tipo = $1.tipo;
+					$$.code = $1.code;
+					$$.code += "mov " + $1.valor + " A\n";
+			   };
+
+Factor :  Ref      { 
+					$$.tipo = $1.tipo;
+					$$.valor = $1.valor;
+				  }
+	   | nentero  {
+
+					string aux_lex = $1.lexema;
+					$$.tipo = 1;
+					$$.valor = "#"+aux_lex;
+				  }
+	   | nreal    {
+					string aux_lex = $1.lexema;
+					$$.valor = "$"+aux_lex;
+					$$.tipo = 2;
+				  }
 	   | pari Expr pard { 
-						   	$$.code = "\t; Factor -> pari Expr pard" + $2.code;
+						   $$.code = "\t; Factor -> pari Expr pard" + $2.code;
 						};
 
 Ref : _this punto id  {
 						Simbolo s = buscarClase(ts, $1.lexema);
+						cout << s.nombre;
 						if (s.nombre != ""){
-						   $$.tipo = s.tipo;
 						   if ($$.tipo != 3){
-							  int temp = nuevoTemporal(ERR_MAXTMP, $3.nlin, $3.ncol, $3.lexema);
-							  $$.code = "mov " + to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> this.id (" + s.nombre + ")\n";
-							  $$.ftemp = to_string(s.dir);
+							  $$.tipo = s.tipo;
+							  $$.valor = to_string(s.dir);
 						   }
 						}
 						else
-						   msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
+						   msgError(ERR_NO_ATRIB, $1.nlin, $1.ncol, $1.lexema);
 					 }
 	| id { 
 			Simbolo s = buscar(ts, $1.lexema);
 			if (s.nombre != ""){
-			   $$.tipo = s.tipo;
-			   if ($$.tipo != 3){
-				  int temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-				  $$.code = "mov " +  to_string(s.dir) + " "  + to_string(temp) + "\t; Ref -> id (" + s.nombre + ")\n";
-				  $$.ftemp = to_string(s.dir);
-			}
+			    if ($$.tipo != 3){
+				  $$.tipo = s.tipo;
+				  $$.valor = to_string(s.dir);
+				}
 			else
 			   msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
 		 }
@@ -341,6 +366,7 @@ Simbolo buscar(TablaSimbolos *root,string nombre){
    }
 }
 Simbolo buscarClase(TablaSimbolos *root, string nombre){
+	cout << "x";
    if (root->root != NULL)
 	  buscarClase(root->root, nombre);
    

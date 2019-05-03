@@ -8,7 +8,11 @@ class prc1 {
   int main()
 	{
 	float a, b;
+<<<<<<< HEAD
 	a = 2 * 3 * 4;
+=======
+	a = this.a;
+>>>>>>> 5b9fe34be2032067f2ad28904a32a10239b84281
 	print(a);
 	}
 }
