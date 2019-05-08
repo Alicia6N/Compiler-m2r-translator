@@ -28,12 +28,8 @@ extern int yylex();
 extern char *yytext;
 extern FILE *yyin;
 int yyerror(char *s);
-//Constantes
-const int ENTERO=1;
-const int REAL=2;
-const int ARRAY=3;
 const int MEM = 16384;
-int ACTUAL_MEM = 0;
+int ACTUAL_MEM = 16097;
 int TEMP_VAR = 0;
 TablaSimbolos *ts = new TablaSimbolos(NULL);
 void deleteScope(TablaSimbolos* root);
@@ -42,7 +38,7 @@ Simbolo buscarClase(TablaSimbolos *root, string nombre);
 Simbolo buscar(TablaSimbolos *root, string nombre);
 bool anyadir(TablaSimbolos *t,Simbolo s);
 bool buscarAmbito(TablaSimbolos *root, string nombre);
-int nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
+string nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
 
 // DONE:  	
 //			- mirar la declaracion de variables en Variable y V, no se guarda bien la s.dir
@@ -95,7 +91,7 @@ Variable : 	id { $$.array = 1; } V   	{
 												s.nombre = $1.lexema;
 												s.tipo = $1.tipo;
 												ACTUAL_MEM += $3.size;
-												s.dir = ACTUAL_MEM;
+												s.dir = to_string(ACTUAL_MEM);
 												s.size = $3.size;
 												anyadir(ts,s);
 
@@ -121,7 +117,8 @@ Instr : pyc {  }
 	  | Bloque { $$.code = $1.code; }
 	  | Ref asig Expr pyc  								{ 	
 															$$.code = $3.code;
-															$$.code += "mov A " + $1.valor + "\t; Instr : Ref asig Expr pyc \n";
+															$$.code += "mov " + $3.temp + " " + $1.temp + "\t; Instr : Ref asig Expr pyc \n";
+															//ACTUAL_MEM--;
 														}
 	  | _print pari Expr pard pyc {}
 	  | _scan pari Ref pard pyc {}
@@ -137,9 +134,8 @@ Expr : 	Expr relop Esimple 							{
 													};
 
 Esimple : Esimple addop Term  	{   
-									$$.code = $1.code;
-									int temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-
+									string temp_final = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+									$$.temp = temp_final;
 									string op = "";
 									if(strcmp($2.lexema,"+")==0){
 										op = "add";
@@ -147,101 +143,141 @@ Esimple : Esimple addop Term  	{
 									else 
 										op = "sub";
 
-									if($1.tipo == 1 && $3.tipo == 1){
-										$$.code += "mov A " + to_string(temp1) + "\n";
+									cout << "Tipo 1 y 3: " << $1.tipo << " " << $3.tipo << endl;
+
+									if($1.tipo == ENTERO && $3.tipo == ENTERO){
+										$$.code = "; ENTEROS \n";
+										$$.code += $1.code;
+										$$.tipo = ENTERO;
 										$$.code += $3.code; //se mete en la A el resultado de Term
-										$$.code += op +"i " + to_string(temp1) + "\n";
-										$$.tipo = 1;
+										$$.code += "mov " + $1.temp + " A\n";
+										$$.code += op + "i " + $3.temp + " \n";
 									}
-									else if($1.tipo == 1 && $3.tipo == 2){
+									else if($1.tipo == ENTERO && $3.tipo == REAL){
+										$$.code = "; ENTERO Y REAL \n";
+										$$.code += $1.code;
+										$$.tipo = REAL;
+										string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+										$$.code += "mov " + $1.temp + " A\n";
 										$$.code += "itor \n";
-										$$.code += "mov A " + to_string(temp1) + "\n";
-										$$.code += $3.code; //se mete en la A el resultado de Term
-										$$.code += op + "r " + to_string(temp1) + "\n";
-										$$.tipo = 2;
+										$$.code += "mov A " + temp1 + " \n";
+										$$.code += $3.code;
+										$$.code += "mov " + temp1 + " A\n";
+										$$.code += op +"r " + $3.temp + " \n";
+										//ACTUAL_MEM--;
 									}
-									else if($1.tipo == 2 && $3.tipo == 1){
-										int temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-										$$.code += "mov A " + to_string(temp1) + "\n";
-										$$.code += "mov " + $3.valor + " A\n";
-										$$.code += "itor\n";
-										int temp2 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-										$$.code += "mov A " + to_string(temp2) + "\n";
-										$$.code += "mov " + to_string(temp1) + " A\n";
-										$$.code += op+"r " + to_string(temp2) + "\n";
-										$$.tipo = 2;
-										ACTUAL_MEM -= 2;
+									else if($1.tipo == REAL && $3.tipo == ENTERO){
+										$$.code = "; REAL y ENTERO \n";
+										$$.code += $1.code;
+										$$.tipo = REAL;
+										$$.code += $3.code;
+										string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+										$$.code += "mov " + $3.temp + " A\n";
+										$$.code += "itor \n";
+										$$.code += "mov A " + temp1 + " \n";
+										$$.code += "mov " + $1.temp + " A\n";
+										$$.code += op +"r " + temp1 + " \n";
+										//ACTUAL_MEM--;
 									}	
 									else { //reales
-										$$.code += "mov A " + to_string(temp1) + "\n";
-										$$.code += $3.code; //se mete en la A el resultado de Term
-										$$.code += op + "r " + to_string(temp1) + "\n";
+										$$.code = "; REALES \n";
+										$$.code += $1.code;
+										$$.tipo = REAL;
+										$$.code += $3.code;
+										$$.code += "mov " + $1.temp + " A\n";
+										$$.code += op + "r " + $3.temp + "\n";
 							  		}
+									$$.code += "mov A " + temp_final + "\t; guardar el resultado en temporal\n";
 								}
 		| Term 					{ 
 									$$.code = $1.code;
 									$$.tipo = $1.tipo;
+									$$.temp = $1.temp;
 			   					};
 
 Term : Term mulop Factor   	{
-								$$.code = $1.code;
-								$$.code += $3.code;	
-
+								string temp_final = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+								$$.temp = temp_final;
 								string op = "";
 								if(strcmp($2.lexema,"*")==0){
 									op = "mul";
 								}
-								else 
+								else
 									op = "div";
 
-								if($1.tipo == 1 && $3.tipo == 1){
-									$$.code += op +"i " + $3.valor + "\t; Term : Term mulop Factor\n";
-									$$.tipo = 1;
+								if($1.tipo == ENTERO && $3.tipo == ENTERO){
+									$$.code = "; ENTEROS \n";
+									$$.code += $1.code;
+									$$.tipo = ENTERO;
+									$$.code += $3.code;
+									$$.code += "mov " + $1.temp + " A\n";
+									$$.code += op + "i " + $3.temp + "\t; Term : Term mulop Factor\n";
 								}
-								else if($1.tipo == 1 && $3.tipo == 2){
+								else if($1.tipo == ENTERO && $3.tipo == REAL){
+									$$.tipo = REAL;
+									$$.code = "; ENTERO Y REAL \n";
+									$$.code += $1.code;
+									string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+									$$.code += "mov " + $1.temp + " A\n";
 									$$.code += "itor \n";
-									$$.code += op + "r " + $3.valor + "\t; Term : Term mulop Factor\n";
-									$$.tipo = 2;
+									$$.code += "mov A " + temp1 + "\n";
+									$$.code += $3.code;
+									$$.code += "mov " + temp1 + " A\n";
+									$$.code += op + "r " + $3.temp + "\t; Term : Term mulop Factor\n";
+									//ACTUAL_MEM--;
 								}
-								else if($1.tipo == 2 && $3.tipo == 1){
-									int temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-									$$.code += "mov A " + to_string(temp1) + "\n";
-									$$.code += "mov " + $3.valor + " A\n";
+								else if($1.tipo == REAL && $3.tipo == ENTERO){
+									$$.code = "; REAL y ENTERO \n";
+									$$.code += $1.code;
+									$$.tipo = REAL;
+									$$.code += $3.code;
+									string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+									$$.code += "mov " + $3.temp + " A\n";
 									$$.code += "itor\n";
-									int temp2 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-									$$.code += "mov A " + to_string(temp2) + "\n";
-									$$.code += "mov " + to_string(temp1) + " A\n";
-									$$.code += op+"r " + to_string(temp2) + "\t; Term : Term mulop Factor\n";
-									$$.tipo = 2;
-									ACTUAL_MEM -= 2;
+									$$.code += "mov A " + temp1 + "\n";
+									$$.code += "mov " + $1.temp + " A\n";
+									$$.code += op + "r " + temp1 + "\t; Term : Term mulop Factor\n";
+									//ACTUAL_MEM--;
 								}	
 								else { //reales
-									$$.code += op + "r " + $3.valor + "\t; Term : Term mulop Factor\n";
-									$$.tipo = 2;
-								}	
+									$$.code = "; REALES \n";
+									$$.code += $1.code;
+									$$.tipo = REAL;
+									$$.code += $3.code;
+									$$.code += "mov " + $1.temp + " A\n";
+									$$.code += op + "r " + $3.temp + "\t; Term : Term mulop Factor\n";
+								}
+
+								$$.code += "mov A " + temp_final + "\t; guardar el resultado en temporal\n";
 						   	}
 	 | Factor  	{ 
 					$$.tipo = $1.tipo;
 					$$.code = $1.code;
-					$$.code += "mov " + $1.valor + " A\n";
+					$$.temp = $1.temp;
 			   	};
 
 Factor :  Ref      		{ 
+							string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 							$$.tipo = $1.tipo;
-							$$.valor = $1.valor;
+							$$.temp = temp;
+							$$.code += "mov " + $1.temp + " " + temp + "\t; guarda " + $$.aux_lexema + "\n";
 						}
 	   | nentero  		{
 							string aux_lex = $1.lexema;
-							$$.tipo = 1;
-							$$.valor = "#"+aux_lex;
+							string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+							$$.tipo = ENTERO;
+							$$.temp = temp;
+							$$.code = "mov #" + aux_lex + " " + temp + "\n";
 						}
 	   | nreal    		{
 							string aux_lex = $1.lexema;
-							$$.valor = "$"+aux_lex;
-							$$.tipo = 2;
+							string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+							$$.tipo = REAL;
+							$$.temp = temp;
+							$$.code = "mov $" + aux_lex + " " + temp + "\n";
 						}
 	   | pari Expr pard { 
-							$$.code = "\t; Factor -> pari Expr pard" + $2.code;
+							$$.code = $2.code + "\t; Factor -> pari Expr pard\n";
 						};
 
 Ref : _this punto id  			{
@@ -249,7 +285,7 @@ Ref : _this punto id  			{
 									if (s.nombre != ""){
 										if ($$.tipo != 3){
 											$$.tipo = s.tipo;
-											$$.valor = to_string(s.dir);
+											$$.temp = s.dir;
 										}
 									}
 									else
@@ -260,7 +296,9 @@ Ref : _this punto id  			{
 									if (s.nombre != ""){
 										if ($$.tipo != 3){
 											$$.tipo = s.tipo;
-											$$.valor = to_string(s.dir);
+											$$.temp = s.dir;
+											string aux = $1.lexema;
+											$$.aux_lexema = aux;
 										}
 									}
 									else
@@ -352,12 +390,13 @@ bool equalsIgnoreCase(string s1, char* lexema){
 	return false;
 }
 
-int nuevoTemporal(int nerror, int nlin, int ncol, const char *s){
+string nuevoTemporal(int nerror, int nlin, int ncol, const char *s){
 	TEMP_VAR++;
 	if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
 		msgError(nerror, nlin, ncol, s);
 
-	return (ACTUAL_MEM + TEMP_VAR);
+	int sum = ACTUAL_MEM + TEMP_VAR;
+	return to_string(sum);
 }
 
 int main(int argc, char *argv[]){
