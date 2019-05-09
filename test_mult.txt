@@ -1,14 +1,33 @@
-class prc1 {
+class prcorrecto1 {
  attributes:
 
- int a, c;
+  int a,b,c;
 
  methods:
 
   int main()
-	{
-		float a, b;
-		a = 2 * 3 + 4;
-		print(a);
-	}
+  {
+    float a,b;
+  
+    a = 8.5;
+    c = a;
+    if (this.c > 7.1)
+    {
+      int a,b;
+      float c;
+      c = 2.1;
+    
+      a = c + 3 * (1.0 / 1.0);
+      this.a = a;
+      b = a/2/2;
+      print(b);
+    }
+    else 
+    {
+      this.a = a/2;
+    }
+    print(this.a);
+    print(a);
+    print(c);
+  }
 }
