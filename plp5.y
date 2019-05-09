@@ -29,40 +29,40 @@ extern char *yytext;
 extern FILE *yyin;
 int yyerror(char *s);
 const int MEM = 16384;
-int ACTUAL_MEM = 16097;
-int TEMP_VAR = 0;
+int ACTUAL_MEM = 1;
+int ETIQ = 0;
 TablaSimbolos *ts = new TablaSimbolos(NULL);
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
+TablaTipos* tp = new TablaTipos(); 
 Simbolo buscarClase(TablaSimbolos *root, string nombre);
 Simbolo buscar(TablaSimbolos *root, string nombre);
 bool anyadir(TablaSimbolos *t,Simbolo s);
 bool buscarAmbito(TablaSimbolos *root, string nombre);
 string nuevoTemporal(int nerror, int nlin, int ncol, const char *s);
+string nuevaEtiq();
+string getRelop(string op);
+int getRelopIndex(string op);
 
 // DONE:  	
-//			- mirar la declaracion de variables en Variable y V, no se guarda bien la s.dir
-//        	- poner el error de NO ES DE AMBITO CLASE en el "Ref : this"
-
-//        	- pasar los tipos por atributos heredados
-//        	- si el tipo cambia de 1 a 2, entonces hacer itor | mirar para cuando es rtor!
-//        	- mover los resultados de una variable a su dir
-//			- en "Ref : id" estar seguros de poder coger el del ambito más cercano que lo tenga declarado | y en "Ref : this"?
-//        	- hacer las divisiones en la parte de mulop
-//        	- pasar el tipo por heredado y hacer itor/rtor muli/muld cuando se tenga que hacer
+//			- 
 
 // TO DO: 
-//			- se puede optimizar la memoria en operaciones? porque hay una que se puede eliminar antes...
+//			- arrays
+//			- probar varias condiciones en los ifs (&& --> *)
 
 
 %}
 %%
 S : _class id llavei attributes dosp BDecl methods dosp Metodos llaved   	{
+																				$$.code = $6.code + $9.code;
+																				$$.code += "halt\n";
+																				cout << $$.code << endl;
 																		   		int tk = yylex();
 																		   		if (tk != 0) yyerror("");
 																			};
 
-Metodos : _int _main pari pard Bloque {};
+Metodos : _int _main pari pard Bloque { $$.code = $5.code; };
 
 Tipo 	: _int {$$.tipo = ENTERO; }
 	 	| _float {$$.tipo = REAL; };
@@ -71,7 +71,6 @@ Bloque : llavei {ts = new TablaSimbolos(ts);} BDecl SeqInstr llaved 	{
 																	 		$$.code = $3.code + $4.code;
 																	 		deleteScope(ts);
 																			ts = ts->root;
-																			cout << $$.code << endl;
 																		};
 
 BDecl 	: BDecl DVar {$$.code = "";}
@@ -90,6 +89,7 @@ Variable : 	id { $$.array = 1; } V   	{
 												Simbolo s;
 												s.nombre = $1.lexema;
 												s.tipo = $1.tipo;
+												//var = tp.getDt(s.tipo);
 												ACTUAL_MEM += $3.size;
 												s.dir = to_string(ACTUAL_MEM);
 												s.size = $3.size;
@@ -118,18 +118,92 @@ Instr : pyc {  }
 	  | Ref asig Expr pyc  								{ 	
 															$$.code = $3.code;
 															$$.code += "mov " + $3.temp + " " + $1.temp + "\t; Instr : Ref asig Expr pyc \n";
-															//ACTUAL_MEM--;
 														}
-	  | _print pari Expr pard pyc {}
-	  | _scan pari Ref pard pyc {}
-	  | _if pari Expr pard Instr {}
-	  | _if pari Expr pard Instr _else Instr 	{}
-	  | _while pari Expr pard Instr {};
+	  | _print pari Expr pard pyc 						{
+		  													$$.code = $3.code;
+															if ($3.tipo == ENTERO){
+																$$.code += "wri " + $3.temp + "\t print valor entero de temporal\n";
+															}
+															else if($3.tipo == REAL){
+																$$.code += "wrr " + $3.temp + "\t print valor real de temporal\n";
+															}
+															$$.code += "wrl\n";
+														}
+	  | _scan pari Ref pard pyc 						{
+															$$.code = $3.code;
+															if ($3.tipo == ENTERO){
+																$$.code += "rdi " + $3.temp + "\t guardar valor entero en temporal\n";
+															}
+															else if($3.tipo == REAL){
+																$$.code += "rdr " + $3.temp + "\t guardar valor real en temporal\n";
+															}
+	  													}
+	  | _if pari Expr pard Instr 						{
+															$$.code = $3.code;
+															$$.code += "mov " + $3.temp + " A\n";
+		  													string etiqueta = nuevaEtiq();
+															$$.code += "jz " + etiqueta + "\n";
+															$$.code += $5.code;
+															$$.code += etiqueta + " ";
+	  													}
+	  | _if pari Expr pard Instr _else Instr 			{
+		  													$$.code = $3.code;
+															string etiqueta1 = nuevaEtiq();
+															string etiqueta2 = nuevaEtiq();
+															$$.code += "mov " + $3.temp + " A\n";
+															$$.code += "jz " + etiqueta1 + "\n";
+															$$.code += $5.code;
+															$$.code += "jmp " + etiqueta2 +"\n";
+															$$.code += etiqueta1 + " ";
+															$$.code += $7.code;
+															$$.code += etiqueta2 + " ";
+														}
+	  | _while pari Expr pard Instr 					{
+		  													string etiqueta1 = nuevaEtiq();
+															string etiqueta2 = nuevaEtiq();
+															$$.code += etiqueta1 + " ";
+															$$.code += $3.code;
+															$$.code += "mov " + $3.temp + " A\n";
+															$$.code += "jz " + etiqueta2 + "\n";
+															$$.code += $5.code;
+															$$.code += "jmp " + etiqueta1 +"\n";
+															$$.code += etiqueta2 + " ";
+	  													};
 
 Expr : 	Expr relop Esimple 							{
-														$$.tipo = $3.tipo;	
+														string temp_final = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+														if(($1.tipo == ARRAY || $3.tipo == ARRAY)){
+															msgError(ERR_NO_ATRIB,$2.nlin,$2.ncol,$2.lexema);
+														}			
+														string op = $2.lexema;								
+														$$.code += $1.code;
+														$$.code += $3.code;
+														if($1.tipo == ENTERO && $3.tipo == ENTERO){
+															$$.code += "mov " + $1.temp + " A\n";
+															$$.code += getRelop(op) + "i " + $3.temp + "\t; Expr relop Esimple\n";
+															
+														}
+														else if($1.tipo == ENTERO && $3.tipo == REAL){
+															string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+															$$.code += "mov " + $1.temp + " A\n";
+															$$.code += "itor \n";
+															$$.code += getRelop(op) + "r " + $3.temp + "\t; Expr relop Esimple\n";
+														}
+														else if($1.tipo == REAL && $3.tipo == ENTERO){
+															string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+															$$.code += "mov " + $3.temp + " A\n";
+															$$.code += "itor \n";
+															$$.code += getRelop(op) + "r " + temp1 + "\t; Expr relop Esimple\n";
+														}	
+														else { //reales
+															$$.code += "mov " + $1.temp + " A\n";
+															$$.code += getRelop(op) + "r " + $3.temp + "\t; Expr relop Esimple\n";
+														}
+														$$.code += "mov A " + temp_final + "\t; guardar el resultado en temporal\n";
+														$$.temp = temp_final;
 													}
 	 |  Esimple 									{ 
+		 												$$.code = $1.code;
 														$$.tipo = $1.tipo;	
 													};
 
@@ -154,7 +228,6 @@ Esimple : Esimple addop Term  	{
 										$$.code += op + "i " + $3.temp + " \n";
 									}
 									else if($1.tipo == ENTERO && $3.tipo == REAL){
-										$$.code = "; ENTERO Y REAL \n";
 										$$.code += $1.code;
 										$$.tipo = REAL;
 										string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
@@ -167,7 +240,6 @@ Esimple : Esimple addop Term  	{
 										//ACTUAL_MEM--;
 									}
 									else if($1.tipo == REAL && $3.tipo == ENTERO){
-										$$.code = "; REAL y ENTERO \n";
 										$$.code += $1.code;
 										$$.tipo = REAL;
 										$$.code += $3.code;
@@ -379,7 +451,38 @@ int yyerror(char *s){
 	   msgError(ERRSINT,nlin,ncol-strlen(yytext),yytext);
 	}
 }
+string getRelop(string op){
+	int op_index = getRelopIndex(op);
 
+	switch(op_index){
+		case 1:
+			return "eql";
+		case 2:
+			return "neq";
+		case 3:
+			return "lss";
+		case 4:
+			return "leq";
+		case 5:
+			return "gtr";
+		case 6:
+			return "geq";
+	}
+}
+int getRelopIndex(string op){
+	if (op == "==")
+		return 1;
+	if (op == "!=")
+		return 2;
+	if (op == "<")
+		return 3;
+	if (op == "<=")
+		return 4;
+	if (op == ">")
+		return 5;
+	if (op == ">=")
+		return 6;
+}
 bool equalsIgnoreCase(string s1, char* lexema){
 	string s2 = string(lexema);
 	transform(s2.begin(), s2.end(), s2.begin(), ::tolower);
@@ -389,16 +492,17 @@ bool equalsIgnoreCase(string s1, char* lexema){
 
 	return false;
 }
-
 string nuevoTemporal(int nerror, int nlin, int ncol, const char *s){
-	TEMP_VAR++;
-	if ((ACTUAL_MEM + TEMP_VAR) >= MEM)
+	ACTUAL_MEM++;
+	if ((ACTUAL_MEM + 1) >= MEM)
 		msgError(nerror, nlin, ncol, s);
-
-	int sum = ACTUAL_MEM + TEMP_VAR;
-	return to_string(sum);
+	return to_string(ACTUAL_MEM);
 }
-
+string nuevaEtiq(){
+	ETIQ++;
+	string etiqueta = "L"+to_string(ETIQ);
+	return etiqueta;
+}
 int main(int argc, char *argv[]){
 	FILE *fent;
 
@@ -463,5 +567,4 @@ void deleteScope(TablaSimbolos* root){
 	for(size_t i = 0; i < root->simbolos.size(); i++){
 		ACTUAL_MEM-=root->simbolos[i].size;
 	}
-	TEMP_VAR = 0;
 }

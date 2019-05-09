@@ -30,7 +30,7 @@ struct TablaSimbolos {
 };
 struct Tipo {
     int tbase;
-    int dt; //dimension y tamabyo
+    int dt; //dimension y tamanyo
     int tipo;
 };
 struct TablaTipos {
