@@ -3,19 +3,23 @@
 #include <algorithm>
 using namespace std;
 
+const int ENTERO=1;
+const int REAL=2;
+const int ARRAY=3;
+
+//temp: var. temporal donde se ha guardado un Factor o resultado de operacion
 typedef struct {
    char *lexema;
-   string code;
+   string code, temp, aux_lexema;
    int nlin, ncol;
    int tipo;
-   string valor;
    int size, array;
 } MITIPO;
 
 struct Simbolo {
     string nombre;
     int tipo;
-    int dir;
+    string dir;
     int size;
     string nomtrad;
 };
@@ -24,6 +28,25 @@ struct TablaSimbolos {
     std::vector<Simbolo> simbolos;
     TablaSimbolos(TablaSimbolos *t){root=t;}
 };
+struct Tipo {
+    int tbase;
+    int dt; //dimension y tamanyo
+    int tipo;
+};
+struct TablaTipos {
+    std::vector<Tipo> tipos;
+    TablaTipos(){
+         tipos.push_back(Tipo{ENTERO,1,ENTERO});
+         tipos.push_back(Tipo{REAL,1,REAL});
+
+    }
+    int NuevoTipoArray(int dim, int tbase){
+        tipos.push_back(Tipo{tbase,dim,ARRAY});
+    }
+    int getTbase(int tipo){ return tipos[tipo].tbase; }
+    int getDt(int tipo){ return tipos[tipo].dt; }
+};
+
 
 #define YYSTYPE MITIPO
 
