@@ -106,8 +106,6 @@ V 	: cori nentero cord { $$.size = $0.size * atoi($1.lexema); $$.tipo = $0.tipo;
 																			$$.size = $5.size;
 																			int dt = atoi($1.lexema);
 																			$$.tipo = NuevoTipoArray(dt, $5.tipo);
-																			/*cout << "size = " << $5.size << endl;
-																			cout << "tipo = " << $$.tipo << endl;*/
 																		}
 	| 	{
 			$$.size = $0.size;
@@ -130,12 +128,6 @@ Instr : pyc {  }
 																$$.code += "mov " + $3.temp + " A\n";
 																$$.code += "itor\n";
 																$$.code += "mov A " + $3.temp + "\n";
-															}
-															else if ($1.tipo >= ARRAY){
-																$$.code += "mov " + $1.temp + " A\n";	
-																$$.code += "muli #"+ to_string(getDt($1.tipo)) + "\n";
-																$$.code += "addi #"+ to_string($1.dbase) + "\n";
-																$$.code += "mov " + $3.temp + " @A\n";
 															}
 
 															$$.code += "mov " + $3.temp + " " + $1.temp + "\t\t; Instr : Ref asig Expr pyc \n";
@@ -350,25 +342,28 @@ Term : Term mulop Factor   	{
 			   	};
 
 Factor :  Ref      		{
-							
+							$$.code = $1.code;
+							$$.tipo = $1.tipo;
+							$$.temp = $1.temp;
 
 							if($1.tipo >= ARRAY){ //arrays
-								$$.code = $1.code;
-								$$.code += "mov #0"  + $1.temp + "\t\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
+								//msgError(ERRFALTAN,$1.nlin,$1.ncol,$1.lexema);
 								string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 								$$.code += "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
 								$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n";
 								$$.code += "addi #" + to_string($1.dbase) + "\n";
 								$$.code += "mov @A " + temp + "\n";
-								$$.temp = $1.temp;
-							}
-							else{
-								string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-								$$.code = "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
-								$$.temp = temp;
 							}
 
+							/*string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+							$$.code = $1.code;
+							$$.code += "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
+							$$.code += "muli #" + getDt($1.tipo) +"\n";
+							$$.code += "addi #" + to_string($1.dbase) + "\n";
+							$$.code += "mov @A " + temp + "\n";
 							$$.tipo = $1.tipo;
+							$$.temp = $1.temp;*/
+							
 						}
 						
 	   | nentero  		{
@@ -396,11 +391,14 @@ Factor :  Ref      		{
 Ref : _this punto id  			{
 									Simbolo s = buscarClase(ts, $3.lexema);
 									if (s.nombre != ""){
+										string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 										$$.tipo = s.tipo;
 										$$.temp = s.dir;
-										$$.dbase = atoi(s.dir.c_str());
 										string aux = $3.lexema;
 										$$.aux_lexema = aux;
+										$$.code = "mov " + s.dir + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
+										if($1.tipo >= ARRAY)
+											$$.code = "mov #0"  + temp + "\t\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
 									}
 									else
 										msgError(ERR_NO_ATRIB, $1.nlin, $1.ncol, $1.lexema);
@@ -408,22 +406,28 @@ Ref : _this punto id  			{
 	| id 						{ 
 									Simbolo s = buscar(ts, $1.lexema);
 									if (s.nombre != ""){
+										string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 										$$.tipo = s.tipo;
 										$$.temp = s.dir;
 										$$.dbase = atoi(s.dir.c_str());
 										string aux = $1.lexema;
 										$$.aux_lexema = aux;
-										//cout << "Tipo = " << s.tipo << endl;
-										if(s.tipo >= ARRAY){ //arrays
-											string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-											$$.code += "mov #0"  + temp + "\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
-											$$.temp = temp;
-										}
+										$$.code = "mov " + s.dir + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
+										if($1.tipo >= ARRAY)
+											$$.code = "mov #0"  + temp + "\t\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
 									}
 									else
 										msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
 								}
-	| Ref cori Esimple cord 	{
+	| Ref  cori {
+				if($1.tipo < ARRAY){
+					msgError(ERRFALTAN,$1.nlin,$1.ncol,$1.lexema);
+				}
+	} Esimple cord 	{
+									/*if($1.tipo < ARRAY){
+										msgError(ERRSOBRAN, $1.nlin, $1.ncol, $1.lexema);
+									}
+									else{*/
 									if($4.tipo != ENTERO){
 										msgError(ERRSOBRAN, $1.nlin, $1.ncol, $1.lexema);
 									}
@@ -441,7 +445,7 @@ Ref : _this punto id  			{
 									$$.code += "mov " + $1.temp + " " + temp1 + "\n";
 									$$.code += $3.code;
 									$$.code += "mov " + $1.temp + " A\n";*/
-									$$.code += "mov " + $1.temp + " A \t; hace recursivo de arrays\n";
+									$$.code += "mov " + $1.temp + " A\n";
 									$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n"; 
 									$$.code += "addi " + $3.temp + " \n";
 									$$.code += "mov A " + temporal + " \n";

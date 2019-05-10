@@ -1,76 +1,13 @@
-mov $8.5 6		; guarda real 8.5
-mov 6 4		; Instr : Ref asig Expr pyc 
-mov 4 7		; guarda id a
-mov 7 A
-rtoi
-mov A 7
-mov 7 3		; Instr : Ref asig Expr pyc 
-mov 3 8		; guarda id c
-mov $7.1 9		; guarda real 7.1
-mov 8 A
-itor 
-gtrr 9	; Expr relop Esimple
-mov A 10	; guardar el resultado en temporal
-mov 10 A
-jz L1
-mov $2.1 15		; guarda real 2.1
-mov 15 14		; Instr : Ref asig Expr pyc 
-mov 14 16		; guarda id c
-mov #3 17		; guarda entero 3
-mov 17 A
-itor 
-mov A 22
-; Factor -> pari Expr pard
-mov $1.0 18		; guarda real 1.0
-mov $1.0 19		; guarda real 1.0
-mov 18 A
-divr 19	; REAL / REAL
-mov A 20
-mov 22 A
-mulr 20	; ENTERO * REAL
-mov A 21
-mov 16 A
-addr 21	; REAL + REAL
-mov A 23	; guardar el resultado en temporal
-mov 23 A
-rtoi
-mov A 23
-mov 23 12		; Instr : Ref asig Expr pyc 
-mov 12 24		; guarda id a
-mov 24 1		; Instr : Ref asig Expr pyc 
-mov 12 25		; guarda id a
-mov #2 26		; guarda entero 2
-mov 25 A
-divi 26	; ENTERO / ENTERO
-mov A 27
-mov #2 28		; guarda entero 2
-mov 27 A
-divi 28	; ENTERO / ENTERO
-mov A 29
-mov 29 13		; Instr : Ref asig Expr pyc 
-mov 13 30		; guarda id b
-wri 30	; print valor entero de temporal
-wrl
-jmp L2
-L1 mov 4 28		; guarda id a
-mov #2 29		; guarda entero 2
-mov 29 A
-itor
-mov A 31
-mov 28 A
-divr 31	; Term : REAL / ENTERO
-mov A 30
-mov 30 A
-rtoi
-mov A 30
-mov 30 1		; Instr : Ref asig Expr pyc 
-L2 mov 1 32		; guarda id a
-wri 32	; print valor entero de temporal
-wrl
-mov 4 33		; guarda id a
-wrr 33	; print valor real de temporal
-wrl
-mov 3 34		; guarda id c
-wri 34	; print valor entero de temporal
+size = 0
+tipo = 2
+mov #0 1		; guarda entero 0
+mov 0 A 	; hace recursivo de arrays
+muli #1
+addi 1 
+mov A 2 
+mov #3 3		; guarda entero 3
+mov 3 2		; Instr : Ref asig Expr pyc 
+mov 5 6		; guarda id c
+wri 6	; print valor entero de temporal
 wrl
 halt
