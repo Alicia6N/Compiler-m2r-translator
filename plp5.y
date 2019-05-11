@@ -464,7 +464,7 @@ Ref : _this punto id  			{
 									}
 									string temporal = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 									$$.dbase = $1.dbase;
-									cout << $$.dbase << endl;
+									//cout << $$.dbase << endl;
 									//$$.tipo = getTbase($1.tipo);
 									$$.tipo = $1.tipo;
 									$$.temp = temporal;
