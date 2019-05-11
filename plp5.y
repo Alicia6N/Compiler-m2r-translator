@@ -88,11 +88,15 @@ Variable : 	id { $$.size = 1; $$.tipo = $0.tipo; } V   	{
 															if(!buscarAmbito(ts,$1.lexema))  {
 																Simbolo s;
 																s.nombre = $1.lexema;
-																s.tipo = getTbase($3.tipo);	//ENTERO, REAL o pos. ARRAY
+																//s.tipo = getTbase($3.tipo);	//ENTERO, REAL o pos. ARRAY
+																s.tipo = $3.tipo;
 																ACTUAL_MEM += $3.size;
 																s.dir = to_string(ACTUAL_MEM);
 																s.size = $3.size;
 																anyadir(ts,s);
+
+																//cout << "size = " << s.size << endl;
+																//cout << "tipo = " << $3.tipo << endl;
 
 																if (ACTUAL_MEM >= MEM)
 																	msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);
@@ -102,12 +106,11 @@ Variable : 	id { $$.size = 1; $$.tipo = $0.tipo; } V   	{
 															}        
 														};
 
-V 	: cori nentero cord { $$.size = $0.size * atoi($1.lexema); $$.tipo = $0.tipo; } V 	{ 
+V 	: cori nentero cord { $$.size = $0.size * atoi($2.lexema); $$.tipo = $0.tipo; } V 	{ 
 																			$$.size = $5.size;
-																			int dt = atoi($1.lexema);
+																			int dt = atoi($2.lexema);
 																			$$.tipo = NuevoTipoArray(dt, $5.tipo);
-																			/*cout << "size = " << $5.size << endl;
-																			cout << "tipo = " << $$.tipo << endl;*/
+																			//cout << "dt que mete es = " << dt << endl;
 																		}
 	| 	{
 			$$.size = $0.size;
@@ -137,6 +140,8 @@ Instr : pyc {  }
 																$$.code += "addi #"+ to_string($1.dbase) + "\n";
 																$$.code += "mov " + $3.temp + " @A\n";
 															}
+
+															cout << "TIPO EN INSTR = " << $1.tipo << endl;
 
 															$$.code += "mov " + $3.temp + " " + $1.temp + "\t\t; Instr : Ref asig Expr pyc \n";
 														}
@@ -413,10 +418,10 @@ Ref : _this punto id  			{
 										$$.dbase = atoi(s.dir.c_str());
 										string aux = $1.lexema;
 										$$.aux_lexema = aux;
-										//cout << "Tipo = " << s.tipo << endl;
+										
 										if(s.tipo >= ARRAY){ //arrays
 											string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-											$$.code += "mov #0"  + temp + "\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
+											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
 											$$.temp = temp;
 										}
 									}
@@ -427,25 +432,18 @@ Ref : _this punto id  			{
 									if($4.tipo != ENTERO){
 										msgError(ERRSOBRAN, $1.nlin, $1.ncol, $1.lexema);
 									}
-									/*int dirbase = atoi($1.temp.c_str());
-									int dir_array = calcularDireccionArray(dirbase);*/
 									string temporal = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 									$$.dbase = $1.dbase;
+									//$$.tipo = getTbase($1.tipo);
 									$$.tipo = getTbase($1.tipo);
 									$$.temp = temporal;
 
-									$$.code = $3.code;
-									/*string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-									string temp2 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-
-									$$.code += "mov " + $1.temp + " " + temp1 + "\n";
+									$$.code = $1.code;
 									$$.code += $3.code;
-									$$.code += "mov " + $1.temp + " A\n";*/
 									$$.code += "mov " + $1.temp + " A \t; hace recursivo de arrays\n";
-									$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n"; 
+									$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n";
 									$$.code += "addi " + $3.temp + " \n";
 									$$.code += "mov A " + temporal + " \n";
-									//}
 								};
 
 Metodos : Met Metodos {};
@@ -601,6 +599,7 @@ int calcularDireccionArray(int dirbase){
 	return 0;
 }
 int getTbase(int tipo){ return tp->tipos[tipo].tbase; } //$3.tipo ==> ENTERO = 1 --> REAL
+//int getTipo(int tipo){ return tp->tipos[tipo].tipo; }
 int getDt(int tipo){ return tp->tipos[tipo].dt; }
 /*****TABLA SIMBOLOS*********/
 bool buscarAmbito(TablaSimbolos *root,string nombre){
