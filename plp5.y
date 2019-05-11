@@ -46,7 +46,8 @@ int NuevoTipoArray(int dim, int tbase);
 int calcularDireccionArray(int dirbase);
 int getTbase(int tipo);
 int getDt(int tipo);
-
+int getTipoSimple(int tipo);
+void printTtipos();
 // DONE:  	
 //			- 
 
@@ -68,7 +69,7 @@ S : _class id llavei attributes dosp BDecl methods dosp Metodos llaved   	{
 Metodos : _int _main pari pard Bloque { $$.code = $5.code; };
 
 Tipo 	: _int {$$.tipo = ENTERO; }
-	 	| _float {$$.tipo = REAL; };
+	 	| _float {$$.tipo = REAL;};
 
 Bloque : llavei {ts = new TablaSimbolos(ts);} BDecl SeqInstr llaved 	{
 																	 		$$.code = $3.code + $4.code;
@@ -81,8 +82,8 @@ BDecl 	: BDecl DVar {$$.code = "";}
 
 DVar : Tipo { $$.tipo = $1.tipo; } LIdent pyc {$$.code = "";};
 
-LIdent : LIdent coma {$$.tipo = $0.tipo;} Variable {}
-	   | {$$.tipo = $0.tipo;} Variable {};
+LIdent : LIdent coma {$$.tipo = $0.tipo;} Variable { }
+	   | { $$.tipo = $0.tipo; } Variable {};
 
 Variable : 	id { $$.size = 1; $$.tipo = $0.tipo; } V   	{
 															if(!buscarAmbito(ts,$1.lexema))  {
@@ -90,13 +91,18 @@ Variable : 	id { $$.size = 1; $$.tipo = $0.tipo; } V   	{
 																s.nombre = $1.lexema;
 																//s.tipo = getTbase($3.tipo);	//ENTERO, REAL o pos. ARRAY
 																s.tipo = $3.tipo;
-																ACTUAL_MEM += $3.size;
 																s.dir = to_string(ACTUAL_MEM);
+																ACTUAL_MEM += $3.size;
 																s.size = $3.size;
 																anyadir(ts,s);
 
+																
+																//cout << "TIPO BASE DE SIMBOLO = " << getTipoSimple($3.tipo) << endl;
+
 																//cout << "size = " << s.size << endl;
 																//cout << "tipo = " << $3.tipo << endl;
+
+																//printTtipos();
 
 																if (ACTUAL_MEM >= MEM)
 																	msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);
@@ -109,7 +115,11 @@ Variable : 	id { $$.size = 1; $$.tipo = $0.tipo; } V   	{
 V 	: cori nentero cord { $$.size = $0.size * atoi($2.lexema); $$.tipo = $0.tipo; } V 	{ 
 																			$$.size = $5.size;
 																			int dt = atoi($2.lexema);
-																			$$.tipo = NuevoTipoArray(dt, $5.tipo);
+																			int index = NuevoTipoArray(dt, $5.tipo);
+																			$$.tipo = index;
+
+																			//cout << "index nuevo = " << index << endl;
+																			//cout << "DIM Y TIPO QUE COGE PARA INDEX(" + to_string(index) + ") --> " + to_string(dt) + " y " << $5.tipo << endl;
 																			//cout << "dt que mete es = " << dt << endl;
 																		}
 	| 	{
@@ -124,33 +134,47 @@ Instr : pyc {  }
 	  | Bloque { $$.code = $1.code; }
 	  | Ref asig Expr pyc  								{ 	
 															$$.code = $1.code + $3.code;
-															if($1.tipo == ENTERO && $3.tipo == REAL){
+
+															int tipo_izq = getTipoSimple($1.tipo); //getTbase($1.tipo);
+															int tipo_der = getTipoSimple($3.tipo); //getTbase($3.tipo);
+
+															//cout << "INDEX Y TIPO BASE IZQ = " << $1.tipo << ": " << getTipoSimple($1.tipo) << endl;
+															//cout << "INDEX Y TIPO BASE DER = " << $3.tipo << ": " << getTipoSimple($3.tipo) << endl;
+
+															if(tipo_izq == ENTERO && tipo_der == REAL){
 																$$.code += "mov " + $3.temp + " A\n";
 																$$.code += "rtoi\n";
 																$$.code += "mov A " + $3.temp + "\n";
+																//$$.code += "mov " + $3.temp + " " + $1.temp + "\t\t; Instr : Ref asig Expr pyc \n";
 															}
-															else if($1.tipo == REAL && $3.tipo == ENTERO){
+															else if(tipo_izq == REAL && tipo_der == ENTERO){
+																//cout << "ENTRA PARA CAMBIAR A REAL" << endl;
 																$$.code += "mov " + $3.temp + " A\n";
 																$$.code += "itor\n";
 																$$.code += "mov A " + $3.temp + "\n";
+																//$$.code += "mov " + $3.temp + " " + $1.temp + "\t\t; Instr : Ref asig Expr pyc \n";
 															}
-															else if ($1.tipo >= ARRAY){
+															
+															if ($1.tipo >= ARRAY){
+																//cout << "SALE MOVIENDOLO A LA POS DEL ARRAY" << endl;
 																$$.code += "mov " + $1.temp + " A\n";	
-																$$.code += "muli #"+ to_string(getDt($1.tipo)) + "\n";
+																$$.code += "muli #1 \n";
 																$$.code += "addi #"+ to_string($1.dbase) + "\n";
 																$$.code += "mov " + $3.temp + " @A\n";
 															}
-
-															cout << "TIPO EN INSTR = " << $1.tipo << endl;
-
-															$$.code += "mov " + $3.temp + " " + $1.temp + "\t\t; Instr : Ref asig Expr pyc \n";
+															else{
+																$$.code += "mov " + $3.temp + " " + $1.temp + "\t\t; Instr : Ref asig Expr pyc \n";
+															}
 														}
 	  | _print pari Expr pard pyc 						{
 		  													$$.code = $3.code;
-															if ($3.tipo == ENTERO){
+
+															//cout << "TIPO BASE = " << getTipoSimple($3.tipo) << endl;
+
+															if (getTipoSimple($3.tipo) == ENTERO){
 																$$.code += "wri " + $3.temp+ "\t; print valor entero de temporal\n";
 															}
-															else if($3.tipo == REAL){
+															else if(getTipoSimple($3.tipo) == REAL){
 																$$.code += "wrr " + $3.temp +"\t; print valor real de temporal\n";
 															}
 															$$.code += "wrl\n";
@@ -244,7 +268,10 @@ Esimple : Esimple addop Term  	{
 									else 
 										op = "sub";
 
-									if($1.tipo == ENTERO && $3.tipo == ENTERO){
+									int tipo_izq = getTipoSimple($1.tipo); //getTbase($1.tipo);
+									int tipo_der = getTipoSimple($3.tipo); //getTbase($3.tipo);
+
+									if(tipo_izq == ENTERO && tipo_der == ENTERO){
 										//$$.code = "; ENTEROS \n";
 										$$.code = $1.code;
 										$$.tipo = ENTERO;
@@ -252,7 +279,7 @@ Esimple : Esimple addop Term  	{
 										$$.code += "mov " + $1.temp + " A\n";
 										$$.code += op + "i " + $3.temp + "\t; ENTERO "+ aux_impr + " ENTERO\n";
 									}
-									else if($1.tipo == ENTERO && $3.tipo == REAL){
+									else if(tipo_izq == ENTERO && tipo_der == REAL){
 										$$.code = $1.code;
 										$$.tipo = REAL;
 										string temp1 = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
@@ -264,7 +291,7 @@ Esimple : Esimple addop Term  	{
 										$$.code += op +"r " + $3.temp + "\t; ENTERO " + aux_impr + " REAL\n";
 										//ACTUAL_MEM--;
 									}
-									else if($1.tipo == REAL && $3.tipo == ENTERO){
+									else if(tipo_izq == REAL && tipo_der == ENTERO){
 										$$.code = $1.code;
 										$$.tipo = REAL;
 										$$.code += $3.code;
@@ -277,6 +304,7 @@ Esimple : Esimple addop Term  	{
 										//ACTUAL_MEM--;
 									}	
 									else { //reales
+									
 										//$$.code = "; REALES \n";
 										$$.code = $1.code;
 										$$.tipo = REAL;
@@ -303,7 +331,10 @@ Term : Term mulop Factor   	{
 								else
 									op = "div";
 
-								if($1.tipo == ENTERO && $3.tipo == ENTERO){
+								int tipo_izq = getTipoSimple($1.tipo); //getTbase($1.tipo);
+								int tipo_der = getTipoSimple($3.tipo); //getTbase($3.tipo);
+
+								if(tipo_izq == ENTERO && tipo_der == ENTERO){
 									//$$.code = "; ENTEROS \n";
 									$$.code = $1.code;
 									$$.tipo = ENTERO;
@@ -311,7 +342,7 @@ Term : Term mulop Factor   	{
 									$$.code += "mov " + $1.temp + " A\n";
 									$$.code += op + "i " + $3.temp + "\t; ENTERO " + aux_impr + " ENTERO\n";
 								}
-								else if($1.tipo == ENTERO && $3.tipo == REAL){
+								else if(tipo_izq == ENTERO && tipo_der == REAL){
 									$$.tipo = REAL;
 									//$$.code = "; ENTERO Y REAL \n";
 									$$.code = $1.code;
@@ -324,7 +355,7 @@ Term : Term mulop Factor   	{
 									$$.code += op + "r " + $3.temp + "\t; ENTERO " + aux_impr + " REAL\n";
 									//ACTUAL_MEM--;
 								}
-								else if($1.tipo == REAL && $3.tipo == ENTERO){
+								else if(tipo_izq == REAL && tipo_der == ENTERO){
 									//$$.code = "; REAL y ENTERO \n";
 									$$.code = $1.code;
 									$$.tipo = REAL;
@@ -356,16 +387,15 @@ Term : Term mulop Factor   	{
 
 Factor :  Ref      		{
 							
-
 							if($1.tipo >= ARRAY){ //arrays
 								$$.code = $1.code;
-								$$.code += "mov #0"  + $1.temp + "\t\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
+								$$.code += "mov #0 "  + $1.temp + "\t\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
 								string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 								$$.code += "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
-								$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n";
+								$$.code += "muli #1 \n";
 								$$.code += "addi #" + to_string($1.dbase) + "\n";
 								$$.code += "mov @A " + temp + "\n";
-								$$.temp = $1.temp;
+								$$.temp = temp;
 							}
 							else{
 								string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
@@ -434,8 +464,9 @@ Ref : _this punto id  			{
 									}
 									string temporal = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 									$$.dbase = $1.dbase;
+									cout << $$.dbase << endl;
 									//$$.tipo = getTbase($1.tipo);
-									$$.tipo = getTbase($1.tipo);
+									$$.tipo = $1.tipo;
 									$$.temp = temporal;
 
 									$$.code = $1.code;
@@ -599,6 +630,34 @@ int calcularDireccionArray(int dirbase){
 	return 0;
 }
 int getTbase(int tipo){ return tp->tipos[tipo].tbase; } //$3.tipo ==> ENTERO = 1 --> REAL
+
+int getTipoSimple(int tipo){
+	if (tipo == ENTERO || tipo == REAL){
+		return tipo;
+	}
+
+	int i = tipo;
+
+	while(i < tp->tipos.size()){
+		if (tp->tipos[i].tipo == 0 || tp->tipos[i].tipo == 1){
+			return tp->tipos[i].tipo;
+		}
+
+		i = tp->tipos[i].tbase;
+	}
+	
+	/*for (int i = tipo; i < tp->tipos.size(); --i){
+		if (tp->tipos[i].tipo == 0 || tp->tipos[i].tipo == 1){
+			return tp->tipos[i].tipo;
+		}
+	}*/
+}
+void printTtipos(){
+		cout << "Tipo Dim Tbase" << endl;
+		for (int i = 0; i < tp->tipos.size(); ++i){
+			cout << "- " << i <<" : " <<  to_string(tp->tipos[i].tipo) + " " + to_string(tp->tipos[i].dt) + " " + to_string(tp->tipos[i].tbase) << endl;
+	}
+}
 //int getTipo(int tipo){ return tp->tipos[tipo].tipo; }
 int getDt(int tipo){ return tp->tipos[tipo].dt; }
 /*****TABLA SIMBOLOS*********/
