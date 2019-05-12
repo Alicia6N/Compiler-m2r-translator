@@ -77,8 +77,8 @@ Bloque : llavei {ts = new TablaSimbolos(ts);} BDecl SeqInstr llaved 	{
 																			ts = ts->root;
 																		};
 
-BDecl 	: BDecl DVar {$$.code = "";}
-	  	| {$$.code = "";};
+BDecl : BDecl DVar {$$.code = "";}
+	  | {$$.code = "";};
 
 DVar : Tipo { $$.tipo = $1.tipo; } LIdent pyc {$$.code = "";};
 
@@ -304,7 +304,6 @@ Esimple : Esimple addop Term  	{
 										$$.code += $3.code;
 										$$.code += "mov " + temp1 + " A\n";
 										$$.code += op +"r " + $3.temp + "\t; ENTERO " + aux_impr + " REAL\n";
-										//ACTUAL_MEM--;
 									}
 									else if(tipo_izq == REAL && tipo_der == ENTERO){
 										$$.code = $1.code;
@@ -316,7 +315,6 @@ Esimple : Esimple addop Term  	{
 										$$.code += "mov A " + temp1 + " \n";
 										$$.code += "mov " + $1.temp + " A\n";
 										$$.code += op +"r " + temp1 + "\t; REAL " + aux_impr + " REAL\n";
-										//ACTUAL_MEM--;
 									}	
 									else { //reales
 									
@@ -412,13 +410,22 @@ Factor :  Ref      		{
 								$$.code += "mov @A " + temp + "\n";
 								$$.temp = temp;
 							}
-							else{
+							$$.code = $1.code;
+							string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+							$$.temp = temp;
+							$$.tipo = $1.tipo;
+							$$.code += "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
+							$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n";
+							$$.code += "addi #" + to_string($1.dbase) + "\n";
+							$$.code += "mov @A " + temp + "\n";
+							
+							/*else{
 								string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 								$$.code = "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
 								$$.temp = temp;
-							}
+							}*/
 
-							$$.tipo = $1.tipo;
+							
 						}
 						
 	   | nentero  		{
@@ -476,17 +483,20 @@ Ref : _this punto id  			{
 										//cout << "tipo en id = " << $$.tipo << endl;
 										//cout << "tbase en id = " << getTbase($$.tipo) << endl;
 										
+<<<<<<< HEAD
 										if(s.index_tipo >= ARRAY){ //arrays
 											string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
 											$$.temp = temp;
 										}
+=======
+>>>>>>> 8105dbfa4325535d88d85d5fed45aa446a5dd49d
 									}
 									else
 										msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
 								}
 	| Ref cori Esimple cord 	{
-									if($4.tipo != ENTERO){
+									if($3.tipo != ENTERO){
 										msgError(ERRSOBRAN, $1.nlin, $1.ncol, $1.lexema);
 									}
 									string temporal = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
@@ -501,7 +511,7 @@ Ref : _this punto id  			{
 									$$.code += $3.code;
 									$$.code += "mov " + $1.temp + " A \t; hace recursivo de arrays\n";
 									$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n";
-									$$.code += "addi " + $3.temp + " \n";
+									$$.code += "addi " + $4.temp + " \n";
 									$$.code += "mov A " + temporal + " \n";
 								};
 
@@ -530,43 +540,43 @@ CPar : {}
 %%
 
 void msgError(int nerror, int nlin, int ncol, const char *s){
-	switch (nerror) {
-		case ERRLEXICO: fprintf(stderr,"Error lexico (%d,%d): caracter '%s' incorrecto\n",nlin,ncol,s);
+	 switch (nerror) {
+		 case ERRLEXICO: fprintf(stderr,"Error lexico (%d,%d): caracter '%s' incorrecto\n",nlin,ncol,s);
 			break;
-		case ERRSINT: fprintf(stderr,"Error sintactico (%d,%d): en '%s'\n",nlin,ncol,s);
+		 case ERRSINT: fprintf(stderr,"Error sintactico (%d,%d): en '%s'\n",nlin,ncol,s);
 			break;
-		case ERREOF: fprintf(stderr,"Error sintactico: fin de fichero inesperado\n");
+		 case ERREOF: fprintf(stderr,"Error sintactico: fin de fichero inesperado\n");
 			break;
-		case ERRLEXEOF: fprintf(stderr,"Error lexico: fin de fichero inesperado\n");
+		 case ERRLEXEOF: fprintf(stderr,"Error lexico: fin de fichero inesperado\n");
 			break;
-		default:
+		 default:
 			fprintf(stderr,"Error semantico (%d,%d): ", nlin,ncol);
 			switch(nerror) {
-				case ERRYADECL: fprintf(stderr,"simbolo '%s' ya declarado\n",s);
-					break;
-				case ERRNODECL: fprintf(stderr,"identificador '%s' no declarado\n",s);
-					break;
-				case ERRDIM: fprintf(stderr,"la dimension debe ser mayor que cero\n");
-					break;
-				case ERRFALTAN: fprintf(stderr,"faltan indices\n");
-					break;
-				case ERRSOBRAN: fprintf(stderr,"sobran indices\n");
-					break;
-				case ERR_EXP_ENT: fprintf(stderr,"la expresion entre corchetes debe ser de tipo entero\n");
-					break;
-				case ERR_NO_ATRIB: fprintf(stderr,"el simbolo despues de 'this' debe ser un atributo\n");
-					break;
-				case ERR_NOCABE:fprintf(stderr,"la variable '%s' ya no cabe en memoria\n",s);
-					break;
-				case ERR_MAXVAR:fprintf(stderr,"en la variable '%s', hay demasiadas variables declaradas\n",s);
-					break;
-				case ERR_MAXTIPOS:fprintf(stderr,"hay demasiados tipos definidos\n");
-					break;
-				case ERR_MAXTMP:fprintf(stderr,"no hay espacio para variables temporales\n");
-					break;
+			 case ERRYADECL: fprintf(stderr,"simbolo '%s' ya declarado\n",s);
+			   break;
+			 case ERRNODECL: fprintf(stderr,"identificador '%s' no declarado\n",s);
+			   break;
+			 case ERRDIM: fprintf(stderr,"la dimension debe ser mayor que cero\n");
+			   break;
+			 case ERRFALTAN: fprintf(stderr,"faltan indices\n");
+			   break;
+			 case ERRSOBRAN: fprintf(stderr,"sobran indices\n");
+			   break;
+			 case ERR_EXP_ENT: fprintf(stderr,"la expresion entre corchetes debe ser de tipo entero\n");
+			   break;
+			 case ERR_NO_ATRIB: fprintf(stderr,"el simbolo despues de 'this' debe ser un atributo\n");
+			   break;
+			 case ERR_NOCABE:fprintf(stderr,"la variable '%s' ya no cabe en memoria\n",s);
+			   break;
+			 case ERR_MAXVAR:fprintf(stderr,"en la variable '%s', hay demasiadas variables declaradas\n",s);
+			   break;
+			 case ERR_MAXTIPOS:fprintf(stderr,"hay demasiados tipos definidos\n");
+			   break;
+			 case ERR_MAXTMP:fprintf(stderr,"no hay espacio para variables temporales\n");
+			   break;
 			}
-	}
-	exit(1);
+		}
+	 exit(1);
 }
 
 int yyerror(char *s){
@@ -611,13 +621,13 @@ int getRelopIndex(string op){
 		return 6;
 }
 bool equalsIgnoreCase(string s1, char* lexema){
-	string s2 = string(lexema);
-	transform(s2.begin(), s2.end(), s2.begin(), ::tolower);
+   string s2 = string(lexema);
+   transform(s2.begin(), s2.end(), s2.begin(), ::tolower);
 
-	if (s1 == s2)
-		return true;
+   if (s1 == s2)
+	  return true;
 
-	return false;
+   return false;
 }
 string nuevoTemporal(int nerror, int nlin, int ncol, const char *s){
 	ACTUAL_MEM++;
@@ -631,20 +641,20 @@ string nuevaEtiq(){
 	return "L"+to_string(ETIQ);
 }
 int main(int argc, char *argv[]){
-	FILE *fent;
+   FILE *fent;
 
-	if (argc == 2) {
-		fent = fopen(argv[1], "rt");
-		if (fent) {
-			yyin = fent;
-			yyparse();
-			fclose(fent);
-		}
-		else
-			fprintf(stderr, "No puedo abrir el fichero\n");
-	}
-	else
-		fprintf(stderr, "Uso: ejemplo <nombre de fichero>\n");
+   if (argc == 2) {
+	  fent = fopen(argv[1], "rt");
+	  if (fent) {
+		 yyin = fent;
+		 yyparse();
+		 fclose(fent);
+	  }
+	  else
+		 fprintf(stderr, "No puedo abrir el fichero\n");
+   }
+   else
+	  fprintf(stderr, "Uso: ejemplo <nombre de fichero>\n");
 }
 /*****TABLA TIPOS******/
 int NuevoTipoArray(int dim, int tbase){
@@ -690,7 +700,7 @@ void printTtipos(){
 int getDt(int tipo){ return tp->tipos[tipo].dt; }
 /*****TABLA SIMBOLOS*********/
 bool buscarAmbito(TablaSimbolos *root,string nombre){
-	for(size_t i=0;i<root->simbolos.size();i++){
+  for(size_t i=0;i<root->simbolos.size();i++){
 		if(root->simbolos[i].nombre == nombre){
 			return true;
 		}
@@ -706,26 +716,27 @@ bool anyadir(TablaSimbolos *t,Simbolo s){
 	}
 	t->simbolos.push_back(s);
 	return true;
+
 }
 Simbolo buscar(TablaSimbolos *root,string nombre){
-	for(size_t i = 0; i < root->simbolos.size(); i++){
-		if(root->simbolos[i].nombre == nombre){
-			return root->simbolos[i];
-		}
-	}
-	if(root->root != NULL){ 
-		return buscar(root->root, nombre);
-	}
+   for(size_t i = 0; i < root->simbolos.size(); i++){
+	  if(root->simbolos[i].nombre == nombre){
+		 return root->simbolos[i];
+	  }
+   }
+   if(root->root != NULL){ 
+	  return buscar(root->root, nombre);
+   }
 }
 Simbolo buscarClase(TablaSimbolos *root, string nombre){
-	if (root->root != NULL)
-		return buscarClase(root->root, nombre);
-	
-	for(size_t i = 0; i < root->simbolos.size(); i++){
-		if(root->simbolos[i].nombre == nombre){
-			return root->simbolos[i];
-		}
-	}
+   if (root->root != NULL)
+	  return buscarClase(root->root, nombre);
+   
+   for(size_t i = 0; i < root->simbolos.size(); i++){
+	  if(root->simbolos[i].nombre == nombre){
+		 return root->simbolos[i];
+	  }
+   }
 }
 TablaSimbolos* createScope(TablaSimbolos* root){
 	TablaSimbolos* child = new TablaSimbolos(root);
