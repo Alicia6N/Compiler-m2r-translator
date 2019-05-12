@@ -180,22 +180,19 @@ Instr : pyc { $$.code = " ";  }
 															$$.code += "wrl\n";
 														}
 	  | _scan pari Ref pard pyc 						{
-															int tipo_tres = getTipoSimple($3.tipo);
-															string temporal = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-
 															$$.code = $3.code;
-															if (tipo_tres == ENTERO){
+															if ($3.tipo == ENTERO){
 																$$.code += "rdi " + $3.temp +  "\t; guardar valor entero en temporal\n";
 															}
-															else if(tipo_tres == REAL){
+															else if($3.tipo == REAL){
 																$$.code += "rdr " + $3.temp + "\t; guardar valor real en temporal\n";
 															}
 
 															if ($1.tipo >= ARRAY){
-																$$.code = $3.code;
+																//cout << "SALE MOVIENDOLO A LA POS DEL ARRAY" << endl;
 																$$.code += "mov " + $1.temp + " A\n";	
 																$$.code += "muli #1 \n";
-																$$.code += "addi #"+ to_string($3.dbase) + "\n";
+																$$.code += "addi #"+ to_string($1.dbase) + "\n";
 																$$.code += "mov " + $3.temp + " @A\n";
 															}
 	  													}

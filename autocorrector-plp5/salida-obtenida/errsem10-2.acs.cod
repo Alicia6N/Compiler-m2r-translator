@@ -1,0 +1,28 @@
+mov #0 146	; guarda 0 y empieza recursivo arrays de a
+mov #0 147		; guarda entero 0
+mov 146 A 	; hace recursivo de arrays
+muli #1
+addi 147 
+mov A 148 
+mov #1 149		; guarda entero 1
+mov 148 A 	; hace recursivo de arrays
+muli #2
+addi 149 
+mov A 150 
+mov #2 151		; guarda entero 2
+mov 150 A 	; hace recursivo de arrays
+muli #3
+addi 151 
+mov A 152 
+mov #3 153		; guarda entero 3
+mov 152 A 	; hace recursivo de arrays
+muli #4
+addi 153 
+mov A 154 
+mov #0 154		; guarda 0 y empieza recursivo arrays de a
+mov 154 155		; guarda id a
+muli #1 
+addi #0
+mov @A 155
+mov 155 144		; Instr : Ref asig Expr pyc 
+halt

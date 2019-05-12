@@ -1,0 +1,6 @@
+mov #7 4		; guarda entero 7
+mov 4 0		; Instr : Ref asig Expr pyc 
+mov 5 0		; Instr : Ref mov 5 0		; Instr : Ref asig Expr pyc 
+wri 6	; print valor entwri 6	; print valor entero de temporal
+wrl
+halt

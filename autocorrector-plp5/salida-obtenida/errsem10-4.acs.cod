@@ -1,0 +1,22 @@
+mov #0 42	; guarda 0 y empieza recursivo arrays de g
+mov #7 43		; guarda entero 7
+mov 42 A 	; hace recursivo de arrays
+muli #10
+addi 43 
+mov A 44 
+mov #2 45		; guarda entero 2
+mov 44 A 	; hace recursivo de arrays
+muli #4
+addi 45 
+mov A 46 
+mov #1 47		; guarda entero 1
+mov 46 A 	; hace recursivo de arrays
+muli #4
+addi 47 
+mov A 48 
+mov $2.5 49		; guarda real 2.5
+mov 48 A
+muli #1 
+addi #1
+mov 49 @A
+halt
