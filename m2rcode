@@ -1,9 +1,11 @@
 TIPO EN INSTR = 0
 mov #0 9	; guarda 0 y empieza recursivo arrays de c
+mov #0 9	;Ref -> id c
 mov #1 10		; guarda entero 1
 mov 9 A 	; hace recursivo de arrays
 muli #8
 addi 10 
+addi  
 mov A 11 
 mov #3 12		; guarda entero 3
 mov 12 11		; Instr : Ref asig Expr pyc 
