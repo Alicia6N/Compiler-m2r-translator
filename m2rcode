@@ -9,7 +9,11 @@ mov 29 A 	; hace recursivo de arrays
 muli #5
 addi 30 
 mov A 31 
+mov 31 A
+muli #1 
+addi #1
 rdr 32	; guardar valor real en temporal
+mov 32 @A
 mov #0 33	; guarda 0 y empieza recursivo arrays de a
 mov #1 34		; guarda entero 1
 mov 33 A 	; hace recursivo de arrays
@@ -26,26 +30,83 @@ mov 37 38		; guarda id a
 muli #1 
 addi #1
 mov @A 38
-mov 38 0		; Instr : Ref asig Expr pyc 
-mov #0 39	; guarda 0 y empieza recursivo arrays de a
-mov #1 40		; guarda entero 1
-mov 39 A 	; hace recursivo de arrays
-muli #5
-addi 40 
+mov #2 39		; guarda entero 2
+mov 39 A
+itor 
 mov A 41 
-mov #1 42		; guarda entero 1
-mov 41 A 	; hace recursivo de arrays
+mov 38 A
+addr 41	; REAL + REAL
+mov A 40	; guardar el resultado en temporal
+mov #2 42		; guarda entero 2
+mov 42 A
+itor 
+mov A 44 
+mov 40 A
+subr 44	; REAL - REAL
+mov A 43	; guardar el resultado en temporal
+mov 43 0		; Instr : Ref asig Expr pyc 
+mov #0 45	; guarda 0 y empieza recursivo arrays de a
+mov #1 46		; guarda entero 1
+mov 45 A 	; hace recursivo de arrays
 muli #5
-addi 42 
-mov A 43 
-mov #0 43		; guarda 0 y empieza recursivo arrays de a
-mov 43 44		; guarda id a
+addi 46 
+mov A 47 
+mov #1 48		; guarda entero 1
+mov 47 A 	; hace recursivo de arrays
+muli #5
+addi 48 
+mov A 49 
+mov #0 49		; guarda 0 y empieza recursivo arrays de a
+mov 49 50		; guarda id a
 muli #1 
 addi #1
-mov @A 44
-wrr 44	; print valor real de temporal
+mov @A 50
+mov #2 51		; guarda entero 2
+mov 51 A
+itor 
+mov A 53 
+mov 50 A
+subr 53	; REAL - REAL
+mov A 52	; guardar el resultado en temporal
+wrr 52	; print valor real de temporal
 wrl
-mov 0 45		; guarda id b
-wrr 45	; print valor real de temporal
+mov #0 54	; guarda 0 y empieza recursivo arrays de a
+mov #1 55		; guarda entero 1
+mov 54 A 	; hace recursivo de arrays
+muli #5
+addi 55 
+mov A 56 
+mov #1 57		; guarda entero 1
+mov 56 A 	; hace recursivo de arrays
+muli #5
+addi 57 
+mov A 58 
+mov #0 58		; guarda 0 y empieza recursivo arrays de a
+mov 58 59		; guarda id a
+muli #1 
+addi #1
+mov @A 59
+mov #1 60		; guarda entero 1
+mov 60 A
+itor
+mov A 62
+mov 59 A
+divr 62	; Term : REAL / ENTERO
+mov A 61
+wrr 61	; print valor real de temporal
+wrl
+mov 0 63		; guarda id b
+mov #2 64		; guarda entero 2
+mov #1 65		; guarda entero 1
+mov 64 A
+muli 65	; ENTERO * ENTERO
+mov A 66
+mov 66 A
+itor 
+mov A 68 
+mov 63 A
+addr 68	; REAL + REAL
+mov A 67	; guardar el resultado en temporal
+wrr 67	; print valor real de temporal
 wrl
 halt

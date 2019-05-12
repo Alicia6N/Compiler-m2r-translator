@@ -181,22 +181,31 @@ Instr : pyc { $$.code = " ";  }
 														}
 	  | _scan pari Ref pard pyc 						{
 															int tipo_tres = getTipoSimple($3.tipo);
-															string temporal = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 
-															$$.code = $3.code;
-															if (tipo_tres == ENTERO){
-																$$.code += "rdi " + $3.temp +  "\t; guardar valor entero en temporal\n";
-															}
-															else if(tipo_tres == REAL){
-																$$.code += "rdr " + $3.temp + "\t; guardar valor real en temporal\n";
-															}
-
-															if ($1.tipo >= ARRAY){
+															if ($3.tipo >= ARRAY){
 																$$.code = $3.code;
-																$$.code += "mov " + $1.temp + " A\n";	
+																string temporal = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+																$$.code += "mov " + $3.temp + " A\n";	
 																$$.code += "muli #1 \n";
 																$$.code += "addi #"+ to_string($3.dbase) + "\n";
-																$$.code += "mov " + $3.temp + " @A\n";
+
+																if (tipo_tres == ENTERO){
+																	$$.code += "rdi " + temporal +  "\t; guardar valor entero en temporal\n";
+																}
+																else if(tipo_tres == REAL){
+																	$$.code += "rdr " + temporal + "\t; guardar valor real en temporal\n";
+																}
+
+																$$.code += "mov " + temporal + " @A\n";
+															}
+															else{
+																$$.code = $3.code;
+																if (tipo_tres == ENTERO){
+																	$$.code += "rdi " + $3.temp +  "\t; guardar valor entero en temporal\n";
+																}
+																else if(tipo_tres == REAL){
+																	$$.code += "rdr " + $3.temp + "\t; guardar valor real en temporal\n";
+																}
 															}
 	  													}
 	  | _if pari Expr pard Instr 						{
@@ -410,22 +419,19 @@ Factor :  Ref      		{
 								$$.code += "mov @A " + temp + "\n";
 								$$.temp = temp;
 							}
-							$$.code = $1.code;
+							else{
+								string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
+								$$.code = "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
+								$$.temp = temp;
+							}
+							/*$$.code = $1.code;
 							string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 							$$.temp = temp;
 							$$.tipo = $1.tipo;
 							$$.code += "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
 							$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n";
 							$$.code += "addi #" + to_string($1.dbase) + "\n";
-							$$.code += "mov @A " + temp + "\n";
-							
-							/*else{
-								string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
-								$$.code = "mov " + $1.temp + " " + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
-								$$.temp = temp;
-							}*/
-
-							
+							$$.code += "mov @A " + temp + "\n";*/
 						}
 						
 	   | nentero  		{
@@ -483,14 +489,11 @@ Ref : _this punto id  			{
 										//cout << "tipo en id = " << $$.tipo << endl;
 										//cout << "tbase en id = " << getTbase($$.tipo) << endl;
 										
-<<<<<<< HEAD
 										if(s.index_tipo >= ARRAY){ //arrays
 											string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
 											$$.temp = temp;
 										}
-=======
->>>>>>> 8105dbfa4325535d88d85d5fed45aa446a5dd49d
 									}
 									else
 										msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);
@@ -511,7 +514,7 @@ Ref : _this punto id  			{
 									$$.code += $3.code;
 									$$.code += "mov " + $1.temp + " A \t; hace recursivo de arrays\n";
 									$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n";
-									$$.code += "addi " + $4.temp + " \n";
+									$$.code += "addi " + $3.temp + " \n";
 									$$.code += "mov A " + temporal + " \n";
 								};
 

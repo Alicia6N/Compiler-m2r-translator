@@ -8,9 +8,11 @@ class prcorrecto2 {
     float a[5][5];
   
     scan(a[1][1]);
-    b = a[1][1];
+    //a[1][1] = 5 + 7;
+    b = a[1][1] + 2 - 2;
     
-    print(a[1][1]);
-    print(b);
+    print(a[1][1] - 2);
+    print(a[1][1] / 1);
+    print(b + 2 * 1);
   }
 }
