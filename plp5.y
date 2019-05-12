@@ -254,7 +254,8 @@ Expr : 	Expr relop Esimple 							{
 													}
 	 |  Esimple 									{ 
 		 												$$.code = $1.code;
-														$$.tipo = $1.tipo;	
+														$$.tipo = $1.tipo;
+														$$.temp = $1.temp;	
 													};
 
 Esimple : Esimple addop Term  	{   
@@ -386,7 +387,7 @@ Term : Term mulop Factor   	{
 			   	};
 
 Factor :  Ref      		{
-							
+							cout << "tipo = " << $1.tipo << endl;
 							if($1.tipo >= ARRAY){ //arrays
 								$$.code = $1.code;
 								$$.code += "mov #0 "  + $1.temp + "\t\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
@@ -436,6 +437,9 @@ Ref : _this punto id  			{
 										$$.dbase = atoi(s.dir.c_str());
 										string aux = $3.lexema;
 										$$.aux_lexema = aux;
+
+										cout << "tipo en this.id = " << $$.tipo << endl;
+										cout << "tbase en this.id = " << getTbase($$.tipo) << endl;
 									}
 									else
 										msgError(ERR_NO_ATRIB, $1.nlin, $1.ncol, $1.lexema);
@@ -448,6 +452,9 @@ Ref : _this punto id  			{
 										$$.dbase = atoi(s.dir.c_str());
 										string aux = $1.lexema;
 										$$.aux_lexema = aux;
+
+										cout << "tipo en id = " << $$.tipo << endl;
+										cout << "tbase en id = " << getTbase($$.tipo) << endl;
 										
 										if(s.tipo >= ARRAY){ //arrays
 											string temp = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
@@ -464,11 +471,9 @@ Ref : _this punto id  			{
 									}
 									string temporal = nuevoTemporal(ERR_MAXTMP, $1.nlin, $1.ncol, $1.lexema);
 									$$.dbase = $1.dbase;
-									//cout << $$.dbase << endl;
-									//$$.tipo = getTbase($1.tipo);
-									$$.tipo = $1.tipo;
+									$$.tipo = getTbase($1.tipo);
 									$$.temp = temporal;
-
+									cout << "[X] Dimensión: " <<  to_string(getDt($1.tipo)) <<  "Tipo: " << $$.tipo << endl;
 									$$.code = $1.code;
 									$$.code += $3.code;
 									$$.code += "mov " + $1.temp + " A \t; hace recursivo de arrays\n";
