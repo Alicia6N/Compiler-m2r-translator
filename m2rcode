@@ -1,9 +1,81 @@
-mov #0 9	;Ref -> id c
-mov #1 10		; guarda entero 1
-mov 9 A 	; hace recursivo de arrays
-muli #8
-addi  
-mov A 11 
-mov #3 12		; guarda entero 3
-mov 12 11		; Instr : Ref asig Expr pyc 
+tipo en id = 0
+tbase en id = 0
+tipo en id = 7
+tbase en id = 6
+[X] Dimensión: 1Tipo: 6
+[X] Dimensión: 2Tipo: 5
+[X] Dimensión: 1Tipo: 4
+[X] Dimensión: 1Tipo: 3
+[X] Dimensión: 2Tipo: 2
+[X] Dimensión: 1Tipo: 0
+tipo en id = 0
+tbase en id = 0
+tipo = 0
+tipo en id = 7
+tbase en id = 6
+[X] Dimensión: 1Tipo: 6
+[X] Dimensión: 2Tipo: 5
+[X] Dimensión: 1Tipo: 4
+[X] Dimensión: 1Tipo: 3
+[X] Dimensión: 2Tipo: 2
+[X] Dimensión: 1Tipo: 0
+tipo = 0
+mov #1 6		; guarda entero 1
+mov #3 7		; guarda entero 3
+mov 6 A
+subi 7	; ENTERO - ENTERO
+mov A 8	; guardar el resultado en temporal
+mov #2 9		; guarda entero 2
+mov #5 10		; guarda entero 5
+mov 9 A
+muli 10	; ENTERO * ENTERO
+mov A 11
+mov #4 12		; guarda entero 4
+mov 11 A
+divi 12	; ENTERO / ENTERO
+mov A 13
+mov 8 A
+addi 13	; ENTERO + ENTERO
+mov A 14	; guardar el resultado en temporal
+mov 14 0		; Instr : Ref asig Expr pyc 
+mov #0 15	; guarda 0 y empieza recursivo arrays de a
+mov #0 16		; guarda entero 0
+mov 15 A 	; hace recursivo de arrays
+muli #1
+addi 16 
+mov A 17 
+mov #1 18		; guarda entero 1
+mov 17 A 	; hace recursivo de arrays
+muli #2
+addi 18 
+mov A 19 
+mov #0 20		; guarda entero 0
+mov 19 A 	; hace recursivo de arrays
+muli #1
+addi 20 
+mov A 21 
+mov #0 22		; guarda entero 0
+mov 21 A 	; hace recursivo de arrays
+muli #1
+addi 22 
+mov A 23 
+mov #0 24		; guarda entero 0
+mov 23 A 	; hace recursivo de arrays
+muli #2
+addi 24 
+mov A 25 
+mov #0 26		; guarda entero 0
+mov 25 A 	; hace recursivo de arrays
+muli #1
+addi 26 
+mov A 27 
+mov 0 28		; guarda id b
+mov #2 29		; guarda entero 2
+mov 28 A
+addi 29	; ENTERO + ENTERO
+mov A 30	; guardar el resultado en temporal
+mov 30 27		; Instr : Ref asig Expr pyc 
+mov 43 44		; guarda id a
+wri 44	; print valor entero de temporal
+wrl
 halt
