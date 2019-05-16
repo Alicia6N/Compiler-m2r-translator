@@ -1,18 +1,14 @@
-class prcorrecto2 {
+class errsem1 {
  attributes:
 
+  int a,b,C;
+
  methods:
-  int main()
-  {
-    float b;
-    float a[5][5];
-  
-    scan(a[1][1]);
-    //a[1][1] = 5 + 7;
-    b = a[1][1] + 2 - 2;
-    
-    print(a[1][1] - 2);
-    print(a[1][1] / 1);
-    print(b + 2 * 1);
+
+  int main() {
+
+    a = 7;
+    c = a;
+    print(c);
   }
 }

@@ -15,6 +15,7 @@ typedef struct {
    int tipo;
    int size;
    int dbase;
+   bool arrays;
 } MITIPO;
 
 struct Simbolo {

@@ -1,16 +1,16 @@
-mov #8 10		; guarda entero 8
-mov 10 A
+ mov #8 16001		; guarda entero 8
+mov 16001 A
 itor
-mov A 10
-mov 10 7		; Instr : Ref asig Expr pyc 
-mov #9 14		; guarda entero 9
-mov 14 10		; Instr : Ref asig Expr pyc 
-mov #10 15		; guarda entero 10
-mov 10 16		; guarda id b
-mov 15 A
-addi 16	; ENTERO + ENTERO
-mov A 17	; guardar el resultado en temporal
-mov 17 0		; Instr : Ref asig Expr pyc 
-mov #11 18		; guarda entero 11
-mov 18 10		; Instr : Ref asig Expr pyc 
+mov A 16001
+mov 16001 7		; Instr : Ref asig Expr pyc 
+ mov #9 16002		; guarda entero 9
+mov 16002 9		; Instr : Ref asig Expr pyc 
+ mov #10 16003		; guarda entero 10
+mov 9 16004		; guarda id b
+mov 16003 A
+addi 16004	; ENTERO + ENTERO
+mov A 16005	; guardar el resultado en temporal
+mov 16005 0		; Instr : Ref asig Expr pyc 
+mov #11 16006		; guarda entero 11
+mov 16006 9		; Instr : Ref asig Expr pyc 
 halt
