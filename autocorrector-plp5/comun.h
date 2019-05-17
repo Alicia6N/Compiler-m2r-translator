@@ -23,6 +23,7 @@ struct Simbolo {
     int index_tipo;
     string dir;
     int size;
+    bool aux;
     string nomtrad;
 };
 struct TablaSimbolos {

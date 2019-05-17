@@ -1,8 +1,0 @@
- mov #7 16001		; guarda entero 7
-mov 16001 0		; Instr : Ref asig Expr pyc 
-mov 0 16002		; guarda id a
-mov 16002 0		; Instr : Ref asig Expr pyc 
-mov 0 16003		; guarda id c
-wri 16003	; print valor entero de temporal
-wrl
-halt

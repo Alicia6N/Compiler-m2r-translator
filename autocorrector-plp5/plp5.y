@@ -91,11 +91,14 @@ Variable : id { $$.size = 1; $$.tipo = $0.tipo; if(buscarAmbito(ts,$1.lexema))
 													msgError(ERRYADECL,$1.nlin,$1.ncol,$1.lexema); } V  {
 																											Simbolo s;
 																											s.nombre = $1.lexema;
+																											//cout << s.nombre;
 																											s.index_tipo = $3.tipo;
 																											s.dir = to_string(VAR_MEM);
 																											VAR_MEM += $3.size;
 																											s.size = $3.size;
+																											s.aux = false;
 																											anyadir(ts,s);
+																											//cout << buscar(ts,s.nombre).nombre;
 
 																											//printTtipos();
 
@@ -439,7 +442,8 @@ Factor :  Ref      		{
 
 Ref : _this punto id  			{
 									Simbolo s = buscarClase(ts, $3.lexema);
-									if (s.nombre != ""){
+									if (s.aux) {
+										s.aux = false;
 										$$.tipo = s.index_tipo;
 										$$.temp = s.dir;
 										$$.dbase = atoi(s.dir.c_str());
@@ -457,7 +461,9 @@ Ref : _this punto id  			{
 								}
 	| id 						{ 
 									Simbolo s = buscar(ts, $1.lexema);
-									if (s.nombre != ""){
+									
+									if (s.aux){
+										s.aux = false;
 										$$.tipo = s.index_tipo;
 										$$.temp = s.dir;
 										$$.dbase = atoi(s.dir.c_str());
@@ -694,7 +700,7 @@ int getDt(int tipo){ return tp->tipos[tipo].dt; }
 /*****TABLA SIMBOLOS*********/
 bool buscarAmbito(TablaSimbolos *root,string nombre){
   for(size_t i=0;i<root->simbolos.size();i++){
-		if(root->simbolos[i].nombre == nombre){
+		if(!root->simbolos[i].nombre.compare(nombre)){
 			return true;
 		}
 	}
@@ -702,7 +708,7 @@ bool buscarAmbito(TablaSimbolos *root,string nombre){
 }
 bool anyadir(TablaSimbolos *t,Simbolo s){
 	for(size_t i=0; i<t->simbolos.size();i++){
-		if(t->simbolos[i].nombre==s.nombre){
+		if(!t->simbolos[i].nombre.compare(s.nombre)){
 			return false;
 		}
 
@@ -713,8 +719,9 @@ bool anyadir(TablaSimbolos *t,Simbolo s){
 }
 Simbolo buscar(TablaSimbolos *root,string nombre){
    for(size_t i = 0; i < root->simbolos.size(); i++){
-	  if(root->simbolos[i].nombre == nombre){
-		 return root->simbolos[i];
+	  if(!root->simbolos[i].nombre.compare(nombre)){
+		  root->simbolos[i].aux = true;
+		  return root->simbolos[i];
 	  }
    }
    if(root->root != NULL){ 
@@ -724,9 +731,10 @@ Simbolo buscar(TablaSimbolos *root,string nombre){
 Simbolo buscarClase(TablaSimbolos *root, string nombre){
    if (root->root != NULL)
 	  return buscarClase(root->root, nombre);
-   
+	
    for(size_t i = 0; i < root->simbolos.size(); i++){
-	  if(root->simbolos[i].nombre == nombre){
+	  if(!root->simbolos[i].nombre.compare(nombre)){
+		 root->simbolos[i].aux = true;
 		 return root->simbolos[i];
 	  }
    }

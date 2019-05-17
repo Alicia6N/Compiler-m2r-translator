@@ -28,6 +28,8 @@ extern char *yytext;
 extern FILE *yyin;
 int yyerror(char *s);
 const int MEM = 16384;
+const int MAX_VAR = 16000;
+const int MAX_TMP = 384;
 int ACTUAL_MEM = 0;
 int TEMP_MEM = 16000;
 int VAR_MEM = 0;
@@ -73,10 +75,11 @@ Metodos : _int _main pari pard Bloque { $$.code = $5.code; };
 Tipo 	: _int {$$.tipo = ENTERO; }
 	 	| _float {$$.tipo = REAL;};
 
-Bloque : llavei {ts = new TablaSimbolos(ts);} BDecl SeqInstr llaved 	{
+Bloque : llavei {ts = new TablaSimbolos(ts,TEMP_MEM);} BDecl SeqInstr llaved 	{
 																	 		$$.code = $3.code + $4.code;
 																	 		deleteScope(ts);
 																			ts = ts->root;
+																			TEMP_MEM = ts->temp_dir;
 																		};
 
 BDecl : BDecl DVar {$$.code = "";}
@@ -95,11 +98,13 @@ Variable : id { $$.size = 1; $$.tipo = $0.tipo; if(buscarAmbito(ts,$1.lexema))
 																											s.dir = to_string(VAR_MEM);
 																											VAR_MEM += $3.size;
 																											s.size = $3.size;
+																											s.exists = false;
 																											anyadir(ts,s);
+																											//cout << buscar(ts,s.nombre).nombre;
 
 																											//printTtipos();
 
-																											if (VAR_MEM >= MEM)
+																											if (VAR_MEM >= MAX_VAR)
 																												msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);       
 																										};
 
@@ -113,9 +118,6 @@ V 	: cori nentero cord { $$.size = $0.size * atoi($2.lexema); $$.tipo = $0.tipo;
 																			int index = NuevoTipoArray(dt, $5.tipo);
 																			$$.tipo = index;
 
-																			//cout << "index nuevo = " << index << endl;
-																			//cout << "DIM Y TIPO QUE COGE PARA INDEX(" + to_string(index) + ") --> " + to_string(dt) + " y " << $5.tipo << endl;
-																			//cout << "dt que mete es = " << dt << endl;
 																		}
 	| 	{
 			$$.size = $0.size;
@@ -148,13 +150,13 @@ Instr : pyc { $$.code = " ";  }
 															}
 															
 															//if ($1.tipo == ARRAY){
-															if ($1.arrays == true){
+															if ($1.arrays == true) {
 																$$.code += "mov " + $1.temp + " A\n";	
 																$$.code += "muli #1 \n";
 																$$.code += "addi #"+ to_string($1.dbase) + "\n";
 																$$.code += "mov " + $4.temp + " @A\n";
 															}
-															else{
+															else {
 																$$.code += "mov " + $4.temp + " " + $1.temp + "\t\t; Instr : Ref asig Expr pyc \n";
 															}
 														}
@@ -174,7 +176,6 @@ Instr : pyc { $$.code = " ";  }
 	  | _scan pari Ref pard pyc 						{
 															int tipo_tres = getTipoSimple($3.tipo);
 
-															//if ($3.tipo == ARRAY){
 															if ($3.arrays == true){
 																$$.code = $3.code;
 																string temporal = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
@@ -439,7 +440,8 @@ Factor :  Ref      		{
 
 Ref : _this punto id  			{
 									Simbolo s = buscarClase(ts, $3.lexema);
-									if (s.nombre != ""){
+									if (s.exists) {
+										s.exists = false;
 										$$.tipo = s.index_tipo;
 										$$.temp = s.dir;
 										$$.dbase = atoi(s.dir.c_str());
@@ -457,7 +459,9 @@ Ref : _this punto id  			{
 								}
 	| id 						{ 
 									Simbolo s = buscar(ts, $1.lexema);
-									if (s.nombre != ""){
+									
+									if (s.exists){
+										s.exists = false;
 										$$.tipo = s.index_tipo;
 										$$.temp = s.dir;
 										$$.dbase = atoi(s.dir.c_str());
@@ -507,17 +511,19 @@ Ref : _this punto id  			{
 */
 
 
-Metodos : Met Metodos {};
+Metodos : Met Metodos { $$.code = $1.code + $2.code;};
 
 Met : Tipo id pari Arg pard Bloque {};
 
-Arg : {}
-	| CArg {};
+Arg : { $$.code = "";}
+	| {ts = new TablaSimbolos(ts,TEMP_MEM);} CArg { $$.code = $2.code;};
 
-CArg : Tipo id CArgp {};
+CArg : Tipo id {Simbolo s; s.nombre = $2.lexema; s.index_tipo = $1.tipo;s.dir = to_string(VAR_MEM);
+				VAR_MEM += 1;s.size = 1;  anyadir(ts,s); } CArgp {$$.code = "";};
 
-CArgp : coma Tipo id CArgp {}
-	  | {};
+CArgp : coma Tipo id {Simbolo s; s.nombre = $3.lexema; s.index_tipo = $2.tipo; s.dir = to_string(VAR_MEM);
+				VAR_MEM += 1;s.size = 1;  anyadir(ts,s); } CArgp {$$.code = "";}
+	  | {$$.code = "";};
 
 Instr : _return Expr pyc {};
 
@@ -623,7 +629,7 @@ bool equalsIgnoreCase(string s1, char* lexema){
 }
 string nuevoTemporal(int nlin, int ncol, const char *s){
 	TEMP_MEM++;
-	if ((TEMP_MEM + 1) >= MEM)
+	if ((TEMP_MEM + 1) >= MAX_TMP)
 		msgError(ERR_MAXTMP, nlin, ncol, s);
 	return to_string(TEMP_MEM);
 }
@@ -694,7 +700,7 @@ int getDt(int tipo){ return tp->tipos[tipo].dt; }
 /*****TABLA SIMBOLOS*********/
 bool buscarAmbito(TablaSimbolos *root,string nombre){
   for(size_t i=0;i<root->simbolos.size();i++){
-		if(root->simbolos[i].nombre == nombre){
+		if(!root->simbolos[i].nombre.compare(nombre)){
 			return true;
 		}
 	}
@@ -702,7 +708,7 @@ bool buscarAmbito(TablaSimbolos *root,string nombre){
 }
 bool anyadir(TablaSimbolos *t,Simbolo s){
 	for(size_t i=0; i<t->simbolos.size();i++){
-		if(t->simbolos[i].nombre==s.nombre){
+		if(!t->simbolos[i].nombre.compare(s.nombre)){
 			return false;
 		}
 
@@ -713,8 +719,9 @@ bool anyadir(TablaSimbolos *t,Simbolo s){
 }
 Simbolo buscar(TablaSimbolos *root,string nombre){
    for(size_t i = 0; i < root->simbolos.size(); i++){
-	  if(root->simbolos[i].nombre == nombre){
-		 return root->simbolos[i];
+	  if(!root->simbolos[i].nombre.compare(nombre)){
+		  root->simbolos[i].aux = true;
+		  return root->simbolos[i];
 	  }
    }
    if(root->root != NULL){ 
@@ -724,9 +731,10 @@ Simbolo buscar(TablaSimbolos *root,string nombre){
 Simbolo buscarClase(TablaSimbolos *root, string nombre){
    if (root->root != NULL)
 	  return buscarClase(root->root, nombre);
-   
+	
    for(size_t i = 0; i < root->simbolos.size(); i++){
-	  if(root->simbolos[i].nombre == nombre){
+	  if(!root->simbolos[i].nombre.compare(nombre)){
+		 root->simbolos[i].aux = true;
 		 return root->simbolos[i];
 	  }
    }

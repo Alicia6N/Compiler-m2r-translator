@@ -23,12 +23,14 @@ struct Simbolo {
     int index_tipo;
     string dir;
     int size;
+    bool exists;
     string nomtrad;
 };
 struct TablaSimbolos {
     TablaSimbolos *root;
     std::vector<Simbolo> simbolos;
-    TablaSimbolos(TablaSimbolos *t){root=t;}
+    int temp_dir;
+    TablaSimbolos(TablaSimbolos *t,int temp_value){root=t;temp_dir = temp_value;}
 };
 struct Tipo {
     int tbase;
