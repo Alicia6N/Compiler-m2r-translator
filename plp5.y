@@ -34,6 +34,7 @@ int ACTUAL_MEM = 0;
 int TEMP_MEM = 16000;
 int VAR_MEM = 0;
 int ETIQ = 0;
+int REL_DIR = 0;
 TablaSimbolos *ts = new TablaSimbolos(NULL);
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
@@ -510,30 +511,59 @@ Ref : _this punto id  			{
 .
 */
 
-
+//1. Guardaremos el método en la tabla de símbolos con la etiqueta para indicar el comienzo del código de la func.
+//2. Guardaremos argumentos en la nueva ts local con la dir relativa.
 Metodos : Met Metodos { $$.code = $1.code + $2.code;};
+//Añadir la función a la tabla símbolos. Creamos un nuevo ámbito. Cerramos ámbito.
 
-Met : Tipo id pari Arg pard Bloque {};
+Met : Tipo id {Simbolo s; s.nombre = $2.lexema; s.etiq = nuevaEtiq(); 
+				s.index_tipo = NuevoTipoFunc($1.tipo, $1.tipo); 
+				anyadir(ts,s); //Añadimos funcion a la tabla simbolos. Faltaría lo de tipos?
+				ts = new TablaSimbolos(ts,TEMP_MEM);} pari Arg pard Bloque { 
+																			$$.code = $7.code;
+																			ts = ts->root; //Cerramos ámbito de la función.
+																			}; 
 
 Arg : { $$.code = "";}
-	| {ts = new TablaSimbolos(ts,TEMP_MEM);} CArg { $$.code = $2.code;};
+	| CArg { $$.code = $1.code;}; 
+//Ir almacenando argumentos en la tabla símbolos y en la tabla tipos.
+CArg : Tipo id {Simbolo s; s.nombre = $2.lexema; s.index_tipo = NuevoTipoFunc($1.tipo,$1.tipo); s.dir = REL_DIR++; //Primer argumento será pos 0 relativa de B
+				VAR_MEM += 1;s.size = 1;  anyadir(ts,s); } CArgp {$$.code = ""; };
 
-CArg : Tipo id {Simbolo s; s.nombre = $2.lexema; s.index_tipo = $1.tipo;s.dir = to_string(VAR_MEM);
-				VAR_MEM += 1;s.size = 1;  anyadir(ts,s); } CArgp {$$.code = "";};
-
-CArgp : coma Tipo id {Simbolo s; s.nombre = $3.lexema; s.index_tipo = $2.tipo; s.dir = to_string(VAR_MEM);
+CArgp : coma Tipo id {Simbolo s; s.nombre = $3.lexema; s.index_tipo = NuevoTipoFunc($1.tipo,$1.tipo); s.dir = REL_DIR++;
 				VAR_MEM += 1;s.size = 1;  anyadir(ts,s); } CArgp {$$.code = "";}
 	  | {$$.code = "";};
 
-Instr : _return Expr pyc {};
+Instr : _return Expr pyc {
+							$$.code = $2.code;
+							$$.code = "; Secuencia de retorno\n";
+							//Valor de retorno B-3
+							$$.code = "mov " + $2.temp + " @B-3\n";
+							//Dirección de retorno en A. B-2
+							$$.code += "mov @B-2 A\n";
+							$$.code += "jmp @A\n";
 
-Factor : id pari Par pard {};
+						 };
 
-Par : {}
-	| Expr CPar {};
+Factor : id pari Par pard {
+							$$.code = $3.code;
+							$$.code = "; Secuencia de llamada\n"; //Necesitamos reservar 3 + parametros de la función
+							//...
+							$$.code += "mov B A"; //
+							$$.code += "addi " + //valor a calcular
+							$$.code += "mov A B\n"; // Nueva B apunta al primer nuevo arg.
+							
+						  }; 
 
-CPar : {}
-	 | coma Expr CPar {};
+Par : {$$.code = "";}
+	| Expr CPar {$$.code = $1.code + $2.code;};
+
+CPar : {$$.code = "";}
+	 | coma Expr { //Comprobar tipos que coincidan con los de la función q toca
+	 				  
+		 		 ;} CPar { 
+						 	$$.code = $2.code + $4.code;
+						 };
 
 %%
 
@@ -659,7 +689,10 @@ int NuevoTipoArray(int dim, int tbase){
 	tp->tipos.push_back(Tipo{tbase,dim,ARRAY});
 	return tp->tipos.size()-1;
 }
-
+int NuevoTipoFunc(int tbase, int tipo){
+	tp->tipos.push_back(Tipo{tbase,1,tipo});
+	return tp->tipos.size()-1;
+}
 int calcularDireccionArray(int dirbase){
 
 

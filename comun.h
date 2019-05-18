@@ -22,6 +22,7 @@ struct Simbolo {
     string nombre;
     int index_tipo;
     string dir;
+    string etiq;
     int size;
     bool exists;
     string nomtrad;
