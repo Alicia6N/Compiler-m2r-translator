@@ -37,6 +37,7 @@ struct Tipo {
     int tbase;
     int dt; //dimension y tamanyo
     int tipo;
+    int arg;
 };
 struct TablaTipos {
     std::vector<Tipo> tipos;
