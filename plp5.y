@@ -40,7 +40,7 @@ bool RETURN_FLAG = false;
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
 
-TablaSimbolos *ts = new TablaSimbolos(NULL);
+TablaSimbolos *ts = new TablaSimbolos(NULL,TEMP_MEM);
 TablaTipos* tp = new TablaTipos(); 
 TablaMetodos* tm = new TablaMetodos();
 
@@ -57,8 +57,7 @@ int getTbase(int tipo);
 int getDt(int tipo);
 int getTipoSimple(int tipo);
 void printTtipos();
-
-Metodo buscarMetodo(string id);
+int buscarMetodo(string id);
 // DONE:  	
 //			- 
 
@@ -519,7 +518,7 @@ Met : Tipo id 	{
 					Simbolo s;
 					s.nombre = aux_lex; 
 					s.etiq = nuevaEtiq(); 
-					s.tipo = $1.tipo;
+					s.index_tipo = $1.tipo;
 					s.dir = VAR_MEM++;
 					anyadir(ts,s); //Añadimos funcion a la tabla simbolos.
 					ts = new TablaSimbolos(ts,TEMP_MEM);
@@ -578,7 +577,7 @@ Instr : _return Expr pyc {
 							RETURN_FLAG = true;
 						 };
 
-Factor : id pari { $$.indice_func = buscarMetodo($1.lexema); if(indice_func == -1){error(NOESTALAFUNC);} } Par pard {
+Factor : id pari { $$.indice_func = buscarMetodo($1.lexema); if($$.indice_func == -1){msgError(ERRSOBRAN, $1.nlin, $1.ncol, $1.lexema);} } Par pard { //el error
 							$$.code = $3.code;
 							$$.code = "; Secuencia de llamada\n"; //Necesitamos reservar 3 + parametros de la función
 							//...
@@ -591,28 +590,28 @@ Factor : id pari { $$.indice_func = buscarMetodo($1.lexema); if(indice_func == -
 Par : 			{
 					$$.code = "";
 					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args];
-					if (tipo_arg != -1){ error(FALTANPARAMS); }
+					//if (tipo_arg != -1){ msgError(ERRSOBRAN, $1.nlin, $1.ncol, $1.lexema); }
 				}
 	| Expr 		{ 
 					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args]; 
-					if(tipo_arg == -1){error(SOBRANPARAMS);}
+					if(tipo_arg == -1){msgError(ERRFALTAN, $1.nlin, $1.ncol, $1.lexema); }
 					int tipo_expr = getTipoSimple($1.tipo);
 
-					if (tipo_arg == ENTERO $$ tipo_expr == REAL){
+					if (tipo_arg == ENTERO && tipo_expr == REAL){
 						$$.code = $1.code;
 						$$.code += "mov @B+" + $1.temp + " A\n";
 						$$.code += "rtoi \n";
-						$$.code += "mov A @B+" + $0.indice_args + "\n";
+						$$.code += "mov A @B+" + to_string($0.indice_args) + "\n";
 					} 
-					else if(tipo_arg == REAL $$ tipo_expr == ENTERO){
+					else if(tipo_arg == REAL && tipo_expr == ENTERO){
 						$$.code = $1.code;
 						$$.code += "mov @B+" + $1.temp + " A\n";
 						$$.code += "itor \n";
-						$$.code += "mov A @B+" + $0.indice_args + "\n";
+						$$.code += "mov A @B+" + to_string($0.indice_args) + "\n";
 					}
 					else{
 						$$.code = $1.code;
-						$$.code += "mov @B+" + $1.temp + " @B+" + $0.indice_args + "\n";
+						$$.code += "mov @B+" + $1.temp + " @B+" + to_string($0.indice_args) + "\n";
 					}
 
 					$$.indice_args = $0.indice_args + 1;
@@ -624,30 +623,31 @@ Par : 			{
 CPar : 	{
 			$$.code = "";
 			int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args];
-			if (tipo_arg != -1){ error(FALTANPARAMS); }
+			//if (tipo_arg != -1){ msgError(ERRFALTAN, $1.nlin, $1.ncol, $1.lexema); }
 		}
 	 	| coma Expr 	{ 
 			 				int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args]; 
-							if(tipo_arg == -1){error(SOBRAN);}
+							if(tipo_arg == -1){
+								msgError(ERRSOBRAN, $2.nlin, $2.ncol, $2.lexema); 
+							}
 							int tipo_expr = getTipoSimple($2.tipo);
 
-							if (tipo_arg == ENTERO $$ tipo_expr == REAL){
+							if (tipo_arg == ENTERO && tipo_expr == REAL) {
 								$$.code = $2.code;
 								$$.code += "mov @B+" + $2.temp + " A\n";
 								$$.code += "rtoi \n";
-								$$.code += "mov A @B+" + $0.indice_args + "\n";
+								$$.code += "mov A @B+" + to_string($0.indice_args) + "\n";
 							} 
-							else if(tipo_arg == REAL $$ tipo_expr == ENTERO){
+							else if(tipo_arg == REAL && tipo_expr == ENTERO) {
 								$$.code = $2.code;
 								$$.code += "mov @B+" + $2.temp + " A\n";
 								$$.code += "itor \n";
-								$$.code += "mov A @B+" + $0.indice_args + "\n";
+								$$.code += "mov A @B+" + to_string($0.indice_args) + "\n";
 							}
-							else{
+							else {
 								$$.code = $2.code;
-								$$.code += "mov @B+" + $2.temp + " @B+" + $0.indice_args + "\n";
+								$$.code += "mov @B+" + $2.temp + " @B+" + to_string($0.indice_args) + "\n";
 							}
-
 							$$.indice_args = $0.indice_args + 1;
 						} CPar	{ 
 									$$.code = $3.code + $4.code;
@@ -832,7 +832,6 @@ bool anyadir(TablaSimbolos *t,Simbolo s){
 		if(!t->simbolos[i].nombre.compare(s.nombre)){
 			return false;
 		}
-
 	}
 	t->simbolos.push_back(s);
 	return true;
@@ -874,7 +873,7 @@ Simbolo buscarClase(TablaSimbolos *root, string nombre){
    }
 }
 TablaSimbolos* createScope(TablaSimbolos* root){
-	TablaSimbolos* child = new TablaSimbolos(root);
+	TablaSimbolos* child = new TablaSimbolos(root,TEMP_MEM);
 	child->root = root;
 	return child;
 }

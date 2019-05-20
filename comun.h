@@ -28,6 +28,7 @@ struct Simbolo {
     string etiq;
     int size;
     bool exists;
+    bool aux;
     string nomtrad;
 };
 struct TablaSimbolos {
