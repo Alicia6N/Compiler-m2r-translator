@@ -35,10 +35,14 @@ int TEMP_MEM = 16000;
 int VAR_MEM = 0;
 int ETIQ = 0;
 int REL_DIR = 0;
-TablaSimbolos *ts = new TablaSimbolos(NULL);
+
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
+
+TablaSimbolos *ts = new TablaSimbolos(NULL);
 TablaTipos* tp = new TablaTipos(); 
+TablaMetodos* tm = new TablaMetodos();
+
 Simbolo buscarClase(TablaSimbolos *root, string nombre);
 Simbolo buscar(TablaSimbolos *root, string nombre);
 bool anyadir(TablaSimbolos *t,Simbolo s);
@@ -48,11 +52,12 @@ string nuevaEtiq();
 string getRelop(string op);
 int getRelopIndex(string op);
 int NuevoTipoArray(int dim, int tbase);
-int calcularDireccionArray(int dirbase);
 int getTbase(int tipo);
 int getDt(int tipo);
 int getTipoSimple(int tipo);
 void printTtipos();
+
+Metodo buscarMetodo(string id);
 // DONE:  	
 //			- 
 
@@ -511,18 +516,16 @@ Metodos : Met Metodos { $$.code = $1.code + $2.code;};
 Met : Tipo id 	{	Simbolo s; 
 					s.nombre = $2.lexema; 
 					s.etiq = nuevaEtiq(); 
+					s.tipo = $1.tipo;
 					s.dir = VAR_MEM++;
 					anyadir(ts,s); //Añadimos funcion a la tabla simbolos.
 					ts = new TablaSimbolos(ts,TEMP_MEM);
 					REL_DIR = 0;
-				} pari { $$.tipo = $1.tipo; } Arg 	{ 
-								asignar_tipo(ts->root,$2.lexema, tp.size-1);
-								ModificarDerechaFunc($1.tipo);
-							} pard Bloque 	{ 
+				} pari Arg  pard Bloque 	{ 
 												$$.code = $7.code;
 												ts = ts->root; //Cerramos ámbito de la función.						
 											}; 
-
+//float func (int a, float b, int c)
 Arg : { $$.code = ""; $$.tipo = $0.tipo; NuevoTipoFunc($0.tipo); }
 	| { $$.tipo = $0.tipo; } CArg { $$.code = $2.code; };
 
@@ -556,13 +559,12 @@ Instr : _return Expr pyc {
 							//Valor de retorno B-3
 							$$.code = "mov " + $2.temp + " @B-3\n";
 							//Dirección de retorno en A. B-2
-
 							$$.code += "mov @B-2 A\n";
 							$$.code += "jmp @A\n";
 
 						 };
 
-Factor : id pari Par pard {
+Factor : id pari { $$.indice_func = buscarMetodo($1.lexema); } Par pard {
 							$$.code = $3.code;
 							$$.code = "; Secuencia de llamada\n"; //Necesitamos reservar 3 + parametros de la función
 							//...
@@ -573,21 +575,22 @@ Factor : id pari Par pard {
 						  }; 
 
 Par : {$$.code = "";}
-	| Expr CPar {$$.code = $1.code + $2.code;};
+	| Expr { int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args]; if(tipo_arg == -1) error(SOBRAN); } CPar {
+					$$.code = $1.code + $2.code;
+					};
 
+int f(int a, int b)
+f(1, 2)
 
-/*
-0 | 0
-1 | 1
-2 | 1 1
-3 | 2 0
-4 | 3 1
-*/
+f(1, 2, 3)
 
-CPar : {$$.code = "";}
-	 | coma Expr CPar 	{ 
+CPar : {
+			$$.code = "";
+		}
+	 | coma Expr { int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args]; if(tipo_arg == -1) error(SOBRAN); } CPar 	{ 
+		 				    $$.tipo = getTbase(buscar($1.lexema).tipo);
 						 	$$.code = $2.code + $4.code;
-						 };
+						};
 
 %%
 
@@ -713,21 +716,16 @@ int NuevoTipoArray(int dim, int tbase){
 	tp->tipos.push_back(Tipo{tbase,dim,ARRAY});
 	return tp->tipos.size()-1;
 }
-int NuevoTipoFunc(int tbase){
-	tp->tipos.push_back(Tipo{tbase,1,-1});
-	return tp->tipos.size()-1;
+Metodo buscarMetodo(string id){
+	for(size_t i=0;i<tm->metodos.size();i++){
+		if(!tm->metodos[i].id.compare(id)){
+			return tm->metodos[i];
+		}
+	}
 }
-int ModificarDerechaFunc(int tipo){
-	tp->tipos[tp->tipos.size()-1].tipo = tipo;
-	return tp->tipos.size()-1;
-}
-int calcularDireccionArray(int dirbase){
 
-
-	return 0;
-}
 int getTbase(int tipo){ return tp->tipos[tipo].tbase; } //$3.tipo ==> ENTERO = 1 --> REAL
-
+int getArg(int tipo){ return tp->tipos[tipo].tipo;}
 int getTipoSimple(int tipo){
 	if (tipo == ENTERO || tipo == REAL){
 		return tipo;

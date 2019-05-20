@@ -16,6 +16,9 @@ typedef struct {
    int size;
    int dbase;
    bool arrays;
+
+   int indice_func;
+   int indice_args;
 } MITIPO;
 
 struct Simbolo {
@@ -37,19 +40,24 @@ struct Tipo {
     int tbase;
     int dt; //dimension y tamanyo
     int tipo;
-    int arg;
 };
 struct TablaTipos {
     std::vector<Tipo> tipos;
     TablaTipos(){
-
-         tipos.push_back(Tipo{ENTERO,1,ENTERO});
-         tipos.push_back(Tipo{REAL,1,REAL});
-
+        tipos.push_back(Tipo{ENTERO,1,ENTERO});
+        tipos.push_back(Tipo{REAL,1,REAL});
     }
-
 };
-
+struct Metodo {
+    int tipo;
+    string id;
+    vector<int> args;
+};
+struct TablaMetodos {
+    std::vector<Metodo> metodos;
+    TablaMetodos(){
+    }
+};
 
 #define YYSTYPE MITIPO
 
