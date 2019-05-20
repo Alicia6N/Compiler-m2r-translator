@@ -29,13 +29,12 @@ extern FILE *yyin;
 int yyerror(char *s);
 const int MEM = 16384;
 const int MAX_VAR = 16000;
-const int MAX_TMP = 384;
+const int MAX_TMP = 16384;
 int ACTUAL_MEM = 0;
 int TEMP_MEM = 16000;
 int VAR_MEM = 0;
 int ETIQ = 0;
 int REL_DIR = 0;
-bool RETURN_FLAG = false;
 
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
@@ -58,13 +57,6 @@ int getDt(int tipo);
 int getTipoSimple(int tipo);
 void printTtipos();
 int buscarMetodo(string id);
-// DONE:  	
-//			- 
-
-// TO DO: 
-//			- arrays
-//			- probar varias condiciones en los ifs (&& --> *)
-
 
 %}
 %%
@@ -81,7 +73,7 @@ Metodos : _int _main pari pard Bloque { $$.code = $5.code; };
 Tipo 	: _int {$$.tipo = ENTERO; }
 	 	| _float {$$.tipo = REAL;};
 
-Bloque : llavei {ts = new TablaSimbolos(ts,TEMP_MEM);} BDecl SeqInstr llaved 	{
+Bloque : llavei {ts = new TablaSimbolos(ts,TEMP_MEM);} BDecl SeqInstr llaved {
 																	 		$$.code = $3.code + $4.code;
 																	 		deleteScope(ts);
 																			ts = ts->root;
@@ -107,9 +99,7 @@ Variable : id { $$.size = 1; $$.tipo = $0.tipo; if(buscarAmbito(ts,$1.lexema))
 																											s.exists = false;
 																											anyadir(ts,s);
 																											//cout << buscar(ts,s.nombre).nombre;
-
 																											//printTtipos();
-
 																											if (VAR_MEM >= MAX_VAR)
 																												msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);       
 																										};
@@ -465,6 +455,8 @@ Ref : _this punto id  			{
 								}
 	| id 						{ 
 									Simbolo s = buscar(ts, $1.lexema);
+
+									//cout << "SIMBOLO = " << s.nombre << endl;
 									
 									if (s.exists){
 										s.exists = false;
@@ -531,11 +523,8 @@ Met : Tipo id 	{
 											$$.code = $7.code;
 											ts = ts->root; //Cerramos ámbito de la función.
 
-											if (!RETURN_FLAG){
-												//return por defecto
-											}
+											//poner siempre el return por defecto.
 
-											RETURN_FLAG = false;
 										}; 
 
 Arg : { $$.code = ""; $$.tipo = $0.tipo; tm->metodos[tm->metodos.size()-1].args.push_back(-1); }
@@ -574,7 +563,6 @@ Instr : _return Expr pyc {
 							//Dirección de retorno en A. B-2
 							$$.code += "mov @B-2 A\n";
 							$$.code += "jmp @A\n";
-							RETURN_FLAG = true;
 						 };
 
 Factor : id pari { $$.indice_func = buscarMetodo($1.lexema); if($$.indice_func == -1){msgError(ERRSOBRAN, $1.nlin, $1.ncol, $1.lexema);} } Par pard { //el error
@@ -747,6 +735,8 @@ bool equalsIgnoreCase(string s1, char* lexema){
 }
 string nuevoTemporal(int nlin, int ncol, const char *s){
 	TEMP_MEM++;
+	string aux_s = s;
+	//cout << "Error en: " << s << " con: " <<  << endl;
 	if ((TEMP_MEM + 1) >= MAX_TMP)
 		msgError(ERR_MAXTMP, nlin, ncol, s);
 	return to_string(TEMP_MEM);
@@ -840,7 +830,7 @@ bool anyadir(TablaSimbolos *t,Simbolo s){
 Simbolo buscar(TablaSimbolos *root,string nombre){
    for(size_t i = 0; i < root->simbolos.size(); i++){
 	  if(!root->simbolos[i].nombre.compare(nombre)){
-		  root->simbolos[i].aux = true;
+		  root->simbolos[i].exists = true;
 		  return root->simbolos[i];
 	  }
    }
@@ -851,7 +841,7 @@ Simbolo buscar(TablaSimbolos *root,string nombre){
 Simbolo asignar_tipo(TablaSimbolos *root,string nombre,int tipo){
    for(size_t i = 0; i < root->simbolos.size(); i++){
 	  if(!root->simbolos[i].nombre.compare(nombre)){
-		  root->simbolos[i].aux = true;
+		  root->simbolos[i].exists = true;
 		  root->simbolos[i].index_tipo = tipo;
 		  return root->simbolos[i];
 	  }
@@ -867,7 +857,7 @@ Simbolo buscarClase(TablaSimbolos *root, string nombre){
 	
    for(size_t i = 0; i < root->simbolos.size(); i++){
 	  if(!root->simbolos[i].nombre.compare(nombre)){
-		 root->simbolos[i].aux = true;
+		 root->simbolos[i].exists = true;
 		 return root->simbolos[i];
 	  }
    }

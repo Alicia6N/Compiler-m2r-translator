@@ -16,20 +16,26 @@ typedef struct {
    int size;
    int dbase;
    bool arrays;
+
+   int indice_func;
+   int indice_args;
 } MITIPO;
 
 struct Simbolo {
     string nombre;
     int index_tipo;
     string dir;
+    string etiq;
     int size;
+    bool exists;
     bool aux;
     string nomtrad;
 };
 struct TablaSimbolos {
     TablaSimbolos *root;
     std::vector<Simbolo> simbolos;
-    TablaSimbolos(TablaSimbolos *t){root=t;}
+    int temp_dir;
+    TablaSimbolos(TablaSimbolos *t,int temp_value){root=t;temp_dir = temp_value;}
 };
 struct Tipo {
     int tbase;
@@ -39,14 +45,20 @@ struct Tipo {
 struct TablaTipos {
     std::vector<Tipo> tipos;
     TablaTipos(){
-
-         tipos.push_back(Tipo{ENTERO,1,ENTERO});
-         tipos.push_back(Tipo{REAL,1,REAL});
-
+        tipos.push_back(Tipo{ENTERO,1,ENTERO});
+        tipos.push_back(Tipo{REAL,1,REAL});
     }
-
 };
-
+struct Metodo {
+    int tipo;
+    string id;
+    vector<int> args;
+};
+struct TablaMetodos {
+    std::vector<Metodo> metodos;
+    TablaMetodos(){
+    }
+};
 
 #define YYSTYPE MITIPO
 

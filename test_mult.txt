@@ -1,7 +1,7 @@
 class errsem1 {
  attributes:
 
-  int a,b,C;
+  int a,b,c;
 
  methods:
 

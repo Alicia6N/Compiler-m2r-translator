@@ -1,0 +1,8 @@
+ mov #7 @B+16001		; guarda entero 7
+mov @B+16001 @B+0		; Instr : Ref asig Expr pyc 
+mov 0 @B+16002		; guarda id a
+mov @B+16002 @B+2		; Instr : Ref asig Expr pyc 
+mov 2 @B+16003		; guarda id c
+wri @B+16003	; print valor entero de temporal
+wrl
+halt
