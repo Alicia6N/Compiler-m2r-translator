@@ -35,6 +35,7 @@ int TEMP_MEM = 16000;
 int VAR_MEM = 0;
 int ETIQ = 0;
 int REL_DIR = 0;
+bool RETURN_FLAG = false;
 
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
@@ -513,45 +514,58 @@ Ref : _this punto id  			{
 Metodos : Met Metodos { $$.code = $1.code + $2.code;};
 //Añadir la función a la tabla símbolos. Creamos un nuevo ámbito. Cerramos ámbito.
 
-Met : Tipo id 	{	Simbolo s; 
-					s.nombre = $2.lexema; 
+Met : Tipo id 	{	
+					string aux_lex = $2.lexema;
+					Simbolo s;
+					s.nombre = aux_lex; 
 					s.etiq = nuevaEtiq(); 
 					s.tipo = $1.tipo;
 					s.dir = VAR_MEM++;
 					anyadir(ts,s); //Añadimos funcion a la tabla simbolos.
 					ts = new TablaSimbolos(ts,TEMP_MEM);
 					REL_DIR = 0;
-				} pari Arg  pard Bloque 	{ 
-												$$.code = $7.code;
-												ts = ts->root; //Cerramos ámbito de la función.						
-											}; 
-//float func (int a, float b, int c)
-Arg : { $$.code = ""; $$.tipo = $0.tipo; NuevoTipoFunc($0.tipo); }
+					Metodo m;
+					m.tipo = $1.tipo;
+					m.id = aux_lex;
+					tm->metodos.push_back(m);
+				} pari Arg pard Bloque 	{ 
+											$$.code = $7.code;
+											ts = ts->root; //Cerramos ámbito de la función.
+
+											if (!RETURN_FLAG){
+												//return por defecto
+											}
+
+											RETURN_FLAG = false;
+										}; 
+
+Arg : { $$.code = ""; $$.tipo = $0.tipo; tm->metodos[tm->metodos.size()-1].args.push_back(-1); }
 	| { $$.tipo = $0.tipo; } CArg { $$.code = $2.code; };
 
 CArg : Tipo id 	{	
+					string aux_lex = $2.lexema;
 					Simbolo s; 
-					s.nombre = $2.lexema; 
+					s.nombre = aux_lex; 
 					s.index_tipo = $1.tipo;
-					NuevoTipoFunc($1.tipo); 
 					s.dir = REL_DIR++; //Primer argumento será pos 0 relativa de B
 					VAR_MEM += 1; 
 					s.size = 1; 
 					anyadir(ts,s);
+					tm->metodos[tm->metodos.size()-1].args.push_back($1.tipo);
 				} CArgp { $$.code = ""; };
 
 CArgp : coma Tipo id 	{
+							string aux_lex = $3.lexema;
 							Simbolo s; 
 							s.nombre = $3.lexema; 
-							ModificarDerechaFunc($2.tipo);
 							s.index_tipo = $2.tipo;
-							NuevoTipoFunc(tp.size-1); 
 							s.dir = REL_DIR++; 
 							VAR_MEM += 1;
 							s.size = 1; 
 							anyadir(ts,s);
+							tm->metodos[tm->metodos.size()-1].args.push_back($1.tipo);
 						} CArgp {$$.code = "";}
-	  | { $$.code = ""; };
+	  | { $$.code = ""; tm->metodos[tm->metodos.size()-1].args.push_back(-1); };
 
 Instr : _return Expr pyc {
 							$$.code = $2.code;
@@ -561,10 +575,10 @@ Instr : _return Expr pyc {
 							//Dirección de retorno en A. B-2
 							$$.code += "mov @B-2 A\n";
 							$$.code += "jmp @A\n";
-
+							RETURN_FLAG = true;
 						 };
 
-Factor : id pari { $$.indice_func = buscarMetodo($1.lexema); } Par pard {
+Factor : id pari { $$.indice_func = buscarMetodo($1.lexema); if(indice_func == -1){error(NOESTALAFUNC);} } Par pard {
 							$$.code = $3.code;
 							$$.code = "; Secuencia de llamada\n"; //Necesitamos reservar 3 + parametros de la función
 							//...
@@ -574,23 +588,70 @@ Factor : id pari { $$.indice_func = buscarMetodo($1.lexema); } Par pard {
 							
 						  }; 
 
-Par : {$$.code = "";}
-	| Expr { int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args]; if(tipo_arg == -1) error(SOBRAN); } CPar {
-					$$.code = $1.code + $2.code;
-					};
+Par : 			{
+					$$.code = "";
+					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args];
+					if (tipo_arg != -1){ error(FALTANPARAMS); }
+				}
+	| Expr 		{ 
+					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args]; 
+					if(tipo_arg == -1){error(SOBRANPARAMS);}
+					int tipo_expr = getTipoSimple($1.tipo);
 
-int f(int a, int b)
-f(1, 2)
+					if (tipo_arg == ENTERO $$ tipo_expr == REAL){
+						$$.code = $1.code;
+						$$.code += "mov @B+" + $1.temp + " A\n";
+						$$.code += "rtoi \n";
+						$$.code += "mov A @B+" + $0.indice_args + "\n";
+					} 
+					else if(tipo_arg == REAL $$ tipo_expr == ENTERO){
+						$$.code = $1.code;
+						$$.code += "mov @B+" + $1.temp + " A\n";
+						$$.code += "itor \n";
+						$$.code += "mov A @B+" + $0.indice_args + "\n";
+					}
+					else{
+						$$.code = $1.code;
+						$$.code += "mov @B+" + $1.temp + " @B+" + $0.indice_args + "\n";
+					}
 
-f(1, 2, 3)
+					$$.indice_args = $0.indice_args + 1;
 
-CPar : {
-			$$.code = "";
-		}
-	 | coma Expr { int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args]; if(tipo_arg == -1) error(SOBRAN); } CPar 	{ 
-		 				    $$.tipo = getTbase(buscar($1.lexema).tipo);
-						 	$$.code = $2.code + $4.code;
+				} CPar 	{
+							$$.code = $2.code + $3.code;
 						};
+
+CPar : 	{
+			$$.code = "";
+			int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args];
+			if (tipo_arg != -1){ error(FALTANPARAMS); }
+		}
+	 	| coma Expr 	{ 
+			 				int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args]; 
+							if(tipo_arg == -1){error(SOBRAN);}
+							int tipo_expr = getTipoSimple($2.tipo);
+
+							if (tipo_arg == ENTERO $$ tipo_expr == REAL){
+								$$.code = $2.code;
+								$$.code += "mov @B+" + $2.temp + " A\n";
+								$$.code += "rtoi \n";
+								$$.code += "mov A @B+" + $0.indice_args + "\n";
+							} 
+							else if(tipo_arg == REAL $$ tipo_expr == ENTERO){
+								$$.code = $2.code;
+								$$.code += "mov @B+" + $2.temp + " A\n";
+								$$.code += "itor \n";
+								$$.code += "mov A @B+" + $0.indice_args + "\n";
+							}
+							else{
+								$$.code = $2.code;
+								$$.code += "mov @B+" + $2.temp + " @B+" + $0.indice_args + "\n";
+							}
+
+							$$.indice_args = $0.indice_args + 1;
+						} CPar	{ 
+									$$.code = $3.code + $4.code;
+								};
 
 %%
 
@@ -716,12 +777,13 @@ int NuevoTipoArray(int dim, int tbase){
 	tp->tipos.push_back(Tipo{tbase,dim,ARRAY});
 	return tp->tipos.size()-1;
 }
-Metodo buscarMetodo(string id){
+int buscarMetodo(string id){
 	for(size_t i=0;i<tm->metodos.size();i++){
 		if(!tm->metodos[i].id.compare(id)){
-			return tm->metodos[i];
+			return i;
 		}
 	}
+	return -1;
 }
 
 int getTbase(int tipo){ return tp->tipos[tipo].tbase; } //$3.tipo ==> ENTERO = 1 --> REAL
