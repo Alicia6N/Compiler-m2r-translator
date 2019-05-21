@@ -1,10 +1,10 @@
  mov $7.5 @B+16001		; guarda real 7.5
-mov @B+16001 @B+3		; Instr : Ref asig Expr pyc 
+mov @B+16001 3		; Instr : Ref asig Expr pyc 
 mov 3 @B+16002		; guarda id a
 mov @B+16002 A
 rtoi
 mov A @B+16002
-mov @B+16002 @B+2		; Instr : Ref asig Expr pyc 
+mov @B+16002 2		; Instr : Ref asig Expr pyc 
 mov 2 @B+16003		; guarda id c
 mov $7.1 @B+16004		; guarda real 7.1
 mov @B+16003 A
@@ -27,9 +27,9 @@ mov A @B+16012
 mov @B+16007 A
 addi @B+16012	; ENTERO + ENTERO
 mov A @B+16013	; guardar el resultado en temporal
-mov @B+16013 @B+5		; Instr : Ref asig Expr pyc 
+mov @B+16013 5		; Instr : Ref asig Expr pyc 
 mov 5 @B+16014		; guarda id a
-mov @B+16014 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+16014 0		; Instr : Ref asig Expr pyc 
 mov 5 @B+16015		; guarda id a
 mov #2 @B+16016		; guarda entero 2
 mov @B+16015 A
@@ -39,7 +39,7 @@ mov #2 @B+16018		; guarda entero 2
 mov @B+16017 A
 divi @B+16018	; ENTERO / ENTERO
 mov A @B+16019
-mov @B+16019 @B+6		; Instr : Ref asig Expr pyc 
+mov @B+16019 6		; Instr : Ref asig Expr pyc 
 mov 6 @B+16020		; guarda id b
 wri @B+16020	; print valor entero de temporal
 wrl
@@ -55,7 +55,7 @@ mov A @B+16003
 mov @B+16003 A
 rtoi
 mov A @B+16003
-mov @B+16003 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+16003 0		; Instr : Ref asig Expr pyc 
 L2 mov 0 @B+16001		; guarda id a
 wri @B+16001	; print valor entero de temporal
 wrl
