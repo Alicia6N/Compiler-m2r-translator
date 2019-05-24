@@ -29,12 +29,12 @@ extern FILE *yyin;
 int yyerror(char *s);
 const int MEM = 16384;
 const int MAX_VAR = 16000;
-const int MAX_TMP = 384;
+const int MAX_TMP = 16384;
 int ACTUAL_MEM = 0;
 int TEMP_MEM = 16000;
 int VAR_MEM = 0;
 int ETIQ = 0;
-TablaSimbolos *ts = new TablaSimbolos(NULL);
+TablaSimbolos *ts = new TablaSimbolos(NULL,TEMP_MEM);
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
 TablaTipos* tp = new TablaTipos(); 
@@ -173,7 +173,9 @@ Instr : pyc { $$.code = " ";  }
 															}
 															$$.code += "wrl\n";
 														}
-	  | _scan pari Ref pard pyc 						{
+	  | _scan pari Ref {if($3.tipo >= ARRAY){
+								msgError(ERRFALTAN, $3.nlin, $3.ncol, $3.lexema);
+							}} pard pyc 						{
 															int tipo_tres = getTipoSimple($3.tipo);
 
 															if ($3.arrays == true){
@@ -720,7 +722,7 @@ bool anyadir(TablaSimbolos *t,Simbolo s){
 Simbolo buscar(TablaSimbolos *root,string nombre){
    for(size_t i = 0; i < root->simbolos.size(); i++){
 	  if(!root->simbolos[i].nombre.compare(nombre)){
-		  root->simbolos[i].aux = true;
+		  root->simbolos[i].exists = true;
 		  return root->simbolos[i];
 	  }
    }
@@ -734,13 +736,13 @@ Simbolo buscarClase(TablaSimbolos *root, string nombre){
 	
    for(size_t i = 0; i < root->simbolos.size(); i++){
 	  if(!root->simbolos[i].nombre.compare(nombre)){
-		 root->simbolos[i].aux = true;
+		 root->simbolos[i].exists = true;
 		 return root->simbolos[i];
 	  }
    }
 }
 TablaSimbolos* createScope(TablaSimbolos* root){
-	TablaSimbolos* child = new TablaSimbolos(root);
+	TablaSimbolos* child = new TablaSimbolos(root,TEMP_MEM);
 	child->root = root;
 	return child;
 }
