@@ -414,7 +414,7 @@ Factor :  Ref      		{
 							}
 							else{
 								string temp = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-								$$.code = "mov @B+" + $1.temp + " @B+" + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
+								$$.code = "mov " + $1.temp + " @B+" + temp + "\t\t; guarda id " + $$.aux_lexema + "\n"; //Aquí.
 								$$.temp = "@B+" + temp;
 							}
 						}
@@ -467,7 +467,7 @@ Ref : _this punto id  			{
 									if (s.exists){
 										s.exists = false;
 										$$.tipo = s.index_tipo;
-										$$.temp = s.dir;
+										$$.temp = "@B+"+s.dir;
 										$$.dbase = atoi(s.dir.c_str());
 										string aux = $1.lexema;
 										$$.aux_lexema = aux;

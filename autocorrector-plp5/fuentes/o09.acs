@@ -1,0 +1,12 @@
+
+
+class o09
+{
+	attributes:
+
+	methods:
+		int main()
+		{
+			print(5 % 5);	// Lexic error: '%'
+		}
+}

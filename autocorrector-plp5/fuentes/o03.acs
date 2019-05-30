@@ -1,0 +1,86 @@
+
+///////////////////////////////////////////////////////////////
+// This file tests:
+//
+// 1. Change of scope
+// 2. blocks
+// 3. Constant expressions
+// 4. Visibility of variables (class vs local variables)
+// 5. this
+// 6. Printing of class and local variables
+///////////////////////////////////////////////////////////////
+
+class o03
+{
+	attributes:
+		int a;
+		float b;
+
+	methods:
+		int main()
+		{
+			int a;
+			float b;
+
+			a = 1;
+			b = 2.2;
+
+			print(b);
+			print(a);
+
+			this.b = 4.4;
+			this.a = 5;
+
+			print(a);
+			print(b);
+			print(this.a);
+			print(this.b);
+
+			{
+				int a;
+				float b;
+
+				print(this.b);
+				print(this.a);
+
+				a = 3;
+
+				print(this.a);
+				print(a);
+				print(this.b);
+
+				this.b = 123.223;
+				b = 23.2;
+
+				print(b);
+				print(this.b);
+
+				{
+					int b;
+					float a;
+
+					print(this.b);
+
+					b = 2;
+
+					print(b);
+					print(this.b);
+
+					a = 2.21;
+
+					print(this.a);
+					print(a);
+				}
+
+				print(a);
+				print(b);
+				print(this.a);
+				print(this.b);
+			}
+
+			print(this.a);
+			print(this.b);
+			print(a);
+			print(b);
+		}
+}

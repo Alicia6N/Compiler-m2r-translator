@@ -1,0 +1,30 @@
+
+
+class o15
+{
+	attributes:
+		int a;
+		float a[20][30];
+
+	methods:
+		int main()
+		{
+			int a;
+			int a;
+			float a;
+			float a[20];
+
+			{
+				float a;
+
+				{
+					int a[10][20];
+
+					{
+						float a[20];
+						int a;
+					}
+				}
+			}
+		}
+}

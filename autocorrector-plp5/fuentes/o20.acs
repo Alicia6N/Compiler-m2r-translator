@@ -1,0 +1,22 @@
+
+
+class o20
+{
+	attributes:
+		int a, A;
+
+	methods:
+		int main()
+		{
+			int a, A;
+
+			{
+				int a, A;
+				float A[20][30], a[20];
+
+				{
+					print(3);
+				}
+			}
+		}
+}

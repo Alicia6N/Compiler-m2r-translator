@@ -1,0 +1,25 @@
+ mov #1 16001		; guarda entero 1
+mov  A
+addi 16001	; ENTERO + ENTERO
+mov A 16002	; guardar el resultado en temporal
+wri 16002	; print valor entero de temporal
+wrl
+mov #1 16003		; guarda entero 1
+wri 16003	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+mov #10 16004		; guarda entero 10
+mov 16004 0		; Instr : Ref asig Expr pyc 
+mov 0 16005		; guarda id a
+wri 16005	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+mov 0 16006		; guarda id a
+wri 16006	; print valor entero de temporal
+wrl
+mov #117 16007		; guarda entero 117
+wri 16007	; print valor entero de temporal
+wrl
+halt

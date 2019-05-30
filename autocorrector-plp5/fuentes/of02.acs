@@ -1,0 +1,60 @@
+
+
+class of02
+{
+	attributes:
+		int a;
+
+	methods:
+		int test()
+		{
+			int a;
+
+			a = 123;
+
+			return a + 2;
+		}
+
+		int test2()
+		{
+			int a;
+
+			a = 100;
+
+			return a + test();
+		}
+
+		int recursive()
+		{
+			int a;
+			int b;
+
+			b = this.a;
+			print(b);
+			this.a = this.a - 1;
+			a = 0;
+
+			if (this.a > 0)
+			{
+				a = recursive();
+			}
+
+			return b + a;
+		}
+
+		int main()
+		{
+			print(test() + 1);
+			print(1);
+			print(test2());
+
+			this.a = 10;
+
+			// Recursive test
+			print(this.a);
+			print(recursive());
+			print(this.a);
+
+			print(117);
+		}
+}

@@ -1,0 +1,51 @@
+
+
+class of09
+{
+	attributes:
+
+	methods:
+
+		int sumaenteros1(int a, int b)
+		{
+			return a + b;
+		}
+
+		float sumaenteros2(int a, int b)
+		{
+			return a + b;
+		}
+
+		int sumareales1(float a, float b)
+		{
+			return a + b;
+		}
+
+		float sumareales2(float a, float b)
+		{
+			return a + b;
+		}
+
+		int main()
+		{
+			print(sumaenteros1(4, 6));
+			print(sumaenteros1(4.9, 6));
+			print(sumaenteros1(4, 6.9));
+			print(sumaenteros1(4.9, 6.9));
+
+			print(sumaenteros2(4, 6));
+			print(sumaenteros2(4.9, 6));
+			print(sumaenteros2(4, 6.9));
+			print(sumaenteros2(4.9, 6.9));
+
+			print(sumareales1(4.9, 6.9));
+			print(sumareales1(4, 6.9));
+			print(sumareales1(4.9, 6));
+			print(sumareales1(4, 6));
+
+			print(sumareales2(4.9, 6.9));
+			print(sumareales2(4, 6.9));
+			print(sumareales2(4.9, 6));
+			print(sumareales2(4, 6));
+		}
+}

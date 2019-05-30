@@ -1,1 +1,1 @@
-AVISO: el programa debe terminar con la instrucción 'halt'
+ERROR(m2r) en instruccion 10: el primer operando de 'muli' debe ser entero.

@@ -1,0 +1,22 @@
+
+
+class o16
+{
+	attributes:
+
+	methods:
+		int main()
+		{
+			{
+				// We declare 'a' here
+
+				int a;
+
+				a = 5;
+			}
+
+			// Out of the above scope: we can't access to 'a'
+
+			print(a);
+		}
+}

@@ -1,30 +1,38 @@
-class prcorrecto2 {
- attributes:
-  int a, b;
- methods:
 
-  int suma(int c, int b){
-    int sum;
-    sum = c + b;
-    return sum;
-  }
+class of01
+{
+	attributes:
 
-  int resta(int c, int b){
-    int res;
-    res = c - b;
-    return res;
-  }
+	methods:
 
-  int main(){
-    int res;
+		float test4()
+		{
+			print(444.0);
+		}
 
-    a = 5;
-    b = a + 3 - 2 + 8 / 2;
+		float test2()
+		{
+			print(test4() + 1);
+		}
 
-    print(b);
+		int test(int a, float b)
+		{
+			return 1234 + 6 * 1;
+		}
 
-    b = suma(4,5);
+		float test3(int a)
+		{
+			return 500.01;
+		}
 
-    print(b);
-  }
+		int main()
+		{
+			print(2);
+			print(test(2, 2));
+			print(23);
+			print(test3(2));
+			print(54);
+			print(test2());
+			print(117);
+		}
 }

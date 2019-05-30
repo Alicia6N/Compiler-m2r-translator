@@ -1,0 +1,14 @@
+
+
+class o19
+{
+	attributes:
+		int a, A, b, B;
+		float c, C, D, D;
+
+	methods:
+		int main()
+		{
+			
+		}
+}

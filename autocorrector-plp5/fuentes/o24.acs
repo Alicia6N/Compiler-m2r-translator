@@ -1,0 +1,13 @@
+
+
+class o24
+{
+	attributes:
+		int a[010][00][20];
+
+	methods:
+		int main()
+		{
+			print(5 % 5);	// Lexic error: '%'
+		}
+}

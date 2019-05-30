@@ -1,0 +1,12 @@
+
+
+class o10
+{
+	attributes:
+
+	methods:
+		int main()
+		{
+			print(-5);	// Sintactic error: '-' (there are not negative numbers defined in the lexical analyzer)
+		}
+}

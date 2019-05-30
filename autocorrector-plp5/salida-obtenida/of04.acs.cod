@@ -1,0 +1,110 @@
+ mov #0 16001	; guarda 0 y empieza recursivo arrays de a
+mov #0 16002		; guarda entero 0
+mov 16001 A 	; hace recursivo de arrays
+muli #10
+addi 16002 
+mov A 16003 
+mov #5 16004		; guarda entero 5
+mov 16003 A
+muli #1 
+addi #0
+mov 16004 @A
+mov #6 16005		; guarda entero 6
+mov 16005 A
+itor
+mov A 16005
+mov 16005 10		; Instr : Ref asig Expr pyc 
+mov #0 16006	; guarda 0 y empieza recursivo arrays de c
+mov #5 16007		; guarda entero 5
+mov 16006 A 	; hace recursivo de arrays
+muli #10
+addi 16007 
+mov A 16008 
+mov #7 16009		; guarda entero 7
+mov 16009 A
+itor
+mov A 16009
+mov 16008 A
+muli #1 
+addi #11
+mov 16009 @A
+mov #123 16010		; guarda entero 123
+wri 16010	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+mov #0 16011	; guarda 0 y empieza recursivo arrays de c
+mov #5 16012		; guarda entero 5
+mov 16011 A 	; hace recursivo de arrays
+muli #10
+addi 16012 
+mov A 16013 
+mov #0 16013		; guarda 0 y empieza recursivo arrays de c
+mov 16013 16014		; guarda id c
+muli #1 
+addi #11
+mov @A 16014
+wrr 16014	; print valor real de temporal
+wrl
+mov #0 16015	; guarda 0 y empieza recursivo arrays de a
+mov #0 16016		; guarda entero 0
+mov 16015 A 	; hace recursivo de arrays
+muli #10
+addi 16016 
+mov A 16017 
+mov #0 16017		; guarda 0 y empieza recursivo arrays de a
+mov 16017 16018		; guarda id a
+muli #1 
+addi #0
+mov @A 16018
+wri 16018	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+mov #0 16019	; guarda 0 y empieza recursivo arrays de a
+mov #0 16020		; guarda entero 0
+mov 16019 A 	; hace recursivo de arrays
+muli #10
+addi 16020 
+mov A 16021 
+mov #0 16021		; guarda 0 y empieza recursivo arrays de a
+mov 16021 16022		; guarda id a
+muli #1 
+addi #0
+mov @A 16022
+wri 16022	; print valor entero de temporal
+wrl
+mov #0 16023	; guarda 0 y empieza recursivo arrays de a
+mov #5 16024		; guarda entero 5
+mov 16023 A 	; hace recursivo de arrays
+muli #10
+addi 16024 
+mov A 16025 
+mov #0 16025		; guarda 0 y empieza recursivo arrays de a
+mov 16025 16026		; guarda id a
+muli #1 
+addi #0
+mov @A 16026
+wri 16026	; print valor entero de temporal
+wrl
+mov #0 16027	; guarda 0 y empieza recursivo arrays de c
+mov #5 16028		; guarda entero 5
+mov 16027 A 	; hace recursivo de arrays
+muli #10
+addi 16028 
+mov A 16029 
+mov #0 16029		; guarda 0 y empieza recursivo arrays de c
+mov 16029 16030		; guarda id c
+muli #1 
+addi #11
+mov @A 16030
+wrr 16030	; print valor real de temporal
+wrl
+mov #321 16031		; guarda entero 321
+wri 16031	; print valor entero de temporal
+wrl
+halt

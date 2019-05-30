@@ -1,0 +1,52 @@
+
+
+class of08
+{
+	attributes:
+		int a;
+		float b[10];
+		int c;
+
+	methods:
+		int modifyparameters1(int a, int b)
+		{
+			a = a * 10;
+			b = b * 10;
+		}
+
+		int modifyparameters2(int c, float b)
+		{
+			c = c + 20;
+			b = b * 10.0;
+
+			print(c);
+			print(this.c);
+		}
+
+		int main()
+		{
+			int c;
+			int foo;
+
+			print(123);
+
+			this.c = 55;
+			c = 44;
+			print(this.c);
+			print(c);
+			foo = modifyparameters1(c, this.c);
+			print(this.c);
+			print(c);
+
+			this.b[0] = 122.2;
+			this.c = 11;
+
+			print(this.b[0]);
+			print(this.c);
+			foo = modifyparameters2(this.c, this.b[0]);
+			print(this.b[0]);
+			print(this.c);
+
+			print(321);
+		}
+}

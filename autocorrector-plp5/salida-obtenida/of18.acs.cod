@@ -1,0 +1,6 @@
+ mov #100000 16001		; guarda entero 100000
+mov  A
+subi 16001	; ENTERO - ENTERO
+mov A 16002	; guardar el resultado en temporal
+mov 16002 2		; Instr : Ref asig Expr pyc 
+halt

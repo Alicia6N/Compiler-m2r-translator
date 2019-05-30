@@ -1,0 +1,1024 @@
+ mov #0 16001	; guarda 0 y empieza recursivo arrays de p
+mov #0 16002		; guarda entero 0
+mov 16001 A 	; hace recursivo de arrays
+muli #2
+addi 16002 
+mov A 16003 
+mov #1 16004		; guarda entero 1
+mov 16003 A 	; hace recursivo de arrays
+muli #3
+addi 16004 
+mov A 16005 
+mov #2 16006		; guarda entero 2
+mov 16005 A
+muli #1 
+addi #0
+mov 16006 @A
+mov #0 16007	; guarda 0 y empieza recursivo arrays de p2
+mov #0 16008		; guarda entero 0
+mov 16007 A 	; hace recursivo de arrays
+muli #2
+addi 16008 
+mov A 16009 
+mov #1 16010		; guarda entero 1
+mov 16009 A 	; hace recursivo de arrays
+muli #3
+addi 16010 
+mov A 16011 
+mov $2.2 16012		; guarda real 2.2
+mov 16011 A
+muli #1 
+addi #6
+mov 16012 @A
+mov $3.3 16013		; guarda real 3.3
+mov 16013 A
+rtoi
+mov A 16013
+mov 16013 12		; Instr : Ref asig Expr pyc 
+mov #3 16014		; guarda entero 3
+mov 16014 A
+itor
+mov A 16014
+mov 16014 13		; Instr : Ref asig Expr pyc 
+mov #0 16015	; guarda 0 y empieza recursivo arrays de p
+mov #0 16016		; guarda entero 0
+mov 16015 A 	; hace recursivo de arrays
+muli #2
+addi 16016 
+mov A 16017 
+mov #1 16018		; guarda entero 1
+mov 16017 A 	; hace recursivo de arrays
+muli #3
+addi 16018 
+mov A 16019 
+mov #0 16019		; guarda 0 y empieza recursivo arrays de p
+mov 16019 16020		; guarda id p
+muli #1 
+addi #0
+mov @A 16020
+wri 16020	; print valor entero de temporal
+wrl
+mov #0 16021	; guarda 0 y empieza recursivo arrays de p2
+mov #0 16022		; guarda entero 0
+mov 16021 A 	; hace recursivo de arrays
+muli #2
+addi 16022 
+mov A 16023 
+mov #1 16024		; guarda entero 1
+mov 16023 A 	; hace recursivo de arrays
+muli #3
+addi 16024 
+mov A 16025 
+mov #0 16025		; guarda 0 y empieza recursivo arrays de p2
+mov 16025 16026		; guarda id p2
+muli #1 
+addi #6
+mov @A 16026
+wrr 16026	; print valor real de temporal
+wrl
+mov 12 16027		; guarda id a
+wri 16027	; print valor entero de temporal
+wrl
+mov 13 16028		; guarda id b
+wrr 16028	; print valor real de temporal
+wrl
+mov #0 16029	; guarda 0 y empieza recursivo arrays de p
+mov #0 16030		; guarda entero 0
+mov 16029 A 	; hace recursivo de arrays
+muli #2
+addi 16030 
+mov A 16031 
+mov #1 16032		; guarda entero 1
+mov 16031 A 	; hace recursivo de arrays
+muli #3
+addi 16032 
+mov A 16033 
+mov 16033 A
+muli #1 
+addi #0
+rdi 16034	; guardar valor entero en temporal
+mov 16034 @A
+mov #0 16035	; guarda 0 y empieza recursivo arrays de p2
+mov #0 16036		; guarda entero 0
+mov 16035 A 	; hace recursivo de arrays
+muli #2
+addi 16036 
+mov A 16037 
+mov #1 16038		; guarda entero 1
+mov 16037 A 	; hace recursivo de arrays
+muli #3
+addi 16038 
+mov A 16039 
+mov 16039 A
+muli #1 
+addi #6
+rdr 16040	; guardar valor real en temporal
+mov 16040 @A
+rdi 12	; guardar valor entero en temporal
+rdr 13	; guardar valor real en temporal
+mov #0 16041	; guarda 0 y empieza recursivo arrays de p
+mov #0 16042		; guarda entero 0
+mov 16041 A 	; hace recursivo de arrays
+muli #2
+addi 16042 
+mov A 16043 
+mov #1 16044		; guarda entero 1
+mov 16043 A 	; hace recursivo de arrays
+muli #3
+addi 16044 
+mov A 16045 
+mov #0 16045		; guarda 0 y empieza recursivo arrays de p
+mov 16045 16046		; guarda id p
+muli #1 
+addi #0
+mov @A 16046
+wri 16046	; print valor entero de temporal
+wrl
+mov #0 16047	; guarda 0 y empieza recursivo arrays de p2
+mov #0 16048		; guarda entero 0
+mov 16047 A 	; hace recursivo de arrays
+muli #2
+addi 16048 
+mov A 16049 
+mov #1 16050		; guarda entero 1
+mov 16049 A 	; hace recursivo de arrays
+muli #3
+addi 16050 
+mov A 16051 
+mov #0 16051		; guarda 0 y empieza recursivo arrays de p2
+mov 16051 16052		; guarda id p2
+muli #1 
+addi #6
+mov @A 16052
+wrr 16052	; print valor real de temporal
+wrl
+mov 12 16053		; guarda id a
+wri 16053	; print valor entero de temporal
+wrl
+mov 13 16054		; guarda id b
+wrr 16054	; print valor real de temporal
+wrl
+mov #0 16055	; guarda 0 y empieza recursivo arrays de p
+mov #0 16056		; guarda entero 0
+mov 16055 A 	; hace recursivo de arrays
+muli #2
+addi 16056 
+mov A 16057 
+mov #1 16058		; guarda entero 1
+mov 16057 A 	; hace recursivo de arrays
+muli #3
+addi 16058 
+mov A 16059 
+mov 16059 A
+muli #1 
+addi #0
+rdi 16060	; guardar valor entero en temporal
+mov 16060 @A
+mov #0 16061	; guarda 0 y empieza recursivo arrays de p2
+mov #0 16062		; guarda entero 0
+mov 16061 A 	; hace recursivo de arrays
+muli #2
+addi 16062 
+mov A 16063 
+mov #1 16064		; guarda entero 1
+mov 16063 A 	; hace recursivo de arrays
+muli #3
+addi 16064 
+mov A 16065 
+mov 16065 A
+muli #1 
+addi #6
+rdr 16066	; guardar valor real en temporal
+mov 16066 @A
+rdi 12	; guardar valor entero en temporal
+rdr 13	; guardar valor real en temporal
+mov #0 16067	; guarda 0 y empieza recursivo arrays de p
+mov #0 16068		; guarda entero 0
+mov 16067 A 	; hace recursivo de arrays
+muli #2
+addi 16068 
+mov A 16069 
+mov #1 16070		; guarda entero 1
+mov 16069 A 	; hace recursivo de arrays
+muli #3
+addi 16070 
+mov A 16071 
+mov #0 16071		; guarda 0 y empieza recursivo arrays de p
+mov 16071 16072		; guarda id p
+muli #1 
+addi #0
+mov @A 16072
+wri 16072	; print valor entero de temporal
+wrl
+mov #0 16073	; guarda 0 y empieza recursivo arrays de p2
+mov #0 16074		; guarda entero 0
+mov 16073 A 	; hace recursivo de arrays
+muli #2
+addi 16074 
+mov A 16075 
+mov #1 16076		; guarda entero 1
+mov 16075 A 	; hace recursivo de arrays
+muli #3
+addi 16076 
+mov A 16077 
+mov #0 16077		; guarda 0 y empieza recursivo arrays de p2
+mov 16077 16078		; guarda id p2
+muli #1 
+addi #6
+mov @A 16078
+wrr 16078	; print valor real de temporal
+wrl
+mov 12 16079		; guarda id a
+wri 16079	; print valor entero de temporal
+wrl
+mov 13 16080		; guarda id b
+wrr 16080	; print valor real de temporal
+wrl
+ mov #0 16081	; guarda 0 y empieza recursivo arrays de halo
+mov #1 16082		; guarda entero 1
+mov #1 16083		; guarda entero 1
+mov 16082 A
+subi 16083	; ENTERO - ENTERO
+mov A 16084	; guardar el resultado en temporal
+mov 16081 A 	; hace recursivo de arrays
+muli #3
+addi 16084 
+mov A 16085 
+mov 16085 A
+muli #1 
+addi #14
+rdr 16086	; guardar valor real en temporal
+mov 16086 @A
+mov #0 16087	; guarda 0 y empieza recursivo arrays de halo
+mov #2 16088		; guarda entero 2
+mov #1 16089		; guarda entero 1
+mov 16088 A
+subi 16089	; ENTERO - ENTERO
+mov A 16090	; guardar el resultado en temporal
+mov 16087 A 	; hace recursivo de arrays
+muli #3
+addi 16090 
+mov A 16091 
+mov 16091 A
+muli #1 
+addi #14
+rdr 16092	; guardar valor real en temporal
+mov 16092 @A
+mov #0 16093	; guarda 0 y empieza recursivo arrays de halo
+mov #3 16094		; guarda entero 3
+mov #1 16095		; guarda entero 1
+mov 16094 A
+subi 16095	; ENTERO - ENTERO
+mov A 16096	; guardar el resultado en temporal
+mov 16093 A 	; hace recursivo de arrays
+muli #3
+addi 16096 
+mov A 16097 
+mov 16097 A
+muli #1 
+addi #14
+rdr 16098	; guardar valor real en temporal
+mov 16098 @A
+mov #0 16099	; guarda 0 y empieza recursivo arrays de halo
+mov #1 16100		; guarda entero 1
+mov #1 16101		; guarda entero 1
+mov 16100 A
+subi 16101	; ENTERO - ENTERO
+mov A 16102	; guardar el resultado en temporal
+mov 16099 A 	; hace recursivo de arrays
+muli #3
+addi 16102 
+mov A 16103 
+mov #0 16103		; guarda 0 y empieza recursivo arrays de halo
+mov 16103 16104		; guarda id halo
+muli #1 
+addi #14
+mov @A 16104
+wrr 16104	; print valor real de temporal
+wrl
+mov #0 16105	; guarda 0 y empieza recursivo arrays de halo
+mov #2 16106		; guarda entero 2
+mov #1 16107		; guarda entero 1
+mov 16106 A
+subi 16107	; ENTERO - ENTERO
+mov A 16108	; guardar el resultado en temporal
+mov 16105 A 	; hace recursivo de arrays
+muli #3
+addi 16108 
+mov A 16109 
+mov #0 16109		; guarda 0 y empieza recursivo arrays de halo
+mov 16109 16110		; guarda id halo
+muli #1 
+addi #14
+mov @A 16110
+wrr 16110	; print valor real de temporal
+wrl
+mov #0 16111	; guarda 0 y empieza recursivo arrays de halo
+mov #3 16112		; guarda entero 3
+mov #1 16113		; guarda entero 1
+mov 16112 A
+subi 16113	; ENTERO - ENTERO
+mov A 16114	; guardar el resultado en temporal
+mov 16111 A 	; hace recursivo de arrays
+muli #3
+addi 16114 
+mov A 16115 
+mov #0 16115		; guarda 0 y empieza recursivo arrays de halo
+mov 16115 16116		; guarda id halo
+muli #1 
+addi #14
+mov @A 16116
+wrr 16116	; print valor real de temporal
+wrl
+ mov #0 16117	; guarda 0 y empieza recursivo arrays de p
+mov #0 16118		; guarda entero 0
+mov 16117 A 	; hace recursivo de arrays
+muli #2
+addi 16118 
+mov A 16119 
+mov #1 16120		; guarda entero 1
+mov 16119 A 	; hace recursivo de arrays
+muli #3
+addi 16120 
+mov A 16121 
+mov #0 16121		; guarda 0 y empieza recursivo arrays de p
+mov 16121 16122		; guarda id p
+muli #1 
+addi #0
+mov @A 16122
+mov 16122 A
+itor 
+mov A 16138 
+; Factor -> pari Expr pard
+mov #0 16123	; guarda 0 y empieza recursivo arrays de halo
+mov #0 16124		; guarda entero 0
+mov 16123 A 	; hace recursivo de arrays
+muli #3
+addi 16124 
+mov A 16125 
+mov #0 16125		; guarda 0 y empieza recursivo arrays de halo
+mov 16125 16126		; guarda id halo
+muli #1 
+addi #14
+mov @A 16126
+; Factor -> pari Expr pard
+mov #0 16127	; guarda 0 y empieza recursivo arrays de halo
+mov #1 16128		; guarda entero 1
+mov 16127 A 	; hace recursivo de arrays
+muli #3
+addi 16128 
+mov A 16129 
+mov #0 16129		; guarda 0 y empieza recursivo arrays de halo
+mov 16129 16130		; guarda id halo
+muli #1 
+addi #14
+mov @A 16130
+mov #0 16131	; guarda 0 y empieza recursivo arrays de halo
+mov #2 16132		; guarda entero 2
+mov 16131 A 	; hace recursivo de arrays
+muli #3
+addi 16132 
+mov A 16133 
+mov #0 16133		; guarda 0 y empieza recursivo arrays de halo
+mov 16133 16134		; guarda id halo
+muli #1 
+addi #14
+mov @A 16134
+mov 16130 A
+subr 16134	; REAL - REAL
+mov A 16135	; guardar el resultado en temporal
+mov 16126 A
+mulr 16135	; REAL * REAL
+mov A 16136
+mov 16138 A
+addr 16136	; ENTERO + REAL
+mov A 16137	; guardar el resultado en temporal
+wrr 16137	; print valor real de temporal
+wrl
+mov #0 16139	; guarda 0 y empieza recursivo arrays de halo
+mov #3 16140		; guarda entero 3
+mov #1 16141		; guarda entero 1
+mov 16140 A
+subi 16141	; ENTERO - ENTERO
+mov A 16142	; guardar el resultado en temporal
+mov 16139 A 	; hace recursivo de arrays
+muli #3
+addi 16142 
+mov A 16143 
+mov $11.000 16144		; guarda real 11.000
+mov 16143 A
+muli #1 
+addi #14
+mov 16144 @A
+mov #0 16081	; guarda 0 y empieza recursivo arrays de halo
+mov #3 16082		; guarda entero 3
+mov #1 16083		; guarda entero 1
+mov 16082 A
+subi 16083	; ENTERO - ENTERO
+mov A 16084	; guardar el resultado en temporal
+mov 16081 A 	; hace recursivo de arrays
+muli #3
+addi 16084 
+mov A 16085 
+mov #0 16085		; guarda 0 y empieza recursivo arrays de halo
+mov 16085 16086		; guarda id halo
+muli #1 
+addi #14
+mov @A 16086
+wrr 16086	; print valor real de temporal
+wrl
+  mov #2 16087		; guarda entero 2
+mov 16087 17		; Instr : Ref asig Expr pyc 
+mov #0 16088	; guarda 0 y empieza recursivo arrays de p
+mov #0 16089		; guarda entero 0
+mov 16088 A 	; hace recursivo de arrays
+muli #2
+addi 16089 
+mov A 16090 
+mov #1 16091		; guarda entero 1
+mov 16090 A 	; hace recursivo de arrays
+muli #3
+addi 16091 
+mov A 16092 
+mov #0 16092		; guarda 0 y empieza recursivo arrays de p
+mov 16092 16093		; guarda id p
+muli #1 
+addi #0
+mov @A 16093
+wri 16093	; print valor entero de temporal
+wrl
+mov #0 16094	; guarda 0 y empieza recursivo arrays de halo
+mov #2 16095		; guarda entero 2
+mov 16094 A 	; hace recursivo de arrays
+muli #3
+addi 16095 
+mov A 16096 
+mov #0 16096		; guarda 0 y empieza recursivo arrays de halo
+mov 16096 16097		; guarda id halo
+muli #1 
+addi #14
+mov @A 16097
+wrr 16097	; print valor real de temporal
+wrl
+mov #0 16098	; guarda 0 y empieza recursivo arrays de halo
+mov #1 16099		; guarda entero 1
+mov #1 16100		; guarda entero 1
+mov 16099 A
+addi 16100	; ENTERO + ENTERO
+mov A 16101	; guardar el resultado en temporal
+mov 16098 A 	; hace recursivo de arrays
+muli #3
+addi 16101 
+mov A 16102 
+mov #0 16102		; guarda 0 y empieza recursivo arrays de halo
+mov 16102 16103		; guarda id halo
+muli #1 
+addi #14
+mov @A 16103
+wrr 16103	; print valor real de temporal
+wrl
+mov #0 16104	; guarda 0 y empieza recursivo arrays de halo
+mov #2 16105		; guarda entero 2
+mov #2 16106		; guarda entero 2
+mov 16105 A
+muli 16106	; ENTERO * ENTERO
+mov A 16107
+mov #2 16108		; guarda entero 2
+mov 16107 A
+subi 16108	; ENTERO - ENTERO
+mov A 16109	; guardar el resultado en temporal
+mov 16104 A 	; hace recursivo de arrays
+muli #3
+addi 16109 
+mov A 16110 
+mov #0 16110		; guarda 0 y empieza recursivo arrays de halo
+mov 16110 16111		; guarda id halo
+muli #1 
+addi #14
+mov @A 16111
+wrr 16111	; print valor real de temporal
+wrl
+mov #0 16112	; guarda 0 y empieza recursivo arrays de halo
+mov 17 16113		; guarda id i
+mov #1 16114		; guarda entero 1
+mov 16113 A
+muli 16114	; ENTERO * ENTERO
+mov A 16115
+mov #1 16116		; guarda entero 1
+mov #1 16117		; guarda entero 1
+mov 16116 A
+muli 16117	; ENTERO * ENTERO
+mov A 16118
+mov 16115 A
+subi 16118	; ENTERO - ENTERO
+mov A 16119	; guardar el resultado en temporal
+mov #1 16120		; guarda entero 1
+mov 16119 A
+addi 16120	; ENTERO + ENTERO
+mov A 16121	; guardar el resultado en temporal
+mov #1 16122		; guarda entero 1
+mov 16121 A
+subi 16122	; ENTERO - ENTERO
+mov A 16123	; guardar el resultado en temporal
+mov #1 16124		; guarda entero 1
+mov 16123 A
+addi 16124	; ENTERO + ENTERO
+mov A 16125	; guardar el resultado en temporal
+mov 16112 A 	; hace recursivo de arrays
+muli #3
+addi 16125 
+mov A 16126 
+mov #0 16126		; guarda 0 y empieza recursivo arrays de halo
+mov 16126 16127		; guarda id halo
+muli #1 
+addi #14
+mov @A 16127
+wrr 16127	; print valor real de temporal
+wrl
+mov #0 16128	; guarda 0 y empieza recursivo arrays de p
+mov #0 16129		; guarda entero 0
+mov 16128 A 	; hace recursivo de arrays
+muli #2
+addi 16129 
+mov A 16130 
+mov 17 16131		; guarda id i
+mov #1 16132		; guarda entero 1
+mov 16131 A
+subi 16132	; ENTERO - ENTERO
+mov A 16133	; guardar el resultado en temporal
+mov 16130 A 	; hace recursivo de arrays
+muli #3
+addi 16133 
+mov A 16134 
+mov #2 16135		; guarda entero 2
+mov 16134 A
+muli #1 
+addi #0
+mov 16135 @A
+mov #0 16136	; guarda 0 y empieza recursivo arrays de halo
+mov #0 16137	; guarda 0 y empieza recursivo arrays de p
+mov #0 16138		; guarda entero 0
+mov 16137 A 	; hace recursivo de arrays
+muli #2
+addi 16138 
+mov A 16139 
+mov #1 16140		; guarda entero 1
+mov 16139 A 	; hace recursivo de arrays
+muli #3
+addi 16140 
+mov A 16141 
+mov #0 16141		; guarda 0 y empieza recursivo arrays de p
+mov 16141 16142		; guarda id p
+muli #1 
+addi #0
+mov @A 16142
+mov 16136 A 	; hace recursivo de arrays
+muli #3
+addi 16142 
+mov A 16143 
+mov #0 16143		; guarda 0 y empieza recursivo arrays de halo
+mov 16143 16144		; guarda id halo
+muli #1 
+addi #14
+mov @A 16144
+wrr 16144	; print valor real de temporal
+wrl
+mov #0 16145	; guarda 0 y empieza recursivo arrays de p
+mov #0 16146		; guarda entero 0
+mov 16145 A 	; hace recursivo de arrays
+muli #2
+addi 16146 
+mov A 16147 
+mov 17 16148		; guarda id i
+mov #1 16149		; guarda entero 1
+mov 16148 A
+subi 16149	; ENTERO - ENTERO
+mov A 16150	; guardar el resultado en temporal
+mov 16147 A 	; hace recursivo de arrays
+muli #3
+addi 16150 
+mov A 16151 
+mov #1 16152		; guarda entero 1
+mov 16151 A
+muli #1 
+addi #0
+mov 16152 @A
+mov #0 16153	; guarda 0 y empieza recursivo arrays de halo
+mov #0 16154	; guarda 0 y empieza recursivo arrays de p
+mov #0 16155		; guarda entero 0
+mov 16154 A 	; hace recursivo de arrays
+muli #2
+addi 16155 
+mov A 16156 
+mov #0 16157	; guarda 0 y empieza recursivo arrays de p
+mov 17 16158		; guarda id i
+mov #2 16159		; guarda entero 2
+mov 16158 A
+subi 16159	; ENTERO - ENTERO
+mov A 16160	; guardar el resultado en temporal
+mov 16157 A 	; hace recursivo de arrays
+muli #2
+addi 16160 
+mov A 16161 
+mov 17 16162		; guarda id i
+mov #1 16163		; guarda entero 1
+mov 16162 A
+subi 16163	; ENTERO - ENTERO
+mov A 16164	; guardar el resultado en temporal
+mov 16161 A 	; hace recursivo de arrays
+muli #3
+addi 16164 
+mov A 16165 
+mov #0 16165		; guarda 0 y empieza recursivo arrays de p
+mov 16165 16166		; guarda id p
+muli #1 
+addi #0
+mov @A 16166
+mov 16156 A 	; hace recursivo de arrays
+muli #3
+addi 16166 
+mov A 16167 
+mov #0 16167		; guarda 0 y empieza recursivo arrays de p
+mov 16167 16168		; guarda id p
+muli #1 
+addi #0
+mov @A 16168
+mov 16153 A 	; hace recursivo de arrays
+muli #3
+addi 16168 
+mov A 16169 
+mov #0 16169		; guarda 0 y empieza recursivo arrays de halo
+mov 16169 16170		; guarda id halo
+muli #1 
+addi #14
+mov @A 16170
+wrr 16170	; print valor real de temporal
+wrl
+mov #1 16171		; guarda entero 1
+mov 16171 A
+itor 
+mov A 16214
+mov #0 16172	; guarda 0 y empieza recursivo arrays de halo
+mov #0 16173		; guarda entero 0
+mov #0 16174	; guarda 0 y empieza recursivo arrays de p
+mov 17 16175		; guarda id i
+mov #2 16176		; guarda entero 2
+mov 16175 A
+subi 16176	; ENTERO - ENTERO
+mov A 16177	; guardar el resultado en temporal
+mov 16174 A 	; hace recursivo de arrays
+muli #2
+addi 16177 
+mov A 16178 
+mov 17 16179		; guarda id i
+mov #1 16180		; guarda entero 1
+mov 16179 A
+subi 16180	; ENTERO - ENTERO
+mov A 16181	; guardar el resultado en temporal
+mov 16178 A 	; hace recursivo de arrays
+muli #3
+addi 16181 
+mov A 16182 
+mov #0 16182		; guarda 0 y empieza recursivo arrays de p
+mov 16182 16183		; guarda id p
+muli #1 
+addi #0
+mov @A 16183
+mov 16173 A
+muli 16183	; ENTERO * ENTERO
+mov A 16184
+mov #0 16185	; guarda 0 y empieza recursivo arrays de p
+mov #0 16186		; guarda entero 0
+mov 16185 A 	; hace recursivo de arrays
+muli #2
+addi 16186 
+mov A 16187 
+mov #1 16188		; guarda entero 1
+mov 16187 A 	; hace recursivo de arrays
+muli #3
+addi 16188 
+mov A 16189 
+mov #0 16189		; guarda 0 y empieza recursivo arrays de p
+mov 16189 16190		; guarda id p
+muli #1 
+addi #0
+mov @A 16190
+mov #0 16191		; guarda entero 0
+mov 16190 A
+muli 16191	; ENTERO * ENTERO
+mov A 16192
+mov 16184 A
+addi 16192	; ENTERO + ENTERO
+mov A 16193	; guardar el resultado en temporal
+mov #0 16194	; guarda 0 y empieza recursivo arrays de p
+mov #0 16195		; guarda entero 0
+mov #0 16196		; guarda entero 0
+mov 16195 A
+muli 16196	; ENTERO * ENTERO
+mov A 16197
+mov #1 16198		; guarda entero 1
+mov 16197 A
+addi 16198	; ENTERO + ENTERO
+mov A 16199	; guardar el resultado en temporal
+mov #1 16200		; guarda entero 1
+mov #1 16201		; guarda entero 1
+mov 16200 A
+muli 16201	; ENTERO * ENTERO
+mov A 16202
+mov 16199 A
+subi 16202	; ENTERO - ENTERO
+mov A 16203	; guardar el resultado en temporal
+mov 16194 A 	; hace recursivo de arrays
+muli #2
+addi 16203 
+mov A 16204 
+mov #0 16205		; guarda entero 0
+mov #1 16206		; guarda entero 1
+mov 16205 A
+addi 16206	; ENTERO + ENTERO
+mov A 16207	; guardar el resultado en temporal
+mov 16204 A 	; hace recursivo de arrays
+muli #3
+addi 16207 
+mov A 16208 
+mov #0 16208		; guarda 0 y empieza recursivo arrays de p
+mov 16208 16209		; guarda id p
+muli #1 
+addi #0
+mov @A 16209
+mov 16193 A
+addi 16209	; ENTERO + ENTERO
+mov A 16210	; guardar el resultado en temporal
+mov 16172 A 	; hace recursivo de arrays
+muli #3
+addi 16210 
+mov A 16211 
+mov #0 16211		; guarda 0 y empieza recursivo arrays de halo
+mov 16211 16212		; guarda id halo
+muli #1 
+addi #14
+mov @A 16212
+mov 16214 A
+mulr 16212	; ENTERO * REAL
+mov A 16213
+mov #1 16215		; guarda entero 1
+mov 16215 A
+itor
+mov A 16217
+mov 16213 A
+mulr 16217	; Term : REAL * ENTERO
+mov A 16216
+mov #0 16218		; guarda entero 0
+mov #0 16219	; guarda 0 y empieza recursivo arrays de p
+mov #0 16220		; guarda entero 0
+mov 16219 A 	; hace recursivo de arrays
+muli #2
+addi 16220 
+mov A 16221 
+mov #1 16222		; guarda entero 1
+mov 16221 A 	; hace recursivo de arrays
+muli #3
+addi 16222 
+mov A 16223 
+mov #0 16223		; guarda 0 y empieza recursivo arrays de p
+mov 16223 16224		; guarda id p
+muli #1 
+addi #0
+mov @A 16224
+mov 16218 A
+muli 16224	; ENTERO * ENTERO
+mov A 16225
+mov 16225 A
+itor 
+mov A 16227 
+mov 16216 A
+subr 16227	; REAL - REAL
+mov A 16226	; guardar el resultado en temporal
+mov #0 16228	; guarda 0 y empieza recursivo arrays de p
+mov #0 16229		; guarda entero 0
+mov 16228 A 	; hace recursivo de arrays
+muli #2
+addi 16229 
+mov A 16230 
+mov #1 16231		; guarda entero 1
+mov 16230 A 	; hace recursivo de arrays
+muli #3
+addi 16231 
+mov A 16232 
+mov #0 16232		; guarda 0 y empieza recursivo arrays de p
+mov 16232 16233		; guarda id p
+muli #1 
+addi #0
+mov @A 16233
+mov #0 16234		; guarda entero 0
+mov 16233 A
+muli 16234	; ENTERO * ENTERO
+mov A 16235
+mov 16235 A
+itor 
+mov A 16237 
+mov 16226 A
+addr 16237	; REAL + REAL
+mov A 16236	; guardar el resultado en temporal
+wrr 16236	; print valor real de temporal
+wrl
+mov #0 16238	; guarda 0 y empieza recursivo arrays de halo
+mov #0 16239		; guarda entero 0
+mov #0 16240	; guarda 0 y empieza recursivo arrays de p
+; Factor -> pari Expr pard
+mov 17 16241		; guarda id i
+mov #2 16242		; guarda entero 2
+mov 16241 A
+subi 16242	; ENTERO - ENTERO
+mov A 16243	; guardar el resultado en temporal
+mov #2 16244		; guarda entero 2
+mov 16243 A
+muli 16244	; ENTERO * ENTERO
+mov A 16245
+mov #2 16246		; guarda entero 2
+mov 16245 A
+divi 16246	; ENTERO / ENTERO
+mov A 16247
+mov 16240 A 	; hace recursivo de arrays
+muli #2
+addi 16247 
+mov A 16248 
+; Factor -> pari Expr pard
+mov 17 16249		; guarda id i
+mov #1 16250		; guarda entero 1
+mov 16249 A
+subi 16250	; ENTERO - ENTERO
+mov A 16251	; guardar el resultado en temporal
+mov #2 16252		; guarda entero 2
+mov 16251 A
+muli 16252	; ENTERO * ENTERO
+mov A 16253
+mov #2 16254		; guarda entero 2
+mov 16253 A
+divi 16254	; ENTERO / ENTERO
+mov A 16255
+mov 16248 A 	; hace recursivo de arrays
+muli #3
+addi 16255 
+mov A 16256 
+mov #0 16256		; guarda 0 y empieza recursivo arrays de p
+mov 16256 16257		; guarda id p
+muli #1 
+addi #0
+mov @A 16257
+mov 16239 A
+muli 16257	; ENTERO * ENTERO
+mov A 16258
+mov #0 16259	; guarda 0 y empieza recursivo arrays de p
+mov #0 16260		; guarda entero 0
+mov #0 16261		; guarda entero 0
+mov 16260 A
+muli 16261	; ENTERO * ENTERO
+mov A 16262
+mov #1 16263		; guarda entero 1
+mov 16262 A
+addi 16263	; ENTERO + ENTERO
+mov A 16264	; guardar el resultado en temporal
+mov #1 16265		; guarda entero 1
+mov #1 16266		; guarda entero 1
+mov 16265 A
+muli 16266	; ENTERO * ENTERO
+mov A 16267
+mov 16264 A
+subi 16267	; ENTERO - ENTERO
+mov A 16268	; guardar el resultado en temporal
+mov 16259 A 	; hace recursivo de arrays
+muli #2
+addi 16268 
+mov A 16269 
+mov #0 16270		; guarda entero 0
+mov #1 16271		; guarda entero 1
+mov 16270 A
+addi 16271	; ENTERO + ENTERO
+mov A 16272	; guardar el resultado en temporal
+mov 16269 A 	; hace recursivo de arrays
+muli #3
+addi 16272 
+mov A 16273 
+mov #0 16273		; guarda 0 y empieza recursivo arrays de p
+mov 16273 16274		; guarda id p
+muli #1 
+addi #0
+mov @A 16274
+mov #1 16275		; guarda entero 1
+mov 16274 A
+muli 16275	; ENTERO * ENTERO
+mov A 16276
+mov 16258 A
+addi 16276	; ENTERO + ENTERO
+mov A 16277	; guardar el resultado en temporal
+mov #0 16278		; guarda entero 0
+mov #0 16279	; guarda 0 y empieza recursivo arrays de p
+mov #0 16280		; guarda entero 0
+mov 16279 A 	; hace recursivo de arrays
+muli #2
+addi 16280 
+mov A 16281 
+mov #1 16282		; guarda entero 1
+mov 16281 A 	; hace recursivo de arrays
+muli #3
+addi 16282 
+mov A 16283 
+mov #0 16283		; guarda 0 y empieza recursivo arrays de p
+mov 16283 16284		; guarda id p
+muli #1 
+addi #0
+mov @A 16284
+mov 16278 A
+muli 16284	; ENTERO * ENTERO
+mov A 16285
+mov 16277 A
+subi 16285	; ENTERO - ENTERO
+mov A 16286	; guardar el resultado en temporal
+mov #0 16287	; guarda 0 y empieza recursivo arrays de p
+mov #0 16288		; guarda entero 0
+mov 16287 A 	; hace recursivo de arrays
+muli #2
+addi 16288 
+mov A 16289 
+mov #1 16290		; guarda entero 1
+mov 16289 A 	; hace recursivo de arrays
+muli #3
+addi 16290 
+mov A 16291 
+mov #0 16291		; guarda 0 y empieza recursivo arrays de p
+mov 16291 16292		; guarda id p
+muli #1 
+addi #0
+mov @A 16292
+mov #0 16293		; guarda entero 0
+mov 16292 A
+muli 16293	; ENTERO * ENTERO
+mov A 16294
+mov 16286 A
+addi 16294	; ENTERO + ENTERO
+mov A 16295	; guardar el resultado en temporal
+mov 16238 A 	; hace recursivo de arrays
+muli #3
+addi 16295 
+mov A 16296 
+mov 16296 A
+muli #1 
+addi #14
+rdr 16297	; guardar valor real en temporal
+mov 16297 @A
+mov #0 16298	; guarda 0 y empieza recursivo arrays de halo
+mov 17 16299		; guarda id i
+mov #1 16300		; guarda entero 1
+mov 16299 A
+subi 16300	; ENTERO - ENTERO
+mov A 16301	; guardar el resultado en temporal
+mov 16298 A 	; hace recursivo de arrays
+muli #3
+addi 16301 
+mov A 16302 
+mov #0 16302		; guarda 0 y empieza recursivo arrays de halo
+mov 16302 16303		; guarda id halo
+muli #1 
+addi #14
+mov @A 16303
+mov $2.5 16304		; guarda real 2.5
+mov 16303 A
+divr 16304	; REAL / REAL
+mov A 16305
+wrr 16305	; print valor real de temporal
+wrl
+mov $2.5 16306		; guarda real 2.5
+mov #0 16307	; guarda 0 y empieza recursivo arrays de halo
+mov 17 16308		; guarda id i
+mov #1 16309		; guarda entero 1
+mov #1 16310		; guarda entero 1
+mov 16309 A
+divi 16310	; ENTERO / ENTERO
+mov A 16311
+mov #1 16312		; guarda entero 1
+mov 16311 A
+muli 16312	; ENTERO * ENTERO
+mov A 16313
+mov 16308 A
+subi 16313	; ENTERO - ENTERO
+mov A 16314	; guardar el resultado en temporal
+mov 16307 A 	; hace recursivo de arrays
+muli #3
+addi 16314 
+mov A 16315 
+mov #0 16315		; guarda 0 y empieza recursivo arrays de halo
+mov 16315 16316		; guarda id halo
+muli #1 
+addi #14
+mov @A 16316
+mov 16306 A
+mulr 16316	; REAL * REAL
+mov A 16317
+mov $2.5 16318		; guarda real 2.5
+mov 16317 A
+divr 16318	; REAL / REAL
+mov A 16319
+wrr 16319	; print valor real de temporal
+wrl
+halt

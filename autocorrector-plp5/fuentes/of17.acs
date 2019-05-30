@@ -1,0 +1,22 @@
+
+
+class of17
+{
+	attributes:
+
+	methods:
+		int halo3()
+		{
+			return 117;
+		}
+
+		float halo3(int grunts, float bansheeSpeed)
+		{
+			return 117.0;
+		}
+
+		int main()
+		{
+
+		}
+}

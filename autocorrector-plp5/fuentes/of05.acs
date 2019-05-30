@@ -1,0 +1,59 @@
+
+
+class of05
+{
+	attributes:
+		int a;
+		float b[10];
+		int c[10];
+		float d;
+
+	methods:
+
+		float t2()
+		{
+			scan(this.a);
+
+			return this.a;
+		}
+
+		int t1()
+		{
+			scan(d);
+
+			return t2();
+		}
+
+		float t3()
+		{
+			scan(b[5]);
+			scan(c[7]);
+
+			return b[5 + c[7] / c[7] * 1 - 1] + c[7];
+		}
+
+		int t4()
+		{
+			return t3();
+		}
+
+		int main()
+		{
+			this.d = 2;
+
+			print(d);
+
+			a = 3.3;
+
+			print(this.a);
+
+			print(d);
+			print(t1());
+			print(d);
+			print(this.a);
+
+			print(t3());
+			print(b[5]);
+			print(c[7]);
+		}
+}

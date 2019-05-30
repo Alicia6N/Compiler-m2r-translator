@@ -1,0 +1,15 @@
+ mov  5		; Instr : Ref asig Expr pyc 
+mov #123 16009		; guarda entero 123
+wri 16009	; print valor entero de temporal
+wrl
+mov #5 16010		; guarda entero 5
+mov 16010 6		; Instr : Ref asig Expr pyc 
+mov 6 16011		; guarda id factorialn
+wri 16011	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+mov 6 16013		; guarda id factorialn
+wri 16013	; print valor entero de temporal
+wrl
+halt

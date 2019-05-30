@@ -1,0 +1,17 @@
+
+
+class o31
+{
+	attributes:
+		int a[20];
+
+	methods:
+		int main()
+		{
+			int A[100];
+
+			{
+				float a[100][100][100];
+			}
+		}
+}

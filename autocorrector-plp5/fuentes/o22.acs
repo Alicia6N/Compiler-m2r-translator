@@ -1,0 +1,15 @@
+
+
+class o22
+{
+	attributes:
+		int a;
+
+	methods:
+		int main()
+		{
+			{
+				int a[10][00][20];
+			}
+		}
+}

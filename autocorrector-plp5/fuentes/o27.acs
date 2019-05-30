@@ -1,0 +1,16 @@
+
+
+class o27
+{
+	attributes:
+
+	methods:
+		int main()
+		{
+			int a[10][20];
+			int b;
+
+			a[0][1] = 2;
+			b = a[0];
+		}
+}

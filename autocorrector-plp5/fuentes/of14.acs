@@ -1,0 +1,18 @@
+
+
+class of14
+{
+	attributes:
+
+	methods:
+
+		int foo(int a, int b, int c)
+		{
+			return 2;
+		}
+
+		int main()
+		{
+			print(foo(1, 1, 1));
+		}
+}

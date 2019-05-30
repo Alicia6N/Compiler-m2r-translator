@@ -1,0 +1,69 @@
+
+
+class of04
+{
+	attributes:
+		int a[10];
+		float b;
+		float c[10];
+
+	methods:
+
+		int t1()
+		{
+			print(b);
+			c[0] = 2.123;
+		}
+
+		int t2()
+		{
+			int a[5][5];
+
+			a[0][0] = 22;
+			a[0][1] = 33;
+			print(a[0][0]);
+			print(a[0][1]);
+			print(a[0][0]);
+
+			return a[0][0] - 9.9;
+		}
+
+		int t3()
+		{
+			print(this.a[0]);
+		}
+
+		float t4()
+		{
+			print(this.c[0]);
+			print(this.c[5]);
+			this.c[5] = 2.76;
+			print(this.c[5]);
+			this.a[5] = 54;
+
+			return this.a[0];
+		}
+
+		int main()
+		{
+			a[0] = 5;
+			b = 6;
+			c[5] = 7;
+
+			print(123);
+			print(t1());
+			print(t2());
+			print(t3());
+
+			print(this.c[5]);
+			print(this.a[0]);
+			print(t4());
+			print(this.a[0]);
+			print(this.a[5]);
+			print(this.c[5]);
+
+			
+
+			print(321);
+		}
+}

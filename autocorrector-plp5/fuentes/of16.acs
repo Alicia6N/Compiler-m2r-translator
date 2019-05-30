@@ -1,0 +1,14 @@
+
+
+class of16
+{
+	attributes:
+
+	methods:
+		int main()
+		{
+			print(123);
+			return 1;
+			print(321);
+		}
+}

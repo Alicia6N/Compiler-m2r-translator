@@ -1,0 +1,26 @@
+class prferrsem11 {
+
+attributes:
+
+methods:
+
+ int f(int a)
+ {
+  return a+1;
+ }
+
+ float g(int a, int b, int c)
+ {
+  return f(7)+3.5;
+ }
+
+ int h()
+ {
+  return g(7, 7)+3;
+ }
+
+ int main()
+ {
+  ;
+ }
+}

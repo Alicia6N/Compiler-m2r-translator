@@ -1,0 +1,97 @@
+ mov #1 16001		; guarda entero 1
+mov 16001 2		; Instr : Ref asig Expr pyc 
+mov $2.2 16002		; guarda real 2.2
+mov 16002 3		; Instr : Ref asig Expr pyc 
+mov 3 16003		; guarda id b
+wrr 16003	; print valor real de temporal
+wrl
+mov 2 16004		; guarda id a
+wri 16004	; print valor entero de temporal
+wrl
+mov $4.4 16005		; guarda real 4.4
+mov 16005 1		; Instr : Ref asig Expr pyc 
+mov #5 16006		; guarda entero 5
+mov 16006 0		; Instr : Ref asig Expr pyc 
+mov 2 16007		; guarda id a
+wri 16007	; print valor entero de temporal
+wrl
+mov 3 16008		; guarda id b
+wrr 16008	; print valor real de temporal
+wrl
+mov 0 16009		; guarda id a
+wri 16009	; print valor entero de temporal
+wrl
+mov 1 16010		; guarda id b
+wrr 16010	; print valor real de temporal
+wrl
+ mov 1 16011		; guarda id b
+wrr 16011	; print valor real de temporal
+wrl
+mov 0 16012		; guarda id a
+wri 16012	; print valor entero de temporal
+wrl
+mov #3 16013		; guarda entero 3
+mov 16013 4		; Instr : Ref asig Expr pyc 
+mov 0 16014		; guarda id a
+wri 16014	; print valor entero de temporal
+wrl
+mov 4 16015		; guarda id a
+wri 16015	; print valor entero de temporal
+wrl
+mov 1 16016		; guarda id b
+wrr 16016	; print valor real de temporal
+wrl
+mov $123.223 16017		; guarda real 123.223
+mov 16017 1		; Instr : Ref asig Expr pyc 
+mov $23.2 16018		; guarda real 23.2
+mov 16018 5		; Instr : Ref asig Expr pyc 
+mov 5 16019		; guarda id b
+wrr 16019	; print valor real de temporal
+wrl
+mov 1 16020		; guarda id b
+wrr 16020	; print valor real de temporal
+wrl
+ mov 1 16021		; guarda id b
+wrr 16021	; print valor real de temporal
+wrl
+mov #2 16022		; guarda entero 2
+mov 16022 6		; Instr : Ref asig Expr pyc 
+mov 6 16023		; guarda id b
+wri 16023	; print valor entero de temporal
+wrl
+mov 1 16024		; guarda id b
+wrr 16024	; print valor real de temporal
+wrl
+mov $2.21 16025		; guarda real 2.21
+mov 16025 7		; Instr : Ref asig Expr pyc 
+mov 0 16026		; guarda id a
+wri 16026	; print valor entero de temporal
+wrl
+mov 7 16027		; guarda id a
+wrr 16027	; print valor real de temporal
+wrl
+mov 4 16011		; guarda id a
+wri 16011	; print valor entero de temporal
+wrl
+mov 5 16012		; guarda id b
+wrr 16012	; print valor real de temporal
+wrl
+mov 0 16013		; guarda id a
+wri 16013	; print valor entero de temporal
+wrl
+mov 1 16014		; guarda id b
+wrr 16014	; print valor real de temporal
+wrl
+mov 0 16001		; guarda id a
+wri 16001	; print valor entero de temporal
+wrl
+mov 1 16002		; guarda id b
+wrr 16002	; print valor real de temporal
+wrl
+mov 2 16003		; guarda id a
+wri 16003	; print valor entero de temporal
+wrl
+mov 3 16004		; guarda id b
+wrr 16004	; print valor real de temporal
+wrl
+halt

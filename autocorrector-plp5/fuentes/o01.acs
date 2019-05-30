@@ -1,0 +1,143 @@
+
+///////////////////////////////////////////////////////////////
+// This file tests:
+//
+// 1. if
+// 2. if-else
+// 3. Variable declaration: int
+// 4. Assignation of primitive variables: int
+// 5. RELOP: '==', '!='
+// 6. Dangling else grammar conflict (Shift-Reduce conflict)
+// 7. print
+///////////////////////////////////////////////////////////////
+
+class o01
+{
+	attributes:
+
+	methods:
+		int main()
+		{
+			int i;
+
+			i = 5;
+
+			if (i == 5)
+			{
+				print(123);	// Expected
+			}
+
+			if (i != 5)
+			{
+				print(321);
+			}
+
+			if (i == 5)
+			{
+				print(234);	// Expected
+			}
+			else
+			{
+				print(432);
+			}
+
+			if (i != 5)
+			{
+				print(345);
+			}
+			else
+			{
+				print(543);	// Expected
+			}
+
+			// Dangling Else
+			// if expr1 then if expr2 then stmt1 else stmt2 --> 2 possible interpretations
+			// 1. if expr1 then (if expr2 then stmt1) else stmt2
+			// 2. if expr1 then (if expr2 then stmt1 else stmt2) <-- We usually take this one as valid
+
+			if (i == 5)
+			{
+				if (i != 5)
+				{
+					print(1);
+				}
+				else
+				{
+					print(2);	// Expected
+				}
+			}
+
+			if (i != 5)
+			{
+				if (i == 5)
+				{
+					print(3);
+				}
+				else
+				{
+					print(4);
+				}
+			}
+
+			if (i == 5)
+			{
+				if (i != 5)
+				{
+					print(5);
+				}
+				else
+				{
+					print(6);	// Expected
+				}
+			}
+			else
+			{
+				print(7);
+			}
+
+			if (i != 5)
+			{
+				if (i == 5)
+				{
+					print(8);
+				}
+				else
+				{
+					print(9);
+				}
+			}
+			else
+			{
+				print(10);	// Expected
+			}
+
+			if (i == 5)
+			{
+				if (i == 5)
+				{
+					print(11);	// Expected
+				}
+				else
+				{
+					print(12);
+				}
+			}
+			else
+			{
+				print(13);
+			}
+
+			if (i != 5)
+			{
+				if (i != 5)
+				{
+					print(14);
+				}
+				else
+				{
+					print(15);
+				}
+			}
+
+		}
+}

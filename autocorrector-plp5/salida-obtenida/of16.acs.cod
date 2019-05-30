@@ -1,0 +1,7 @@
+ mov #123 16001		; guarda entero 123
+wri 16001	; print valor entero de temporal
+wrl
+mov #321 16003		; guarda entero 321
+wri 16003	; print valor entero de temporal
+wrl
+halt

@@ -1,0 +1,282 @@
+ mov #10 16001		; guarda entero 10
+mov 16001 10		; Instr : Ref asig Expr pyc 
+mov #0 16002	; guarda 0 y empieza recursivo arrays de array
+mov #0 16003		; guarda entero 0
+mov 16002 A 	; hace recursivo de arrays
+muli #10
+addi 16003 
+mov A 16004 
+mov #10 16005		; guarda entero 10
+mov 16004 A
+muli #1 
+addi #0
+mov 16005 @A
+mov #0 16006	; guarda 0 y empieza recursivo arrays de array
+mov #1 16007		; guarda entero 1
+mov 16006 A 	; hace recursivo de arrays
+muli #10
+addi 16007 
+mov A 16008 
+mov #2 16009		; guarda entero 2
+mov 16008 A
+muli #1 
+addi #0
+mov 16009 @A
+mov #0 16010	; guarda 0 y empieza recursivo arrays de array
+mov #2 16011		; guarda entero 2
+mov 16010 A 	; hace recursivo de arrays
+muli #10
+addi 16011 
+mov A 16012 
+mov #4 16013		; guarda entero 4
+mov 16012 A
+muli #1 
+addi #0
+mov 16013 @A
+mov #0 16014	; guarda 0 y empieza recursivo arrays de array
+mov #3 16015		; guarda entero 3
+mov 16014 A 	; hace recursivo de arrays
+muli #10
+addi 16015 
+mov A 16016 
+mov #6 16017		; guarda entero 6
+mov 16016 A
+muli #1 
+addi #0
+mov 16017 @A
+mov #0 16018	; guarda 0 y empieza recursivo arrays de array
+mov #4 16019		; guarda entero 4
+mov 16018 A 	; hace recursivo de arrays
+muli #10
+addi 16019 
+mov A 16020 
+mov #8 16021		; guarda entero 8
+mov 16020 A
+muli #1 
+addi #0
+mov 16021 @A
+mov #0 16022	; guarda 0 y empieza recursivo arrays de array
+mov #5 16023		; guarda entero 5
+mov 16022 A 	; hace recursivo de arrays
+muli #10
+addi 16023 
+mov A 16024 
+mov #9 16025		; guarda entero 9
+mov 16024 A
+muli #1 
+addi #0
+mov 16025 @A
+mov #0 16026	; guarda 0 y empieza recursivo arrays de array
+mov #6 16027		; guarda entero 6
+mov 16026 A 	; hace recursivo de arrays
+muli #10
+addi 16027 
+mov A 16028 
+mov #7 16029		; guarda entero 7
+mov 16028 A
+muli #1 
+addi #0
+mov 16029 @A
+mov #0 16030	; guarda 0 y empieza recursivo arrays de array
+mov #7 16031		; guarda entero 7
+mov 16030 A 	; hace recursivo de arrays
+muli #10
+addi 16031 
+mov A 16032 
+mov #5 16033		; guarda entero 5
+mov 16032 A
+muli #1 
+addi #0
+mov 16033 @A
+mov #0 16034	; guarda 0 y empieza recursivo arrays de array
+mov #8 16035		; guarda entero 8
+mov 16034 A 	; hace recursivo de arrays
+muli #10
+addi 16035 
+mov A 16036 
+mov #3 16037		; guarda entero 3
+mov 16036 A
+muli #1 
+addi #0
+mov 16037 @A
+mov #0 16038	; guarda 0 y empieza recursivo arrays de array
+mov #9 16039		; guarda entero 9
+mov 16038 A 	; hace recursivo de arrays
+muli #10
+addi 16039 
+mov A 16040 
+mov #1 16041		; guarda entero 1
+mov 16040 A
+muli #1 
+addi #0
+mov 16041 @A
+ mov #0 16042		; guarda entero 0
+mov 16042 11		; Instr : Ref asig Expr pyc 
+L1 mov 11 16043		; guarda id i
+mov 10 16044		; guarda id size
+mov 16043 A
+lssi 16044	; Expr relop Esimple
+mov A 16045	; guardar el resultado en temporal
+	; WHILE
+mov 16045 A
+jz L2	 ; if else
+ mov #0 16046	; guarda 0 y empieza recursivo arrays de array
+mov 11 16047		; guarda id i
+mov 16046 A 	; hace recursivo de arrays
+muli #10
+addi 16047 
+mov A 16048 
+mov #0 16048		; guarda 0 y empieza recursivo arrays de array
+mov 16048 16049		; guarda id array
+muli #1 
+addi #0
+mov @A 16049
+wri 16049	; print valor entero de temporal
+wrl
+mov 11 16050		; guarda id i
+mov #1 16051		; guarda entero 1
+mov 16050 A
+addi 16051	; ENTERO + ENTERO
+mov A 16052	; guardar el resultado en temporal
+mov 16052 11		; Instr : Ref asig Expr pyc 
+jmp L1
+	; ENDWHILE
+L2  mov #0 16001		; guarda entero 0
+mov 16001 11		; Instr : Ref asig Expr pyc 
+L6 mov 11 16002		; guarda id i
+mov 10 16003		; guarda id size
+mov 16002 A
+lssi 16003	; Expr relop Esimple
+mov A 16004	; guardar el resultado en temporal
+	; WHILE
+mov 16004 A
+jz L7	 ; if else
+ mov 11 16005		; guarda id i
+mov 16005 12		; Instr : Ref asig Expr pyc 
+L4 mov 12 16006		; guarda id j
+mov 10 16007		; guarda id size
+mov 16006 A
+lssi 16007	; Expr relop Esimple
+mov A 16008	; guardar el resultado en temporal
+	; WHILE
+mov 16008 A
+jz L5	 ; if else
+ mov #0 16009	; guarda 0 y empieza recursivo arrays de array
+mov 11 16010		; guarda id i
+mov 16009 A 	; hace recursivo de arrays
+muli #10
+addi 16010 
+mov A 16011 
+mov #0 16011		; guarda 0 y empieza recursivo arrays de array
+mov 16011 16012		; guarda id array
+muli #1 
+addi #0
+mov @A 16012
+mov #0 16013	; guarda 0 y empieza recursivo arrays de array
+mov 12 16014		; guarda id j
+mov 16013 A 	; hace recursivo de arrays
+muli #10
+addi 16014 
+mov A 16015 
+mov #0 16015		; guarda 0 y empieza recursivo arrays de array
+mov 16015 16016		; guarda id array
+muli #1 
+addi #0
+mov @A 16016
+mov 16012 A
+gtri 16016	; Expr relop Esimple
+mov A 16017	; guardar el resultado en temporal
+mov 16017 A
+jz L3 	 ; if 
+ mov #0 16018	; guarda 0 y empieza recursivo arrays de array
+mov 11 16019		; guarda id i
+mov 16018 A 	; hace recursivo de arrays
+muli #10
+addi 16019 
+mov A 16020 
+mov #0 16020		; guarda 0 y empieza recursivo arrays de array
+mov 16020 16021		; guarda id array
+muli #1 
+addi #0
+mov @A 16021
+mov 16021 13		; Instr : Ref asig Expr pyc 
+mov #0 16022	; guarda 0 y empieza recursivo arrays de array
+mov 11 16023		; guarda id i
+mov 16022 A 	; hace recursivo de arrays
+muli #10
+addi 16023 
+mov A 16024 
+mov #0 16025	; guarda 0 y empieza recursivo arrays de array
+mov 12 16026		; guarda id j
+mov 16025 A 	; hace recursivo de arrays
+muli #10
+addi 16026 
+mov A 16027 
+mov #0 16027		; guarda 0 y empieza recursivo arrays de array
+mov 16027 16028		; guarda id array
+muli #1 
+addi #0
+mov @A 16028
+mov 16024 A
+muli #1 
+addi #0
+mov 16028 @A
+mov #0 16029	; guarda 0 y empieza recursivo arrays de array
+mov 12 16030		; guarda id j
+mov 16029 A 	; hace recursivo de arrays
+muli #10
+addi 16030 
+mov A 16031 
+mov 13 16032		; guarda id tmp
+mov 16031 A
+muli #1 
+addi #0
+mov 16032 @A
+L3 mov 12 16009		; guarda id j
+mov #1 16010		; guarda entero 1
+mov 16009 A
+addi 16010	; ENTERO + ENTERO
+mov A 16011	; guardar el resultado en temporal
+mov 16011 12		; Instr : Ref asig Expr pyc 
+jmp L4
+	; ENDWHILE
+L5 mov 11 16005		; guarda id i
+mov #1 16006		; guarda entero 1
+mov 16005 A
+addi 16006	; ENTERO + ENTERO
+mov A 16007	; guardar el resultado en temporal
+mov 16007 11		; Instr : Ref asig Expr pyc 
+jmp L6
+	; ENDWHILE
+L7  mov #0 16001		; guarda entero 0
+mov 16001 11		; Instr : Ref asig Expr pyc 
+L8 mov 11 16002		; guarda id i
+mov 10 16003		; guarda id size
+mov 16002 A
+lssi 16003	; Expr relop Esimple
+mov A 16004	; guardar el resultado en temporal
+	; WHILE
+mov 16004 A
+jz L9	 ; if else
+ mov #0 16005	; guarda 0 y empieza recursivo arrays de array
+mov 11 16006		; guarda id i
+mov 16005 A 	; hace recursivo de arrays
+muli #10
+addi 16006 
+mov A 16007 
+mov #0 16007		; guarda 0 y empieza recursivo arrays de array
+mov 16007 16008		; guarda id array
+muli #1 
+addi #0
+mov @A 16008
+wri 16008	; print valor entero de temporal
+wrl
+mov 11 16009		; guarda id i
+mov #1 16010		; guarda entero 1
+mov 16009 A
+addi 16010	; ENTERO + ENTERO
+mov A 16011	; guardar el resultado en temporal
+mov 16011 11		; Instr : Ref asig Expr pyc 
+jmp L8
+	; ENDWHILE
+L9 halt

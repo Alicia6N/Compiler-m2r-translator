@@ -1,0 +1,21 @@
+
+
+class o18
+{
+	attributes:
+
+	methods:
+		int main()
+		{
+			int a;
+
+			a = 2;
+
+			print(a);
+
+			{
+				print(a);
+				print(this.a);
+			}
+		}
+}

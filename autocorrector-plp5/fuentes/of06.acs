@@ -1,0 +1,79 @@
+
+
+class of06
+{
+	attributes:
+		float z[113];
+		int a[5];
+
+	methods:
+
+		int initialization()
+		{
+			a[0] = 5;
+			a[1] = 4;
+			a[2] = 3;
+			a[3] = 2;
+			a[4] = 1;
+
+			return 5;
+		}
+
+		int sort()
+		{
+			int i, j;
+			int size;
+
+			size = initialization();
+
+			i = 0;
+			while (i < size)
+			{
+				j = i + 1;
+				while (j < size)
+				{
+					if (this.a[i] > a[j])
+					{
+						// Swap
+						int tmp;
+
+						tmp = this.a[i];
+						a[i] = this.a[j];
+						this.a[j] = tmp;
+					}
+
+					j = j + 1;
+				}
+
+				i = i + 1;
+			}
+
+			return i + j;
+		}
+
+		int printArray()
+		{
+			int i;
+
+			i = 0;
+
+			while (i < 5)
+			{
+				print(this.a[i + 1 - 1 * 1 + 6 / 6 * 1 - 1]);
+
+				i = i + 1;
+			}
+
+			return i;
+		}
+
+		int main()
+		{
+			int foo;
+
+			foo = initialization();
+			foo = printArray();
+			foo = sort();
+			foo = printArray();
+		}
+}

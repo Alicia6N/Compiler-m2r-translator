@@ -1,0 +1,189 @@
+ mov #5 16001		; guarda entero 5
+mov 16001 0		; Instr : Ref asig Expr pyc 
+mov 0 16002		; guarda id i
+mov #5 16003		; guarda entero 5
+mov 16002 A
+eqli 16003	; Expr relop Esimple
+mov A 16004	; guardar el resultado en temporal
+mov 16004 A
+jz L1 	 ; if 
+ mov #123 16005		; guarda entero 123
+wri 16005	; print valor entero de temporal
+wrl
+L1 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+neqi 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L2 	 ; if 
+ mov #321 16004		; guarda entero 321
+wri 16004	; print valor entero de temporal
+wrl
+L2 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+eqli 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L3
+ mov #234 16004		; guarda entero 234
+wri 16004	; print valor entero de temporal
+wrl
+jmp L4
+L3  mov #432 16001		; guarda entero 432
+wri 16001	; print valor entero de temporal
+wrl
+L4 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+neqi 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L5
+ mov #345 16004		; guarda entero 345
+wri 16004	; print valor entero de temporal
+wrl
+jmp L6
+L5  mov #543 16001		; guarda entero 543
+wri 16001	; print valor entero de temporal
+wrl
+L6 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+eqli 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L9 	 ; if 
+ mov 0 16004		; guarda id i
+mov #5 16005		; guarda entero 5
+mov 16004 A
+neqi 16005	; Expr relop Esimple
+mov A 16006	; guardar el resultado en temporal
+mov 16006 A
+jz L7
+ mov #1 16007		; guarda entero 1
+wri 16007	; print valor entero de temporal
+wrl
+jmp L8
+L7  mov #2 16004		; guarda entero 2
+wri 16004	; print valor entero de temporal
+wrl
+L8 L9 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+neqi 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L12 	 ; if 
+ mov 0 16004		; guarda id i
+mov #5 16005		; guarda entero 5
+mov 16004 A
+eqli 16005	; Expr relop Esimple
+mov A 16006	; guardar el resultado en temporal
+mov 16006 A
+jz L10
+ mov #3 16007		; guarda entero 3
+wri 16007	; print valor entero de temporal
+wrl
+jmp L11
+L10  mov #4 16004		; guarda entero 4
+wri 16004	; print valor entero de temporal
+wrl
+L11 L12 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+eqli 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L15
+ mov 0 16004		; guarda id i
+mov #5 16005		; guarda entero 5
+mov 16004 A
+neqi 16005	; Expr relop Esimple
+mov A 16006	; guardar el resultado en temporal
+mov 16006 A
+jz L13
+ mov #5 16007		; guarda entero 5
+wri 16007	; print valor entero de temporal
+wrl
+jmp L14
+L13  mov #6 16004		; guarda entero 6
+wri 16004	; print valor entero de temporal
+wrl
+L14 jmp L16
+L15  mov #7 16001		; guarda entero 7
+wri 16001	; print valor entero de temporal
+wrl
+L16 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+neqi 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L19
+ mov 0 16004		; guarda id i
+mov #5 16005		; guarda entero 5
+mov 16004 A
+eqli 16005	; Expr relop Esimple
+mov A 16006	; guardar el resultado en temporal
+mov 16006 A
+jz L17
+ mov #8 16007		; guarda entero 8
+wri 16007	; print valor entero de temporal
+wrl
+jmp L18
+L17  mov #9 16004		; guarda entero 9
+wri 16004	; print valor entero de temporal
+wrl
+L18 jmp L20
+L19  mov #10 16001		; guarda entero 10
+wri 16001	; print valor entero de temporal
+wrl
+L20 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+eqli 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L23
+ mov 0 16004		; guarda id i
+mov #5 16005		; guarda entero 5
+mov 16004 A
+eqli 16005	; Expr relop Esimple
+mov A 16006	; guardar el resultado en temporal
+mov 16006 A
+jz L21
+ mov #11 16007		; guarda entero 11
+wri 16007	; print valor entero de temporal
+wrl
+jmp L22
+L21  mov #12 16004		; guarda entero 12
+wri 16004	; print valor entero de temporal
+wrl
+L22 jmp L24
+L23  mov #13 16001		; guarda entero 13
+wri 16001	; print valor entero de temporal
+wrl
+L24 mov 0 16001		; guarda id i
+mov #5 16002		; guarda entero 5
+mov 16001 A
+neqi 16002	; Expr relop Esimple
+mov A 16003	; guardar el resultado en temporal
+mov 16003 A
+jz L27 	 ; if 
+ mov 0 16004		; guarda id i
+mov #5 16005		; guarda entero 5
+mov 16004 A
+neqi 16005	; Expr relop Esimple
+mov A 16006	; guardar el resultado en temporal
+mov 16006 A
+jz L25
+ mov #14 16007		; guarda entero 14
+wri 16007	; print valor entero de temporal
+wrl
+jmp L26
+L25  mov #15 16004		; guarda entero 15
+wri 16004	; print valor entero de temporal
+wrl
+L26 L27 halt

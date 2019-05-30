@@ -1,807 +1,807 @@
- mov #5 @B+16001		; guarda entero 5
-mov @B+16001 2		; Instr : Ref asig Expr pyc 
-mov #0 @B+16002		; guarda entero 0
-mov @B+16002 0		; Instr : Ref asig Expr pyc 
-L3 mov 0 @B+16003		; guarda id i
-mov 2 @B+16004		; guarda id n
-mov @B+16003 A
-lssi @B+16004	; Expr relop Esimple
-mov A @B+16005	; guardar el resultado en temporal
+ mov #5 16001		; guarda entero 5
+mov 16001 2		; Instr : Ref asig Expr pyc 
+mov #0 16002		; guarda entero 0
+mov 16002 0		; Instr : Ref asig Expr pyc 
+L3 mov 0 16003		; guarda id i
+mov 2 16004		; guarda id n
+mov 16003 A
+lssi 16004	; Expr relop Esimple
+mov A 16005	; guardar el resultado en temporal
 	; WHILE
-mov @B+16005 A
+mov 16005 A
 jz L4	 ; if else
- mov #0 @B+16006		; guarda entero 0
-mov @B+16006 1		; Instr : Ref asig Expr pyc 
-L1 mov 1 @B+16007		; guarda id j
-mov 2 @B+16008		; guarda id n
-mov @B+16007 A
-lssi @B+16008	; Expr relop Esimple
-mov A @B+16009	; guardar el resultado en temporal
+ mov #0 16006		; guarda entero 0
+mov 16006 1		; Instr : Ref asig Expr pyc 
+L1 mov 1 16007		; guarda id j
+mov 2 16008		; guarda id n
+mov 16007 A
+lssi 16008	; Expr relop Esimple
+mov A 16009	; guardar el resultado en temporal
 	; WHILE
-mov @B+16009 A
+mov 16009 A
 jz L2	 ; if else
  mov #0 16010	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16011		; guarda id i
+mov 0 16011		; guarda id i
 mov 16010 A 	; hace recursivo de arrays
 muli #5
-addi @B+16011 
+addi 16011 
 mov A 16012 
-mov 1 @B+16013		; guarda id j
-mov @B+16012 A 	; hace recursivo de arrays
+mov 1 16013		; guarda id j
+mov 16012 A 	; hace recursivo de arrays
 muli #5
-addi @B+16013 
+addi 16013 
 mov A 16014 
-mov #0 @B+16015		; guarda entero 0
-mov @B+16014 A
+mov #0 16015		; guarda entero 0
+mov 16014 A
 muli #1 
 addi #3
-mov @B+16015 @A
-mov 1 @B+16016		; guarda id j
-mov #1 @B+16017		; guarda entero 1
-mov @B+16016 A
-addi @B+16017	; ENTERO + ENTERO
-mov A @B+16018	; guardar el resultado en temporal
-mov @B+16018 1		; Instr : Ref asig Expr pyc 
+mov 16015 @A
+mov 1 16016		; guarda id j
+mov #1 16017		; guarda entero 1
+mov 16016 A
+addi 16017	; ENTERO + ENTERO
+mov A 16018	; guardar el resultado en temporal
+mov 16018 1		; Instr : Ref asig Expr pyc 
 jmp L1
 	; ENDWHILE
-L2 mov 0 @B+16006		; guarda id i
-mov #1 @B+16007		; guarda entero 1
-mov @B+16006 A
-addi @B+16007	; ENTERO + ENTERO
-mov A @B+16008	; guardar el resultado en temporal
-mov @B+16008 0		; Instr : Ref asig Expr pyc 
+L2 mov 0 16006		; guarda id i
+mov #1 16007		; guarda entero 1
+mov 16006 A
+addi 16007	; ENTERO + ENTERO
+mov A 16008	; guardar el resultado en temporal
+mov 16008 0		; Instr : Ref asig Expr pyc 
 jmp L3
 	; ENDWHILE
-L4 mov #0 @B+16001		; guarda entero 0
-mov @B+16001 0		; Instr : Ref asig Expr pyc 
-L5 mov 0 @B+16002		; guarda id i
-mov 2 @B+16003		; guarda id n
-mov @B+16002 A
-lssi @B+16003	; Expr relop Esimple
-mov A @B+16004	; guardar el resultado en temporal
+L4 mov #0 16001		; guarda entero 0
+mov 16001 0		; Instr : Ref asig Expr pyc 
+L5 mov 0 16002		; guarda id i
+mov 2 16003		; guarda id n
+mov 16002 A
+lssi 16003	; Expr relop Esimple
+mov A 16004	; guardar el resultado en temporal
 	; WHILE
-mov @B+16004 A
+mov 16004 A
 jz L6	 ; if else
  mov #0 16005	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16006		; guarda id i
+mov 0 16006		; guarda id i
 mov 16005 A 	; hace recursivo de arrays
 muli #5
-addi @B+16006 
+addi 16006 
 mov A 16007 
-mov 0 @B+16008		; guarda id i
-mov @B+16007 A 	; hace recursivo de arrays
+mov 0 16008		; guarda id i
+mov 16007 A 	; hace recursivo de arrays
 muli #5
-addi @B+16008 
+addi 16008 
 mov A 16009 
-mov #1 @B+16010		; guarda entero 1
-mov @B+16009 A
+mov #1 16010		; guarda entero 1
+mov 16009 A
 muli #1 
 addi #3
-mov @B+16010 @A
-mov 0 @B+16011		; guarda id i
-mov #1 @B+16012		; guarda entero 1
-mov @B+16011 A
-addi @B+16012	; ENTERO + ENTERO
-mov A @B+16013	; guardar el resultado en temporal
-mov @B+16013 0		; Instr : Ref asig Expr pyc 
+mov 16010 @A
+mov 0 16011		; guarda id i
+mov #1 16012		; guarda entero 1
+mov 16011 A
+addi 16012	; ENTERO + ENTERO
+mov A 16013	; guardar el resultado en temporal
+mov 16013 0		; Instr : Ref asig Expr pyc 
 jmp L5
 	; ENDWHILE
-L6 mov #0 @B+16001		; guarda entero 0
-mov @B+16001 0		; Instr : Ref asig Expr pyc 
-L7 mov 0 @B+16002		; guarda id i
-mov 2 @B+16003		; guarda id n
-mov @B+16002 A
-lssi @B+16003	; Expr relop Esimple
-mov A @B+16004	; guardar el resultado en temporal
+L6 mov #0 16001		; guarda entero 0
+mov 16001 0		; Instr : Ref asig Expr pyc 
+L7 mov 0 16002		; guarda id i
+mov 2 16003		; guarda id n
+mov 16002 A
+lssi 16003	; Expr relop Esimple
+mov A 16004	; guardar el resultado en temporal
 	; WHILE
-mov @B+16004 A
+mov 16004 A
 jz L8	 ; if else
  mov #0 16005	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16006		; guarda id i
+mov 0 16006		; guarda id i
 mov 16005 A 	; hace recursivo de arrays
 muli #5
-addi @B+16006 
+addi 16006 
 mov A 16007 
-mov #0 @B+16008		; guarda entero 0
-mov @B+16007 A 	; hace recursivo de arrays
+mov #0 16008		; guarda entero 0
+mov 16007 A 	; hace recursivo de arrays
 muli #5
-addi @B+16008 
+addi 16008 
 mov A 16009 
-mov #1 @B+16010		; guarda entero 1
-mov @B+16009 A
+mov #1 16010		; guarda entero 1
+mov 16009 A
 muli #1 
 addi #3
-mov @B+16010 @A
-mov 0 @B+16011		; guarda id i
-mov #1 @B+16012		; guarda entero 1
-mov @B+16011 A
-addi @B+16012	; ENTERO + ENTERO
-mov A @B+16013	; guardar el resultado en temporal
-mov @B+16013 0		; Instr : Ref asig Expr pyc 
+mov 16010 @A
+mov 0 16011		; guarda id i
+mov #1 16012		; guarda entero 1
+mov 16011 A
+addi 16012	; ENTERO + ENTERO
+mov A 16013	; guardar el resultado en temporal
+mov 16013 0		; Instr : Ref asig Expr pyc 
 jmp L7
 	; ENDWHILE
-L8 mov #1 @B+16001		; guarda entero 1
-mov @B+16001 0		; Instr : Ref asig Expr pyc 
-L9 mov 0 @B+16002		; guarda id i
-mov 2 @B+16003		; guarda id n
-mov @B+16002 A
-lssi @B+16003	; Expr relop Esimple
-mov A @B+16004	; guardar el resultado en temporal
+L8 mov #1 16001		; guarda entero 1
+mov 16001 0		; Instr : Ref asig Expr pyc 
+L9 mov 0 16002		; guarda id i
+mov 2 16003		; guarda id n
+mov 16002 A
+lssi 16003	; Expr relop Esimple
+mov A 16004	; guardar el resultado en temporal
 	; WHILE
-mov @B+16004 A
+mov 16004 A
 jz L10	 ; if else
  mov #0 16005	; guarda 0 y empieza recursivo arrays de laberinto
-mov 2 @B+16006		; guarda id n
-mov #1 @B+16007		; guarda entero 1
-mov @B+16006 A
-subi @B+16007	; ENTERO - ENTERO
-mov A @B+16008	; guardar el resultado en temporal
+mov 2 16006		; guarda id n
+mov #1 16007		; guarda entero 1
+mov 16006 A
+subi 16007	; ENTERO - ENTERO
+mov A 16008	; guardar el resultado en temporal
 mov 16005 A 	; hace recursivo de arrays
 muli #5
-addi @B+16008 
+addi 16008 
 mov A 16009 
-mov 0 @B+16010		; guarda id i
-mov @B+16009 A 	; hace recursivo de arrays
+mov 0 16010		; guarda id i
+mov 16009 A 	; hace recursivo de arrays
 muli #5
-addi @B+16010 
+addi 16010 
 mov A 16011 
-mov #1 @B+16012		; guarda entero 1
-mov @B+16011 A
+mov #1 16012		; guarda entero 1
+mov 16011 A
 muli #1 
 addi #3
-mov @B+16012 @A
-mov 0 @B+16013		; guarda id i
-mov #1 @B+16014		; guarda entero 1
-mov @B+16013 A
-addi @B+16014	; ENTERO + ENTERO
-mov A @B+16015	; guardar el resultado en temporal
-mov @B+16015 0		; Instr : Ref asig Expr pyc 
+mov 16012 @A
+mov 0 16013		; guarda id i
+mov #1 16014		; guarda entero 1
+mov 16013 A
+addi 16014	; ENTERO + ENTERO
+mov A 16015	; guardar el resultado en temporal
+mov 16015 0		; Instr : Ref asig Expr pyc 
 jmp L9
 	; ENDWHILE
-L10 mov #1 @B+16001		; guarda entero 1
-mov @B+16001 28		; Instr : Ref asig Expr pyc 
-mov #0 @B+16002		; guarda entero 0
-mov @B+16002 29		; Instr : Ref asig Expr pyc 
-mov #0 @B+16003		; guarda entero 0
-mov @B+16003 30		; Instr : Ref asig Expr pyc 
-mov #0 @B+16004		; guarda entero 0
-mov @B+16004 0		; Instr : Ref asig Expr pyc 
-mov #0 @B+16005		; guarda entero 0
-mov @B+16005 1		; Instr : Ref asig Expr pyc 
-mov 0 @B+16006		; guarda id i
-wri @B+16006	; print valor entero de temporal
+L10 mov #1 16001		; guarda entero 1
+mov 16001 28		; Instr : Ref asig Expr pyc 
+mov #0 16002		; guarda entero 0
+mov 16002 29		; Instr : Ref asig Expr pyc 
+mov #0 16003		; guarda entero 0
+mov 16003 30		; Instr : Ref asig Expr pyc 
+mov #0 16004		; guarda entero 0
+mov 16004 0		; Instr : Ref asig Expr pyc 
+mov #0 16005		; guarda entero 0
+mov 16005 1		; Instr : Ref asig Expr pyc 
+mov 0 16006		; guarda id i
+wri 16006	; print valor entero de temporal
 wrl
-mov 1 @B+16007		; guarda id j
-wri @B+16007	; print valor entero de temporal
+mov 1 16007		; guarda id j
+wri 16007	; print valor entero de temporal
 wrl
 L22 ; Factor -> pari Expr pard
-mov 0 @B+16008		; guarda id i
-mov 2 @B+16009		; guarda id n
-mov @B+16008 A
-lssi @B+16009	; Expr relop Esimple
-mov A @B+16010	; guardar el resultado en temporal
+mov 0 16008		; guarda id i
+mov 2 16009		; guarda id n
+mov 16008 A
+lssi 16009	; Expr relop Esimple
+mov A 16010	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 1 @B+16011		; guarda id j
-mov 2 @B+16012		; guarda id n
-mov @B+16011 A
-lssi @B+16012	; Expr relop Esimple
-mov A @B+16013	; guardar el resultado en temporal
-mov @B+16010 A
-muli @B+16013	; ENTERO * ENTERO
-mov A @B+16014
+mov 1 16011		; guarda id j
+mov 2 16012		; guarda id n
+mov 16011 A
+lssi 16012	; Expr relop Esimple
+mov A 16013	; guardar el resultado en temporal
+mov 16010 A
+muli 16013	; ENTERO * ENTERO
+mov A 16014
 ; Factor -> pari Expr pard
-mov 29 @B+16015		; guarda id error
-mov #0 @B+16016		; guarda entero 0
-mov @B+16015 A
-eqli @B+16016	; Expr relop Esimple
-mov A @B+16017	; guardar el resultado en temporal
-mov @B+16014 A
-muli @B+16017	; ENTERO * ENTERO
-mov A @B+16018
+mov 29 16015		; guarda id error
+mov #0 16016		; guarda entero 0
+mov 16015 A
+eqli 16016	; Expr relop Esimple
+mov A 16017	; guardar el resultado en temporal
+mov 16014 A
+muli 16017	; ENTERO * ENTERO
+mov A 16018
 ; Factor -> pari Expr pard
-mov 30 @B+16019		; guarda id salir
-mov #0 @B+16020		; guarda entero 0
-mov @B+16019 A
-eqli @B+16020	; Expr relop Esimple
-mov A @B+16021	; guardar el resultado en temporal
-mov @B+16018 A
-muli @B+16021	; ENTERO * ENTERO
-mov A @B+16022
+mov 30 16019		; guarda id salir
+mov #0 16020		; guarda entero 0
+mov 16019 A
+eqli 16020	; Expr relop Esimple
+mov A 16021	; guardar el resultado en temporal
+mov 16018 A
+muli 16021	; ENTERO * ENTERO
+mov A 16022
 	; WHILE
-mov @B+16022 A
+mov 16022 A
 jz L23	 ; if else
  mov #0 16023	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16024		; guarda id i
+mov 0 16024		; guarda id i
 mov 16023 A 	; hace recursivo de arrays
 muli #5
-addi @B+16024 
+addi 16024 
 mov A 16025 
-mov 1 @B+16026		; guarda id j
-mov @B+16025 A 	; hace recursivo de arrays
+mov 1 16026		; guarda id j
+mov 16025 A 	; hace recursivo de arrays
 muli #5
-addi @B+16026 
+addi 16026 
 mov A 16027 
-mov #0 @B+16027		; guarda 0 y empieza recursivo arrays de laberinto
-mov @B+16027 @B+16028		; guarda id laberinto
+mov #0 16027		; guarda 0 y empieza recursivo arrays de laberinto
+mov 16027 16028		; guarda id laberinto
 muli #1 
 addi #3
-mov @A @B+16028
-mov @B+16028 A
+mov @A 16028
+mov 16028 A
 jz L21 	 ; if 
- mov #0 @B+16029		; guarda entero 0
-mov @B+16029 31		; Instr : Ref asig Expr pyc 
+ mov #0 16029		; guarda entero 0
+mov 16029 31		; Instr : Ref asig Expr pyc 
 ; Factor -> pari Expr pard
-mov 0 @B+16030		; guarda id i
-mov 2 @B+16031		; guarda id n
-mov #1 @B+16032		; guarda entero 1
-mov @B+16031 A
-subi @B+16032	; ENTERO - ENTERO
-mov A @B+16033	; guardar el resultado en temporal
-mov @B+16030 A
-lssi @B+16033	; Expr relop Esimple
-mov A @B+16034	; guardar el resultado en temporal
+mov 0 16030		; guarda id i
+mov 2 16031		; guarda id n
+mov #1 16032		; guarda entero 1
+mov 16031 A
+subi 16032	; ENTERO - ENTERO
+mov A 16033	; guardar el resultado en temporal
+mov 16030 A
+lssi 16033	; Expr relop Esimple
+mov A 16034	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 1 @B+16035		; guarda id j
-mov 2 @B+16036		; guarda id n
-mov #1 @B+16037		; guarda entero 1
-mov @B+16036 A
-subi @B+16037	; ENTERO - ENTERO
-mov A @B+16038	; guardar el resultado en temporal
-mov @B+16035 A
-lssi @B+16038	; Expr relop Esimple
-mov A @B+16039	; guardar el resultado en temporal
-mov @B+16034 A
-muli @B+16039	; ENTERO * ENTERO
-mov A @B+16040
-mov @B+16040 A
+mov 1 16035		; guarda id j
+mov 2 16036		; guarda id n
+mov #1 16037		; guarda entero 1
+mov 16036 A
+subi 16037	; ENTERO - ENTERO
+mov A 16038	; guardar el resultado en temporal
+mov 16035 A
+lssi 16038	; Expr relop Esimple
+mov A 16039	; guardar el resultado en temporal
+mov 16034 A
+muli 16039	; ENTERO * ENTERO
+mov A 16040
+mov 16040 A
 jz L12 	 ; if 
  mov #0 16041	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16042		; guarda id i
-mov #1 @B+16043		; guarda entero 1
-mov @B+16042 A
-addi @B+16043	; ENTERO + ENTERO
-mov A @B+16044	; guardar el resultado en temporal
+mov 0 16042		; guarda id i
+mov #1 16043		; guarda entero 1
+mov 16042 A
+addi 16043	; ENTERO + ENTERO
+mov A 16044	; guardar el resultado en temporal
 mov 16041 A 	; hace recursivo de arrays
 muli #5
-addi @B+16044 
+addi 16044 
 mov A 16045 
-mov 1 @B+16046		; guarda id j
-mov #1 @B+16047		; guarda entero 1
-mov @B+16046 A
-addi @B+16047	; ENTERO + ENTERO
-mov A @B+16048	; guardar el resultado en temporal
-mov @B+16045 A 	; hace recursivo de arrays
+mov 1 16046		; guarda id j
+mov #1 16047		; guarda entero 1
+mov 16046 A
+addi 16047	; ENTERO + ENTERO
+mov A 16048	; guardar el resultado en temporal
+mov 16045 A 	; hace recursivo de arrays
 muli #5
-addi @B+16048 
+addi 16048 
 mov A 16049 
-mov #0 @B+16049		; guarda 0 y empieza recursivo arrays de laberinto
-mov @B+16049 @B+16050		; guarda id laberinto
+mov #0 16049		; guarda 0 y empieza recursivo arrays de laberinto
+mov 16049 16050		; guarda id laberinto
 muli #1 
 addi #3
-mov @A @B+16050
-mov @B+16050 A
+mov @A 16050
+mov 16050 A
 jz L11 	 ; if 
- mov 0 @B+16051		; guarda id i
-mov #1 @B+16052		; guarda entero 1
-mov @B+16051 A
-addi @B+16052	; ENTERO + ENTERO
-mov A @B+16053	; guardar el resultado en temporal
-mov @B+16053 0		; Instr : Ref asig Expr pyc 
-mov 1 @B+16054		; guarda id j
-mov #1 @B+16055		; guarda entero 1
-mov @B+16054 A
-addi @B+16055	; ENTERO + ENTERO
-mov A @B+16056	; guardar el resultado en temporal
-mov @B+16056 1		; Instr : Ref asig Expr pyc 
-mov 28 @B+16057		; guarda id lon
-mov #1 @B+16058		; guarda entero 1
-mov @B+16057 A
-addi @B+16058	; ENTERO + ENTERO
-mov A @B+16059	; guardar el resultado en temporal
-mov @B+16059 28		; Instr : Ref asig Expr pyc 
-mov #1 @B+16060		; guarda entero 1
-mov @B+16060 31		; Instr : Ref asig Expr pyc 
+ mov 0 16051		; guarda id i
+mov #1 16052		; guarda entero 1
+mov 16051 A
+addi 16052	; ENTERO + ENTERO
+mov A 16053	; guardar el resultado en temporal
+mov 16053 0		; Instr : Ref asig Expr pyc 
+mov 1 16054		; guarda id j
+mov #1 16055		; guarda entero 1
+mov 16054 A
+addi 16055	; ENTERO + ENTERO
+mov A 16056	; guardar el resultado en temporal
+mov 16056 1		; Instr : Ref asig Expr pyc 
+mov 28 16057		; guarda id lon
+mov #1 16058		; guarda entero 1
+mov 16057 A
+addi 16058	; ENTERO + ENTERO
+mov A 16059	; guardar el resultado en temporal
+mov 16059 28		; Instr : Ref asig Expr pyc 
+mov #1 16060		; guarda entero 1
+mov 16060 31		; Instr : Ref asig Expr pyc 
 L11 L12 ; Factor -> pari Expr pard
-mov 31 @B+16029		; guarda id mov
-mov #0 @B+16030		; guarda entero 0
-mov @B+16029 A
-eqli @B+16030	; Expr relop Esimple
-mov A @B+16031	; guardar el resultado en temporal
+mov 31 16029		; guarda id mov
+mov #0 16030		; guarda entero 0
+mov 16029 A
+eqli 16030	; Expr relop Esimple
+mov A 16031	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 0 @B+16032		; guarda id i
-mov 2 @B+16033		; guarda id n
-mov #1 @B+16034		; guarda entero 1
-mov @B+16033 A
-subi @B+16034	; ENTERO - ENTERO
-mov A @B+16035	; guardar el resultado en temporal
-mov @B+16032 A
-lssi @B+16035	; Expr relop Esimple
-mov A @B+16036	; guardar el resultado en temporal
-mov @B+16031 A
-muli @B+16036	; ENTERO * ENTERO
-mov A @B+16037
-mov @B+16037 A
+mov 0 16032		; guarda id i
+mov 2 16033		; guarda id n
+mov #1 16034		; guarda entero 1
+mov 16033 A
+subi 16034	; ENTERO - ENTERO
+mov A 16035	; guardar el resultado en temporal
+mov 16032 A
+lssi 16035	; Expr relop Esimple
+mov A 16036	; guardar el resultado en temporal
+mov 16031 A
+muli 16036	; ENTERO * ENTERO
+mov A 16037
+mov 16037 A
 jz L14 	 ; if 
 mov #0 16038	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16039		; guarda id i
-mov #1 @B+16040		; guarda entero 1
-mov @B+16039 A
-addi @B+16040	; ENTERO + ENTERO
-mov A @B+16041	; guardar el resultado en temporal
+mov 0 16039		; guarda id i
+mov #1 16040		; guarda entero 1
+mov 16039 A
+addi 16040	; ENTERO + ENTERO
+mov A 16041	; guardar el resultado en temporal
 mov 16038 A 	; hace recursivo de arrays
 muli #5
-addi @B+16041 
+addi 16041 
 mov A 16042 
-mov 1 @B+16043		; guarda id j
-mov @B+16042 A 	; hace recursivo de arrays
+mov 1 16043		; guarda id j
+mov 16042 A 	; hace recursivo de arrays
 muli #5
-addi @B+16043 
+addi 16043 
 mov A 16044 
-mov #0 @B+16044		; guarda 0 y empieza recursivo arrays de laberinto
-mov @B+16044 @B+16045		; guarda id laberinto
+mov #0 16044		; guarda 0 y empieza recursivo arrays de laberinto
+mov 16044 16045		; guarda id laberinto
 muli #1 
 addi #3
-mov @A @B+16045
-mov @B+16045 A
+mov @A 16045
+mov 16045 A
 jz L13 	 ; if 
- mov 0 @B+16046		; guarda id i
-mov #1 @B+16047		; guarda entero 1
-mov @B+16046 A
-addi @B+16047	; ENTERO + ENTERO
-mov A @B+16048	; guardar el resultado en temporal
-mov @B+16048 0		; Instr : Ref asig Expr pyc 
-mov 28 @B+16049		; guarda id lon
-mov #1 @B+16050		; guarda entero 1
-mov @B+16049 A
-addi @B+16050	; ENTERO + ENTERO
-mov A @B+16051	; guardar el resultado en temporal
-mov @B+16051 28		; Instr : Ref asig Expr pyc 
-mov #1 @B+16052		; guarda entero 1
-mov @B+16052 31		; Instr : Ref asig Expr pyc 
+ mov 0 16046		; guarda id i
+mov #1 16047		; guarda entero 1
+mov 16046 A
+addi 16047	; ENTERO + ENTERO
+mov A 16048	; guardar el resultado en temporal
+mov 16048 0		; Instr : Ref asig Expr pyc 
+mov 28 16049		; guarda id lon
+mov #1 16050		; guarda entero 1
+mov 16049 A
+addi 16050	; ENTERO + ENTERO
+mov A 16051	; guardar el resultado en temporal
+mov 16051 28		; Instr : Ref asig Expr pyc 
+mov #1 16052		; guarda entero 1
+mov 16052 31		; Instr : Ref asig Expr pyc 
 L13 L14 ; Factor -> pari Expr pard
-mov 31 @B+16029		; guarda id mov
-mov #0 @B+16030		; guarda entero 0
-mov @B+16029 A
-eqli @B+16030	; Expr relop Esimple
-mov A @B+16031	; guardar el resultado en temporal
+mov 31 16029		; guarda id mov
+mov #0 16030		; guarda entero 0
+mov 16029 A
+eqli 16030	; Expr relop Esimple
+mov A 16031	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 1 @B+16032		; guarda id j
-mov 2 @B+16033		; guarda id n
-mov #1 @B+16034		; guarda entero 1
-mov @B+16033 A
-subi @B+16034	; ENTERO - ENTERO
-mov A @B+16035	; guardar el resultado en temporal
-mov @B+16032 A
-lssi @B+16035	; Expr relop Esimple
-mov A @B+16036	; guardar el resultado en temporal
-mov @B+16031 A
-muli @B+16036	; ENTERO * ENTERO
-mov A @B+16037
-mov @B+16037 A
+mov 1 16032		; guarda id j
+mov 2 16033		; guarda id n
+mov #1 16034		; guarda entero 1
+mov 16033 A
+subi 16034	; ENTERO - ENTERO
+mov A 16035	; guardar el resultado en temporal
+mov 16032 A
+lssi 16035	; Expr relop Esimple
+mov A 16036	; guardar el resultado en temporal
+mov 16031 A
+muli 16036	; ENTERO * ENTERO
+mov A 16037
+mov 16037 A
 jz L16 	 ; if 
 mov #0 16038	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16039		; guarda id i
+mov 0 16039		; guarda id i
 mov 16038 A 	; hace recursivo de arrays
 muli #5
-addi @B+16039 
+addi 16039 
 mov A 16040 
-mov 1 @B+16041		; guarda id j
-mov #1 @B+16042		; guarda entero 1
-mov @B+16041 A
-addi @B+16042	; ENTERO + ENTERO
-mov A @B+16043	; guardar el resultado en temporal
-mov @B+16040 A 	; hace recursivo de arrays
+mov 1 16041		; guarda id j
+mov #1 16042		; guarda entero 1
+mov 16041 A
+addi 16042	; ENTERO + ENTERO
+mov A 16043	; guardar el resultado en temporal
+mov 16040 A 	; hace recursivo de arrays
 muli #5
-addi @B+16043 
+addi 16043 
 mov A 16044 
-mov #0 @B+16044		; guarda 0 y empieza recursivo arrays de laberinto
-mov @B+16044 @B+16045		; guarda id laberinto
+mov #0 16044		; guarda 0 y empieza recursivo arrays de laberinto
+mov 16044 16045		; guarda id laberinto
 muli #1 
 addi #3
-mov @A @B+16045
-mov @B+16045 A
+mov @A 16045
+mov 16045 A
 jz L15 	 ; if 
- mov 1 @B+16046		; guarda id j
-mov #1 @B+16047		; guarda entero 1
-mov @B+16046 A
-addi @B+16047	; ENTERO + ENTERO
-mov A @B+16048	; guardar el resultado en temporal
-mov @B+16048 1		; Instr : Ref asig Expr pyc 
-mov 28 @B+16049		; guarda id lon
-mov #1 @B+16050		; guarda entero 1
-mov @B+16049 A
-addi @B+16050	; ENTERO + ENTERO
-mov A @B+16051	; guardar el resultado en temporal
-mov @B+16051 28		; Instr : Ref asig Expr pyc 
-mov #1 @B+16052		; guarda entero 1
-mov @B+16052 31		; Instr : Ref asig Expr pyc 
-L15 L16 mov 31 @B+16029		; guarda id mov
-mov #1 @B+16030		; guarda entero 1
-mov @B+16029 A
-eqli @B+16030	; Expr relop Esimple
-mov A @B+16031	; guardar el resultado en temporal
-mov @B+16031 A
+ mov 1 16046		; guarda id j
+mov #1 16047		; guarda entero 1
+mov 16046 A
+addi 16047	; ENTERO + ENTERO
+mov A 16048	; guardar el resultado en temporal
+mov 16048 1		; Instr : Ref asig Expr pyc 
+mov 28 16049		; guarda id lon
+mov #1 16050		; guarda entero 1
+mov 16049 A
+addi 16050	; ENTERO + ENTERO
+mov A 16051	; guardar el resultado en temporal
+mov 16051 28		; Instr : Ref asig Expr pyc 
+mov #1 16052		; guarda entero 1
+mov 16052 31		; Instr : Ref asig Expr pyc 
+L15 L16 mov 31 16029		; guarda id mov
+mov #1 16030		; guarda entero 1
+mov 16029 A
+eqli 16030	; Expr relop Esimple
+mov A 16031	; guardar el resultado en temporal
+mov 16031 A
 jz L19
- mov 0 @B+16032		; guarda id i
-wri @B+16032	; print valor entero de temporal
+ mov 0 16032		; guarda id i
+wri 16032	; print valor entero de temporal
 wrl
-mov 1 @B+16033		; guarda id j
-wri @B+16033	; print valor entero de temporal
+mov 1 16033		; guarda id j
+wri 16033	; print valor entero de temporal
 wrl
 jmp L20
 L19  ; Factor -> pari Expr pard
-mov 0 @B+16029		; guarda id i
-mov 2 @B+16030		; guarda id n
-mov #1 @B+16031		; guarda entero 1
-mov @B+16030 A
-subi @B+16031	; ENTERO - ENTERO
-mov A @B+16032	; guardar el resultado en temporal
-mov @B+16029 A
-lssi @B+16032	; Expr relop Esimple
-mov A @B+16033	; guardar el resultado en temporal
+mov 0 16029		; guarda id i
+mov 2 16030		; guarda id n
+mov #1 16031		; guarda entero 1
+mov 16030 A
+subi 16031	; ENTERO - ENTERO
+mov A 16032	; guardar el resultado en temporal
+mov 16029 A
+lssi 16032	; Expr relop Esimple
+mov A 16033	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 1 @B+16034		; guarda id j
-mov 2 @B+16035		; guarda id n
-mov #1 @B+16036		; guarda entero 1
-mov @B+16035 A
-subi @B+16036	; ENTERO - ENTERO
-mov A @B+16037	; guardar el resultado en temporal
-mov @B+16034 A
-lssi @B+16037	; Expr relop Esimple
-mov A @B+16038	; guardar el resultado en temporal
-mov @B+16033 A
-addi @B+16038	; ENTERO + ENTERO
-mov A @B+16039	; guardar el resultado en temporal
-mov @B+16039 A
+mov 1 16034		; guarda id j
+mov 2 16035		; guarda id n
+mov #1 16036		; guarda entero 1
+mov 16035 A
+subi 16036	; ENTERO - ENTERO
+mov A 16037	; guardar el resultado en temporal
+mov 16034 A
+lssi 16037	; Expr relop Esimple
+mov A 16038	; guardar el resultado en temporal
+mov 16033 A
+addi 16038	; ENTERO + ENTERO
+mov A 16039	; guardar el resultado en temporal
+mov 16039 A
 jz L17
-mov #1 @B+16040		; guarda entero 1
-mov @B+16040 29		; Instr : Ref asig Expr pyc 
+mov #1 16040		; guarda entero 1
+mov 16040 29		; Instr : Ref asig Expr pyc 
 jmp L18
-L17 mov #2 @B+16041		; guarda entero 2
-mov @B+16041 30		; Instr : Ref asig Expr pyc 
+L17 mov #2 16041		; guarda entero 2
+mov 16041 30		; Instr : Ref asig Expr pyc 
 L18 L20 L21 jmp L22
 	; ENDWHILE
-L23 mov 29 @B+16001		; guarda id error
-mov @B+16001 A
+L23 mov 29 16001		; guarda id error
+mov 16001 A
 jz L24 	 ; if 
-mov #0 @B+16002		; guarda entero 0
-mov #1 @B+16003		; guarda entero 1
-mov @B+16002 A
-subi @B+16003	; ENTERO - ENTERO
-mov A @B+16004	; guardar el resultado en temporal
-mov @B+16004 28		; Instr : Ref asig Expr pyc 
-L24 mov 28 @B+16005		; guarda id lon
-wri @B+16005	; print valor entero de temporal
+mov #0 16002		; guarda entero 0
+mov #1 16003		; guarda entero 1
+mov 16002 A
+subi 16003	; ENTERO - ENTERO
+mov A 16004	; guardar el resultado en temporal
+mov 16004 28		; Instr : Ref asig Expr pyc 
+L24 mov 28 16005		; guarda id lon
+wri 16005	; print valor entero de temporal
 wrl
 mov #0 16006	; guarda 0 y empieza recursivo arrays de laberinto
-mov #1 @B+16007		; guarda entero 1
+mov #1 16007		; guarda entero 1
 mov 16006 A 	; hace recursivo de arrays
 muli #5
-addi @B+16007 
+addi 16007 
 mov A 16008 
-mov #1 @B+16009		; guarda entero 1
-mov @B+16008 A 	; hace recursivo de arrays
+mov #1 16009		; guarda entero 1
+mov 16008 A 	; hace recursivo de arrays
 muli #5
-addi @B+16009 
+addi 16009 
 mov A 16010 
-mov #0 @B+16011		; guarda entero 0
-mov @B+16010 A
+mov #0 16011		; guarda entero 0
+mov 16010 A
 muli #1 
 addi #3
-mov @B+16011 @A
-mov #1 @B+16012		; guarda entero 1
-mov @B+16012 28		; Instr : Ref asig Expr pyc 
-mov #0 @B+16013		; guarda entero 0
-mov @B+16013 29		; Instr : Ref asig Expr pyc 
-mov #0 @B+16014		; guarda entero 0
-mov @B+16014 30		; Instr : Ref asig Expr pyc 
-mov #0 @B+16015		; guarda entero 0
-mov @B+16015 0		; Instr : Ref asig Expr pyc 
-mov #0 @B+16016		; guarda entero 0
-mov @B+16016 1		; Instr : Ref asig Expr pyc 
-mov 0 @B+16017		; guarda id i
-wri @B+16017	; print valor entero de temporal
+mov 16011 @A
+mov #1 16012		; guarda entero 1
+mov 16012 28		; Instr : Ref asig Expr pyc 
+mov #0 16013		; guarda entero 0
+mov 16013 29		; Instr : Ref asig Expr pyc 
+mov #0 16014		; guarda entero 0
+mov 16014 30		; Instr : Ref asig Expr pyc 
+mov #0 16015		; guarda entero 0
+mov 16015 0		; Instr : Ref asig Expr pyc 
+mov #0 16016		; guarda entero 0
+mov 16016 1		; Instr : Ref asig Expr pyc 
+mov 0 16017		; guarda id i
+wri 16017	; print valor entero de temporal
 wrl
-mov 1 @B+16018		; guarda id j
-wri @B+16018	; print valor entero de temporal
+mov 1 16018		; guarda id j
+wri 16018	; print valor entero de temporal
 wrl
 L36 ; Factor -> pari Expr pard
-mov 0 @B+16019		; guarda id i
-mov 2 @B+16020		; guarda id n
-mov @B+16019 A
-lssi @B+16020	; Expr relop Esimple
-mov A @B+16021	; guardar el resultado en temporal
+mov 0 16019		; guarda id i
+mov 2 16020		; guarda id n
+mov 16019 A
+lssi 16020	; Expr relop Esimple
+mov A 16021	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 1 @B+16022		; guarda id j
-mov 2 @B+16023		; guarda id n
-mov @B+16022 A
-lssi @B+16023	; Expr relop Esimple
-mov A @B+16024	; guardar el resultado en temporal
-mov @B+16021 A
-muli @B+16024	; ENTERO * ENTERO
-mov A @B+16025
+mov 1 16022		; guarda id j
+mov 2 16023		; guarda id n
+mov 16022 A
+lssi 16023	; Expr relop Esimple
+mov A 16024	; guardar el resultado en temporal
+mov 16021 A
+muli 16024	; ENTERO * ENTERO
+mov A 16025
 ; Factor -> pari Expr pard
-mov 29 @B+16026		; guarda id error
-mov #0 @B+16027		; guarda entero 0
-mov @B+16026 A
-eqli @B+16027	; Expr relop Esimple
-mov A @B+16028	; guardar el resultado en temporal
-mov @B+16025 A
-muli @B+16028	; ENTERO * ENTERO
-mov A @B+16029
+mov 29 16026		; guarda id error
+mov #0 16027		; guarda entero 0
+mov 16026 A
+eqli 16027	; Expr relop Esimple
+mov A 16028	; guardar el resultado en temporal
+mov 16025 A
+muli 16028	; ENTERO * ENTERO
+mov A 16029
 ; Factor -> pari Expr pard
-mov 30 @B+16030		; guarda id salir
-mov #0 @B+16031		; guarda entero 0
-mov @B+16030 A
-eqli @B+16031	; Expr relop Esimple
-mov A @B+16032	; guardar el resultado en temporal
-mov @B+16029 A
-muli @B+16032	; ENTERO * ENTERO
-mov A @B+16033
+mov 30 16030		; guarda id salir
+mov #0 16031		; guarda entero 0
+mov 16030 A
+eqli 16031	; Expr relop Esimple
+mov A 16032	; guardar el resultado en temporal
+mov 16029 A
+muli 16032	; ENTERO * ENTERO
+mov A 16033
 	; WHILE
-mov @B+16033 A
+mov 16033 A
 jz L37	 ; if else
  mov #0 16034	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16035		; guarda id i
+mov 0 16035		; guarda id i
 mov 16034 A 	; hace recursivo de arrays
 muli #5
-addi @B+16035 
+addi 16035 
 mov A 16036 
-mov 1 @B+16037		; guarda id j
-mov @B+16036 A 	; hace recursivo de arrays
+mov 1 16037		; guarda id j
+mov 16036 A 	; hace recursivo de arrays
 muli #5
-addi @B+16037 
+addi 16037 
 mov A 16038 
-mov #0 @B+16038		; guarda 0 y empieza recursivo arrays de laberinto
-mov @B+16038 @B+16039		; guarda id laberinto
+mov #0 16038		; guarda 0 y empieza recursivo arrays de laberinto
+mov 16038 16039		; guarda id laberinto
 muli #1 
 addi #3
-mov @A @B+16039
-mov @B+16039 A
+mov @A 16039
+mov 16039 A
 jz L35 	 ; if 
- mov #0 @B+16040		; guarda entero 0
-mov @B+16040 31		; Instr : Ref asig Expr pyc 
+ mov #0 16040		; guarda entero 0
+mov 16040 31		; Instr : Ref asig Expr pyc 
 ; Factor -> pari Expr pard
-mov 0 @B+16041		; guarda id i
-mov 2 @B+16042		; guarda id n
-mov #1 @B+16043		; guarda entero 1
-mov @B+16042 A
-subi @B+16043	; ENTERO - ENTERO
-mov A @B+16044	; guardar el resultado en temporal
-mov @B+16041 A
-lssi @B+16044	; Expr relop Esimple
-mov A @B+16045	; guardar el resultado en temporal
+mov 0 16041		; guarda id i
+mov 2 16042		; guarda id n
+mov #1 16043		; guarda entero 1
+mov 16042 A
+subi 16043	; ENTERO - ENTERO
+mov A 16044	; guardar el resultado en temporal
+mov 16041 A
+lssi 16044	; Expr relop Esimple
+mov A 16045	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 1 @B+16046		; guarda id j
-mov 2 @B+16047		; guarda id n
-mov #1 @B+16048		; guarda entero 1
-mov @B+16047 A
-subi @B+16048	; ENTERO - ENTERO
-mov A @B+16049	; guardar el resultado en temporal
-mov @B+16046 A
-lssi @B+16049	; Expr relop Esimple
-mov A @B+16050	; guardar el resultado en temporal
-mov @B+16045 A
-muli @B+16050	; ENTERO * ENTERO
-mov A @B+16051
-mov @B+16051 A
+mov 1 16046		; guarda id j
+mov 2 16047		; guarda id n
+mov #1 16048		; guarda entero 1
+mov 16047 A
+subi 16048	; ENTERO - ENTERO
+mov A 16049	; guardar el resultado en temporal
+mov 16046 A
+lssi 16049	; Expr relop Esimple
+mov A 16050	; guardar el resultado en temporal
+mov 16045 A
+muli 16050	; ENTERO * ENTERO
+mov A 16051
+mov 16051 A
 jz L26 	 ; if 
  mov #0 16052	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16053		; guarda id i
-mov #1 @B+16054		; guarda entero 1
-mov @B+16053 A
-addi @B+16054	; ENTERO + ENTERO
-mov A @B+16055	; guardar el resultado en temporal
+mov 0 16053		; guarda id i
+mov #1 16054		; guarda entero 1
+mov 16053 A
+addi 16054	; ENTERO + ENTERO
+mov A 16055	; guardar el resultado en temporal
 mov 16052 A 	; hace recursivo de arrays
 muli #5
-addi @B+16055 
+addi 16055 
 mov A 16056 
-mov 1 @B+16057		; guarda id j
-mov #1 @B+16058		; guarda entero 1
-mov @B+16057 A
-addi @B+16058	; ENTERO + ENTERO
-mov A @B+16059	; guardar el resultado en temporal
-mov @B+16056 A 	; hace recursivo de arrays
+mov 1 16057		; guarda id j
+mov #1 16058		; guarda entero 1
+mov 16057 A
+addi 16058	; ENTERO + ENTERO
+mov A 16059	; guardar el resultado en temporal
+mov 16056 A 	; hace recursivo de arrays
 muli #5
-addi @B+16059 
+addi 16059 
 mov A 16060 
-mov #0 @B+16060		; guarda 0 y empieza recursivo arrays de laberinto
-mov @B+16060 @B+16061		; guarda id laberinto
+mov #0 16060		; guarda 0 y empieza recursivo arrays de laberinto
+mov 16060 16061		; guarda id laberinto
 muli #1 
 addi #3
-mov @A @B+16061
-mov @B+16061 A
+mov @A 16061
+mov 16061 A
 jz L25 	 ; if 
- mov 0 @B+16062		; guarda id i
-mov #1 @B+16063		; guarda entero 1
-mov @B+16062 A
-addi @B+16063	; ENTERO + ENTERO
-mov A @B+16064	; guardar el resultado en temporal
-mov @B+16064 0		; Instr : Ref asig Expr pyc 
-mov 1 @B+16065		; guarda id j
-mov #1 @B+16066		; guarda entero 1
-mov @B+16065 A
-addi @B+16066	; ENTERO + ENTERO
-mov A @B+16067	; guardar el resultado en temporal
-mov @B+16067 1		; Instr : Ref asig Expr pyc 
-mov 28 @B+16068		; guarda id lon
-mov #1 @B+16069		; guarda entero 1
-mov @B+16068 A
-addi @B+16069	; ENTERO + ENTERO
-mov A @B+16070	; guardar el resultado en temporal
-mov @B+16070 28		; Instr : Ref asig Expr pyc 
-mov #1 @B+16071		; guarda entero 1
-mov @B+16071 31		; Instr : Ref asig Expr pyc 
+ mov 0 16062		; guarda id i
+mov #1 16063		; guarda entero 1
+mov 16062 A
+addi 16063	; ENTERO + ENTERO
+mov A 16064	; guardar el resultado en temporal
+mov 16064 0		; Instr : Ref asig Expr pyc 
+mov 1 16065		; guarda id j
+mov #1 16066		; guarda entero 1
+mov 16065 A
+addi 16066	; ENTERO + ENTERO
+mov A 16067	; guardar el resultado en temporal
+mov 16067 1		; Instr : Ref asig Expr pyc 
+mov 28 16068		; guarda id lon
+mov #1 16069		; guarda entero 1
+mov 16068 A
+addi 16069	; ENTERO + ENTERO
+mov A 16070	; guardar el resultado en temporal
+mov 16070 28		; Instr : Ref asig Expr pyc 
+mov #1 16071		; guarda entero 1
+mov 16071 31		; Instr : Ref asig Expr pyc 
 L25 L26 ; Factor -> pari Expr pard
-mov 31 @B+16040		; guarda id mov
-mov #0 @B+16041		; guarda entero 0
-mov @B+16040 A
-eqli @B+16041	; Expr relop Esimple
-mov A @B+16042	; guardar el resultado en temporal
+mov 31 16040		; guarda id mov
+mov #0 16041		; guarda entero 0
+mov 16040 A
+eqli 16041	; Expr relop Esimple
+mov A 16042	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 0 @B+16043		; guarda id i
-mov 2 @B+16044		; guarda id n
-mov #1 @B+16045		; guarda entero 1
-mov @B+16044 A
-subi @B+16045	; ENTERO - ENTERO
-mov A @B+16046	; guardar el resultado en temporal
-mov @B+16043 A
-lssi @B+16046	; Expr relop Esimple
-mov A @B+16047	; guardar el resultado en temporal
-mov @B+16042 A
-muli @B+16047	; ENTERO * ENTERO
-mov A @B+16048
-mov @B+16048 A
+mov 0 16043		; guarda id i
+mov 2 16044		; guarda id n
+mov #1 16045		; guarda entero 1
+mov 16044 A
+subi 16045	; ENTERO - ENTERO
+mov A 16046	; guardar el resultado en temporal
+mov 16043 A
+lssi 16046	; Expr relop Esimple
+mov A 16047	; guardar el resultado en temporal
+mov 16042 A
+muli 16047	; ENTERO * ENTERO
+mov A 16048
+mov 16048 A
 jz L28 	 ; if 
 mov #0 16049	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16050		; guarda id i
-mov #1 @B+16051		; guarda entero 1
-mov @B+16050 A
-addi @B+16051	; ENTERO + ENTERO
-mov A @B+16052	; guardar el resultado en temporal
+mov 0 16050		; guarda id i
+mov #1 16051		; guarda entero 1
+mov 16050 A
+addi 16051	; ENTERO + ENTERO
+mov A 16052	; guardar el resultado en temporal
 mov 16049 A 	; hace recursivo de arrays
 muli #5
-addi @B+16052 
+addi 16052 
 mov A 16053 
-mov 1 @B+16054		; guarda id j
-mov @B+16053 A 	; hace recursivo de arrays
+mov 1 16054		; guarda id j
+mov 16053 A 	; hace recursivo de arrays
 muli #5
-addi @B+16054 
+addi 16054 
 mov A 16055 
-mov #0 @B+16055		; guarda 0 y empieza recursivo arrays de laberinto
-mov @B+16055 @B+16056		; guarda id laberinto
+mov #0 16055		; guarda 0 y empieza recursivo arrays de laberinto
+mov 16055 16056		; guarda id laberinto
 muli #1 
 addi #3
-mov @A @B+16056
-mov @B+16056 A
+mov @A 16056
+mov 16056 A
 jz L27 	 ; if 
- mov 0 @B+16057		; guarda id i
-mov #1 @B+16058		; guarda entero 1
-mov @B+16057 A
-addi @B+16058	; ENTERO + ENTERO
-mov A @B+16059	; guardar el resultado en temporal
-mov @B+16059 0		; Instr : Ref asig Expr pyc 
-mov 28 @B+16060		; guarda id lon
-mov #1 @B+16061		; guarda entero 1
-mov @B+16060 A
-addi @B+16061	; ENTERO + ENTERO
-mov A @B+16062	; guardar el resultado en temporal
-mov @B+16062 28		; Instr : Ref asig Expr pyc 
-mov #1 @B+16063		; guarda entero 1
-mov @B+16063 31		; Instr : Ref asig Expr pyc 
+ mov 0 16057		; guarda id i
+mov #1 16058		; guarda entero 1
+mov 16057 A
+addi 16058	; ENTERO + ENTERO
+mov A 16059	; guardar el resultado en temporal
+mov 16059 0		; Instr : Ref asig Expr pyc 
+mov 28 16060		; guarda id lon
+mov #1 16061		; guarda entero 1
+mov 16060 A
+addi 16061	; ENTERO + ENTERO
+mov A 16062	; guardar el resultado en temporal
+mov 16062 28		; Instr : Ref asig Expr pyc 
+mov #1 16063		; guarda entero 1
+mov 16063 31		; Instr : Ref asig Expr pyc 
 L27 L28 ; Factor -> pari Expr pard
-mov 31 @B+16040		; guarda id mov
-mov #0 @B+16041		; guarda entero 0
-mov @B+16040 A
-eqli @B+16041	; Expr relop Esimple
-mov A @B+16042	; guardar el resultado en temporal
+mov 31 16040		; guarda id mov
+mov #0 16041		; guarda entero 0
+mov 16040 A
+eqli 16041	; Expr relop Esimple
+mov A 16042	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 1 @B+16043		; guarda id j
-mov 2 @B+16044		; guarda id n
-mov #1 @B+16045		; guarda entero 1
-mov @B+16044 A
-subi @B+16045	; ENTERO - ENTERO
-mov A @B+16046	; guardar el resultado en temporal
-mov @B+16043 A
-lssi @B+16046	; Expr relop Esimple
-mov A @B+16047	; guardar el resultado en temporal
-mov @B+16042 A
-muli @B+16047	; ENTERO * ENTERO
-mov A @B+16048
-mov @B+16048 A
+mov 1 16043		; guarda id j
+mov 2 16044		; guarda id n
+mov #1 16045		; guarda entero 1
+mov 16044 A
+subi 16045	; ENTERO - ENTERO
+mov A 16046	; guardar el resultado en temporal
+mov 16043 A
+lssi 16046	; Expr relop Esimple
+mov A 16047	; guardar el resultado en temporal
+mov 16042 A
+muli 16047	; ENTERO * ENTERO
+mov A 16048
+mov 16048 A
 jz L30 	 ; if 
 mov #0 16049	; guarda 0 y empieza recursivo arrays de laberinto
-mov 0 @B+16050		; guarda id i
+mov 0 16050		; guarda id i
 mov 16049 A 	; hace recursivo de arrays
 muli #5
-addi @B+16050 
+addi 16050 
 mov A 16051 
-mov 1 @B+16052		; guarda id j
-mov #1 @B+16053		; guarda entero 1
-mov @B+16052 A
-addi @B+16053	; ENTERO + ENTERO
-mov A @B+16054	; guardar el resultado en temporal
-mov @B+16051 A 	; hace recursivo de arrays
+mov 1 16052		; guarda id j
+mov #1 16053		; guarda entero 1
+mov 16052 A
+addi 16053	; ENTERO + ENTERO
+mov A 16054	; guardar el resultado en temporal
+mov 16051 A 	; hace recursivo de arrays
 muli #5
-addi @B+16054 
+addi 16054 
 mov A 16055 
-mov #0 @B+16055		; guarda 0 y empieza recursivo arrays de laberinto
-mov @B+16055 @B+16056		; guarda id laberinto
+mov #0 16055		; guarda 0 y empieza recursivo arrays de laberinto
+mov 16055 16056		; guarda id laberinto
 muli #1 
 addi #3
-mov @A @B+16056
-mov @B+16056 A
+mov @A 16056
+mov 16056 A
 jz L29 	 ; if 
- mov 1 @B+16057		; guarda id j
-mov #1 @B+16058		; guarda entero 1
-mov @B+16057 A
-addi @B+16058	; ENTERO + ENTERO
-mov A @B+16059	; guardar el resultado en temporal
-mov @B+16059 1		; Instr : Ref asig Expr pyc 
-mov 28 @B+16060		; guarda id lon
-mov #1 @B+16061		; guarda entero 1
-mov @B+16060 A
-addi @B+16061	; ENTERO + ENTERO
-mov A @B+16062	; guardar el resultado en temporal
-mov @B+16062 28		; Instr : Ref asig Expr pyc 
-mov #1 @B+16063		; guarda entero 1
-mov @B+16063 31		; Instr : Ref asig Expr pyc 
-L29 L30 mov 31 @B+16040		; guarda id mov
-mov #1 @B+16041		; guarda entero 1
-mov @B+16040 A
-eqli @B+16041	; Expr relop Esimple
-mov A @B+16042	; guardar el resultado en temporal
-mov @B+16042 A
+ mov 1 16057		; guarda id j
+mov #1 16058		; guarda entero 1
+mov 16057 A
+addi 16058	; ENTERO + ENTERO
+mov A 16059	; guardar el resultado en temporal
+mov 16059 1		; Instr : Ref asig Expr pyc 
+mov 28 16060		; guarda id lon
+mov #1 16061		; guarda entero 1
+mov 16060 A
+addi 16061	; ENTERO + ENTERO
+mov A 16062	; guardar el resultado en temporal
+mov 16062 28		; Instr : Ref asig Expr pyc 
+mov #1 16063		; guarda entero 1
+mov 16063 31		; Instr : Ref asig Expr pyc 
+L29 L30 mov 31 16040		; guarda id mov
+mov #1 16041		; guarda entero 1
+mov 16040 A
+eqli 16041	; Expr relop Esimple
+mov A 16042	; guardar el resultado en temporal
+mov 16042 A
 jz L33
- mov 0 @B+16043		; guarda id i
-wri @B+16043	; print valor entero de temporal
+ mov 0 16043		; guarda id i
+wri 16043	; print valor entero de temporal
 wrl
-mov 1 @B+16044		; guarda id j
-wri @B+16044	; print valor entero de temporal
+mov 1 16044		; guarda id j
+wri 16044	; print valor entero de temporal
 wrl
 jmp L34
 L33  ; Factor -> pari Expr pard
-mov 0 @B+16040		; guarda id i
-mov 2 @B+16041		; guarda id n
-mov #1 @B+16042		; guarda entero 1
-mov @B+16041 A
-subi @B+16042	; ENTERO - ENTERO
-mov A @B+16043	; guardar el resultado en temporal
-mov @B+16040 A
-lssi @B+16043	; Expr relop Esimple
-mov A @B+16044	; guardar el resultado en temporal
+mov 0 16040		; guarda id i
+mov 2 16041		; guarda id n
+mov #1 16042		; guarda entero 1
+mov 16041 A
+subi 16042	; ENTERO - ENTERO
+mov A 16043	; guardar el resultado en temporal
+mov 16040 A
+lssi 16043	; Expr relop Esimple
+mov A 16044	; guardar el resultado en temporal
 ; Factor -> pari Expr pard
-mov 1 @B+16045		; guarda id j
-mov 2 @B+16046		; guarda id n
-mov #1 @B+16047		; guarda entero 1
-mov @B+16046 A
-subi @B+16047	; ENTERO - ENTERO
-mov A @B+16048	; guardar el resultado en temporal
-mov @B+16045 A
-lssi @B+16048	; Expr relop Esimple
-mov A @B+16049	; guardar el resultado en temporal
-mov @B+16044 A
-addi @B+16049	; ENTERO + ENTERO
-mov A @B+16050	; guardar el resultado en temporal
-mov @B+16050 A
+mov 1 16045		; guarda id j
+mov 2 16046		; guarda id n
+mov #1 16047		; guarda entero 1
+mov 16046 A
+subi 16047	; ENTERO - ENTERO
+mov A 16048	; guardar el resultado en temporal
+mov 16045 A
+lssi 16048	; Expr relop Esimple
+mov A 16049	; guardar el resultado en temporal
+mov 16044 A
+addi 16049	; ENTERO + ENTERO
+mov A 16050	; guardar el resultado en temporal
+mov 16050 A
 jz L31
-mov #1 @B+16051		; guarda entero 1
-mov @B+16051 29		; Instr : Ref asig Expr pyc 
+mov #1 16051		; guarda entero 1
+mov 16051 29		; Instr : Ref asig Expr pyc 
 jmp L32
-L31 mov #2 @B+16052		; guarda entero 2
-mov @B+16052 30		; Instr : Ref asig Expr pyc 
+L31 mov #2 16052		; guarda entero 2
+mov 16052 30		; Instr : Ref asig Expr pyc 
 L32 L34 L35 jmp L36
 	; ENDWHILE
-L37 mov 29 @B+16001		; guarda id error
-mov @B+16001 A
+L37 mov 29 16001		; guarda id error
+mov 16001 A
 jz L38 	 ; if 
-mov #0 @B+16002		; guarda entero 0
-mov #1 @B+16003		; guarda entero 1
-mov @B+16002 A
-subi @B+16003	; ENTERO - ENTERO
-mov A @B+16004	; guardar el resultado en temporal
-mov @B+16004 28		; Instr : Ref asig Expr pyc 
-L38 mov 28 @B+16005		; guarda id lon
-wri @B+16005	; print valor entero de temporal
+mov #0 16002		; guarda entero 0
+mov #1 16003		; guarda entero 1
+mov 16002 A
+subi 16003	; ENTERO - ENTERO
+mov A 16004	; guardar el resultado en temporal
+mov 16004 28		; Instr : Ref asig Expr pyc 
+L38 mov 28 16005		; guarda id lon
+wri 16005	; print valor entero de temporal
 wrl
 halt

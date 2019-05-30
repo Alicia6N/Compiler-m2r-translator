@@ -1,0 +1,14 @@
+
+
+class o28
+{
+	attributes:
+
+	methods:
+		int main()
+		{
+			int a[2][3][4];
+
+			scan(a[1][2]);
+		}
+}

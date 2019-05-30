@@ -1,0 +1,51 @@
+ mov #44 16001		; guarda entero 44
+mov 16001 0		; Instr : Ref asig Expr pyc 
+mov #123 16002		; guarda entero 123
+wri 16002	; print valor entero de temporal
+wrl
+mov 0 16003		; guarda id a
+wri 16003	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+mov 0 16004		; guarda id a
+wri 16004	; print valor entero de temporal
+wrl
+mov #321 16005		; guarda entero 321
+wri 16005	; print valor entero de temporal
+wrl
+mov 0 16006		; guarda id a
+wri 16006	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+mov 0 16007		; guarda id a
+wri 16007	; print valor entero de temporal
+wrl
+mov 0 16008		; guarda id a
+mov 0 16009		; guarda id a
+mov 16008 A
+addi 16009	; ENTERO + ENTERO
+mov A 16010	; guardar el resultado en temporal
+mov 0 16011		; guarda id a
+mov 16010 A
+subi 16011	; ENTERO - ENTERO
+mov A 16012	; guardar el resultado en temporal
+mov 16012 0		; Instr : Ref asig Expr pyc 
+mov 0 16013		; guarda id a
+wri 16013	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+wri 	; print valor entero de temporal
+wrl
+mov #117 16014		; guarda entero 117
+wri 16014	; print valor entero de temporal
+wrl
+halt

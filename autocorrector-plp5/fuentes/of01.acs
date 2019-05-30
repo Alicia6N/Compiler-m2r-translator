@@ -1,0 +1,39 @@
+
+
+class of01
+{
+	attributes:
+
+	methods:
+
+		float test4()
+		{
+			print(444.0);
+		}
+
+		float test2()
+		{
+			print(test4() + 1);
+		}
+
+		int test(int a, float b)
+		{
+			return 1234 + 6 * 1;
+		}
+
+		float test3(int a)
+		{
+			return 500.01;
+		}
+
+		int main()
+		{
+			print(2);
+			print(test(2, 2));
+			print(23);
+			print(test3(2));
+			print(54);
+			print(test2());
+			print(117);
+		}
+}

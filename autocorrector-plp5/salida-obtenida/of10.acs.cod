@@ -1,0 +1,17 @@
+ wri 	; print valor entero de temporal
+wrl
+mov  A
+eqli 	; Expr relop Esimple
+mov A 16004	; guardar el resultado en temporal
+mov 16004 A
+jz L2 	 ; if 
+ wri 	; print valor entero de temporal
+wrl
+L2  mov #7 16001		; guarda entero 7
+mov 16001 1		; Instr : Ref asig Expr pyc 
+wri 	; print valor entero de temporal
+wrl
+mov 1 16003		; guarda id fact
+wri 16003	; print valor entero de temporal
+wrl
+halt

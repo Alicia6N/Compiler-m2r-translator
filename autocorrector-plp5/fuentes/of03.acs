@@ -1,0 +1,88 @@
+
+
+class of03
+{
+	attributes:
+		int a;
+
+	methods:
+
+		int t1()
+		{
+			return this.a + 1;
+		}
+
+		int t2()
+		{
+			a = a + 1;
+
+			return a - 1;
+		}
+
+		int t3()
+		{
+			return 5;
+		}
+
+		float t4()
+		{
+			return 5.987;
+		}
+
+		float t5()
+		{
+			return 5;
+		}
+
+		int t6()
+		{
+			return 5.987;
+		}
+
+		float c4()
+		{
+			return 10.23;
+		}
+
+		int c3()
+		{
+			return c4() + 1.9;
+		}
+
+		float c2()
+		{
+			return c3() + 2;
+		}
+
+		int c1()
+		{
+			return c2() * 2.9;
+		}
+
+		int main()
+		{
+			this.a = 44;
+
+			print(123);
+			print(this.a);
+			print(t1());
+			print(this.a);
+			print(321);
+
+			print(this.a);
+			print(t2());
+			print(this.a);
+
+			this.a = this.a + a - this.a;
+			print(this.a);
+
+			print(t3());
+			print(t4());
+			print(t5());
+			print(t6());
+
+			print(c1());
+
+			print(117);
+		}
+}

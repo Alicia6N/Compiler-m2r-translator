@@ -1,333 +1,333 @@
- mov #1 @B+16001		; guarda entero 1
-mov #3 @B+16002		; guarda entero 3
-mov @B+16001 A
-subi @B+16002	; ENTERO - ENTERO
-mov A @B+16003	; guardar el resultado en temporal
-mov #2 @B+16004		; guarda entero 2
-mov #5 @B+16005		; guarda entero 5
-mov @B+16004 A
-muli @B+16005	; ENTERO * ENTERO
-mov A @B+16006
-mov #4 @B+16007		; guarda entero 4
-mov @B+16006 A
-divi @B+16007	; ENTERO / ENTERO
-mov A @B+16008
-mov @B+16003 A
-addi @B+16008	; ENTERO + ENTERO
-mov A @B+16009	; guardar el resultado en temporal
-mov @B+16009 4		; Instr : Ref asig Expr pyc 
+ mov #1 16001		; guarda entero 1
+mov #3 16002		; guarda entero 3
+mov 16001 A
+subi 16002	; ENTERO - ENTERO
+mov A 16003	; guardar el resultado en temporal
+mov #2 16004		; guarda entero 2
+mov #5 16005		; guarda entero 5
+mov 16004 A
+muli 16005	; ENTERO * ENTERO
+mov A 16006
+mov #4 16007		; guarda entero 4
+mov 16006 A
+divi 16007	; ENTERO / ENTERO
+mov A 16008
+mov 16003 A
+addi 16008	; ENTERO + ENTERO
+mov A 16009	; guardar el resultado en temporal
+mov 16009 4		; Instr : Ref asig Expr pyc 
 mov #0 16010	; guarda 0 y empieza recursivo arrays de a
-mov #0 @B+16011		; guarda entero 0
+mov #0 16011		; guarda entero 0
 mov 16010 A 	; hace recursivo de arrays
 muli #1
-addi @B+16011 
+addi 16011 
 mov A 16012 
-mov #1 @B+16013		; guarda entero 1
-mov @B+16012 A 	; hace recursivo de arrays
+mov #1 16013		; guarda entero 1
+mov 16012 A 	; hace recursivo de arrays
 muli #2
-addi @B+16013 
+addi 16013 
 mov A 16014 
-mov #0 @B+16015		; guarda entero 0
-mov @B+16014 A 	; hace recursivo de arrays
+mov #0 16015		; guarda entero 0
+mov 16014 A 	; hace recursivo de arrays
 muli #1
-addi @B+16015 
+addi 16015 
 mov A 16016 
-mov #0 @B+16017		; guarda entero 0
-mov @B+16016 A 	; hace recursivo de arrays
+mov #0 16017		; guarda entero 0
+mov 16016 A 	; hace recursivo de arrays
 muli #1
-addi @B+16017 
+addi 16017 
 mov A 16018 
-mov #1 @B+16019		; guarda entero 1
-mov @B+16018 A 	; hace recursivo de arrays
+mov #1 16019		; guarda entero 1
+mov 16018 A 	; hace recursivo de arrays
 muli #2
-addi @B+16019 
+addi 16019 
 mov A 16020 
-mov #0 @B+16021		; guarda entero 0
-mov @B+16020 A 	; hace recursivo de arrays
+mov #0 16021		; guarda entero 0
+mov 16020 A 	; hace recursivo de arrays
 muli #1
-addi @B+16021 
+addi 16021 
 mov A 16022 
-mov 4 @B+16023		; guarda id b
-mov @B+16022 A
+mov 4 16023		; guarda id b
+mov 16022 A
 muli #1 
 addi #0
-mov @B+16023 @A
+mov 16023 @A
 mov #0 16024	; guarda 0 y empieza recursivo arrays de a
-mov #0 @B+16025		; guarda entero 0
+mov #0 16025		; guarda entero 0
 mov 16024 A 	; hace recursivo de arrays
 muli #1
-addi @B+16025 
+addi 16025 
 mov A 16026 
-mov #0 @B+16027		; guarda entero 0
-mov @B+16026 A 	; hace recursivo de arrays
+mov #0 16027		; guarda entero 0
+mov 16026 A 	; hace recursivo de arrays
 muli #2
-addi @B+16027 
+addi 16027 
 mov A 16028 
-mov #0 @B+16029		; guarda entero 0
-mov @B+16028 A 	; hace recursivo de arrays
+mov #0 16029		; guarda entero 0
+mov 16028 A 	; hace recursivo de arrays
 muli #1
-addi @B+16029 
+addi 16029 
 mov A 16030 
-mov #0 @B+16031		; guarda entero 0
-mov @B+16030 A 	; hace recursivo de arrays
+mov #0 16031		; guarda entero 0
+mov 16030 A 	; hace recursivo de arrays
 muli #1
-addi @B+16031 
+addi 16031 
 mov A 16032 
-mov #0 @B+16033		; guarda entero 0
-mov @B+16032 A 	; hace recursivo de arrays
+mov #0 16033		; guarda entero 0
+mov 16032 A 	; hace recursivo de arrays
 muli #2
-addi @B+16033 
+addi 16033 
 mov A 16034 
-mov #0 @B+16035		; guarda entero 0
-mov @B+16034 A 	; hace recursivo de arrays
+mov #0 16035		; guarda entero 0
+mov 16034 A 	; hace recursivo de arrays
 muli #1
-addi @B+16035 
+addi 16035 
 mov A 16036 
-mov 4 @B+16037		; guarda id b
-mov #1 @B+16038		; guarda entero 1
-mov @B+16037 A
-addi @B+16038	; ENTERO + ENTERO
-mov A @B+16039	; guardar el resultado en temporal
-mov @B+16036 A
+mov 4 16037		; guarda id b
+mov #1 16038		; guarda entero 1
+mov 16037 A
+addi 16038	; ENTERO + ENTERO
+mov A 16039	; guardar el resultado en temporal
+mov 16036 A
 muli #1 
 addi #0
-mov @B+16039 @A
+mov 16039 @A
 mov #0 16040	; guarda 0 y empieza recursivo arrays de a
-mov #0 @B+16041		; guarda entero 0
+mov #0 16041		; guarda entero 0
 mov 16040 A 	; hace recursivo de arrays
 muli #1
-addi @B+16041 
+addi 16041 
 mov A 16042 
-mov #1 @B+16043		; guarda entero 1
-mov @B+16042 A 	; hace recursivo de arrays
+mov #1 16043		; guarda entero 1
+mov 16042 A 	; hace recursivo de arrays
 muli #2
-addi @B+16043 
+addi 16043 
 mov A 16044 
-mov #0 @B+16045		; guarda entero 0
-mov @B+16044 A 	; hace recursivo de arrays
+mov #0 16045		; guarda entero 0
+mov 16044 A 	; hace recursivo de arrays
 muli #1
-addi @B+16045 
+addi 16045 
 mov A 16046 
-mov #0 @B+16047		; guarda entero 0
-mov @B+16046 A 	; hace recursivo de arrays
+mov #0 16047		; guarda entero 0
+mov 16046 A 	; hace recursivo de arrays
 muli #1
-addi @B+16047 
+addi 16047 
 mov A 16048 
-mov #0 @B+16049		; guarda entero 0
-mov @B+16048 A 	; hace recursivo de arrays
+mov #0 16049		; guarda entero 0
+mov 16048 A 	; hace recursivo de arrays
 muli #2
-addi @B+16049 
+addi 16049 
 mov A 16050 
-mov #0 @B+16051		; guarda entero 0
-mov @B+16050 A 	; hace recursivo de arrays
+mov #0 16051		; guarda entero 0
+mov 16050 A 	; hace recursivo de arrays
 muli #1
-addi @B+16051 
+addi 16051 
 mov A 16052 
-mov 4 @B+16053		; guarda id b
-mov #2 @B+16054		; guarda entero 2
-mov @B+16053 A
-addi @B+16054	; ENTERO + ENTERO
-mov A @B+16055	; guardar el resultado en temporal
-mov @B+16052 A
+mov 4 16053		; guarda id b
+mov #2 16054		; guarda entero 2
+mov 16053 A
+addi 16054	; ENTERO + ENTERO
+mov A 16055	; guardar el resultado en temporal
+mov 16052 A
 muli #1 
 addi #0
-mov @B+16055 @A
+mov 16055 @A
 mov #0 16056	; guarda 0 y empieza recursivo arrays de a
-mov #0 @B+16057		; guarda entero 0
+mov #0 16057		; guarda entero 0
 mov 16056 A 	; hace recursivo de arrays
 muli #1
-addi @B+16057 
+addi 16057 
 mov A 16058 
-mov #0 @B+16059		; guarda entero 0
-mov @B+16058 A 	; hace recursivo de arrays
+mov #0 16059		; guarda entero 0
+mov 16058 A 	; hace recursivo de arrays
 muli #2
-addi @B+16059 
+addi 16059 
 mov A 16060 
-mov #0 @B+16061		; guarda entero 0
-mov @B+16060 A 	; hace recursivo de arrays
+mov #0 16061		; guarda entero 0
+mov 16060 A 	; hace recursivo de arrays
 muli #1
-addi @B+16061 
+addi 16061 
 mov A 16062 
-mov #0 @B+16063		; guarda entero 0
-mov @B+16062 A 	; hace recursivo de arrays
+mov #0 16063		; guarda entero 0
+mov 16062 A 	; hace recursivo de arrays
 muli #1
-addi @B+16063 
+addi 16063 
 mov A 16064 
-mov #1 @B+16065		; guarda entero 1
-mov @B+16064 A 	; hace recursivo de arrays
+mov #1 16065		; guarda entero 1
+mov 16064 A 	; hace recursivo de arrays
 muli #2
-addi @B+16065 
+addi 16065 
 mov A 16066 
-mov #0 @B+16067		; guarda entero 0
-mov @B+16066 A 	; hace recursivo de arrays
+mov #0 16067		; guarda entero 0
+mov 16066 A 	; hace recursivo de arrays
 muli #1
-addi @B+16067 
+addi 16067 
 mov A 16068 
-mov 4 @B+16069		; guarda id b
-mov #3 @B+16070		; guarda entero 3
-mov @B+16069 A
-addi @B+16070	; ENTERO + ENTERO
-mov A @B+16071	; guardar el resultado en temporal
-mov @B+16068 A
+mov 4 16069		; guarda id b
+mov #3 16070		; guarda entero 3
+mov 16069 A
+addi 16070	; ENTERO + ENTERO
+mov A 16071	; guardar el resultado en temporal
+mov 16068 A
 muli #1 
 addi #0
-mov @B+16071 @A
-mov 4 @B+16072		; guarda id b
-wri @B+16072	; print valor entero de temporal
+mov 16071 @A
+mov 4 16072		; guarda id b
+wri 16072	; print valor entero de temporal
 wrl
 mov #0 16073	; guarda 0 y empieza recursivo arrays de a
-mov #0 @B+16074		; guarda entero 0
+mov #0 16074		; guarda entero 0
 mov 16073 A 	; hace recursivo de arrays
 muli #1
-addi @B+16074 
+addi 16074 
 mov A 16075 
-mov #1 @B+16076		; guarda entero 1
-mov @B+16075 A 	; hace recursivo de arrays
+mov #1 16076		; guarda entero 1
+mov 16075 A 	; hace recursivo de arrays
 muli #2
-addi @B+16076 
+addi 16076 
 mov A 16077 
-mov #0 @B+16078		; guarda entero 0
-mov @B+16077 A 	; hace recursivo de arrays
+mov #0 16078		; guarda entero 0
+mov 16077 A 	; hace recursivo de arrays
 muli #1
-addi @B+16078 
+addi 16078 
 mov A 16079 
-mov #0 @B+16080		; guarda entero 0
-mov @B+16079 A 	; hace recursivo de arrays
+mov #0 16080		; guarda entero 0
+mov 16079 A 	; hace recursivo de arrays
 muli #1
-addi @B+16080 
+addi 16080 
 mov A 16081 
-mov #1 @B+16082		; guarda entero 1
-mov @B+16081 A 	; hace recursivo de arrays
+mov #1 16082		; guarda entero 1
+mov 16081 A 	; hace recursivo de arrays
 muli #2
-addi @B+16082 
+addi 16082 
 mov A 16083 
-mov #0 @B+16084		; guarda entero 0
-mov @B+16083 A 	; hace recursivo de arrays
+mov #0 16084		; guarda entero 0
+mov 16083 A 	; hace recursivo de arrays
 muli #1
-addi @B+16084 
+addi 16084 
 mov A 16085 
-mov #0 @B+16085		; guarda 0 y empieza recursivo arrays de a
-mov @B+16085 @B+16086		; guarda id a
+mov #0 16085		; guarda 0 y empieza recursivo arrays de a
+mov 16085 16086		; guarda id a
 muli #1 
 addi #0
-mov @A @B+16086
+mov @A 16086
 mov #0 16087	; guarda 0 y empieza recursivo arrays de a
-mov #0 @B+16088		; guarda entero 0
+mov #0 16088		; guarda entero 0
 mov 16087 A 	; hace recursivo de arrays
 muli #1
-addi @B+16088 
+addi 16088 
 mov A 16089 
-mov #0 @B+16090		; guarda entero 0
-mov @B+16089 A 	; hace recursivo de arrays
+mov #0 16090		; guarda entero 0
+mov 16089 A 	; hace recursivo de arrays
 muli #2
-addi @B+16090 
+addi 16090 
 mov A 16091 
-mov #0 @B+16092		; guarda entero 0
-mov @B+16091 A 	; hace recursivo de arrays
+mov #0 16092		; guarda entero 0
+mov 16091 A 	; hace recursivo de arrays
 muli #1
-addi @B+16092 
+addi 16092 
 mov A 16093 
-mov #0 @B+16094		; guarda entero 0
-mov @B+16093 A 	; hace recursivo de arrays
+mov #0 16094		; guarda entero 0
+mov 16093 A 	; hace recursivo de arrays
 muli #1
-addi @B+16094 
+addi 16094 
 mov A 16095 
-mov #0 @B+16096		; guarda entero 0
-mov @B+16095 A 	; hace recursivo de arrays
+mov #0 16096		; guarda entero 0
+mov 16095 A 	; hace recursivo de arrays
 muli #2
-addi @B+16096 
+addi 16096 
 mov A 16097 
-mov #0 @B+16098		; guarda entero 0
-mov @B+16097 A 	; hace recursivo de arrays
+mov #0 16098		; guarda entero 0
+mov 16097 A 	; hace recursivo de arrays
 muli #1
-addi @B+16098 
+addi 16098 
 mov A 16099 
-mov #0 @B+16099		; guarda 0 y empieza recursivo arrays de a
-mov @B+16099 @B+16100		; guarda id a
+mov #0 16099		; guarda 0 y empieza recursivo arrays de a
+mov 16099 16100		; guarda id a
 muli #1 
 addi #0
-mov @A @B+16100
-mov @B+16086 A
-addi @B+16100	; ENTERO + ENTERO
-mov A @B+16101	; guardar el resultado en temporal
+mov @A 16100
+mov 16086 A
+addi 16100	; ENTERO + ENTERO
+mov A 16101	; guardar el resultado en temporal
 mov #0 16102	; guarda 0 y empieza recursivo arrays de a
-mov #0 @B+16103		; guarda entero 0
+mov #0 16103		; guarda entero 0
 mov 16102 A 	; hace recursivo de arrays
 muli #1
-addi @B+16103 
+addi 16103 
 mov A 16104 
-mov #1 @B+16105		; guarda entero 1
-mov @B+16104 A 	; hace recursivo de arrays
+mov #1 16105		; guarda entero 1
+mov 16104 A 	; hace recursivo de arrays
 muli #2
-addi @B+16105 
+addi 16105 
 mov A 16106 
-mov #0 @B+16107		; guarda entero 0
-mov @B+16106 A 	; hace recursivo de arrays
+mov #0 16107		; guarda entero 0
+mov 16106 A 	; hace recursivo de arrays
 muli #1
-addi @B+16107 
+addi 16107 
 mov A 16108 
-mov #0 @B+16109		; guarda entero 0
-mov @B+16108 A 	; hace recursivo de arrays
+mov #0 16109		; guarda entero 0
+mov 16108 A 	; hace recursivo de arrays
 muli #1
-addi @B+16109 
+addi 16109 
 mov A 16110 
-mov #0 @B+16111		; guarda entero 0
-mov @B+16110 A 	; hace recursivo de arrays
+mov #0 16111		; guarda entero 0
+mov 16110 A 	; hace recursivo de arrays
 muli #2
-addi @B+16111 
+addi 16111 
 mov A 16112 
-mov #0 @B+16113		; guarda entero 0
-mov @B+16112 A 	; hace recursivo de arrays
+mov #0 16113		; guarda entero 0
+mov 16112 A 	; hace recursivo de arrays
 muli #1
-addi @B+16113 
+addi 16113 
 mov A 16114 
-mov #0 @B+16114		; guarda 0 y empieza recursivo arrays de a
-mov @B+16114 @B+16115		; guarda id a
+mov #0 16114		; guarda 0 y empieza recursivo arrays de a
+mov 16114 16115		; guarda id a
 muli #1 
 addi #0
-mov @A @B+16115
-mov @B+16101 A
-addi @B+16115	; ENTERO + ENTERO
-mov A @B+16116	; guardar el resultado en temporal
+mov @A 16115
+mov 16101 A
+addi 16115	; ENTERO + ENTERO
+mov A 16116	; guardar el resultado en temporal
 mov #0 16117	; guarda 0 y empieza recursivo arrays de a
-mov #0 @B+16118		; guarda entero 0
+mov #0 16118		; guarda entero 0
 mov 16117 A 	; hace recursivo de arrays
 muli #1
-addi @B+16118 
+addi 16118 
 mov A 16119 
-mov #0 @B+16120		; guarda entero 0
-mov @B+16119 A 	; hace recursivo de arrays
+mov #0 16120		; guarda entero 0
+mov 16119 A 	; hace recursivo de arrays
 muli #2
-addi @B+16120 
+addi 16120 
 mov A 16121 
-mov #0 @B+16122		; guarda entero 0
-mov @B+16121 A 	; hace recursivo de arrays
+mov #0 16122		; guarda entero 0
+mov 16121 A 	; hace recursivo de arrays
 muli #1
-addi @B+16122 
+addi 16122 
 mov A 16123 
-mov #0 @B+16124		; guarda entero 0
-mov @B+16123 A 	; hace recursivo de arrays
+mov #0 16124		; guarda entero 0
+mov 16123 A 	; hace recursivo de arrays
 muli #1
-addi @B+16124 
+addi 16124 
 mov A 16125 
-mov #1 @B+16126		; guarda entero 1
-mov @B+16125 A 	; hace recursivo de arrays
+mov #1 16126		; guarda entero 1
+mov 16125 A 	; hace recursivo de arrays
 muli #2
-addi @B+16126 
+addi 16126 
 mov A 16127 
-mov #0 @B+16128		; guarda entero 0
-mov @B+16127 A 	; hace recursivo de arrays
+mov #0 16128		; guarda entero 0
+mov 16127 A 	; hace recursivo de arrays
 muli #1
-addi @B+16128 
+addi 16128 
 mov A 16129 
-mov #0 @B+16129		; guarda 0 y empieza recursivo arrays de a
-mov @B+16129 @B+16130		; guarda id a
+mov #0 16129		; guarda 0 y empieza recursivo arrays de a
+mov 16129 16130		; guarda id a
 muli #1 
 addi #0
-mov @A @B+16130
-mov @B+16116 A
-addi @B+16130	; ENTERO + ENTERO
-mov A @B+16131	; guardar el resultado en temporal
-wri @B+16131	; print valor entero de temporal
+mov @A 16130
+mov 16116 A
+addi 16130	; ENTERO + ENTERO
+mov A 16131	; guardar el resultado en temporal
+wri 16131	; print valor entero de temporal
 wrl
 halt
