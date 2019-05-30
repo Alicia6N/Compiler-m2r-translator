@@ -1,1 +1,4 @@
-ERROR(m2r) en la instrucción 4: Esperaba numero,'#numero','$numero','A','B','@A' o '@B+numero', encontrado ';'
+2
+1240
+23
+ERROR(m2r) en instruccion 71: el primer operando de 'wri' debe ser entero.

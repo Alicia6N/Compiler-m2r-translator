@@ -1,1 +1,24 @@
- halt
+mov #0 B
+jmp L3
+
+; metodo: 'halo3'
+L1 mov #117 @B+1		; guarda entero 117
+; Secuencia de retorno
+mov @B+1 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 2
+mov @B-2 A
+jmp @A
+
+; metodo: 'halo3'
+L2 mov $117.0 @B+3		; guarda real 117.0
+; Secuencia de retorno
+mov @B+3 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 4
+mov @B-2 A
+jmp @A
+
+L3  halt

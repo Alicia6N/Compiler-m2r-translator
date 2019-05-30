@@ -1,25 +1,156 @@
- mov #1 16001		; guarda entero 1
-mov  A
-addi 16001	; ENTERO + ENTERO
-mov A 16002	; guardar el resultado en temporal
-wri 16002	; print valor entero de temporal
+;Temporal a = @B+0
+;Temporal der = @B+2
+;Temporal a = @B+0
+;Temporal der = @B+2
+;Temporal b = @B+1
+;Temporal der = @B+3
+;Imprime temp = 
+;Temporal this.a = 0
+;Temporal der = @B+7
+;Temporal a = @B+0
+;Temporal der = @B+8
+;Temporal a = @B+0
+;Temporal der = @B+11
+;Imprime temp = 
+;Imprime temp = 
+;Imprime temp = 
+;Temporal this.a = 0
+;Temporal der = @B+4
+;Imprime temp = 
+;Imprime temp = 
+;Imprime temp = 
+;Imprime temp = 
+mov #1 B
+jmp L10
+
+; metodo: 'test'
+L1 mov #123 @B+2		; guarda entero 123
+mov @B+2 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+0 @B+3		; guarda id a
+mov #2 @B+4		; guarda entero 2
+mov @B+3 A
+addi @B+4	; ENTERO + ENTERO
+mov A @B+5	; guardar el resultado en temporal
+; Secuencia de retorno
+mov @B+5 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 6
+mov @B-2 A
+jmp @A
+
+; metodo: 'test2'
+L3 mov #100 @B+2		; guarda entero 100
+mov @B+2 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+0 @B+3		; guarda id a
+; Secuencia de llamada
+mov B @B+5
+mov B A
+addi #6
+mov A B
+mvetq L2 @B-2
+jmp L1
+L2 mov @B-1 B
+mov @B+3 A
+addi @B+3	; ENTERO + ENTERO
+mov A @B+4	; guardar el resultado en temporal
+; Secuencia de retorno
+mov @B+4 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 5
+mov @B-2 A
+jmp @A
+
+; metodo: 'recursive'
+L6 mov 0 @B+3		; guarda id this.a
+mov @B+3 @B+1		; Instr : Ref asig Expr pyc 
+mov @B+1 @B+4		; guarda id b
+wri @B+4	; print valor entero de temporal
 wrl
-mov #1 16003		; guarda entero 1
-wri 16003	; print valor entero de temporal
+mov 0 @B+5		; guarda id this.a
+mov #1 @B+6		; guarda entero 1
+mov @B+5 A
+subi @B+6	; ENTERO - ENTERO
+mov A @B+7	; guardar el resultado en temporal
+mov @B+7 0		; Instr : Ref asig Expr pyc 
+mov #0 @B+8		; guarda entero 0
+mov @B+8 @B+0		; Instr : Ref asig Expr pyc 
+mov 0 @B+9		; guarda id this.a
+mov #0 @B+10		; guarda entero 0
+mov @B+9 A
+gtri @B+10	; Expr relop Esimple
+mov A @B+11	; guardar el resultado en temporal
+mov @B+11 A
+jz L5 	 ; if 
+ ; Secuencia de llamada
+mov B @B+13
+mov B A
+addi #14
+mov A B
+mvetq L4 @B-2
+jmp 
+L4 mov @B-1 B
+mov @B+11 @B+0		; Instr : Ref asig Expr pyc 
+L5 mov @B+1 @B+12		; guarda id b
+mov @B+0 @B+13		; guarda id a
+mov @B+12 A
+addi @B+13	; ENTERO + ENTERO
+mov A @B+14	; guardar el resultado en temporal
+; Secuencia de retorno
+mov @B+14 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 15
+mov @B-2 A
+jmp @A
+
+L10  ; Secuencia de llamada
+mov B @B+2
+mov B A
+addi #3
+mov A B
+mvetq L7 @B-2
+jmp L1
+L7 mov @B-1 B
+mov #1 @B+1		; guarda entero 1
+mov @B+0 A
+addi @B+1	; ENTERO + ENTERO
+mov A @B+2	; guardar el resultado en temporal
+wri @B+2	; print valor entero de temporal
 wrl
-wri 	; print valor entero de temporal
+mov #1 @B+3		; guarda entero 1
+wri @B+3	; print valor entero de temporal
 wrl
-mov #10 16004		; guarda entero 10
-mov 16004 0		; Instr : Ref asig Expr pyc 
-mov 0 16005		; guarda id a
-wri 16005	; print valor entero de temporal
+; Secuencia de llamada
+mov B @B+5
+mov B A
+addi #6
+mov A B
+mvetq L8 @B-2
+jmp L3
+L8 mov @B-1 B
+wri @B+3	; print valor entero de temporal
 wrl
-wri 	; print valor entero de temporal
+mov #10 @B+4		; guarda entero 10
+mov @B+4 0		; Instr : Ref asig Expr pyc 
+mov 0 @B+5		; guarda id this.a
+wri @B+5	; print valor entero de temporal
 wrl
-mov 0 16006		; guarda id a
-wri 16006	; print valor entero de temporal
+; Secuencia de llamada
+mov B @B+7
+mov B A
+addi #8
+mov A B
+mvetq L9 @B-2
+jmp L6
+L9 mov @B-1 B
+wri @B+5	; print valor entero de temporal
 wrl
-mov #117 16007		; guarda entero 117
-wri 16007	; print valor entero de temporal
+mov 0 @B+6		; guarda id this.a
+wri @B+6	; print valor entero de temporal
+wrl
+mov #117 @B+7		; guarda entero 117
+wri @B+7	; print valor entero de temporal
 wrl
 halt

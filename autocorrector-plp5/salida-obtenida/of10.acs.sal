@@ -1,1 +1,2 @@
-ERROR(m2r) en la instrucción 1: Esperaba numero,'#numero','$numero','A','B','@A' o '@B+numero', encontrado ';'
+ERROR(m2r) en la instrucción 25: Esperaba numero, etiqueta, '@A' o '@B+numero', encontrado '
+'

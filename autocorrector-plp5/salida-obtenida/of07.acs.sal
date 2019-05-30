@@ -1,1 +1,2 @@
-ERROR(m2r) en la instrucción 1: Esperaba numero,'A','B','@A' o '@B+numero', encontrado ';'
+ERROR(m2r) en la instrucción 40: Esperaba numero, etiqueta, '@A' o '@B+numero', encontrado '
+'

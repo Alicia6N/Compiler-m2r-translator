@@ -1,1 +1,1 @@
-ERROR(m2r) en la instrucción 34: Esperaba numero,'#numero','$numero','A','B','@A' o '@B+numero', encontrado ';'
+ERROR(m2r) en linea 1: nombre de instruccion incorrecto (entra)

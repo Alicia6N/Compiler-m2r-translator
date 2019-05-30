@@ -1,7 +1,17 @@
- mov #123 16001		; guarda entero 123
-wri 16001	; print valor entero de temporal
+;Imprime temp = 
+;Imprime temp = 
+mov #0 B
+jmp L1
+
+L1  mov #123 @B+1		; guarda entero 123
+wri @B+1	; print valor entero de temporal
 wrl
-mov #321 16003		; guarda entero 321
-wri 16003	; print valor entero de temporal
+mov #1 @B+2		; guarda entero 1
+; Secuencia de retorno
+mov @B+2 @B-3
+mov @B-2 A
+jmp @A
+mov #321 @B+3		; guarda entero 321
+wri @B+3	; print valor entero de temporal
 wrl
 halt

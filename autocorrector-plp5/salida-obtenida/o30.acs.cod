@@ -1,0 +1,6 @@
+;Temporal a = @B+0
+;Temporal der = @B+2
+;Temporal a = @B+12
+;Temporal der = @B+13
+;Temporal a = @B+21
+;Temporal der = @B+22

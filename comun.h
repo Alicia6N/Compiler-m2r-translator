@@ -30,6 +30,7 @@ struct Simbolo {
     bool exists;
     bool aux;
     string nomtrad;
+    int root;
 };
 struct TablaSimbolos {
     TablaSimbolos *root;

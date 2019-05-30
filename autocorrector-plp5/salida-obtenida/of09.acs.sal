@@ -1,1 +1,9 @@
-ERROR(m2r) en la instrucción 1: Esperaba numero,'#numero','$numero','A','B','@A' o '@B+numero', encontrado ';'
+10
+10
+10
+10
+10
+10
+10
+10
+ERROR(m2r) en instruccion 26: el segundo operando de 'addr' debe ser real.

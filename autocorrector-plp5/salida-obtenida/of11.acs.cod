@@ -1,3 +1,25 @@
- wri 	; print valor entero de temporal
+;Imprime temp = 
+mov #0 B
+jmp L3
+
+; metodo: 'foo'
+L1 mov #2 @B+4		; guarda entero 2
+; Secuencia de retorno
+mov @B+4 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 5
+mov @B-2 A
+jmp @A
+
+L3  ; Secuencia de llamada
+mov B @B+2
+mov B A
+addi #6
+mov A B
+mvetq L2 @B-2
+jmp L1
+L2 mov @B-1 B
+wri @B+0	; print valor entero de temporal
 wrl
 halt

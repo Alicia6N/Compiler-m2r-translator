@@ -61,10 +61,12 @@ int buscarMetodo(string id);
 
 %}
 %%
-S : _class id llavei attributes dosp BDecl methods dosp Metodos llaved   	{
-																				$$.code = "mov #0 B\n";
+S : _class id llavei attributes dosp BDecl 	{
+											$$.code = "mov #"+ to_string(REL_DIR) + " B\n";
+											} methods dosp Metodos llaved   {
+																				$$.code = $7.code;
 																				$$.code += "jmp " + MAIN_LABEL + "\n\n";
-																				$$.code += $6.code + $9.code;
+																				$$.code += $6.code + $10.code;
 																				$$.code += "halt\n";
 																				cout << $$.code;
 																		   		int tk = yylex();
@@ -81,9 +83,9 @@ Tipo 	: _int {$$.tipo = ENTERO; }
 
 Bloque : llavei {ts = new TablaSimbolos(ts,ACTUAL_MEM);} BDecl SeqInstr llaved {
 																	 		$$.code = $3.code + $4.code;
-																	 		deleteScope(ts);
+																	 		//deleteScope(ts);
 																			ts = ts->root;
-																			ACTUAL_MEM = ts->temp_dir;
+																			REL_DIR = ts->temp_dir;
 																		};
 
 BDecl : BDecl DVar {$$.code = "";}
@@ -103,6 +105,7 @@ Variable : id { $$.size = 1; $$.tipo = $0.tipo; if(buscarAmbito(ts,$1.lexema))
 																											REL_DIR += $3.size;
 																											s.size = $3.size;
 																											s.exists = false;
+																											s.root = 0;
 																											anyadir(ts,s);
 																											//cout << buscar(ts,s.nombre).nombre;
 																											//printTtipos();
@@ -140,6 +143,9 @@ Instr : pyc { $$.code = " ";  }
 															//cout << "INDEX Y TIPO BASE IZQ = " << $1.tipo << ": " << getTipoSimple($1.tipo) << endl;
 															//cout << "INDEX Y TIPO BASE DER = " << $3.tipo << ": " << getTipoSimple($3.tipo) << endl;
 
+															cout << ";Temporal " << $1.aux_lexema << " = " << $1.temp << endl;
+															cout << ";Temporal der = " << $4.temp << endl;
+
 															if(tipo_izq == ENTERO && tipo_der == REAL){
 																$$.code += "mov " + $4.temp + " A\n";
 																$$.code += "rtoi\n";
@@ -165,6 +171,8 @@ Instr : pyc { $$.code = " ";  }
 	  | _print pari Expr pard pyc 						{
 		  													$$.code = $3.code;
 
+															cout << ";Imprime temp = " << $4.temp << endl;
+
 															//cout << "TIPO BASE = " << getTipoSimple($3.tipo) << endl;
 
 															if (getTipoSimple($3.tipo) == ENTERO){
@@ -175,12 +183,13 @@ Instr : pyc { $$.code = " ";  }
 															}
 															$$.code += "wrl\n";
 														}
-	  | _scan pari Ref pard pyc 						{
+	  | _scan pari Ref {if($3.tipo >= ARRAY){msgError(ERRFALTAN, $3.nlin, $3.ncol, $3.lexema);}} pard pyc {
 															int tipo_tres = getTipoSimple($3.tipo);
 
 															if ($3.arrays == true){
 																$$.code = $3.code;
 																string temporal = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
+																$$.code += "\n;scan\n";
 																$$.code += "mov " + $3.temp + " A\n";	
 																$$.code += "muli #1 \n";
 																$$.code += "addi #"+ to_string($3.dbase) + "\n";
@@ -203,6 +212,7 @@ Instr : pyc { $$.code = " ";  }
 																	$$.code += "rdr " + $3.temp + "\t; guardar valor real en temporal\n";
 																}
 															}
+															$$.code += "\n";
 	  													}
 	  | _if pari Expr pard Instr 						{
 															$$.code = $3.code;
@@ -448,7 +458,7 @@ Ref : _this punto id  			{
 										$$.temp = s.dir;
 										$$.dbase = atoi(s.dir.c_str());
 										string aux = $3.lexema;
-										$$.aux_lexema = aux;
+										$$.aux_lexema = "this." + aux;
 
 										if(s.index_tipo >= ARRAY){
 											string temp = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
@@ -472,10 +482,19 @@ Ref : _this punto id  			{
 										string aux = $1.lexema;
 										$$.aux_lexema = aux;
 
-										if (ts->root == NULL) {
+										//if (ts->root == NULL) {
+										if (s.root == 1){
+											cout << "entra con: " << aux << endl;;
 											$$.temp = s.dir;
 										}
-										
+										// CLASE : a b //ts->root = null
+										// int main(){
+											// int a; //aaa ts = ts-root; --->
+											// print(b); buscar(b)
+										//}
+
+
+
 										if(s.index_tipo >= ARRAY){
 											string temp = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
 											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
@@ -873,6 +892,9 @@ Simbolo buscar(TablaSimbolos *root,string nombre){
    for(size_t i = 0; i < root->simbolos.size(); i++){
 	  if(!root->simbolos[i].nombre.compare(nombre)){
 		  root->simbolos[i].exists = true;
+		  if(root->root == NULL){
+			  root->simbolos[i].root = 1;
+		  }
 		  return root->simbolos[i];
 	  }
    }

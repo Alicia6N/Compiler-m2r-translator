@@ -1,56 +1,250 @@
- mov #2 16001		; guarda entero 2
-mov 16001 A
-itor
-mov A 16001
-mov 16001 21		; Instr : Ref asig Expr pyc 
-mov 21 16002		; guarda id d
-wrr 16002	; print valor real de temporal
-wrl
-mov $3.3 16003		; guarda real 3.3
-mov 16003 A
-rtoi
-mov A 16003
-mov 16003 0		; Instr : Ref asig Expr pyc 
-mov 0 16004		; guarda id a
-wri 16004	; print valor entero de temporal
-wrl
-mov 21 16005		; guarda id d
-wrr 16005	; print valor real de temporal
-wrl
-wri 	; print valor entero de temporal
-wrl
-mov 21 16006		; guarda id d
-wrr 16006	; print valor real de temporal
-wrl
-mov 0 16007		; guarda id a
-wri 16007	; print valor entero de temporal
-wrl
-wri 	; print valor entero de temporal
-wrl
-mov #0 16008	; guarda 0 y empieza recursivo arrays de b
-mov #5 16009		; guarda entero 5
-mov 16008 A 	; hace recursivo de arrays
+entra con: d
+entra con: b
+entra con: c
+entra con: b
+entra con: c
+entra con: c
+entra con: c
+;Temporal this.d = 21
+;Temporal der = @B+1
+entra con: d
+;Imprime temp = 
+entra con: a
+;Temporal a = 0
+;Temporal der = @B+3
+;Imprime temp = 
+entra con: d
+;Imprime temp = 
+;Imprime temp = 
+entra con: d
+;Imprime temp = 
+;Imprime temp = 
+;Imprime temp = 
+entra con: b
+;Imprime temp = 
+entra con: c
+;Imprime temp = 
+mov #22 B
+jmp L9
+
+; metodo: 't2'
+L1 rdi 0	; guardar valor entero en temporal
+
+mov 0 @B+1		; guarda id this.a
+; Secuencia de retorno
+mov @B+1 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 2
+mov @B-2 A
+jmp @A
+
+; metodo: 't1'
+L3 rdr 21	; guardar valor real en temporal
+
+; Secuencia de llamada
+mov B @B+2
+mov B A
+addi #3
+mov A B
+mvetq L2 @B-2
+jmp L1
+L2 mov @B-1 B
+; Secuencia de retorno
+mov @B+0 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 1
+mov @B-2 A
+jmp @A
+
+; metodo: 't3'
+L4 mov #0 1	; guarda 0 y empieza recursivo arrays de b
+mov #5 @B+2		; guarda entero 5
+mov 1 A 	; hace recursivo de arrays
 muli #10
-addi 16009 
-mov A 16010 
-mov #0 16010		; guarda 0 y empieza recursivo arrays de b
-mov 16010 16011		; guarda id b
+addi @B+2 
+mov A 3 
+
+;scan
+mov @B+3 A
 muli #1 
 addi #1
-mov @A 16011
-wrr 16011	; print valor real de temporal
-wrl
-mov #0 16012	; guarda 0 y empieza recursivo arrays de c
-mov #7 16013		; guarda entero 7
-mov 16012 A 	; hace recursivo de arrays
+rdr @B+4	; guardar valor real en temporal
+mov @B+4 @A
+
+mov #0 5	; guarda 0 y empieza recursivo arrays de c
+mov #7 @B+6		; guarda entero 7
+mov 5 A 	; hace recursivo de arrays
 muli #10
-addi 16013 
-mov A 16014 
-mov #0 16014		; guarda 0 y empieza recursivo arrays de c
-mov 16014 16015		; guarda id c
+addi @B+6 
+mov A 7 
+
+;scan
+mov @B+7 A
 muli #1 
 addi #11
-mov @A 16015
-wri 16015	; print valor entero de temporal
+rdi @B+8	; guardar valor entero en temporal
+mov @B+8 @A
+
+mov #0 9	; guarda 0 y empieza recursivo arrays de b
+mov #5 @B+10		; guarda entero 5
+mov #0 11	; guarda 0 y empieza recursivo arrays de c
+mov #7 @B+12		; guarda entero 7
+mov 11 A 	; hace recursivo de arrays
+muli #10
+addi @B+12 
+mov A 13 
+mov #0 @B+13		; guarda 0 y empieza recursivo arrays de c
+mov @B+13 @B+14		; guarda id c
+muli #1 
+addi #11
+mov @A @B+14
+mov #0 15	; guarda 0 y empieza recursivo arrays de c
+mov #7 @B+16		; guarda entero 7
+mov 15 A 	; hace recursivo de arrays
+muli #10
+addi @B+16 
+mov A 17 
+mov #0 @B+17		; guarda 0 y empieza recursivo arrays de c
+mov @B+17 @B+18		; guarda id c
+muli #1 
+addi #11
+mov @A @B+18
+mov @B+14 A
+divi @B+18	; ENTERO / ENTERO
+mov A @B+19
+mov #1 @B+20		; guarda entero 1
+mov @B+19 A
+muli @B+20	; ENTERO * ENTERO
+mov A @B+21
+mov @B+10 A
+addi @B+21	; ENTERO + ENTERO
+mov A @B+22	; guardar el resultado en temporal
+mov #1 @B+23		; guarda entero 1
+mov @B+22 A
+subi @B+23	; ENTERO - ENTERO
+mov A @B+24	; guardar el resultado en temporal
+mov 9 A 	; hace recursivo de arrays
+muli #10
+addi @B+24 
+mov A 25 
+mov #0 @B+25		; guarda 0 y empieza recursivo arrays de b
+mov @B+25 @B+26		; guarda id b
+muli #1 
+addi #1
+mov @A @B+26
+mov #0 27	; guarda 0 y empieza recursivo arrays de c
+mov #7 @B+28		; guarda entero 7
+mov 27 A 	; hace recursivo de arrays
+muli #10
+addi @B+28 
+mov A 29 
+mov #0 @B+29		; guarda 0 y empieza recursivo arrays de c
+mov @B+29 @B+30		; guarda id c
+muli #1 
+addi #11
+mov @A @B+30
+mov @B+30 A
+itor 
+mov A @B+32 
+mov @B+26 A
+addr @B+32	; REAL + REAL
+mov A @B+31	; guardar el resultado en temporal
+; Secuencia de retorno
+mov @B+31 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 33
+mov @B-2 A
+jmp @A
+
+; metodo: 't4'
+L6 ; Secuencia de llamada
+mov B @B+2
+mov B A
+addi #3
+mov A B
+mvetq L5 @B-2
+jmp L4
+L5 mov @B-1 B
+; Secuencia de retorno
+mov @B+0 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 1
+mov @B-2 A
+jmp @A
+
+L9  mov #2 @B+1		; guarda entero 2
+mov @B+1 A
+itor
+mov A @B+1
+mov @B+1 21		; Instr : Ref asig Expr pyc 
+mov 21 @B+2		; guarda id d
+wrr @B+2	; print valor real de temporal
+wrl
+mov $3.3 @B+3		; guarda real 3.3
+mov @B+3 A
+rtoi
+mov A @B+3
+mov @B+3 0		; Instr : Ref asig Expr pyc 
+mov 0 @B+4		; guarda id this.a
+wri @B+4	; print valor entero de temporal
+wrl
+mov 21 @B+5		; guarda id d
+wrr @B+5	; print valor real de temporal
+wrl
+; Secuencia de llamada
+mov B @B+7
+mov B A
+addi #8
+mov A B
+mvetq L7 @B-2
+jmp L3
+L7 mov @B-1 B
+wri @B+5	; print valor entero de temporal
+wrl
+mov 21 @B+6		; guarda id d
+wrr @B+6	; print valor real de temporal
+wrl
+mov 0 @B+7		; guarda id this.a
+wri @B+7	; print valor entero de temporal
+wrl
+; Secuencia de llamada
+mov B @B+9
+mov B A
+addi #10
+mov A B
+mvetq L8 @B-2
+jmp L4
+L8 mov @B-1 B
+wri @B+7	; print valor entero de temporal
+wrl
+mov #0 8	; guarda 0 y empieza recursivo arrays de b
+mov #5 @B+9		; guarda entero 5
+mov 8 A 	; hace recursivo de arrays
+muli #10
+addi @B+9 
+mov A 10 
+mov #0 @B+10		; guarda 0 y empieza recursivo arrays de b
+mov @B+10 @B+11		; guarda id b
+muli #1 
+addi #1
+mov @A @B+11
+wrr @B+11	; print valor real de temporal
+wrl
+mov #0 12	; guarda 0 y empieza recursivo arrays de c
+mov #7 @B+13		; guarda entero 7
+mov 12 A 	; hace recursivo de arrays
+muli #10
+addi @B+13 
+mov A 14 
+mov #0 @B+14		; guarda 0 y empieza recursivo arrays de c
+mov @B+14 @B+15		; guarda id c
+muli #1 
+addi #11
+mov @A @B+15
+wri @B+15	; print valor entero de temporal
 wrl
 halt

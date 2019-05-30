@@ -1,1 +1,8 @@
-ERROR(m2r) en la instrucción 14: Esperaba numero,'A','B','@A' o '@B+numero', encontrado ';'
+123
+55
+44
+55
+44
+
+ERROR(m2r) al leer un valor de la posicion de memoria 26 sin haberlo
+inicializado, en la instrucción 75
