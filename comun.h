@@ -16,7 +16,7 @@ typedef struct {
    int size;
    int dbase;
    bool arrays;
-
+   
    int indice_func;
    int indice_args;
 } MITIPO;
@@ -49,10 +49,16 @@ struct TablaTipos {
         tipos.push_back(Tipo{REAL,1,REAL});
     }
 };
+struct Arg {
+    int tipo;
+    string id;
+};
 struct Metodo {
     int tipo;
     string id;
-    vector<int> args;
+    vector<Arg> args;
+    int dirs;
+    string etiq;
 };
 struct TablaMetodos {
     std::vector<Metodo> metodos;
