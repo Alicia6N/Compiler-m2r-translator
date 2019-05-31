@@ -14,7 +14,7 @@ typedef struct {
    int nlin, ncol;
    int tipo;
    int size;
-   int dbase;
+   string dbase;
    bool arrays;
    
    int indice_func;
@@ -60,6 +60,7 @@ struct Metodo {
     vector<Arg> args;
     int dirs;
     string etiq;
+    int mlin, mcol;
 };
 struct TablaMetodos {
     std::vector<Metodo> metodos;
@@ -86,6 +87,8 @@ struct TablaMetodos {
 #define ERR_MAXVAR     101
 #define ERR_MAXTIPOS   102
 #define ERR_MAXTMP     103
+#define ERRFFALTAN     104
+#define ERRFSOBRAN     105
 
 void msgError(int nerror, int nlin, int ncol, const char *s);
 bool equalsIgnoreCase(string s1, char* lexema);

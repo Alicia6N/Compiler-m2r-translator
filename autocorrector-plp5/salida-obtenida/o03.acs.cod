@@ -1,144 +1,152 @@
-;Temporal a = @B+0
-;Temporal der = @B+3
-;Temporal b = @B+1
-;Temporal der = @B+4
-;Imprime temp = 
-;Imprime temp = 
-;Temporal this.b = 1
-;Temporal der = @B+7
-;Temporal this.a = 0
-;Temporal der = @B+8
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Temporal a = @B+12
-;Temporal der = @B+17
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Temporal this.b = 1
-;Temporal der = @B+21
-;Temporal b = @B+13
-;Temporal der = @B+22
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Temporal b = @B+24
-;Temporal der = @B+28
-;Imprime temp = 
-;Imprime temp = 
-;Temporal a = @B+25
-;Temporal der = @B+31
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
 mov #2 B
 jmp L1
 
 L1  mov #1 @B+3		; guarda entero 1
-mov @B+3 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+3 @B+0		; a = @B+3; 
 mov $2.2 @B+4		; guarda real 2.2
-mov @B+4 @B+1		; Instr : Ref asig Expr pyc 
+mov @B+4 @B+1		; b = @B+4; 
+
+;print
 mov @B+1 @B+5		; guarda id b
 wrr @B+5	; print valor real de temporal
 wrl
+
+;print
 mov @B+0 @B+6		; guarda id a
 wri @B+6	; print valor entero de temporal
 wrl
 mov $4.4 @B+7		; guarda real 4.4
-mov @B+7 1		; Instr : Ref asig Expr pyc 
+mov @B+7 1		; this.b = @B+7; 
 mov #5 @B+8		; guarda entero 5
-mov @B+8 0		; Instr : Ref asig Expr pyc 
+mov @B+8 0		; this.a = @B+8; 
+
+;print
 mov @B+0 @B+9		; guarda id a
 wri @B+9	; print valor entero de temporal
 wrl
+
+;print
 mov @B+1 @B+10		; guarda id b
 wrr @B+10	; print valor real de temporal
 wrl
+
+;print
 mov 0 @B+11		; guarda id this.a
 wri @B+11	; print valor entero de temporal
 wrl
+
+;print
 mov 1 @B+12		; guarda id this.b
 wrr @B+12	; print valor real de temporal
 wrl
- mov 1 @B+15		; guarda id this.b
+ 
+;print
+mov 1 @B+15		; guarda id this.b
 wrr @B+15	; print valor real de temporal
 wrl
+
+;print
 mov 0 @B+16		; guarda id this.a
 wri @B+16	; print valor entero de temporal
 wrl
 mov #3 @B+17		; guarda entero 3
-mov @B+17 @B+12		; Instr : Ref asig Expr pyc 
+mov @B+17 @B+12		; a = @B+17; 
+
+;print
 mov 0 @B+18		; guarda id this.a
 wri @B+18	; print valor entero de temporal
 wrl
+
+;print
 mov @B+12 @B+19		; guarda id a
 wri @B+19	; print valor entero de temporal
 wrl
+
+;print
 mov 1 @B+20		; guarda id this.b
 wrr @B+20	; print valor real de temporal
 wrl
 mov $123.223 @B+21		; guarda real 123.223
-mov @B+21 1		; Instr : Ref asig Expr pyc 
+mov @B+21 1		; this.b = @B+21; 
 mov $23.2 @B+22		; guarda real 23.2
-mov @B+22 @B+13		; Instr : Ref asig Expr pyc 
+mov @B+22 @B+13		; b = @B+22; 
+
+;print
 mov @B+13 @B+23		; guarda id b
 wrr @B+23	; print valor real de temporal
 wrl
+
+;print
 mov 1 @B+24		; guarda id this.b
 wrr @B+24	; print valor real de temporal
 wrl
- mov 1 @B+27		; guarda id this.b
+ 
+;print
+mov 1 @B+27		; guarda id this.b
 wrr @B+27	; print valor real de temporal
 wrl
 mov #2 @B+28		; guarda entero 2
-mov @B+28 @B+24		; Instr : Ref asig Expr pyc 
+mov @B+28 @B+24		; b = @B+28; 
+
+;print
 mov @B+24 @B+29		; guarda id b
 wri @B+29	; print valor entero de temporal
 wrl
+
+;print
 mov 1 @B+30		; guarda id this.b
 wrr @B+30	; print valor real de temporal
 wrl
 mov $2.21 @B+31		; guarda real 2.21
-mov @B+31 @B+25		; Instr : Ref asig Expr pyc 
+mov @B+31 @B+25		; a = @B+31; 
+
+;print
 mov 0 @B+32		; guarda id this.a
 wri @B+32	; print valor entero de temporal
 wrl
+
+;print
 mov @B+25 @B+33		; guarda id a
 wrr @B+33	; print valor real de temporal
 wrl
-mov @B+12 @B+34		; guarda id a
+
+;print
+mov @B+12 @B+32		; guarda id a
+wri @B+32	; print valor entero de temporal
+wrl
+
+;print
+mov @B+13 @B+33		; guarda id b
+wrr @B+33	; print valor real de temporal
+wrl
+
+;print
+mov 0 @B+34		; guarda id this.a
 wri @B+34	; print valor entero de temporal
 wrl
-mov @B+13 @B+35		; guarda id b
+
+;print
+mov 1 @B+35		; guarda id this.b
 wrr @B+35	; print valor real de temporal
 wrl
-mov 0 @B+36		; guarda id this.a
+
+;print
+mov 0 @B+34		; guarda id this.a
+wri @B+34	; print valor entero de temporal
+wrl
+
+;print
+mov 1 @B+35		; guarda id this.b
+wrr @B+35	; print valor real de temporal
+wrl
+
+;print
+mov @B+0 @B+36		; guarda id a
 wri @B+36	; print valor entero de temporal
 wrl
-mov 1 @B+37		; guarda id this.b
+
+;print
+mov @B+1 @B+37		; guarda id b
 wrr @B+37	; print valor real de temporal
-wrl
-mov 0 @B+38		; guarda id this.a
-wri @B+38	; print valor entero de temporal
-wrl
-mov 1 @B+39		; guarda id this.b
-wrr @B+39	; print valor real de temporal
-wrl
-mov @B+0 @B+40		; guarda id a
-wri @B+40	; print valor entero de temporal
-wrl
-mov @B+1 @B+41		; guarda id b
-wrr @B+41	; print valor real de temporal
 wrl
 halt

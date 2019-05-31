@@ -1,19 +1,3 @@
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
 mov #0 B
 jmp L21
 
@@ -28,6 +12,7 @@ mov @B+5 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 6
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -42,6 +27,7 @@ mov @B+5 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 6
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -56,6 +42,7 @@ mov @B+5 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 6
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -70,10 +57,13 @@ mov @B+5 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 6
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
-L21  mov #4 @B+1		; guarda entero 4
+L21  
+;print
+mov #4 @B+1		; guarda entero 4
 mov @B+1 @B+5	; asigna un param
 mov #6 @B+2		; guarda entero 6
 mov @B+2 @B+6	; asigna un param
@@ -87,6 +77,8 @@ jmp L1
 L5 mov @B-1 B
 wri @B+2	; print valor entero de temporal
 wrl
+
+;print
 mov $4.9 @B+3		; guarda real 4.9
 mov @B+3 A
 rtoi 
@@ -103,6 +95,8 @@ jmp L1
 L6 mov @B-1 B
 wri @B+4	; print valor entero de temporal
 wrl
+
+;print
 mov #4 @B+5		; guarda entero 4
 mov @B+5 @B+9	; asigna un param
 mov $6.9 @B+6		; guarda real 6.9
@@ -119,6 +113,8 @@ jmp L1
 L7 mov @B-1 B
 wri @B+6	; print valor entero de temporal
 wrl
+
+;print
 mov $4.9 @B+7		; guarda real 4.9
 mov @B+7 A
 rtoi 
@@ -137,6 +133,8 @@ jmp L1
 L8 mov @B-1 B
 wri @B+8	; print valor entero de temporal
 wrl
+
+;print
 mov #4 @B+9		; guarda entero 4
 mov @B+9 @B+13	; asigna un param
 mov #6 @B+10		; guarda entero 6
@@ -151,6 +149,8 @@ jmp L2
 L9 mov @B-1 B
 wri @B+10	; print valor entero de temporal
 wrl
+
+;print
 mov $4.9 @B+11		; guarda real 4.9
 mov @B+11 A
 rtoi 
@@ -167,6 +167,8 @@ jmp L2
 L10 mov @B-1 B
 wri @B+12	; print valor entero de temporal
 wrl
+
+;print
 mov #4 @B+13		; guarda entero 4
 mov @B+13 @B+17	; asigna un param
 mov $6.9 @B+14		; guarda real 6.9
@@ -183,6 +185,8 @@ jmp L2
 L11 mov @B-1 B
 wri @B+14	; print valor entero de temporal
 wrl
+
+;print
 mov $4.9 @B+15		; guarda real 4.9
 mov @B+15 A
 rtoi 
@@ -201,6 +205,8 @@ jmp L2
 L12 mov @B-1 B
 wri @B+16	; print valor entero de temporal
 wrl
+
+;print
 mov $4.9 @B+17		; guarda real 4.9
 mov @B+17 @B+21	; asigna un param
 mov $6.9 @B+18		; guarda real 6.9
@@ -217,6 +223,8 @@ jmp L3
 L13 mov @B-1 B
 wri @B+18	; print valor entero de temporal
 wrl
+
+;print
 mov #4 @B+19		; guarda entero 4
 mov @B+19 A
 itor 
@@ -235,6 +243,8 @@ jmp L3
 L14 mov @B-1 B
 wri @B+20	; print valor entero de temporal
 wrl
+
+;print
 mov $4.9 @B+21		; guarda real 4.9
 mov @B+21 @B+25	; asigna un param
 mov #6 @B+22		; guarda entero 6
@@ -249,6 +259,8 @@ jmp L3
 L15 mov @B-1 B
 wri @B+22	; print valor entero de temporal
 wrl
+
+;print
 mov #4 @B+23		; guarda entero 4
 mov @B+23 A
 itor 
@@ -265,6 +277,8 @@ jmp L3
 L16 mov @B-1 B
 wri @B+24	; print valor entero de temporal
 wrl
+
+;print
 mov $4.9 @B+25		; guarda real 4.9
 mov @B+25 @B+29	; asigna un param
 mov $6.9 @B+26		; guarda real 6.9
@@ -281,6 +295,8 @@ jmp L4
 L17 mov @B-1 B
 wri @B+26	; print valor entero de temporal
 wrl
+
+;print
 mov #4 @B+27		; guarda entero 4
 mov @B+27 A
 itor 
@@ -299,6 +315,8 @@ jmp L4
 L18 mov @B-1 B
 wri @B+28	; print valor entero de temporal
 wrl
+
+;print
 mov $4.9 @B+29		; guarda real 4.9
 mov @B+29 @B+33	; asigna un param
 mov #6 @B+30		; guarda entero 6
@@ -313,6 +331,8 @@ jmp L4
 L19 mov @B-1 B
 wri @B+30	; print valor entero de temporal
 wrl
+
+;print
 mov #4 @B+31		; guarda entero 4
 mov @B+31 A
 itor 

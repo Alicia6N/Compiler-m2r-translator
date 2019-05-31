@@ -1,32 +1,29 @@
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Temporal foo = @B+0
-;Temporal der = @B+10
-;Imprime temp = 
-;Temporal factorialn = @B+1
-;Temporal der = @B+12
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
 mov #0 B
 jmp L7
 
 ; metodo: 't1'
-L1 mov @B+0 @B+5		; guarda id a
+L1 
+;print
+mov @B+0 @B+5		; guarda id a
 wri @B+5	; print valor entero de temporal
 wrl
+
+;print
 mov @B+1 @B+6		; guarda id b
 wri @B+6	; print valor entero de temporal
 wrl
+
+;print
 mov @B+2 @B+7		; guarda id c
 wri @B+7	; print valor entero de temporal
 wrl
+
+;print
 mov @B+3 @B+8		; guarda id d
 wri @B+8	; print valor entero de temporal
 wrl
 ; DIR USED = 9
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -66,6 +63,7 @@ mov @B+10 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 11
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -93,15 +91,21 @@ mov A B
 mvetq L5 @B-2
 jmp L1
 L5 mov @B-1 B
-mov @B+10 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+10 @B+0		; foo = @B+10; 
+
+;print
 mov #123 @B+11		; guarda entero 123
 wri @B+11	; print valor entero de temporal
 wrl
 mov #5 @B+12		; guarda entero 5
-mov @B+12 @B+1		; Instr : Ref asig Expr pyc 
+mov @B+12 @B+1		; factorialn = @B+12; 
+
+;print
 mov @B+1 @B+13		; guarda id factorialn
 wri @B+13	; print valor entero de temporal
 wrl
+
+;print
 mov @B+1 @B+14		; guarda id factorialn
 mov @B+14 @B+18	; asigna un param
 ; Secuencia de llamada
@@ -114,6 +118,8 @@ jmp L4
 L6 mov @B-1 B
 wri @B+14	; print valor entero de temporal
 wrl
+
+;print
 mov @B+1 @B+15		; guarda id factorialn
 wri @B+15	; print valor entero de temporal
 wrl

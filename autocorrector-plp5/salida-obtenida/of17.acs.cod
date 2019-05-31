@@ -8,6 +8,7 @@ mov @B+1 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 2
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -18,6 +19,7 @@ mov @B+3 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 4
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 

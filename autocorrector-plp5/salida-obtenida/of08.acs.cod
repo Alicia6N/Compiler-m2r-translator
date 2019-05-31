@@ -1,35 +1,3 @@
-;Temporal a = @B+0
-;Temporal der = @B+5
-;Temporal b = @B+1
-;Temporal der = @B+8
-;Temporal c = @B+0
-;Temporal der = @B+5
-;Temporal b = @B+1
-;Temporal der = @B+8
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Temporal this.c = 11
-;Temporal der = @B+4
-;Temporal c = @B+0
-;Temporal der = @B+5
-;Imprime temp = 
-;Imprime temp = 
-;Temporal foo = @B+1
-;Temporal der = @B+9
-;Imprime temp = 
-;Imprime temp = 
-;Temporal this.b = @B+14
-;Temporal der = @B+15
-;Temporal this.c = 11
-;Temporal der = @B+16
-;Imprime temp = 
-;Imprime temp = 
-;Temporal foo = @B+1
-;Temporal der = @B+26
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
 mov #12 B
 jmp L5
 
@@ -39,14 +7,15 @@ mov #10 @B+4		; guarda entero 10
 mov @B+3 A
 muli @B+4	; ENTERO * ENTERO
 mov A @B+5
-mov @B+5 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+5 @B+0		; a = @B+5; 
 mov @B+1 @B+6		; guarda id b
 mov #10 @B+7		; guarda entero 10
 mov @B+6 A
 muli @B+7	; ENTERO * ENTERO
 mov A @B+8
-mov @B+8 @B+1		; Instr : Ref asig Expr pyc 
+mov @B+8 @B+1		; b = @B+8; 
 ; DIR USED = 9
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -56,33 +25,44 @@ mov #20 @B+4		; guarda entero 20
 mov @B+3 A
 addi @B+4	; ENTERO + ENTERO
 mov A @B+5	; guardar el resultado en temporal
-mov @B+5 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+5 @B+0		; c = @B+5; 
 mov @B+1 @B+6		; guarda id b
 mov $10.0 @B+7		; guarda real 10.0
 mov @B+6 A
 mulr @B+7	; REAL * REAL
 mov A @B+8
-mov @B+8 @B+1		; Instr : Ref asig Expr pyc 
+mov @B+8 @B+1		; b = @B+8; 
+
+;print
 mov @B+0 @B+9		; guarda id c
 wri @B+9	; print valor entero de temporal
 wrl
+
+;print
 mov 11 @B+10		; guarda id this.c
 wri @B+10	; print valor entero de temporal
 wrl
 ; DIR USED = 11
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
-L5  mov #123 @B+3		; guarda entero 123
+L5  
+;print
+mov #123 @B+3		; guarda entero 123
 wri @B+3	; print valor entero de temporal
 wrl
 mov #55 @B+4		; guarda entero 55
-mov @B+4 11		; Instr : Ref asig Expr pyc 
+mov @B+4 11		; this.c = @B+4; 
 mov #44 @B+5		; guarda entero 44
-mov @B+5 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+5 @B+0		; c = @B+5; 
+
+;print
 mov 11 @B+6		; guarda id this.c
 wri @B+6	; print valor entero de temporal
 wrl
+
+;print
 mov @B+0 @B+7		; guarda id c
 wri @B+7	; print valor entero de temporal
 wrl
@@ -98,55 +78,63 @@ mov A B
 mvetq L3 @B-2
 jmp L1
 L3 mov @B-1 B
-mov @B+9 @B+1		; Instr : Ref asig Expr pyc 
+mov @B+9 @B+1		; foo = @B+9; 
+
+;print
 mov 11 @B+10		; guarda id this.c
 wri @B+10	; print valor entero de temporal
 wrl
+
+;print
 mov @B+0 @B+11		; guarda id c
 wri @B+11	; print valor entero de temporal
 wrl
-mov #0 12	; guarda 0 y empieza recursivo arrays de this.b
+mov #0 @B+12	; guarda 0 y empieza recursivo arrays de this.b
 mov #0 @B+13		; guarda entero 0
-mov 12 A 	; hace recursivo de arrays
+mov @B+12 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+13 
-mov A 14 
+addi @B+13	; fallo en este 
+mov A @B+14 
 mov $122.2 @B+15		; guarda real 122.2
 mov @B+14 A
 muli #1 
 addi #1
 mov @B+15 @A
 mov #11 @B+16		; guarda entero 11
-mov @B+16 11		; Instr : Ref asig Expr pyc 
-mov #0 17	; guarda 0 y empieza recursivo arrays de this.b
+mov @B+16 11		; this.c = @B+16; 
+
+;print
+mov #0 @B+17	; guarda 0 y empieza recursivo arrays de this.b
 mov #0 @B+18		; guarda entero 0
-mov 17 A 	; hace recursivo de arrays
+mov @B+17 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+18 
-mov A 19 
-mov #0 @B+19		; guarda 0 y empieza recursivo arrays de this.b
+addi @B+18	; fallo en este 
+mov A @B+19 
+mov #0 @B+19		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+19 @B+20		; guarda id this.b
 muli #1 
 addi #1
-mov @A @B+20
+mov @A @B+20	;acaba array en Factor
 wrr @B+20	; print valor real de temporal
 wrl
+
+;print
 mov 11 @B+21		; guarda id this.c
 wri @B+21	; print valor entero de temporal
 wrl
 mov 11 @B+22		; guarda id this.c
 mov @B+22 @B+26	; asigna un param
-mov #0 23	; guarda 0 y empieza recursivo arrays de this.b
+mov #0 @B+23	; guarda 0 y empieza recursivo arrays de this.b
 mov #0 @B+24		; guarda entero 0
-mov 23 A 	; hace recursivo de arrays
+mov @B+23 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+24 
-mov A 25 
-mov #0 @B+25		; guarda 0 y empieza recursivo arrays de this.b
+addi @B+24	; fallo en este 
+mov A @B+25 
+mov #0 @B+25		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+25 @B+26		; guarda id this.b
 muli #1 
 addi #1
-mov @A @B+26
+mov @A @B+26	;acaba array en Factor
 mov @B+26 A
 rtoi 
 mov A @B+30	; asigna un param
@@ -158,23 +146,29 @@ mov A B
 mvetq L4 @B-2
 jmp L2
 L4 mov @B-1 B
-mov @B+26 @B+1		; Instr : Ref asig Expr pyc 
-mov #0 27	; guarda 0 y empieza recursivo arrays de this.b
+mov @B+26 @B+1		; foo = @B+26; 
+
+;print
+mov #0 @B+27	; guarda 0 y empieza recursivo arrays de this.b
 mov #0 @B+28		; guarda entero 0
-mov 27 A 	; hace recursivo de arrays
+mov @B+27 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+28 
-mov A 29 
-mov #0 @B+29		; guarda 0 y empieza recursivo arrays de this.b
+addi @B+28	; fallo en este 
+mov A @B+29 
+mov #0 @B+29		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+29 @B+30		; guarda id this.b
 muli #1 
 addi #1
-mov @A @B+30
+mov @A @B+30	;acaba array en Factor
 wrr @B+30	; print valor real de temporal
 wrl
+
+;print
 mov 11 @B+31		; guarda id this.c
 wri @B+31	; print valor entero de temporal
 wrl
+
+;print
 mov #321 @B+32		; guarda entero 321
 wri @B+32	; print valor entero de temporal
 wrl

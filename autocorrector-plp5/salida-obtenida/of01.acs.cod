@@ -1,25 +1,21 @@
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
 mov #0 B
 jmp L9
 
 ; metodo: 'test4'
-L1 mov $444.0 @B+1		; guarda real 444.0
+L1 
+;print
+mov $444.0 @B+1		; guarda real 444.0
 wrr @B+1	; print valor real de temporal
 wrl
 ; DIR USED = 2
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
 ; metodo: 'test2'
-L3 ; Secuencia de llamada
+L3 
+;print
+; Secuencia de llamada
 mov B @B+2
 mov B A
 addi #3
@@ -34,6 +30,7 @@ mov A @B+2	; guardar el resultado en temporal
 wri @B+2	; print valor entero de temporal
 wrl
 ; DIR USED = 3
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -52,6 +49,7 @@ mov @B+7 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 8
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -62,12 +60,17 @@ mov @B+2 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 3
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
-L9  mov #2 @B+1		; guarda entero 2
+L9  
+;print
+mov #2 @B+1		; guarda entero 2
 wri @B+1	; print valor entero de temporal
 wrl
+
+;print
 mov #2 @B+2		; guarda entero 2
 mov @B+2 @B+6	; asigna un param
 mov #2 @B+3		; guarda entero 2
@@ -82,9 +85,13 @@ jmp L4
 L6 mov @B-1 B
 wri @B+3	; print valor entero de temporal
 wrl
+
+;print
 mov #23 @B+4		; guarda entero 23
 wri @B+4	; print valor entero de temporal
 wrl
+
+;print
 mov #2 @B+5		; guarda entero 2
 mov @B+5 @B+9	; asigna un param
 ; Secuencia de llamada
@@ -97,9 +104,13 @@ jmp L5
 L7 mov @B-1 B
 wri @B+5	; print valor entero de temporal
 wrl
+
+;print
 mov #54 @B+6		; guarda entero 54
 wri @B+6	; print valor entero de temporal
 wrl
+
+;print
 ; Secuencia de llamada
 mov B @B+8
 mov B A
@@ -110,6 +121,8 @@ jmp L3
 L8 mov @B-1 B
 wri @B+6	; print valor entero de temporal
 wrl
+
+;print
 mov #117 @B+7		; guarda entero 117
 wri @B+7	; print valor entero de temporal
 wrl

@@ -1,1 +1,1 @@
-Error semantico (16,23): sobran indices
+Error semantico (16,10): sobran parámetros en la llamada a la función 'foo'

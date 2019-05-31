@@ -1,1 +1,6 @@
-ERROR(m2r) en linea 1: nombre de instruccion incorrecto (entra)
+123
+   6.000
+0
+
+ERROR(m2r) al leer un valor de la posicion de memoria 34 sin haberlo
+inicializado, en la instrucción 34

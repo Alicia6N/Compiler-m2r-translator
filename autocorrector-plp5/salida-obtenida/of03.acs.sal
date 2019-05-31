@@ -1,1 +1,11 @@
-ERROR(m2r) en linea 1: nombre de instruccion incorrecto (entra)
+123
+44
+45
+44
+321
+44
+44
+45
+45
+5
+ERROR(m2r) en instruccion 190: el primer operando de 'wri' debe ser entero.

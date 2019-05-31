@@ -1,32 +1,13 @@
-;Temporal a = @B+0
-;Temporal der = @B+3
-entra con: c
-;Temporal c = 2
-;Temporal der = @B+4
-entra con: c
-;Temporal a = @B+8
-;Temporal der = @B+17
-;Temporal this.a = 0
-;Temporal der = @B+18
-;Temporal b = @B+9
-;Temporal der = @B+23
-;Imprime temp = 
-;Temporal this.a = 0
-;Temporal der = @B+27
-;Imprime temp = 
-;Imprime temp = 
-entra con: c
-;Imprime temp = 
 mov #3 B
 jmp L3
 
 L3  mov $7.5 @B+3		; guarda real 7.5
-mov @B+3 @B+0		; Instr : Ref asig Expr pyc 
+mov @B+3 @B+0		; a = @B+3; 
 mov @B+0 @B+4		; guarda id a
 mov @B+4 A
 rtoi
 mov A @B+4
-mov @B+4 2		; Instr : Ref asig Expr pyc 
+mov @B+4 2		; this.c = @B+4; 
 mov 2 @B+5		; guarda id this.c
 mov $7.1 @B+6		; guarda real 7.1
 mov @B+5 A
@@ -35,7 +16,7 @@ gtrr @B+6	; Expr relop Esimple
 mov A @B+7	; guardar el resultado en temporal
 mov @B+7 A
 jz L1
- mov 2 @B+11		; guarda id c
+ mov 2 @B+11		; guarda id this.c
 mov #3 @B+12		; guarda entero 3
 ; Factor -> pari Expr pard
 mov #10 @B+13		; guarda entero 10
@@ -49,9 +30,9 @@ mov A @B+16
 mov @B+11 A
 addi @B+16	; ENTERO + ENTERO
 mov A @B+17	; guardar el resultado en temporal
-mov @B+17 @B+8		; Instr : Ref asig Expr pyc 
+mov @B+17 @B+8		; a = @B+17; 
 mov @B+8 @B+18		; guarda id a
-mov @B+18 0		; Instr : Ref asig Expr pyc 
+mov @B+18 0		; this.a = @B+18; 
 mov @B+8 @B+19		; guarda id a
 mov #2 @B+20		; guarda entero 2
 mov @B+19 A
@@ -61,30 +42,38 @@ mov #2 @B+22		; guarda entero 2
 mov @B+21 A
 divi @B+22	; ENTERO / ENTERO
 mov A @B+23
-mov @B+23 @B+9		; Instr : Ref asig Expr pyc 
+mov @B+23 @B+9		; b = @B+23; 
+
+;print
 mov @B+9 @B+24		; guarda id b
 wri @B+24	; print valor entero de temporal
 wrl
 jmp L2
-L1  mov @B+0 @B+25		; guarda id a
-mov #2 @B+26		; guarda entero 2
-mov @B+26 A
+L1  mov @B+0 @B+23		; guarda id a
+mov #2 @B+24		; guarda entero 2
+mov @B+24 A
 itor
-mov A @B+28
+mov A @B+26
+mov @B+23 A
+divr @B+26	; Term : REAL / ENTERO
+mov A @B+25
 mov @B+25 A
-divr @B+28	; Term : REAL / ENTERO
-mov A @B+27
-mov @B+27 A
 rtoi
-mov A @B+27
-mov @B+27 0		; Instr : Ref asig Expr pyc 
-L2 mov 0 @B+29		; guarda id this.a
+mov A @B+25
+mov @B+25 0		; this.a = @B+25; 
+L2 
+;print
+mov 0 @B+27		; guarda id this.a
+wri @B+27	; print valor entero de temporal
+wrl
+
+;print
+mov @B+0 @B+28		; guarda id a
+wrr @B+28	; print valor real de temporal
+wrl
+
+;print
+mov 2 @B+29		; guarda id this.c
 wri @B+29	; print valor entero de temporal
-wrl
-mov @B+0 @B+30		; guarda id a
-wrr @B+30	; print valor real de temporal
-wrl
-mov 2 @B+31		; guarda id c
-wri @B+31	; print valor entero de temporal
 wrl
 halt

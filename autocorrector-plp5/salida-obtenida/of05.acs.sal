@@ -1,1 +1,7 @@
-ERROR(m2r) en linea 1: nombre de instruccion incorrecto (entra)
+   2.000
+3
+   2.000
+56
+  23.123
+56
+ERROR(m2r) en instruccion 171: el primer operando de 'wri' debe ser entero.

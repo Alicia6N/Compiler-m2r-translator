@@ -1,28 +1,3 @@
-entra con: a
-entra con: a
-;Temporal a = 0
-;Temporal der = @B+3
-entra con: a
-;Temporal this.a = 0
-;Temporal der = @B+1
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-entra con: a
-;Temporal this.a = 0
-;Temporal der = @B+12
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
-;Imprime temp = 
 mov #1 B
 jmp L21
 
@@ -37,17 +12,18 @@ mov @B+3 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 4
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
 ; metodo: 't2'
-L2 mov 0 @B+1		; guarda id a
+L2 mov 0 @B+1		; guarda id this.a
 mov #1 @B+2		; guarda entero 1
 mov @B+1 A
 addi @B+2	; ENTERO + ENTERO
 mov A @B+3	; guardar el resultado en temporal
-mov @B+3 0		; Instr : Ref asig Expr pyc 
-mov 0 @B+4		; guarda id a
+mov @B+3 0		; this.a = @B+3; 
+mov 0 @B+4		; guarda id this.a
 mov #1 @B+5		; guarda entero 1
 mov @B+4 A
 subi @B+5	; ENTERO - ENTERO
@@ -57,6 +33,7 @@ mov @B+6 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 7
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -67,6 +44,7 @@ mov @B+1 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 2
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -77,6 +55,7 @@ mov @B+1 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 2
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -87,6 +66,7 @@ mov @B+1 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 2
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -97,6 +77,7 @@ mov @B+1 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 2
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -107,6 +88,7 @@ mov @B+1 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 2
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -131,6 +113,7 @@ mov @B+2 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 4
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -152,6 +135,7 @@ mov @B+2 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 3
+mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
@@ -176,17 +160,24 @@ mov @B+2 @B-3
 mov @B-2 A
 jmp @A
 ; DIR USED = 4
+mov #0 @B-3
 mov @B-2 A
 jmp @A
 
 L21  mov #44 @B+1		; guarda entero 44
-mov @B+1 0		; Instr : Ref asig Expr pyc 
+mov @B+1 0		; this.a = @B+1; 
+
+;print
 mov #123 @B+2		; guarda entero 123
 wri @B+2	; print valor entero de temporal
 wrl
+
+;print
 mov 0 @B+3		; guarda id this.a
 wri @B+3	; print valor entero de temporal
 wrl
+
+;print
 ; Secuencia de llamada
 mov B @B+5
 mov B A
@@ -197,15 +188,23 @@ jmp L1
 L14 mov @B-1 B
 wri @B+3	; print valor entero de temporal
 wrl
+
+;print
 mov 0 @B+4		; guarda id this.a
 wri @B+4	; print valor entero de temporal
 wrl
+
+;print
 mov #321 @B+5		; guarda entero 321
 wri @B+5	; print valor entero de temporal
 wrl
+
+;print
 mov 0 @B+6		; guarda id this.a
 wri @B+6	; print valor entero de temporal
 wrl
+
+;print
 ; Secuencia de llamada
 mov B @B+8
 mov B A
@@ -216,11 +215,13 @@ jmp L2
 L15 mov @B-1 B
 wri @B+6	; print valor entero de temporal
 wrl
+
+;print
 mov 0 @B+7		; guarda id this.a
 wri @B+7	; print valor entero de temporal
 wrl
 mov 0 @B+8		; guarda id this.a
-mov 0 @B+9		; guarda id a
+mov 0 @B+9		; guarda id this.a
 mov @B+8 A
 addi @B+9	; ENTERO + ENTERO
 mov A @B+10	; guardar el resultado en temporal
@@ -228,10 +229,14 @@ mov 0 @B+11		; guarda id this.a
 mov @B+10 A
 subi @B+11	; ENTERO - ENTERO
 mov A @B+12	; guardar el resultado en temporal
-mov @B+12 0		; Instr : Ref asig Expr pyc 
+mov @B+12 0		; this.a = @B+12; 
+
+;print
 mov 0 @B+13		; guarda id this.a
 wri @B+13	; print valor entero de temporal
 wrl
+
+;print
 ; Secuencia de llamada
 mov B @B+15
 mov B A
@@ -242,6 +247,8 @@ jmp L3
 L16 mov @B-1 B
 wri @B+13	; print valor entero de temporal
 wrl
+
+;print
 ; Secuencia de llamada
 mov B @B+15
 mov B A
@@ -252,6 +259,8 @@ jmp L4
 L17 mov @B-1 B
 wri @B+13	; print valor entero de temporal
 wrl
+
+;print
 ; Secuencia de llamada
 mov B @B+15
 mov B A
@@ -262,6 +271,8 @@ jmp L5
 L18 mov @B-1 B
 wri @B+13	; print valor entero de temporal
 wrl
+
+;print
 ; Secuencia de llamada
 mov B @B+15
 mov B A
@@ -272,6 +283,8 @@ jmp L6
 L19 mov @B-1 B
 wri @B+13	; print valor entero de temporal
 wrl
+
+;print
 ; Secuencia de llamada
 mov B @B+15
 mov B A
@@ -282,6 +295,8 @@ jmp L13
 L20 mov @B-1 B
 wri @B+13	; print valor entero de temporal
 wrl
+
+;print
 mov #117 @B+14		; guarda entero 117
 wri @B+14	; print valor entero de temporal
 wrl
