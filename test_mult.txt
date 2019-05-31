@@ -14,10 +14,18 @@ methods:
   return res;
  }
 
+ int resta(int a,int b,int c)
+ {
+  int res;
+  res = a + b + c;
+  return res;
+ }
+
  int main()
  {
-  f = suma(8,7,3);
+  f = suma(8,7,5);
   print(f);   // 20.500
-
+  g = resta(3.4,7,8.5);
+  print(g);   // 18
  }
 }

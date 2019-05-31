@@ -1,8 +1,6 @@
 123
 55
 44
-55
-44
- 122.200
-11
-ERROR(m2r) en instruccion 21: el primer operando de 'addi' debe ser entero.
+
+ERROR(m2r) al leer un valor de la posicion de memoria 24 sin haberlo
+inicializado, en la instrucción 3

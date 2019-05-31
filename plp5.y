@@ -650,11 +650,7 @@ Par : 			{
 				}
 	| Expr 		{ 
 					int pos_args;
-					if($0.indice_args == 0){
-						$$.code = ";entra\n";
-						pos_args = REL_DIR + 3 + $0.indice_args + 1;
-					}
-					else pos_args = REL_DIR + 3 + $0.indice_args;
+					pos_args = REL_DIR + 3 + 2;
 					
 					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo; 
 					const char *id = tm->metodos[$0.indice_func].id.c_str();
@@ -695,12 +691,8 @@ CPar : 	{
 		}
 	 	| coma Expr 	{ 
 
-			 				int pos_args;
-							if($0.indice_args == 0){
-								pos_args = REL_DIR + 3 + $0.indice_args + 1;
-							}
-							else pos_args = REL_DIR + 3 + $0.indice_args;
-
+			 				int pos_args=0;
+							pos_args = REL_DIR + 3 + 2;
 			 				int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo; 
 							const char *id = tm->metodos[$0.indice_func].id.c_str();
 							if(tipo_arg == -1){
@@ -726,6 +718,7 @@ CPar : 	{
 							}
 							$$.indice_args = $0.indice_args + 1;
 							$$.indice_func = $0.indice_func;
+						//	cout << pos_args << " " << REL_DIR << " " <<$0.indice_args;
 						} CPar	{ 
 									$$.code = $3.code + $4.code;
 								};

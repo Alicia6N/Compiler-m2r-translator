@@ -22,7 +22,7 @@ mov #1 @B+8		; guarda entero 1
 mov @B+7 A
 subi @B+8	; ENTERO - ENTERO
 mov A @B+9	; guardar el resultado en temporal
-mov @B+9 @B+13	; asigna un param
+mov @B+9 @B+14	; asigna un param
 ; Secuencia de llamada
 mov B @B+11
 mov B A
@@ -46,7 +46,7 @@ jmp @A
 L5  
 ;print
 mov #6 @B+1		; guarda entero 6
-mov @B+1 @B+5	; asigna un param
+mov @B+1 @B+6	; asigna un param
 ; Secuencia de llamada
 mov B @B+3
 mov B A

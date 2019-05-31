@@ -1,6 +1,7 @@
 ;Imprime temp = 1
+;Imprime temp = 1
 mov #5 B
-jmp L2
+jmp L3
 
 ; metodo: 'suma'
 L1 mov @B+0 @B+5		; guarda id a
@@ -23,20 +24,41 @@ mov #0 @B-3
 mov @B-2 A
 jmp @A
 
-L2  mov #8 @B+1		; guarda entero 8
-mov @B+1 @B+5	; asigna un param
+; metodo: 'resta'
+L2 mov @B+0 @B+5		; guarda id a
+mov @B+1 @B+6		; guarda id b
+mov @B+5 A
+addi @B+6	; ENTERO + ENTERO
+mov A @B+7	; guardar el resultado en temporal
+mov @B+2 @B+8		; guarda id c
+mov @B+7 A
+addi @B+8	; ENTERO + ENTERO
+mov A @B+9	; guardar el resultado en temporal
+mov @B+9 @B+3		; res = @B+9; 
+mov @B+3 @B+10		; guarda id res
+; Secuencia de retorno
+mov @B+10 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 10
+mov #0 @B-3
+mov @B-2 A
+jmp @A
+
+L3  mov #8 @B+1		; guarda entero 8
+mov @B+1 @B+6	; asigna un param
 mov #7 @B+2		; guarda entero 7
-mov @B+2 @B+6	; asigna un param
-mov #3 @B+3		; guarda entero 3
+mov @B+2 @B+7	; asigna un param
+mov #5 @B+3		; guarda entero 5
 mov @B+3 @B+8	; asigna un param
 ; Secuencia de llamada
 mov B @B+5
 mov B A
 addi #6
 mov A B
-mvetq L3 @B-2
+mvetq L4 @B-2
 jmp L1
-L3 mov @B-1 B
+L4 mov @B-1 B
 mov @B+3 A
 itor
 mov A @B+3
@@ -45,5 +67,32 @@ mov @B+3 3		; this.f = @B+3;
 ;print
 mov 3 @B+4		; guarda id this.f
 wrr @B+4	; print valor real de temporal
+wrl
+mov $3.4 @B+5		; guarda real 3.4
+mov @B+5 A
+rtoi 
+mov A @B+10	; asigna un param
+mov #7 @B+6		; guarda entero 7
+mov @B+6 @B+11	; asigna un param
+mov $8.5 @B+7		; guarda real 8.5
+mov @B+7 A
+rtoi 
+mov A @B+12	; asigna un param
+; Secuencia de llamada
+mov B @B+9
+mov B A
+addi #10
+mov A B
+mvetq L5 @B-2
+jmp L2
+L5 mov @B-1 B
+mov @B+7 A
+itor
+mov A @B+7
+mov @B+7 4		; this.g = @B+7; 
+
+;print
+mov 4 @B+8		; guarda id this.g
+wrr @B+8	; print valor real de temporal
 wrl
 halt

@@ -1,39 +1,31 @@
+class prfcorrecto1 {
 
+attributes:
 
-class of01
-{
-	attributes:
+  int a,b,c;
+  float f,g;
 
-	methods:
+methods:
 
-		float test4()
-		{
-			return 444.0;
-		}
+ float suma(int a,int b,float c)
+ {
+  float res;
+  res = a + b + c;
+  return res;
+ }
 
-		float test2()
-		{
-			return test4() + 1;
-		}
+ int resta(int a,float b,int c)
+ {
+  float res;
+  res = a + b + c;
+  return res;
+ }
 
-		int test(int a, float b)
-		{
-			return 1234 + 6 * 1;
-		}
-
-		float test3(int a)
-		{
-			return 500.01;
-		}
-
-		int main()
-		{
-			print(2);
-			print(test(2, 2));
-			print(23);
-			print(test3(2));
-			print(54);
-			print(test2());
-			print(117);
-		}
+ int main()
+ {
+  f = suma(8,7,5.5);
+  print(f);   // 20.500
+  g = resta(3.4,7,8.5);
+  print(g);   // 18
+ }
 }

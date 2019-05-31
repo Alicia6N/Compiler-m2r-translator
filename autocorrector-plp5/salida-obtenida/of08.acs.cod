@@ -79,9 +79,9 @@ mov @B+0 @B+7		; guarda id c
 wri @B+7	; print valor entero de temporal
 wrl
 mov @B+0 @B+8		; guarda id c
-mov @B+8 @B+12	; asigna un param
+mov @B+8 @B+13	; asigna un param
 mov 11 @B+9		; guarda id this.c
-mov @B+9 @B+13	; asigna un param
+mov @B+9 @B+14	; asigna un param
 ; Secuencia de llamada
 mov B @B+11
 mov B A
@@ -135,7 +135,7 @@ mov 11 @B+21		; guarda id this.c
 wri @B+21	; print valor entero de temporal
 wrl
 mov 11 @B+22		; guarda id this.c
-mov @B+22 @B+26	; asigna un param
+mov @B+22 @B+27	; asigna un param
 mov #0 @B+23	; guarda 0 y empieza recursivo arrays de this.b
 mov #0 @B+24		; guarda entero 0
 mov @B+23 A 	; hace recursivo de arrays en Ref
@@ -149,7 +149,7 @@ addi #1
 mov @A @B+26	;acaba array en Factor
 mov @B+26 A
 rtoi 
-mov A @B+30	; asigna un param
+mov A @B+31	; asigna un param
 ; Secuencia de llamada
 mov B @B+28
 mov B A

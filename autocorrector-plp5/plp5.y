@@ -179,7 +179,7 @@ Instr : pyc { $$.code = " ";  }
 															if (getTipoSimple($3.tipo) == ENTERO){
 																$$.code += "wri " + $3.temp+ "\t; print valor entero de temporal\n";
 															}
-															else if(getTipoSimple($3.tipo) == REAL){
+															else if(getTipoSimple($3.tipo) == REAL){																
 																$$.code += "wrr " + $3.temp +"\t; print valor real de temporal\n";
 															}
 															$$.code += "wrl\n";
@@ -605,7 +605,10 @@ CArgp : coma Tipo id 	{
 Instr : _return Expr pyc {
 							if(MAIN_LABEL!="") msgError(ERRFMAIN, $1.nlin, $1.ncol, $1.lexema);
 							$$.code = $2.code;
-							$$.code += "; Secuencia de retorno\n";						
+						 	$$.code += "; Secuencia de retorno\n";	
+							//$$.code += "mov " + $2.temp + " A\n";
+							//$$.code += "itor \n";	
+							//$$.code += "mov A " + $2.temp + "\n";				
 							$$.code += "mov " + $2.temp + " @B-3\n";
 							$$.code += "mov @B-2 A\n";
 							$$.code += "jmp @A\n";
@@ -614,9 +617,7 @@ Instr : _return Expr pyc {
 Factor : id pari 	{ 
 						int index_func = buscarMetodo($1.lexema);
 						$$.indice_func = index_func;
-						//cout << "--> " << $1.nlin << " " << $1.ncol << endl;
 						if($$.indice_func == -1){msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);} 
-						//cout << "indice funcion = " << $$.indice_func << " --> " << tm->metodos[$$.indice_func].id << endl;
 						
 						tm->metodos[index_func].mlin = $1.nlin;
 						tm->metodos[index_func].mcol = $1.ncol;
@@ -624,13 +625,11 @@ Factor : id pari 	{
 					} Par pard { //el error
 							int index_func = buscarMetodo($1.lexema);
 							string prueba =  tm->metodos[index_func].etiq;
-							//cout << prueba;
 							$$.code = $4.code;
 							$$.code += "; Secuencia de llamada\n";
 							int op = REL_DIR + 2;
 							$$.code += "mov B @B+" + to_string(op) +"\n"; 
 							$$.code += "mov B A\n"; //B+0... B+1(Valor), B+2(Direccion), B+3(b atnerior), B+4(Primer parámetro)						
-							//int add = REL_DIR + 3 + tm->metodos[index_func].args.size();
 							$$.code += "addi #" + $4.temp + "\n"; //valor a calcular
 							$$.code += "mov A B\n"; // Nueva B apunta al primer nuevo arg.
 							string etiq = nuevaEtiq();
@@ -639,6 +638,7 @@ Factor : id pari 	{
 							$$.code += etiq + " mov @B-1 B\n";
 							$$.temp = "@B+" + to_string(REL_DIR);
 							$$.tipo = tm->metodos[index_func].tipo;
+		
 						  }; 
 
 Par : 			{
@@ -650,10 +650,7 @@ Par : 			{
 				}
 	| Expr 		{ 
 					int pos_args;
-					if($0.indice_args == 0){
-						pos_args = REL_DIR + 3 + $0.indice_args + 1;
-					}
-					else pos_args = REL_DIR + 3 + $0.indice_args;
+					pos_args = REL_DIR + 3 + 2;
 					
 					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo; 
 					const char *id = tm->metodos[$0.indice_func].id.c_str();
@@ -694,12 +691,9 @@ CPar : 	{
 		}
 	 	| coma Expr 	{ 
 
-			 				int pos_args;
-							if($0.indice_args == 0){
-								pos_args = REL_DIR + 3 + $0.indice_args + 1;
-							}
-							else pos_args = REL_DIR + 3 + $0.indice_args;
-
+			 				int pos_args=0;
+							pos_args = REL_DIR + 3 + 2;
+						//	cout << pos_args << " " << REL_DIR << " " <<$0.indice_args << " ";
 			 				int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo; 
 							const char *id = tm->metodos[$0.indice_func].id.c_str();
 							if(tipo_arg == -1){
@@ -725,6 +719,7 @@ CPar : 	{
 							}
 							$$.indice_args = $0.indice_args + 1;
 							$$.indice_func = $0.indice_func;
+						//	cout << pos_args << " " << REL_DIR << " " <<$0.indice_args;
 						} CPar	{ 
 									$$.code = $3.code + $4.code;
 								};
