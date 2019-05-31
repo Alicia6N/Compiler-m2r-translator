@@ -1,15 +1,3 @@
-;Imprime temp = 0
-;Imprime temp = 0
-;Imprime temp = 0
-;Imprime temp = 0
-;Imprime temp = 0
-;Imprime temp = 0
-;Imprime temp = 0
-;Imprime temp = 1
-;Imprime temp = 0
-;Imprime temp = 1
-;Imprime temp = 0
-;Imprime temp = 0
 mov #12 B
 jmp L3
 
@@ -79,9 +67,9 @@ mov @B+0 @B+7		; guarda id c
 wri @B+7	; print valor entero de temporal
 wrl
 mov @B+0 @B+8		; guarda id c
-mov @B+8 @B+13	; asigna un param
+mov @B+8 @B+13	; asigna un param Par
 mov 11 @B+9		; guarda id this.c
-mov @B+9 @B+14	; asigna un param
+mov @B+9 @B+14	; asigna un param CPar
 ; Secuencia de llamada
 mov B @B+11
 mov B A
@@ -101,22 +89,22 @@ wrl
 mov @B+0 @B+11		; guarda id c
 wri @B+11	; print valor entero de temporal
 wrl
-mov #0 @B+12	; guarda 0 y empieza recursivo arrays de this.b
+mov #0 @B+12	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
 mov #0 @B+13		; guarda entero 0
 mov @B+12 A 	; hace recursivo de arrays en Ref
 muli #10
 addi @B+13	; fallo en este 
 mov A @B+14 
 mov $122.2 @B+15		; guarda real 122.2
-mov @B+14 A
+mov @B+14 A	; empieza arrays en Ref asig de: this.b
 muli #1 
 addi #1
-mov @B+15 @A
+mov @B+15 @A	; acaba arrays en Ref asig
 mov #11 @B+16		; guarda entero 11
 mov @B+16 11		; this.c = @B+16; 
 
 ;print
-mov #0 @B+17	; guarda 0 y empieza recursivo arrays de this.b
+mov #0 @B+17	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
 mov #0 @B+18		; guarda entero 0
 mov @B+17 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -135,8 +123,8 @@ mov 11 @B+21		; guarda id this.c
 wri @B+21	; print valor entero de temporal
 wrl
 mov 11 @B+22		; guarda id this.c
-mov @B+22 @B+27	; asigna un param
-mov #0 @B+23	; guarda 0 y empieza recursivo arrays de this.b
+mov @B+22 @B+27	; asigna un param Par
+mov #0 @B+23	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
 mov #0 @B+24		; guarda entero 0
 mov @B+23 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -147,9 +135,7 @@ mov @B+25 @B+26		; guarda id this.b
 muli #1 
 addi #1
 mov @A @B+26	;acaba array en Factor
-mov @B+26 A
-rtoi 
-mov A @B+31	; asigna un param
+mov @B+26 @B+31	; asigna un param CPar
 ; Secuencia de llamada
 mov B @B+28
 mov B A
@@ -161,7 +147,7 @@ L5 mov @B-1 B
 mov @B+26 @B+1		; foo = @B+26; 
 
 ;print
-mov #0 @B+27	; guarda 0 y empieza recursivo arrays de this.b
+mov #0 @B+27	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
 mov #0 @B+28		; guarda entero 0
 mov @B+27 A 	; hace recursivo de arrays en Ref
 muli #10

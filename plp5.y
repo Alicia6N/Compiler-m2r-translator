@@ -84,8 +84,8 @@ Metodos : _int _main pari pard { REL_DIR = 0; MAIN_LABEL = nuevaEtiq(); } Bloque
 Tipo 	: _int {$$.tipo = ENTERO; }
 	 	| _float {$$.tipo = REAL;};
 
-Bloque : llavei {ts = new TablaSimbolos(ts,REL_DIR); /*cout << ts->temp_dir << endl;*/} BDecl SeqInstr llaved {
-																	 		$$.code = $3.code + $4.code;
+Bloque : llavei {ts = new TablaSimbolos(ts,REL_DIR); /*cout << ts->temp_dir << endl;*/} BDecl {$$.tipo_metodo = $0.tipo_metodo;} SeqInstr llaved {
+																	 		$$.code = $3.code + $5.code;
 																	 		deleteScope(ts);
 																			//imprimir_simbolos(ts);
 																			ts = ts->root;
@@ -133,7 +133,7 @@ V 	: cori nentero cord { $$.size = $0.size * atoi($2.lexema); $$.tipo = $0.tipo;
 			$$.tipo = $0.tipo;
 		};
 
-SeqInstr : SeqInstr Instr 	{ $$.code = $1.code + $2.code; }
+SeqInstr : SeqInstr {$$.tipo_metodo = $0.tipo_metodo;} Instr 	{ $$.code = $1.code + $3.code; }
 		 | { $$.code = " ";  };
 
 Instr : pyc { $$.code = " ";  }
@@ -153,17 +153,19 @@ Instr : pyc { $$.code = " ";  }
 																$$.code += "itor\n";
 																$$.code += "mov A " + $4.temp + "\n";
 															}
+
+															//cout << "id = " << $1.aux_lexema << endl;
 															
 															//if ($1.tipo == ARRAY){
 															if ($1.arrays == true) {
-																
-																$$.code += "mov " + $1.temp + " A\n";	
+																$$.code += "mov " + $1.temp + " A\t; empieza arrays en Ref asig de: " + $1.aux_lexema + "\n";	
 																$$.code += "muli #1 \n";
-																if($1.dbase.find("@") != string::npos){
-																	$$.code += "addi "+ $1.dbase + "\n";
-																}
-																else $$.code += "addi #"+ $1.dbase + "\n";
-																$$.code += "mov " + $4.temp + " @A\n";
+																//if($1.dbase.find("@") != string::npos){
+																	//$$.code += "addi "+ $1.dbase + "\n";
+																//}
+																//else $$.code += "addi #"+ $1.dbase + "\n";
+																$$.code += "addi #"+ $1.dbase + "\n";
+																$$.code += "mov " + $4.temp + " @A\t; acaba arrays en Ref asig\n";
 															}
 															else {
 																$$.code += "mov " + $4.temp + " " + $1.temp + "\t\t; " + $1.aux_lexema + " = " + $4.temp + "; \n";
@@ -172,7 +174,7 @@ Instr : pyc { $$.code = " ";  }
 	  | _print pari Expr pard pyc 						{
 		  													$$.code = "\n;print\n" + $3.code;
 
-															cout << ";Imprime temp = " << $3.tipo << endl;
+															//cout << ";Imprime temp = " << $3.tipo << endl;
 															
 															//cout << "TIPO BASE = " << getTipoSimple($3.tipo) << endl;
 
@@ -193,10 +195,11 @@ Instr : pyc { $$.code = " ";  }
 																$$.code += "\n;scan\n";
 																$$.code += "mov " + $3.temp + " A\n";	
 																$$.code += "muli #1 \n";
-																if($3.dbase.find("@") != string::npos){
+																/*if($3.dbase.find("@") != string::npos){
 																	$$.code += "addi "+ $3.dbase + "\n";
 																}
-																else $$.code += "addi #"+ $3.dbase + "\n";
+																else*/
+																 $$.code += "addi #"+ $3.dbase + "\n";
 
 																if (tipo_tres == ENTERO){
 																	$$.code += "rdi @B+" + temporal +  "\t; guardar valor entero en temporal\n";
@@ -422,10 +425,11 @@ Factor :  Ref      		{
 								string temp = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
 								$$.code += "mov " + $1.temp + " @B+" + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
 								$$.code += "muli #1 \n";
-								if($1.dbase.find("@") != string::npos){
-									$$.code += "addi "+ $1.dbase + "\n";
-								}
-								else $$.code += "addi #"+ $1.dbase + "\n";
+								//if($1.dbase.find("@") != string::npos){
+								//	$$.code += "addi "+ $1.dbase + "\n";
+								//}
+								//else $$.code += "addi #"+ $1.dbase + "\n";
+								$$.code += "addi #"+ $1.dbase + "\n";
 								$$.code += "mov @A @B+" + temp + "\t;acaba array en Factor\n";
 								$$.temp = "@B+" + temp;
 							}
@@ -469,7 +473,7 @@ Ref : _this punto id  			{
 
 										if(s.index_tipo >= ARRAY){
 											string temp = "@B+"+nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
+											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de Ref this" + $$.aux_lexema + "\n";
 											$$.temp = temp;
 										}
 									}
@@ -485,7 +489,8 @@ Ref : _this punto id  			{
 										s.exists = false;
 										$$.tipo = s.index_tipo;
 										$$.temp = "@B+"+s.dir;
-										$$.dbase = "@B+"+s.dir;
+										//$$.dbase = "@B+"+s.dir;
+										$$.dbase = s.dir;
 										string aux = $1.lexema;
 										$$.aux_lexema = aux;
 
@@ -506,7 +511,7 @@ Ref : _this punto id  			{
 
 										if(s.index_tipo >= ARRAY){
 											string temp = "@B+"+nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de " + $$.aux_lexema + "\n";
+											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de en Ref id " + $$.aux_lexema + "\n";
 											$$.temp = temp;
 										}
 									}
@@ -553,26 +558,28 @@ Met : Tipo id 	{
 					vector<Arg> aux_vector;
 					//m.arg = aux_vector;
 					tm->metodos.push_back(Metodo{$1.tipo, $2.lexema, aux_vector});
-				} pari Arg pard Bloque 	{ 
-											string etiqueta = nuevaEtiq();
-											string aux_lex = $2.lexema;
-											//cout << tm->metodos[tm->metodos.size()-1].id << endl;
-											$$.code = "; metodo: '" + tm->metodos[tm->metodos.size()-1].id + "'\n";
-											$$.code += etiqueta + $7.code;
-											tm->metodos[tm->metodos.size()-1].dirs = REL_DIR + 1;
-											tm->metodos[tm->metodos.size()-1].etiq = etiqueta;
-											$$.code += "; DIR USED = " + to_string(tm->metodos[tm->metodos.size()-1].dirs) + "\n";
-											ts = ts->root; //Cerramos ámbito de la función.
+					string etiqueta = nuevaEtiq();
+					tm->metodos[tm->metodos.size()-1].etiq = etiqueta;
+				} pari Arg pard {$$.tipo_metodo = $1.tipo;} Bloque 	{ 
+																		
+																		string aux_lex = $2.lexema;
+																		//cout << tm->metodos[tm->metodos.size()-1].id << endl;
+																		$$.code = "; metodo: '" + tm->metodos[tm->metodos.size()-1].id + "'\n";
+																		$$.code += tm->metodos[tm->metodos.size()-1].etiq + $8.code;
+																		tm->metodos[tm->metodos.size()-1].dirs = REL_DIR + 1;
+																		
+																		$$.code += "; DIR USED = " + to_string(tm->metodos[tm->metodos.size()-1].dirs) + "\n";
+																		ts = ts->root; //Cerramos ámbito de la función.
 
-											//poner siempre el return por defecto.
-											if (tm->metodos[tm->metodos.size()-1].tipo == ENTERO)
-												$$.code += "mov #0 @B-3\n";
-											else
-												$$.code += "mov $0.0 @B-3\n";
+																		//poner siempre el return por defecto.
+																		if (tm->metodos[tm->metodos.size()-1].tipo == ENTERO)
+																			$$.code += "mov #0 @B-3\n";
+																		else
+																			$$.code += "mov $0.0 @B-3\n";
 
-											$$.code += "mov @B-2 A\n";
-											$$.code += "jmp @A\n\n";
-										}; 
+																		$$.code += "mov @B-2 A\n";
+																		$$.code += "jmp @A\n\n";
+																	}; 
 
 Arg : { $$.code = ""; $$.tipo = $0.tipo; tm->metodos[tm->metodos.size()-1].args.push_back(Arg{-1,""}); }
 	| { $$.tipo = $0.tipo; } CArg { $$.code = $2.code; };
@@ -598,17 +605,25 @@ CArgp : coma Tipo id 	{
 							VAR_MEM += 1;
 							s.size = 1; 
 							anyadir(ts,s);
-							tm->metodos[tm->metodos.size()-1].args.push_back(Arg{$1.tipo,aux_lex});
+							tm->metodos[tm->metodos.size()-1].args.push_back(Arg{$2.tipo,aux_lex});
 						} CArgp {$$.code = "";}
 	  | { $$.code = ""; tm->metodos[tm->metodos.size()-1].args.push_back(Arg{-1,""}); };
 
 Instr : _return Expr pyc {
 							if(MAIN_LABEL!="") msgError(ERRFMAIN, $1.nlin, $1.ncol, $1.lexema);
+							//cout << "Codigo del método en return = " << $0.tipo_metodo << endl;
 							$$.code = $2.code;
-						 	$$.code += "; Secuencia de retorno\n";	
-							//$$.code += "mov " + $2.temp + " A\n";
-							//$$.code += "itor \n";	
-							//$$.code += "mov A " + $2.temp + "\n";				
+						 	$$.code += "; Secuencia de retorno\n";
+							if($0.tipo_metodo == ENTERO && $2.tipo == REAL){
+								$$.code += "mov " + $2.temp + " A\n";
+								$$.code += "rtoi\n";
+								$$.code += "mov A " + $2.temp + "\n";
+							}
+							else if($0.tipo_metodo == REAL && $2.tipo == ENTERO){
+								$$.code += "mov " + $2.temp + " A\n";
+								$$.code += "itor\n";
+								$$.code += "mov A " + $2.temp + "\n";
+							}
 							$$.code += "mov " + $2.temp + " @B-3\n";
 							$$.code += "mov @B-2 A\n";
 							$$.code += "jmp @A\n";
@@ -638,7 +653,6 @@ Factor : id pari 	{
 							$$.code += etiq + " mov @B-1 B\n";
 							$$.temp = "@B+" + to_string(REL_DIR);
 							$$.tipo = tm->metodos[index_func].tipo;
-		
 						  }; 
 
 Par : 			{
@@ -652,7 +666,14 @@ Par : 			{
 					int pos_args;
 					pos_args = REL_DIR + 3 + 2;
 					
-					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo; 
+					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo;
+
+					/*cout << "Metodo: " << tm->metodos[$0.indice_func].id << " con argumentos: ";
+					cout << tm->metodos[$0.indice_func].args[0].tipo << " ";
+					cout << tm->metodos[$0.indice_func].args[1].tipo << " ";
+					cout << tm->metodos[$0.indice_func].args[2].tipo << " ";
+					cout << tm->metodos[$0.indice_func].args[3].tipo << endl;*/
+
 					const char *id = tm->metodos[$0.indice_func].id.c_str();
 
 					if(tipo_arg == -1){msgError(ERRFSOBRAN,  tm->metodos[$0.indice_func].mlin, tm->metodos[$0.indice_func].mcol,id); }
@@ -662,17 +683,17 @@ Par : 			{
 						$$.code = $1.code;
 						$$.code += "mov " + $1.temp + " A\n";
 						$$.code += "rtoi \n";
-						$$.code += "mov A @B+" + to_string(pos_args) + "\t; asigna un param\n";
+						$$.code += "mov A @B+" + to_string(pos_args) + "\t; asigna un param Par | entero != real\n";
 					} 
 					else if(tipo_arg == REAL && tipo_expr == ENTERO){
 						$$.code = $1.code;
 						$$.code += "mov " + $1.temp + " A\n";
 						$$.code += "itor \n";
-						$$.code += "mov A @B+" + to_string(pos_args) + "\t; asigna un param\n";
+						$$.code += "mov A @B+" + to_string(pos_args) + "\t; asigna un param Par | real != entero\n";
 					}
 					else{
 						$$.code = $1.code;
-						$$.code += "mov " + $1.temp + " @B+" + to_string(pos_args) + "\t; asigna un param\n";
+						$$.code += "mov " + $1.temp + " @B+" + to_string(pos_args) + "\t; asigna un param Par\n";
 					}
 
 					$$.indice_args = $0.indice_args + 1;
@@ -704,17 +725,17 @@ CPar : 	{
 								$$.code = $2.code;
 								$$.code += "mov " + $2.temp + " A\n";
 								$$.code += "rtoi \n";
-								$$.code += "mov A @B+" + to_string(pos_args) + "\t; asigna un param\n";
+								$$.code += "mov A @B+" + to_string(pos_args) + "\t; asigna un param CPar | entero != real\n";
 							} 
 							else if(tipo_arg == REAL && tipo_expr == ENTERO) {
 								$$.code = $2.code;
 								$$.code += "mov " + $2.temp + " A\n";
 								$$.code += "itor \n";
-								$$.code += "mov A @B+" + to_string(pos_args) + "\t; asigna un param\n";
+								$$.code += "mov A @B+" + to_string(pos_args) + "\t; asigna un param CPar | real != entero\n";
 							}
 							else {
 								$$.code = $2.code;
-								$$.code += "mov " + $2.temp + " @B+" + to_string(pos_args) + "\t; asigna un param\n";
+								$$.code += "mov " + $2.temp + " @B+" + to_string(pos_args) + "\t; asigna un param CPar\n";
 							}
 							$$.indice_args = $0.indice_args + 1;
 							$$.indice_func = $0.indice_func;

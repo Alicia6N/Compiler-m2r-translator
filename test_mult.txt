@@ -1,31 +1,18 @@
-class prfcorrecto1 {
+class prfcorrecto3 {
 
 attributes:
 
-  int a,b,c;
-  float f,g;
-
 methods:
 
- int suma(int a,int b,int c)
+ int factorial(int n)
  {
-  int res;
-  res = a + b + c;
-  return res;
- }
-
- int resta(int a,int b,int c)
- {
-  int res;
-  res = a + b + c;
-  return res;
+  print(n);
+  if (n<=1) return 1;
+  else      return n*factorial(n-1);
  }
 
  int main()
  {
-  f = suma(8,7,5);
-  print(f);   // 20.500
-  g = resta(3.4,7,8.5);
-  print(g);   // 18
+  print(factorial(6));
  }
 }

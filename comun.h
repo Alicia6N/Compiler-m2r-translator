@@ -19,6 +19,7 @@ typedef struct {
    
    int indice_func;
    int indice_args;
+   int tipo_metodo;
 } MITIPO;
 
 struct Simbolo {
