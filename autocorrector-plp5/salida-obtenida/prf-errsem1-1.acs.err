@@ -1,1 +1,1 @@
-Error semantico (19,10): faltan parámetros en la llamada a la función 'g'
+Error semantico (19,10): sobran parámetros en la llamada a la función 'g'

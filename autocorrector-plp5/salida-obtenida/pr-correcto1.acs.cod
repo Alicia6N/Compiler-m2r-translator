@@ -1,7 +1,11 @@
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
 mov #3 B
-jmp L3
+jmp L1
 
-L3  mov $7.5 @B+3		; guarda real 7.5
+L1  mov $7.5 @B+3		; guarda real 7.5
 mov @B+3 @B+0		; a = @B+3; 
 mov @B+0 @B+4		; guarda id a
 mov @B+4 A
@@ -15,7 +19,7 @@ itor
 gtrr @B+6	; Expr relop Esimple
 mov A @B+7	; guardar el resultado en temporal
 mov @B+7 A
-jz L1
+jz L2
  mov 2 @B+11		; guarda id this.c
 mov #3 @B+12		; guarda entero 3
 ; Factor -> pari Expr pard
@@ -48,8 +52,8 @@ mov @B+23 @B+9		; b = @B+23;
 mov @B+9 @B+24		; guarda id b
 wri @B+24	; print valor entero de temporal
 wrl
-jmp L2
-L1  mov @B+0 @B+23		; guarda id a
+jmp L3
+L2  mov @B+0 @B+23		; guarda id a
 mov #2 @B+24		; guarda entero 2
 mov @B+24 A
 itor
@@ -61,7 +65,7 @@ mov @B+25 A
 rtoi
 mov A @B+25
 mov @B+25 0		; this.a = @B+25; 
-L2 
+L3 
 ;print
 mov 0 @B+27		; guarda id this.a
 wri @B+27	; print valor entero de temporal

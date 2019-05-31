@@ -1,0 +1,594 @@
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+mov #25 B
+jmp L28
+
+; metodo: 'inicializarLaberinto'
+L5 mov #0 @B+4		; guarda entero 0
+mov @B+4 @B+1		; i = @B+4; 
+L3 mov @B+1 @B+5		; guarda id i
+mov @B+0 @B+6		; guarda id n
+mov @B+5 A
+lssi @B+6	; Expr relop Esimple
+mov A @B+7	; guardar el resultado en temporal
+	; WHILE
+mov @B+7 A
+jz L4	 ; if else
+ mov #0 @B+8		; guarda entero 0
+mov @B+8 @B+2		; j = @B+8; 
+L1 mov @B+2 @B+9		; guarda id j
+mov @B+0 @B+10		; guarda id n
+mov @B+9 A
+lssi @B+10	; Expr relop Esimple
+mov A @B+11	; guardar el resultado en temporal
+	; WHILE
+mov @B+11 A
+jz L2	 ; if else
+ mov #0 @B+12	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov @B+1 @B+13		; guarda id i
+mov @B+12 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+13	; fallo en este 
+mov A @B+14 
+mov @B+2 @B+15		; guarda id j
+mov @B+14 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+15	; fallo en este 
+mov A @B+16 
+mov #0 @B+17		; guarda entero 0
+mov @B+16 A
+muli #1 
+addi #0
+mov @B+17 @A
+mov @B+2 @B+18		; guarda id j
+mov #1 @B+19		; guarda entero 1
+mov @B+18 A
+addi @B+19	; ENTERO + ENTERO
+mov A @B+20	; guardar el resultado en temporal
+mov @B+20 @B+2		; j = @B+20; 
+jmp L1
+	; ENDWHILE
+L2 mov @B+1 @B+21		; guarda id i
+mov #1 @B+22		; guarda entero 1
+mov @B+21 A
+addi @B+22	; ENTERO + ENTERO
+mov A @B+23	; guardar el resultado en temporal
+mov @B+23 @B+1		; i = @B+23; 
+jmp L3
+	; ENDWHILE
+L4 mov #1 @B+24		; guarda entero 1
+; Secuencia de retorno
+mov @B+24 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 23
+mov #0 @B-3
+mov @B-2 A
+jmp @A
+
+; metodo: 'ponerCaminos'
+L12 mov #0 @B+4		; guarda entero 0
+mov @B+4 @B+1		; i = @B+4; 
+L6 mov @B+1 @B+5		; guarda id i
+mov @B+0 @B+6		; guarda id n
+mov @B+5 A
+lssi @B+6	; Expr relop Esimple
+mov A @B+7	; guardar el resultado en temporal
+	; WHILE
+mov @B+7 A
+jz L7	 ; if else
+ mov #0 @B+8	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov @B+1 @B+9		; guarda id i
+mov @B+8 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+9	; fallo en este 
+mov A @B+10 
+mov @B+1 @B+11		; guarda id i
+mov @B+10 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+11	; fallo en este 
+mov A @B+12 
+mov #1 @B+13		; guarda entero 1
+mov @B+12 A
+muli #1 
+addi #0
+mov @B+13 @A
+mov @B+1 @B+14		; guarda id i
+mov #1 @B+15		; guarda entero 1
+mov @B+14 A
+addi @B+15	; ENTERO + ENTERO
+mov A @B+16	; guardar el resultado en temporal
+mov @B+16 @B+1		; i = @B+16; 
+jmp L6
+	; ENDWHILE
+L7 mov #0 @B+17		; guarda entero 0
+mov @B+17 @B+1		; i = @B+17; 
+L8 mov @B+1 @B+18		; guarda id i
+mov @B+0 @B+19		; guarda id n
+mov @B+18 A
+lssi @B+19	; Expr relop Esimple
+mov A @B+20	; guardar el resultado en temporal
+	; WHILE
+mov @B+20 A
+jz L9	 ; if else
+ mov #0 @B+21	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov @B+1 @B+22		; guarda id i
+mov @B+21 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+22	; fallo en este 
+mov A @B+23 
+mov #0 @B+24		; guarda entero 0
+mov @B+23 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+24	; fallo en este 
+mov A @B+25 
+mov #1 @B+26		; guarda entero 1
+mov @B+25 A
+muli #1 
+addi #0
+mov @B+26 @A
+mov @B+1 @B+27		; guarda id i
+mov #1 @B+28		; guarda entero 1
+mov @B+27 A
+addi @B+28	; ENTERO + ENTERO
+mov A @B+29	; guardar el resultado en temporal
+mov @B+29 @B+1		; i = @B+29; 
+jmp L8
+	; ENDWHILE
+L9 mov #1 @B+30		; guarda entero 1
+mov @B+30 @B+1		; i = @B+30; 
+L10 mov @B+1 @B+31		; guarda id i
+mov @B+0 @B+32		; guarda id n
+mov @B+31 A
+lssi @B+32	; Expr relop Esimple
+mov A @B+33	; guardar el resultado en temporal
+	; WHILE
+mov @B+33 A
+jz L11	 ; if else
+ mov #0 @B+34	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov @B+0 @B+35		; guarda id n
+mov #1 @B+36		; guarda entero 1
+mov @B+35 A
+subi @B+36	; ENTERO - ENTERO
+mov A @B+37	; guardar el resultado en temporal
+mov @B+34 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+37	; fallo en este 
+mov A @B+38 
+mov @B+1 @B+39		; guarda id i
+mov @B+38 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+39	; fallo en este 
+mov A @B+40 
+mov #1 @B+41		; guarda entero 1
+mov @B+40 A
+muli #1 
+addi #0
+mov @B+41 @A
+mov @B+1 @B+42		; guarda id i
+mov #1 @B+43		; guarda entero 1
+mov @B+42 A
+addi @B+43	; ENTERO + ENTERO
+mov A @B+44	; guardar el resultado en temporal
+mov @B+44 @B+1		; i = @B+44; 
+jmp L10
+	; ENDWHILE
+L11 mov #1 @B+45		; guarda entero 1
+; Secuencia de retorno
+mov @B+45 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 44
+mov #0 @B-3
+mov @B-2 A
+jmp @A
+
+; metodo: 'buscarCamino'
+L27 mov #1 @B+7		; guarda entero 1
+mov @B+7 @B+3		; lon = @B+7; 
+mov #0 @B+8		; guarda entero 0
+mov @B+8 @B+4		; error = @B+8; 
+mov #0 @B+9		; guarda entero 0
+mov @B+9 @B+5		; salir = @B+9; 
+mov #0 @B+10		; guarda entero 0
+mov @B+10 @B+1		; i = @B+10; 
+mov #0 @B+11		; guarda entero 0
+mov @B+11 @B+2		; j = @B+11; 
+
+;print
+mov @B+1 @B+12		; guarda id i
+wri @B+12	; print valor entero de temporal
+wrl
+
+;print
+mov @B+2 @B+13		; guarda id j
+wri @B+13	; print valor entero de temporal
+wrl
+L24 ; Factor -> pari Expr pard
+mov @B+1 @B+14		; guarda id i
+mov @B+0 @B+15		; guarda id n
+mov @B+14 A
+lssi @B+15	; Expr relop Esimple
+mov A @B+16	; guardar el resultado en temporal
+; Factor -> pari Expr pard
+mov @B+2 @B+17		; guarda id j
+mov @B+0 @B+18		; guarda id n
+mov @B+17 A
+lssi @B+18	; Expr relop Esimple
+mov A @B+19	; guardar el resultado en temporal
+mov @B+16 A
+muli @B+19	; ENTERO * ENTERO
+mov A @B+20
+; Factor -> pari Expr pard
+mov @B+4 @B+21		; guarda id error
+mov #0 @B+22		; guarda entero 0
+mov @B+21 A
+eqli @B+22	; Expr relop Esimple
+mov A @B+23	; guardar el resultado en temporal
+mov @B+20 A
+muli @B+23	; ENTERO * ENTERO
+mov A @B+24
+; Factor -> pari Expr pard
+mov @B+5 @B+25		; guarda id salir
+mov #0 @B+26		; guarda entero 0
+mov @B+25 A
+eqli @B+26	; Expr relop Esimple
+mov A @B+27	; guardar el resultado en temporal
+mov @B+24 A
+muli @B+27	; ENTERO * ENTERO
+mov A @B+28
+	; WHILE
+mov @B+28 A
+jz L25	 ; if else
+ mov #0 @B+29	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov @B+1 @B+30		; guarda id i
+mov @B+29 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+30	; fallo en este 
+mov A @B+31 
+mov @B+2 @B+32		; guarda id j
+mov @B+31 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+32	; fallo en este 
+mov A @B+33 
+mov #0 @B+33		; guarda 0 y empieza en Factor recursivo arrays de this.laberinto
+mov @B+33 @B+34		; guarda id this.laberinto
+muli #1 
+addi #0
+mov @A @B+34	;acaba array en Factor
+mov @B+34 A
+jz L23 	 ; if 
+ mov #0 @B+36		; guarda entero 0
+mov @B+36 @B+34		; mov = @B+36; 
+; Factor -> pari Expr pard
+mov @B+1 @B+37		; guarda id i
+mov @B+0 @B+38		; guarda id n
+mov #1 @B+39		; guarda entero 1
+mov @B+38 A
+subi @B+39	; ENTERO - ENTERO
+mov A @B+40	; guardar el resultado en temporal
+mov @B+37 A
+lssi @B+40	; Expr relop Esimple
+mov A @B+41	; guardar el resultado en temporal
+; Factor -> pari Expr pard
+mov @B+2 @B+42		; guarda id j
+mov @B+0 @B+43		; guarda id n
+mov #1 @B+44		; guarda entero 1
+mov @B+43 A
+subi @B+44	; ENTERO - ENTERO
+mov A @B+45	; guardar el resultado en temporal
+mov @B+42 A
+lssi @B+45	; Expr relop Esimple
+mov A @B+46	; guardar el resultado en temporal
+mov @B+41 A
+muli @B+46	; ENTERO * ENTERO
+mov A @B+47
+mov @B+47 A
+jz L14 	 ; if 
+ mov #0 @B+48	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov @B+1 @B+49		; guarda id i
+mov #1 @B+50		; guarda entero 1
+mov @B+49 A
+addi @B+50	; ENTERO + ENTERO
+mov A @B+51	; guardar el resultado en temporal
+mov @B+48 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+51	; fallo en este 
+mov A @B+52 
+mov @B+2 @B+53		; guarda id j
+mov #1 @B+54		; guarda entero 1
+mov @B+53 A
+addi @B+54	; ENTERO + ENTERO
+mov A @B+55	; guardar el resultado en temporal
+mov @B+52 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+55	; fallo en este 
+mov A @B+56 
+mov #0 @B+56		; guarda 0 y empieza en Factor recursivo arrays de this.laberinto
+mov @B+56 @B+57		; guarda id this.laberinto
+muli #1 
+addi #0
+mov @A @B+57	;acaba array en Factor
+mov @B+57 A
+jz L13 	 ; if 
+ mov @B+1 @B+58		; guarda id i
+mov #1 @B+59		; guarda entero 1
+mov @B+58 A
+addi @B+59	; ENTERO + ENTERO
+mov A @B+60	; guardar el resultado en temporal
+mov @B+60 @B+1		; i = @B+60; 
+mov @B+2 @B+61		; guarda id j
+mov #1 @B+62		; guarda entero 1
+mov @B+61 A
+addi @B+62	; ENTERO + ENTERO
+mov A @B+63	; guardar el resultado en temporal
+mov @B+63 @B+2		; j = @B+63; 
+mov @B+3 @B+64		; guarda id lon
+mov #1 @B+65		; guarda entero 1
+mov @B+64 A
+addi @B+65	; ENTERO + ENTERO
+mov A @B+66	; guardar el resultado en temporal
+mov @B+66 @B+3		; lon = @B+66; 
+mov #1 @B+67		; guarda entero 1
+mov @B+67 @B+34		; mov = @B+67; 
+L13 L14 ; Factor -> pari Expr pard
+mov @B+34 @B+68		; guarda id mov
+mov #0 @B+69		; guarda entero 0
+mov @B+68 A
+eqli @B+69	; Expr relop Esimple
+mov A @B+70	; guardar el resultado en temporal
+; Factor -> pari Expr pard
+mov @B+1 @B+71		; guarda id i
+mov @B+0 @B+72		; guarda id n
+mov #1 @B+73		; guarda entero 1
+mov @B+72 A
+subi @B+73	; ENTERO - ENTERO
+mov A @B+74	; guardar el resultado en temporal
+mov @B+71 A
+lssi @B+74	; Expr relop Esimple
+mov A @B+75	; guardar el resultado en temporal
+mov @B+70 A
+muli @B+75	; ENTERO * ENTERO
+mov A @B+76
+mov @B+76 A
+jz L16 	 ; if 
+mov #0 @B+77	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov @B+1 @B+78		; guarda id i
+mov #1 @B+79		; guarda entero 1
+mov @B+78 A
+addi @B+79	; ENTERO + ENTERO
+mov A @B+80	; guardar el resultado en temporal
+mov @B+77 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+80	; fallo en este 
+mov A @B+81 
+mov @B+2 @B+82		; guarda id j
+mov @B+81 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+82	; fallo en este 
+mov A @B+83 
+mov #0 @B+83		; guarda 0 y empieza en Factor recursivo arrays de this.laberinto
+mov @B+83 @B+84		; guarda id this.laberinto
+muli #1 
+addi #0
+mov @A @B+84	;acaba array en Factor
+mov @B+84 A
+jz L15 	 ; if 
+ mov @B+1 @B+85		; guarda id i
+mov #1 @B+86		; guarda entero 1
+mov @B+85 A
+addi @B+86	; ENTERO + ENTERO
+mov A @B+87	; guardar el resultado en temporal
+mov @B+87 @B+1		; i = @B+87; 
+mov @B+3 @B+88		; guarda id lon
+mov #1 @B+89		; guarda entero 1
+mov @B+88 A
+addi @B+89	; ENTERO + ENTERO
+mov A @B+90	; guardar el resultado en temporal
+mov @B+90 @B+3		; lon = @B+90; 
+mov #1 @B+91		; guarda entero 1
+mov @B+91 @B+34		; mov = @B+91; 
+L15 L16 ; Factor -> pari Expr pard
+mov @B+34 @B+92		; guarda id mov
+mov #0 @B+93		; guarda entero 0
+mov @B+92 A
+eqli @B+93	; Expr relop Esimple
+mov A @B+94	; guardar el resultado en temporal
+; Factor -> pari Expr pard
+mov @B+2 @B+95		; guarda id j
+mov @B+0 @B+96		; guarda id n
+mov #1 @B+97		; guarda entero 1
+mov @B+96 A
+subi @B+97	; ENTERO - ENTERO
+mov A @B+98	; guardar el resultado en temporal
+mov @B+95 A
+lssi @B+98	; Expr relop Esimple
+mov A @B+99	; guardar el resultado en temporal
+mov @B+94 A
+muli @B+99	; ENTERO * ENTERO
+mov A @B+100
+mov @B+100 A
+jz L18 	 ; if 
+mov #0 @B+101	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov @B+1 @B+102		; guarda id i
+mov @B+101 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+102	; fallo en este 
+mov A @B+103 
+mov @B+2 @B+104		; guarda id j
+mov #1 @B+105		; guarda entero 1
+mov @B+104 A
+addi @B+105	; ENTERO + ENTERO
+mov A @B+106	; guardar el resultado en temporal
+mov @B+103 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+106	; fallo en este 
+mov A @B+107 
+mov #0 @B+107		; guarda 0 y empieza en Factor recursivo arrays de this.laberinto
+mov @B+107 @B+108		; guarda id this.laberinto
+muli #1 
+addi #0
+mov @A @B+108	;acaba array en Factor
+mov @B+108 A
+jz L17 	 ; if 
+ mov @B+2 @B+109		; guarda id j
+mov #1 @B+110		; guarda entero 1
+mov @B+109 A
+addi @B+110	; ENTERO + ENTERO
+mov A @B+111	; guardar el resultado en temporal
+mov @B+111 @B+2		; j = @B+111; 
+mov @B+3 @B+112		; guarda id lon
+mov #1 @B+113		; guarda entero 1
+mov @B+112 A
+addi @B+113	; ENTERO + ENTERO
+mov A @B+114	; guardar el resultado en temporal
+mov @B+114 @B+3		; lon = @B+114; 
+mov #1 @B+115		; guarda entero 1
+mov @B+115 @B+34		; mov = @B+115; 
+L17 L18 mov @B+34 @B+116		; guarda id mov
+mov #1 @B+117		; guarda entero 1
+mov @B+116 A
+eqli @B+117	; Expr relop Esimple
+mov A @B+118	; guardar el resultado en temporal
+mov @B+118 A
+jz L21
+ 
+;print
+mov @B+1 @B+119		; guarda id i
+wri @B+119	; print valor entero de temporal
+wrl
+
+;print
+mov @B+2 @B+120		; guarda id j
+wri @B+120	; print valor entero de temporal
+wrl
+jmp L22
+L21  ; Factor -> pari Expr pard
+mov @B+1 @B+121		; guarda id i
+mov @B+0 @B+122		; guarda id n
+mov #1 @B+123		; guarda entero 1
+mov @B+122 A
+subi @B+123	; ENTERO - ENTERO
+mov A @B+124	; guardar el resultado en temporal
+mov @B+121 A
+lssi @B+124	; Expr relop Esimple
+mov A @B+125	; guardar el resultado en temporal
+; Factor -> pari Expr pard
+mov @B+2 @B+126		; guarda id j
+mov @B+0 @B+127		; guarda id n
+mov #1 @B+128		; guarda entero 1
+mov @B+127 A
+subi @B+128	; ENTERO - ENTERO
+mov A @B+129	; guardar el resultado en temporal
+mov @B+126 A
+lssi @B+129	; Expr relop Esimple
+mov A @B+130	; guardar el resultado en temporal
+mov @B+125 A
+addi @B+130	; ENTERO + ENTERO
+mov A @B+131	; guardar el resultado en temporal
+mov @B+131 A
+jz L19
+mov #1 @B+132		; guarda entero 1
+mov @B+132 @B+4		; error = @B+132; 
+jmp L20
+L19 mov #2 @B+133		; guarda entero 2
+mov @B+133 @B+5		; salir = @B+133; 
+L20 L22 L23 jmp L24
+	; ENDWHILE
+L25 mov @B+4 @B+133		; guarda id error
+mov @B+133 A
+jz L26 	 ; if 
+mov #0 @B+134		; guarda entero 0
+mov #1 @B+135		; guarda entero 1
+mov @B+134 A
+subi @B+135	; ENTERO - ENTERO
+mov A @B+136	; guardar el resultado en temporal
+mov @B+136 @B+3		; lon = @B+136; 
+L26 mov @B+3 @B+137		; guarda id lon
+; Secuencia de retorno
+mov @B+137 @B-3
+mov @B-2 A
+jmp @A
+; DIR USED = 133
+mov #0 @B-3
+mov @B-2 A
+jmp @A
+
+L28  mov #5 @B+5		; guarda entero 5
+mov @B+5 @B+9	; asigna un param
+; Secuencia de llamada
+mov B @B+7
+mov B A
+addi #8
+mov A B
+mvetq L29 @B-2
+jmp L5
+L29 mov @B-1 B
+mov #5 @B+6		; guarda entero 5
+mov @B+6 @B+10	; asigna un param
+; Secuencia de llamada
+mov B @B+8
+mov B A
+addi #9
+mov A B
+mvetq L30 @B-2
+jmp L12
+L30 mov @B-1 B
+mov @B+5 A
+muli @B+6	; ENTERO * ENTERO
+mov A @B+7
+mov @B+7 A
+jz L33 	 ; if 
+ mov #5 @B+8		; guarda entero 5
+mov @B+8 @B+12	; asigna un param
+; Secuencia de llamada
+mov B @B+10
+mov B A
+addi #11
+mov A B
+mvetq L31 @B-2
+jmp L27
+L31 mov @B-1 B
+mov @B+8 @B+2		; lon = @B+8; 
+
+;print
+mov @B+2 @B+9		; guarda id lon
+wri @B+9	; print valor entero de temporal
+wrl
+mov #0 @B+10	; guarda 0 y empieza recursivo arrays de this.laberinto
+mov #1 @B+11		; guarda entero 1
+mov @B+10 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+11	; fallo en este 
+mov A @B+12 
+mov #1 @B+13		; guarda entero 1
+mov @B+12 A 	; hace recursivo de arrays en Ref
+muli #5
+addi @B+13	; fallo en este 
+mov A @B+14 
+mov #0 @B+15		; guarda entero 0
+mov @B+14 A
+muli #1 
+addi #0
+mov @B+15 @A
+mov #5 @B+16		; guarda entero 5
+mov @B+16 @B+20	; asigna un param
+; Secuencia de llamada
+mov B @B+18
+mov B A
+addi #19
+mov A B
+mvetq L32 @B-2
+jmp L27
+L32 mov @B-1 B
+mov @B+16 @B+2		; lon = @B+16; 
+
+;print
+mov @B+2 @B+17		; guarda id lon
+wri @B+17	; print valor entero de temporal
+wrl
+L33 halt

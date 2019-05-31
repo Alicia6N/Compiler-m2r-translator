@@ -1,5 +1,21 @@
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
 mov #0 B
-jmp L21
+jmp L5
 
 ; metodo: 'sumaenteros1'
 L1 mov @B+0 @B+3		; guarda id a
@@ -61,7 +77,7 @@ mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
-L21  
+L5  
 ;print
 mov #4 @B+1		; guarda entero 4
 mov @B+1 @B+5	; asigna un param
@@ -72,9 +88,9 @@ mov B @B+4
 mov B A
 addi #5
 mov A B
-mvetq L5 @B-2
+mvetq L6 @B-2
 jmp L1
-L5 mov @B-1 B
+L6 mov @B-1 B
 wri @B+2	; print valor entero de temporal
 wrl
 
@@ -90,9 +106,9 @@ mov B @B+6
 mov B A
 addi #7
 mov A B
-mvetq L6 @B-2
+mvetq L7 @B-2
 jmp L1
-L6 mov @B-1 B
+L7 mov @B-1 B
 wri @B+4	; print valor entero de temporal
 wrl
 
@@ -108,9 +124,9 @@ mov B @B+8
 mov B A
 addi #9
 mov A B
-mvetq L7 @B-2
+mvetq L8 @B-2
 jmp L1
-L7 mov @B-1 B
+L8 mov @B-1 B
 wri @B+6	; print valor entero de temporal
 wrl
 
@@ -128,9 +144,9 @@ mov B @B+10
 mov B A
 addi #11
 mov A B
-mvetq L8 @B-2
+mvetq L9 @B-2
 jmp L1
-L8 mov @B-1 B
+L9 mov @B-1 B
 wri @B+8	; print valor entero de temporal
 wrl
 
@@ -144,10 +160,10 @@ mov B @B+12
 mov B A
 addi #13
 mov A B
-mvetq L9 @B-2
+mvetq L10 @B-2
 jmp L2
-L9 mov @B-1 B
-wri @B+10	; print valor entero de temporal
+L10 mov @B-1 B
+wrr @B+10	; print valor real de temporal
 wrl
 
 ;print
@@ -162,10 +178,10 @@ mov B @B+14
 mov B A
 addi #15
 mov A B
-mvetq L10 @B-2
+mvetq L11 @B-2
 jmp L2
-L10 mov @B-1 B
-wri @B+12	; print valor entero de temporal
+L11 mov @B-1 B
+wrr @B+12	; print valor real de temporal
 wrl
 
 ;print
@@ -180,10 +196,10 @@ mov B @B+16
 mov B A
 addi #17
 mov A B
-mvetq L11 @B-2
+mvetq L12 @B-2
 jmp L2
-L11 mov @B-1 B
-wri @B+14	; print valor entero de temporal
+L12 mov @B-1 B
+wrr @B+14	; print valor real de temporal
 wrl
 
 ;print
@@ -200,10 +216,10 @@ mov B @B+18
 mov B A
 addi #19
 mov A B
-mvetq L12 @B-2
+mvetq L13 @B-2
 jmp L2
-L12 mov @B-1 B
-wri @B+16	; print valor entero de temporal
+L13 mov @B-1 B
+wrr @B+16	; print valor real de temporal
 wrl
 
 ;print
@@ -218,9 +234,9 @@ mov B @B+20
 mov B A
 addi #21
 mov A B
-mvetq L13 @B-2
+mvetq L14 @B-2
 jmp L3
-L13 mov @B-1 B
+L14 mov @B-1 B
 wri @B+18	; print valor entero de temporal
 wrl
 
@@ -238,9 +254,9 @@ mov B @B+22
 mov B A
 addi #23
 mov A B
-mvetq L14 @B-2
+mvetq L15 @B-2
 jmp L3
-L14 mov @B-1 B
+L15 mov @B-1 B
 wri @B+20	; print valor entero de temporal
 wrl
 
@@ -254,9 +270,9 @@ mov B @B+24
 mov B A
 addi #25
 mov A B
-mvetq L15 @B-2
+mvetq L16 @B-2
 jmp L3
-L15 mov @B-1 B
+L16 mov @B-1 B
 wri @B+22	; print valor entero de temporal
 wrl
 
@@ -272,9 +288,9 @@ mov B @B+26
 mov B A
 addi #27
 mov A B
-mvetq L16 @B-2
+mvetq L17 @B-2
 jmp L3
-L16 mov @B-1 B
+L17 mov @B-1 B
 wri @B+24	; print valor entero de temporal
 wrl
 
@@ -290,10 +306,10 @@ mov B @B+28
 mov B A
 addi #29
 mov A B
-mvetq L17 @B-2
+mvetq L18 @B-2
 jmp L4
-L17 mov @B-1 B
-wri @B+26	; print valor entero de temporal
+L18 mov @B-1 B
+wrr @B+26	; print valor real de temporal
 wrl
 
 ;print
@@ -310,10 +326,10 @@ mov B @B+30
 mov B A
 addi #31
 mov A B
-mvetq L18 @B-2
+mvetq L19 @B-2
 jmp L4
-L18 mov @B-1 B
-wri @B+28	; print valor entero de temporal
+L19 mov @B-1 B
+wrr @B+28	; print valor real de temporal
 wrl
 
 ;print
@@ -326,10 +342,10 @@ mov B @B+32
 mov B A
 addi #33
 mov A B
-mvetq L19 @B-2
+mvetq L20 @B-2
 jmp L4
-L19 mov @B-1 B
-wri @B+30	; print valor entero de temporal
+L20 mov @B-1 B
+wrr @B+30	; print valor real de temporal
 wrl
 
 ;print
@@ -344,9 +360,9 @@ mov B @B+34
 mov B A
 addi #35
 mov A B
-mvetq L20 @B-2
+mvetq L21 @B-2
 jmp L4
-L20 mov @B-1 B
-wri @B+32	; print valor entero de temporal
+L21 mov @B-1 B
+wrr @B+32	; print valor real de temporal
 wrl
 halt

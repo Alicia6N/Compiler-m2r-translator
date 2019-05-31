@@ -1,3 +1,30 @@
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
 mov #0 B
 jmp L1
 

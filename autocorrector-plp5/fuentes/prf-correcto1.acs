@@ -1,0 +1,31 @@
+class prfcorrecto1 {
+
+attributes:
+
+  int a,b,c;
+  float f,g;
+
+methods:
+
+ float suma(int a,int b,float c)
+ {
+  float res;
+  res = a + b + c;
+  return res;
+ }
+
+ int resta(int a,float b,int c)
+ {
+  float res;
+  res = a + b + c;
+  return res;
+ }
+
+ int main()
+ {
+  f = suma(8,7,5.5);
+  print(f);   // 20.500
+  g = resta(3.4,7,8.5);
+  print(g);   // 18
+ }
+}

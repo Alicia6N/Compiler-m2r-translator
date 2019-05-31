@@ -8,4 +8,5 @@
 45
 45
 5
-ERROR(m2r) en instruccion 190: el primer operando de 'wri' debe ser entero.
+   5.987
+ERROR(m2r) en instruccion 193: el primer operando de 'wrr' debe ser real.

@@ -1,5 +1,17 @@
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 0
 mov #12 B
-jmp L5
+jmp L3
 
 ; metodo: 'modifyparameters1'
 L1 mov @B+0 @B+3		; guarda id a
@@ -47,7 +59,7 @@ mov #0 @B-3
 mov @B-2 A
 jmp @A
 
-L5  
+L3  
 ;print
 mov #123 @B+3		; guarda entero 123
 wri @B+3	; print valor entero de temporal
@@ -75,9 +87,9 @@ mov B @B+11
 mov B A
 addi #12
 mov A B
-mvetq L3 @B-2
+mvetq L4 @B-2
 jmp L1
-L3 mov @B-1 B
+L4 mov @B-1 B
 mov @B+9 @B+1		; foo = @B+9; 
 
 ;print
@@ -143,9 +155,9 @@ mov B @B+28
 mov B A
 addi #26
 mov A B
-mvetq L4 @B-2
+mvetq L5 @B-2
 jmp L2
-L4 mov @B-1 B
+L5 mov @B-1 B
 mov @B+26 @B+1		; foo = @B+26; 
 
 ;print

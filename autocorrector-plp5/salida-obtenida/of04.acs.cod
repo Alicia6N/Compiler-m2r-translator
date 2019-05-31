@@ -1,5 +1,24 @@
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
 mov #21 B
-jmp L9
+jmp L5
 
 ; metodo: 't1'
 L1 
@@ -257,7 +276,7 @@ mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
-L9  mov #0 @B+1	; guarda 0 y empieza recursivo arrays de this.a
+L5  mov #0 @B+1	; guarda 0 y empieza recursivo arrays de this.a
 mov #0 @B+2		; guarda entero 0
 mov @B+1 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -299,20 +318,8 @@ mov B @B+12
 mov B A
 addi #13
 mov A B
-mvetq L5 @B-2
-jmp L1
-L5 mov @B-1 B
-wri @B+10	; print valor entero de temporal
-wrl
-
-;print
-; Secuencia de llamada
-mov B @B+12
-mov B A
-addi #13
-mov A B
 mvetq L6 @B-2
-jmp L2
+jmp L1
 L6 mov @B-1 B
 wri @B+10	; print valor entero de temporal
 wrl
@@ -324,8 +331,20 @@ mov B A
 addi #13
 mov A B
 mvetq L7 @B-2
-jmp L3
+jmp L2
 L7 mov @B-1 B
+wri @B+10	; print valor entero de temporal
+wrl
+
+;print
+; Secuencia de llamada
+mov B @B+12
+mov B A
+addi #13
+mov A B
+mvetq L8 @B-2
+jmp L3
+L8 mov @B-1 B
 wri @B+10	; print valor entero de temporal
 wrl
 
@@ -365,10 +384,10 @@ mov B @B+20
 mov B A
 addi #21
 mov A B
-mvetq L8 @B-2
+mvetq L9 @B-2
 jmp L4
-L8 mov @B-1 B
-wri @B+18	; print valor entero de temporal
+L9 mov @B-1 B
+wrr @B+18	; print valor real de temporal
 wrl
 
 ;print

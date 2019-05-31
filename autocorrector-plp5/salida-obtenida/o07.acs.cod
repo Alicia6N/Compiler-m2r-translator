@@ -1,7 +1,9 @@
+;Imprime temp = 0
+;Imprime temp = 0
 mov #10 B
-jmp L10
+jmp L1
 
-L10  mov #10 @B+2		; guarda entero 10
+L1  mov #10 @B+2		; guarda entero 10
 mov @B+2 @B+0		; size = @B+2; 
 mov #0 @B+3	; guarda 0 y empieza recursivo arrays de this.array
 mov #0 @B+4		; guarda entero 0
@@ -115,14 +117,14 @@ addi #0
 mov @B+42 @A
  mov #0 @B+44		; guarda entero 0
 mov @B+44 @B+42		; i = @B+44; 
-L1 mov @B+42 @B+45		; guarda id i
+L2 mov @B+42 @B+45		; guarda id i
 mov @B+0 @B+46		; guarda id size
 mov @B+45 A
 lssi @B+46	; Expr relop Esimple
 mov A @B+47	; guardar el resultado en temporal
 	; WHILE
 mov @B+47 A
-jz L2	 ; if else
+jz L3	 ; if else
  
 ;print
 mov #0 @B+48	; guarda 0 y empieza recursivo arrays de this.array
@@ -144,28 +146,28 @@ mov @B+52 A
 addi @B+53	; ENTERO + ENTERO
 mov A @B+54	; guardar el resultado en temporal
 mov @B+54 @B+42		; i = @B+54; 
-jmp L1
+jmp L2
 	; ENDWHILE
-L2  mov #0 @B+56		; guarda entero 0
+L3  mov #0 @B+56		; guarda entero 0
 mov @B+56 @B+53		; i = @B+56; 
-L6 mov @B+53 @B+57		; guarda id i
+L7 mov @B+53 @B+57		; guarda id i
 mov @B+0 @B+58		; guarda id size
 mov @B+57 A
 lssi @B+58	; Expr relop Esimple
 mov A @B+59	; guardar el resultado en temporal
 	; WHILE
 mov @B+59 A
-jz L7	 ; if else
+jz L8	 ; if else
  mov @B+53 @B+60		; guarda id i
 mov @B+60 @B+54		; j = @B+60; 
-L4 mov @B+54 @B+61		; guarda id j
+L5 mov @B+54 @B+61		; guarda id j
 mov @B+0 @B+62		; guarda id size
 mov @B+61 A
 lssi @B+62	; Expr relop Esimple
 mov A @B+63	; guardar el resultado en temporal
 	; WHILE
 mov @B+63 A
-jz L5	 ; if else
+jz L6	 ; if else
  mov #0 @B+64	; guarda 0 y empieza recursivo arrays de this.array
 mov @B+53 @B+65		; guarda id i
 mov @B+64 A 	; hace recursivo de arrays en Ref
@@ -192,7 +194,7 @@ mov @B+67 A
 gtri @B+71	; Expr relop Esimple
 mov A @B+72	; guardar el resultado en temporal
 mov @B+72 A
-jz L3 	 ; if 
+jz L4 	 ; if 
  mov #0 @B+74	; guarda 0 y empieza recursivo arrays de this.array
 mov @B+53 @B+75		; guarda id i
 mov @B+74 A 	; hace recursivo de arrays en Ref
@@ -237,32 +239,32 @@ mov @B+87 A
 muli #1 
 addi #0
 mov @B+88 @A
-L3 mov @B+54 @B+88		; guarda id j
+L4 mov @B+54 @B+88		; guarda id j
 mov #1 @B+89		; guarda entero 1
 mov @B+88 A
 addi @B+89	; ENTERO + ENTERO
 mov A @B+90	; guardar el resultado en temporal
 mov @B+90 @B+54		; j = @B+90; 
-jmp L4
+jmp L5
 	; ENDWHILE
-L5 mov @B+53 @B+91		; guarda id i
+L6 mov @B+53 @B+91		; guarda id i
 mov #1 @B+92		; guarda entero 1
 mov @B+91 A
 addi @B+92	; ENTERO + ENTERO
 mov A @B+93	; guardar el resultado en temporal
 mov @B+93 @B+53		; i = @B+93; 
-jmp L6
+jmp L7
 	; ENDWHILE
-L7  mov #0 @B+93		; guarda entero 0
+L8  mov #0 @B+93		; guarda entero 0
 mov @B+93 @B+91		; i = @B+93; 
-L8 mov @B+91 @B+94		; guarda id i
+L9 mov @B+91 @B+94		; guarda id i
 mov @B+0 @B+95		; guarda id size
 mov @B+94 A
 lssi @B+95	; Expr relop Esimple
 mov A @B+96	; guardar el resultado en temporal
 	; WHILE
 mov @B+96 A
-jz L9	 ; if else
+jz L10	 ; if else
  
 ;print
 mov #0 @B+97	; guarda 0 y empieza recursivo arrays de this.array
@@ -284,6 +286,6 @@ mov @B+101 A
 addi @B+102	; ENTERO + ENTERO
 mov A @B+103	; guardar el resultado en temporal
 mov @B+103 @B+91		; i = @B+103; 
-jmp L8
+jmp L9
 	; ENDWHILE
-L9 halt
+L10 halt

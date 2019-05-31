@@ -1,5 +1,14 @@
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 0
+;Imprime temp = 1
+;Imprime temp = 1
+;Imprime temp = 0
 mov #22 B
-jmp L9
+jmp L7
 
 ; metodo: 't2'
 L1 rdi 0	; guardar valor entero en temporal
@@ -154,7 +163,7 @@ mov #0 @B-3
 mov @B-2 A
 jmp @A
 
-L9  mov #2 @B+1		; guarda entero 2
+L7  mov #2 @B+1		; guarda entero 2
 mov @B+1 A
 itor
 mov A @B+1
@@ -186,9 +195,9 @@ mov B @B+7
 mov B A
 addi #8
 mov A B
-mvetq L7 @B-2
+mvetq L8 @B-2
 jmp L3
-L7 mov @B-1 B
+L8 mov @B-1 B
 wri @B+5	; print valor entero de temporal
 wrl
 
@@ -208,10 +217,10 @@ mov B @B+9
 mov B A
 addi #10
 mov A B
-mvetq L8 @B-2
+mvetq L9 @B-2
 jmp L4
-L8 mov @B-1 B
-wri @B+7	; print valor entero de temporal
+L9 mov @B-1 B
+wrr @B+7	; print valor real de temporal
 wrl
 
 ;print

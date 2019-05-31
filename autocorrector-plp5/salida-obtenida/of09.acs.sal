@@ -2,8 +2,4 @@
 10
 10
 10
-10
-10
-10
-10
-ERROR(m2r) en instruccion 28: el segundo operando de 'addr' debe ser real.
+ERROR(m2r) en instruccion 118: el primer operando de 'wrr' debe ser real.

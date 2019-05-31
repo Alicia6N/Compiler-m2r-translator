@@ -8,12 +8,12 @@ class of01
 
 		float test4()
 		{
-			print(444.0);
+			return 444.0;
 		}
 
 		float test2()
 		{
-			print(test4() + 1);
+			return test4() + 1;
 		}
 
 		int test(int a, float b)

@@ -1,5 +1,9 @@
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
 mov #0 B
-jmp L10
+jmp L4
 
 ; metodo: 'fact'
 L3 mov @B+0 @B+2		; guarda id fact
@@ -41,7 +45,7 @@ mov #0 @B-3
 mov @B-2 A
 jmp @A
 
-L10  
+L4  
 ;print
 mov $4.4 @B+1		; guarda real 4.4
 mov @B+1 A
@@ -52,9 +56,9 @@ mov B @B+3
 mov B A
 addi #4
 mov A B
-mvetq L4 @B-2
+mvetq L5 @B-2
 jmp L3
-L4 mov @B-1 B
+L5 mov @B-1 B
 wri @B+1	; print valor entero de temporal
 wrl
 mov $5.9 @B+2		; guarda real 5.9
@@ -66,9 +70,9 @@ mov B @B+4
 mov B A
 addi #5
 mov A B
-mvetq L5 @B-2
+mvetq L6 @B-2
 jmp L3
-L5 mov @B-1 B
+L6 mov @B-1 B
 mov #5 @B+3		; guarda entero 5
 mov @B+3 @B+7	; asigna un param
 ; Secuencia de llamada
@@ -76,14 +80,14 @@ mov B @B+5
 mov B A
 addi #6
 mov A B
-mvetq L6 @B-2
+mvetq L7 @B-2
 jmp L3
-L6 mov @B-1 B
+L7 mov @B-1 B
 mov @B+2 A
 eqli @B+3	; Expr relop Esimple
 mov A @B+4	; guardar el resultado en temporal
 mov @B+4 A
-jz L8 	 ; if 
+jz L9 	 ; if 
  
 ;print
 mov #5 @B+5		; guarda entero 5
@@ -93,12 +97,12 @@ mov B @B+7
 mov B A
 addi #8
 mov A B
-mvetq L7 @B-2
+mvetq L8 @B-2
 jmp L3
-L7 mov @B-1 B
+L8 mov @B-1 B
 wri @B+5	; print valor entero de temporal
 wrl
-L8  mov #7 @B+7		; guarda entero 7
+L9  mov #7 @B+7		; guarda entero 7
 mov @B+7 @B+5		; fact = @B+7; 
 
 ;print
@@ -109,9 +113,9 @@ mov B @B+10
 mov B A
 addi #11
 mov A B
-mvetq L9 @B-2
+mvetq L10 @B-2
 jmp L3
-L9 mov @B-1 B
+L10 mov @B-1 B
 wri @B+8	; print valor entero de temporal
 wrl
 

@@ -1,1 +1,1 @@
-Error semantico (16,10): sobran parámetros en la llamada a la función 'foo'
+Error semantico (16,10): faltan parámetros en la llamada a la función 'foo'

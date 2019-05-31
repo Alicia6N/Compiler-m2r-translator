@@ -1,3 +1,1 @@
-
-ERROR(m2r) al leer un valor de la posicion de memoria 2 sin haberlo
-inicializado, en la instrucción 19
+ERROR(m2r) en la instrucción 1: Esperaba numero,'#numero','$numero','A','B','@A' o '@B+numero', encontrado ';'

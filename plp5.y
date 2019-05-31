@@ -76,8 +76,8 @@ S : _class id llavei attributes dosp BDecl 	{
 																		   		if (tk != 0) yyerror("");
 																			};
 
-Metodos : _int _main pari pard { REL_DIR = 0; } Bloque 	{ 
-																		MAIN_LABEL = nuevaEtiq();
+Metodos : _int _main pari pard { REL_DIR = 0; MAIN_LABEL = nuevaEtiq(); } Bloque 	{ 
+																		
 																		$$.code = MAIN_LABEL + " " + $6.code;
 																	};
 
@@ -143,13 +143,6 @@ Instr : pyc { $$.code = " ";  }
 
 															int tipo_izq = getTipoSimple($1.tipo); //getTbase($1.tipo);
 															int tipo_der = getTipoSimple($4.tipo); //getTbase($3.tipo);
-
-															//cout << "INDEX Y TIPO BASE IZQ = " << $1.tipo << ": " << getTipoSimple($1.tipo) << endl;
-															//cout << "INDEX Y TIPO BASE DER = " << $3.tipo << ": " << getTipoSimple($3.tipo) << endl;
-
-															//cout << ";Temporal " << $1.aux_lexema << " = " << $1.temp << endl;
-															//cout << ";Temporal der = " << $4.temp << endl;
-
 															if(tipo_izq == ENTERO && tipo_der == REAL){
 																$$.code += "mov " + $4.temp + " A\n";
 																$$.code += "rtoi\n";
@@ -179,14 +172,14 @@ Instr : pyc { $$.code = " ";  }
 	  | _print pari Expr pard pyc 						{
 		  													$$.code = "\n;print\n" + $3.code;
 
-															//cout << ";Imprime temp = " << $3.temp << endl;
-
+															cout << ";Imprime temp = " << $3.tipo << endl;
+															
 															//cout << "TIPO BASE = " << getTipoSimple($3.tipo) << endl;
 
 															if (getTipoSimple($3.tipo) == ENTERO){
 																$$.code += "wri " + $3.temp+ "\t; print valor entero de temporal\n";
 															}
-															else if(getTipoSimple($3.tipo) == REAL){
+															else if(getTipoSimple($3.tipo) == REAL){																
 																$$.code += "wrr " + $3.temp +"\t; print valor real de temporal\n";
 															}
 															$$.code += "wrl\n";
@@ -610,8 +603,12 @@ CArgp : coma Tipo id 	{
 	  | { $$.code = ""; tm->metodos[tm->metodos.size()-1].args.push_back(Arg{-1,""}); };
 
 Instr : _return Expr pyc {
+							if(MAIN_LABEL!="") msgError(ERRFMAIN, $1.nlin, $1.ncol, $1.lexema);
 							$$.code = $2.code;
-							$$.code += "; Secuencia de retorno\n";						
+						 	$$.code += "; Secuencia de retorno\n";	
+							//$$.code += "mov " + $2.temp + " A\n";
+							//$$.code += "itor \n";	
+							//$$.code += "mov A " + $2.temp + "\n";				
 							$$.code += "mov " + $2.temp + " @B-3\n";
 							$$.code += "mov @B-2 A\n";
 							$$.code += "jmp @A\n";
@@ -620,28 +617,28 @@ Instr : _return Expr pyc {
 Factor : id pari 	{ 
 						int index_func = buscarMetodo($1.lexema);
 						$$.indice_func = index_func;
-						//cout << "--> " << $1.nlin << " " << $1.ncol << endl;
 						if($$.indice_func == -1){msgError(ERRNODECL, $1.nlin, $1.ncol, $1.lexema);} 
-						//cout << "indice funcion = " << $$.indice_func << " --> " << tm->metodos[$$.indice_func].id << endl;
 						
 						tm->metodos[index_func].mlin = $1.nlin;
 						tm->metodos[index_func].mcol = $1.ncol;
 						$$.temp = to_string(REL_DIR + 3 + tm->metodos[index_func].args.size() - 1);
 					} Par pard { //el error
 							int index_func = buscarMetodo($1.lexema);
+							string prueba =  tm->metodos[index_func].etiq;
 							$$.code = $4.code;
 							$$.code += "; Secuencia de llamada\n";
 							int op = REL_DIR + 2;
 							$$.code += "mov B @B+" + to_string(op) +"\n"; 
 							$$.code += "mov B A\n"; //B+0... B+1(Valor), B+2(Direccion), B+3(b atnerior), B+4(Primer parámetro)						
-							//int add = REL_DIR + 3 + tm->metodos[index_func].args.size();
 							$$.code += "addi #" + $4.temp + "\n"; //valor a calcular
 							$$.code += "mov A B\n"; // Nueva B apunta al primer nuevo arg.
 							string etiq = nuevaEtiq();
 							$$.code += "mvetq " + etiq + " @B-2\n";
-							$$.code += "jmp " + tm->metodos[index_func].etiq + "\n";
+							$$.code += "jmp " + prueba + "\n";
 							$$.code += etiq + " mov @B-1 B\n";
 							$$.temp = "@B+" + to_string(REL_DIR);
+							$$.tipo = tm->metodos[index_func].tipo;
+		
 						  }; 
 
 Par : 			{
@@ -649,11 +646,12 @@ Par : 			{
 					$$.temp = $0.temp;
 					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo;
 					const char *id = tm->metodos[$0.indice_func].id.c_str();
-					if (tipo_arg != -1){msgError(ERRFSOBRAN, tm->metodos[$0.indice_func].mlin, tm->metodos[$0.indice_func].mcol, id); }
+					if (tipo_arg != -1){msgError(ERRFFALTAN, tm->metodos[$0.indice_func].mlin, tm->metodos[$0.indice_func].mcol, id); }
 				}
 	| Expr 		{ 
 					int pos_args;
 					if($0.indice_args == 0){
+						$$.code = ";entra\n";
 						pos_args = REL_DIR + 3 + $0.indice_args + 1;
 					}
 					else pos_args = REL_DIR + 3 + $0.indice_args;
@@ -661,7 +659,7 @@ Par : 			{
 					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo; 
 					const char *id = tm->metodos[$0.indice_func].id.c_str();
 
-					if(tipo_arg == -1){msgError(ERRFFALTAN,  tm->metodos[$0.indice_func].mlin, tm->metodos[$0.indice_func].mcol,id); }
+					if(tipo_arg == -1){msgError(ERRFSOBRAN,  tm->metodos[$0.indice_func].mlin, tm->metodos[$0.indice_func].mcol,id); }
 					int tipo_expr = getTipoSimple($1.tipo);
 
 					if (tipo_arg == ENTERO && tipo_expr == REAL){
@@ -773,6 +771,7 @@ void msgError(int nerror, int nlin, int ncol, const char *s){
 			 	break;
 			 case ERRFSOBRAN: fprintf(stderr,"sobran parámetros en la llamada a la función '%s'",s);
 			 	break;
+			 case ERRFMAIN: fprintf(stderr,"no se puede utilizar 'return' dentro de 'main'");
 			}
 
 		}

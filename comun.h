@@ -89,6 +89,6 @@ struct TablaMetodos {
 #define ERR_MAXTMP     103
 #define ERRFFALTAN     104
 #define ERRFSOBRAN     105
-
+#define ERRFMAIN       106
 void msgError(int nerror, int nlin, int ncol, const char *s);
 bool equalsIgnoreCase(string s1, char* lexema);

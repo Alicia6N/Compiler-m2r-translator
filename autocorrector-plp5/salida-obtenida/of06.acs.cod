@@ -1,5 +1,6 @@
+;Imprime temp = 0
 mov #118 B
-jmp L16
+jmp L12
 
 ; metodo: 'initialization'
 L1 mov #0 @B+1	; guarda 0 y empieza recursivo arrays de this.a
@@ -274,22 +275,13 @@ mov #0 @B-3
 mov @B-2 A
 jmp @A
 
-L16  ; Secuencia de llamada
-mov B @B+3
-mov B A
-addi #4
-mov A B
-mvetq L12 @B-2
-jmp L1
-L12 mov @B-1 B
-mov @B+1 @B+0		; foo = @B+1; 
-; Secuencia de llamada
+L12  ; Secuencia de llamada
 mov B @B+3
 mov B A
 addi #4
 mov A B
 mvetq L13 @B-2
-jmp L11
+jmp L1
 L13 mov @B-1 B
 mov @B+1 @B+0		; foo = @B+1; 
 ; Secuencia de llamada
@@ -298,7 +290,7 @@ mov B A
 addi #4
 mov A B
 mvetq L14 @B-2
-jmp L8
+jmp L11
 L14 mov @B-1 B
 mov @B+1 @B+0		; foo = @B+1; 
 ; Secuencia de llamada
@@ -307,7 +299,16 @@ mov B A
 addi #4
 mov A B
 mvetq L15 @B-2
-jmp L11
+jmp L8
 L15 mov @B-1 B
+mov @B+1 @B+0		; foo = @B+1; 
+; Secuencia de llamada
+mov B @B+3
+mov B A
+addi #4
+mov A B
+mvetq L16 @B-2
+jmp L11
+L16 mov @B-1 B
 mov @B+1 @B+0		; foo = @B+1; 
 halt

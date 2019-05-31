@@ -1,5 +1,13 @@
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
+;Imprime temp = 0
 mov #0 B
-jmp L7
+jmp L5
 
 ; metodo: 't1'
 L1 
@@ -67,7 +75,7 @@ mov #0 @B-3
 mov @B-2 A
 jmp @A
 
-L7  mov #321 @B+3		; guarda entero 321
+L5  mov #321 @B+3		; guarda entero 321
 mov #5 @B+4		; guarda entero 5
 mov @B+3 A
 addi @B+4	; ENTERO + ENTERO
@@ -88,9 +96,9 @@ mov B @B+12
 mov B A
 addi #9
 mov A B
-mvetq L5 @B-2
+mvetq L6 @B-2
 jmp L1
-L5 mov @B-1 B
+L6 mov @B-1 B
 mov @B+10 @B+0		; foo = @B+10; 
 
 ;print
@@ -113,9 +121,9 @@ mov B @B+16
 mov B A
 addi #17
 mov A B
-mvetq L6 @B-2
+mvetq L7 @B-2
 jmp L4
-L6 mov @B-1 B
+L7 mov @B-1 B
 wri @B+14	; print valor entero de temporal
 wrl
 

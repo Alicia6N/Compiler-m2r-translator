@@ -9,14 +9,14 @@ methods:
   return a+1;
  }
 
- float g(int a, int b, int c)
+ float g()
  {
   return f(7)+3.5;
  }
 
  int h()
  {
-  return g(7, 7)+3;
+  return g(7)+3;
  }
 
  int main()
