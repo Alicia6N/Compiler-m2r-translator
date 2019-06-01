@@ -558,14 +558,16 @@ Met : Tipo id 	{
 					vector<Arg> aux_vector;
 					//m.arg = aux_vector;
 					tm->metodos.push_back(Metodo{$1.tipo, $2.lexema, aux_vector});
+					string etiqueta = nuevaEtiq();
+					tm->metodos[tm->metodos.size()-1].etiq = etiqueta;
 				} pari Arg pard {$$.tipo_metodo = $1.tipo;} Bloque 	{ 
-																		string etiqueta = nuevaEtiq();
+																		
 																		string aux_lex = $2.lexema;
 																		//cout << tm->metodos[tm->metodos.size()-1].id << endl;
 																		$$.code = "; metodo: '" + tm->metodos[tm->metodos.size()-1].id + "'\n";
-																		$$.code += etiqueta + $8.code;
+																		$$.code += tm->metodos[tm->metodos.size()-1].etiq + $8.code;
 																		tm->metodos[tm->metodos.size()-1].dirs = REL_DIR + 1;
-																		tm->metodos[tm->metodos.size()-1].etiq = etiqueta;
+																		
 																		$$.code += "; DIR USED = " + to_string(tm->metodos[tm->metodos.size()-1].dirs) + "\n";
 																		ts = ts->root; //Cerramos ámbito de la función.
 
@@ -635,21 +637,29 @@ Factor : id pari 	{
 						tm->metodos[index_func].mlin = $1.nlin;
 						tm->metodos[index_func].mcol = $1.ncol;
 						$$.temp = to_string(REL_DIR + 3 + tm->metodos[index_func].args.size() - 1);
+
+						cout << ";Guarda desde: " << REL_DIR << endl;
+						ACTUAL_MEM = REL_DIR + 3;
+						cout << ";Actual empieza: " << ACTUAL_MEM << endl;
+						REL_DIR = REL_DIR + 3 + tm->metodos[index_func].args.size() - 1;
+						cout << ";Hasta: " << REL_DIR << endl;
+
 					} Par pard { //el error
 							int index_func = buscarMetodo($1.lexema);
 							string prueba =  tm->metodos[index_func].etiq;
 							$$.code = $4.code;
 							$$.code += "; Secuencia de llamada\n";
-							int op = REL_DIR + 2;
+							int op = ACTUAL_MEM;
+							int op2 = ACTUAL_MEM + 1;
 							$$.code += "mov B @B+" + to_string(op) +"\n"; 
 							$$.code += "mov B A\n"; //B+0... B+1(Valor), B+2(Direccion), B+3(b atnerior), B+4(Primer parámetro)						
-							$$.code += "addi #" + $4.temp + "\n"; //valor a calcular
+							$$.code += "addi #" + to_string(op2) + "\n"; //valor a calcular
 							$$.code += "mov A B\n"; // Nueva B apunta al primer nuevo arg.
 							string etiq = nuevaEtiq();
 							$$.code += "mvetq " + etiq + " @B-2\n";
 							$$.code += "jmp " + prueba + "\n";
 							$$.code += etiq + " mov @B-1 B\n";
-							$$.temp = "@B+" + to_string(REL_DIR);
+							$$.temp = "@B+" + to_string(ACTUAL_MEM-2);
 							$$.tipo = tm->metodos[index_func].tipo;
 						  }; 
 
@@ -662,15 +672,9 @@ Par : 			{
 				}
 	| Expr 		{ 
 					int pos_args;
-					pos_args = REL_DIR + 3 + 2;
-					
+					pos_args = ACTUAL_MEM + $0.indice_args+1; //1 2
+					//cout << ";--> pos_args = " << pos_args << endl;
 					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo;
-
-					/*cout << "Metodo: " << tm->metodos[$0.indice_func].id << " con argumentos: ";
-					cout << tm->metodos[$0.indice_func].args[0].tipo << " ";
-					cout << tm->metodos[$0.indice_func].args[1].tipo << " ";
-					cout << tm->metodos[$0.indice_func].args[2].tipo << " ";
-					cout << tm->metodos[$0.indice_func].args[3].tipo << endl;*/
 
 					const char *id = tm->metodos[$0.indice_func].id.c_str();
 
@@ -711,7 +715,7 @@ CPar : 	{
 	 	| coma Expr 	{ 
 
 			 				int pos_args=0;
-							pos_args = REL_DIR + 3 + 2;
+							pos_args = ACTUAL_MEM + $0.indice_args+1; //1 2
 			 				int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo; 
 							const char *id = tm->metodos[$0.indice_func].id.c_str();
 							if(tipo_arg == -1){

@@ -1,3 +1,33 @@
+;Guarda desde: 0
+;Actual empieza: 3
+;Hasta: 3
+;Guarda desde: 0
+;Actual empieza: 3
+;Hasta: 3
+;Guarda desde: 0
+;Actual empieza: 3
+;Hasta: 3
+;Guarda desde: 3
+;Actual empieza: 6
+;Hasta: 6
+;Guarda desde: 9
+;Actual empieza: 12
+;Hasta: 12
+;Guarda desde: 19
+;Actual empieza: 22
+;Hasta: 22
+;Guarda desde: 22
+;Actual empieza: 25
+;Hasta: 25
+;Guarda desde: 25
+;Actual empieza: 28
+;Hasta: 28
+;Guarda desde: 28
+;Actual empieza: 31
+;Hasta: 31
+;Guarda desde: 31
+;Actual empieza: 34
+;Hasta: 34
 mov #1 B
 jmp L14
 
@@ -99,76 +129,76 @@ mov @B-2 A
 jmp @A
 
 ; metodo: 'c3'
-L9 ; Secuencia de llamada
-mov B @B+2
+L8 ; Secuencia de llamada
+mov B @B+3
 mov B A
-addi #3
+addi #4
 mov A B
-mvetq L8 @B-2
+mvetq L9 @B-2
 jmp L7
-L8 mov @B-1 B
-mov $1.9 @B+1		; guarda real 1.9
-mov @B+0 A
-addr @B+1	; REAL + REAL
-mov A @B+2	; guardar el resultado en temporal
+L9 mov @B-1 B
+mov $1.9 @B+4		; guarda real 1.9
+mov @B+1 A
+addr @B+4	; REAL + REAL
+mov A @B+5	; guardar el resultado en temporal
 ; Secuencia de retorno
-mov @B+2 A
+mov @B+5 A
 rtoi
-mov A @B+2
-mov @B+2 @B-3
+mov A @B+5
+mov @B+5 @B-3
 mov @B-2 A
 jmp @A
-; DIR USED = 3
+; DIR USED = 6
 mov #0 @B-3
 mov @B-2 A
 jmp @A
 
 ; metodo: 'c2'
-L11 ; Secuencia de llamada
-mov B @B+2
+L10 ; Secuencia de llamada
+mov B @B+3
 mov B A
-addi #3
+addi #4
 mov A B
-mvetq L10 @B-2
-jmp L9
-L10 mov @B-1 B
-mov #2 @B+1		; guarda entero 2
-mov @B+0 A
-addi @B+1	; ENTERO + ENTERO
-mov A @B+2	; guardar el resultado en temporal
+mvetq L11 @B-2
+jmp L8
+L11 mov @B-1 B
+mov #2 @B+4		; guarda entero 2
+mov @B+1 A
+addi @B+4	; ENTERO + ENTERO
+mov A @B+5	; guardar el resultado en temporal
 ; Secuencia de retorno
-mov @B+2 A
+mov @B+5 A
 itor
-mov A @B+2
-mov @B+2 @B-3
+mov A @B+5
+mov @B+5 @B-3
 mov @B-2 A
 jmp @A
-; DIR USED = 3
+; DIR USED = 6
 mov $0.0 @B-3
 mov @B-2 A
 jmp @A
 
 ; metodo: 'c1'
-L13 ; Secuencia de llamada
-mov B @B+2
+L12 ; Secuencia de llamada
+mov B @B+3
 mov B A
-addi #3
+addi #4
 mov A B
-mvetq L12 @B-2
-jmp L11
-L12 mov @B-1 B
-mov $2.9 @B+1		; guarda real 2.9
-mov @B+0 A
-mulr @B+1	; REAL * REAL
-mov A @B+2
+mvetq L13 @B-2
+jmp L10
+L13 mov @B-1 B
+mov $2.9 @B+4		; guarda real 2.9
+mov @B+1 A
+mulr @B+4	; REAL * REAL
+mov A @B+5
 ; Secuencia de retorno
-mov @B+2 A
+mov @B+5 A
 rtoi
-mov A @B+2
-mov @B+2 @B-3
+mov A @B+5
+mov @B+5 @B-3
 mov @B-2 A
 jmp @A
-; DIR USED = 3
+; DIR USED = 6
 mov #0 @B-3
 mov @B-2 A
 jmp @A
@@ -188,125 +218,125 @@ wrl
 
 ;print
 ; Secuencia de llamada
-mov B @B+5
+mov B @B+6
 mov B A
-addi #6
+addi #7
 mov A B
 mvetq L15 @B-2
 jmp L1
 L15 mov @B-1 B
-wri @B+3	; print valor entero de temporal
-wrl
-
-;print
-mov 0 @B+4		; guarda id this.a
 wri @B+4	; print valor entero de temporal
-wrl
-
-;print
-mov #321 @B+5		; guarda entero 321
-wri @B+5	; print valor entero de temporal
-wrl
-
-;print
-mov 0 @B+6		; guarda id this.a
-wri @B+6	; print valor entero de temporal
-wrl
-
-;print
-; Secuencia de llamada
-mov B @B+8
-mov B A
-addi #9
-mov A B
-mvetq L16 @B-2
-jmp L2
-L16 mov @B-1 B
-wri @B+6	; print valor entero de temporal
 wrl
 
 ;print
 mov 0 @B+7		; guarda id this.a
 wri @B+7	; print valor entero de temporal
 wrl
-mov 0 @B+8		; guarda id this.a
+
+;print
+mov #321 @B+8		; guarda entero 321
+wri @B+8	; print valor entero de temporal
+wrl
+
+;print
 mov 0 @B+9		; guarda id this.a
-mov @B+8 A
-addi @B+9	; ENTERO + ENTERO
-mov A @B+10	; guardar el resultado en temporal
-mov 0 @B+11		; guarda id this.a
-mov @B+10 A
-subi @B+11	; ENTERO - ENTERO
-mov A @B+12	; guardar el resultado en temporal
-mov @B+12 0		; this.a = @B+12; 
+wri @B+9	; print valor entero de temporal
+wrl
+
+;print
+; Secuencia de llamada
+mov B @B+12
+mov B A
+addi #13
+mov A B
+mvetq L16 @B-2
+jmp L2
+L16 mov @B-1 B
+wri @B+10	; print valor entero de temporal
+wrl
 
 ;print
 mov 0 @B+13		; guarda id this.a
 wri @B+13	; print valor entero de temporal
 wrl
+mov 0 @B+14		; guarda id this.a
+mov 0 @B+15		; guarda id this.a
+mov @B+14 A
+addi @B+15	; ENTERO + ENTERO
+mov A @B+16	; guardar el resultado en temporal
+mov 0 @B+17		; guarda id this.a
+mov @B+16 A
+subi @B+17	; ENTERO - ENTERO
+mov A @B+18	; guardar el resultado en temporal
+mov @B+18 0		; this.a = @B+18; 
+
+;print
+mov 0 @B+19		; guarda id this.a
+wri @B+19	; print valor entero de temporal
+wrl
 
 ;print
 ; Secuencia de llamada
-mov B @B+15
+mov B @B+22
 mov B A
-addi #16
+addi #23
 mov A B
 mvetq L17 @B-2
 jmp L3
 L17 mov @B-1 B
-wri @B+13	; print valor entero de temporal
+wri @B+20	; print valor entero de temporal
 wrl
 
 ;print
 ; Secuencia de llamada
-mov B @B+15
+mov B @B+25
 mov B A
-addi #16
+addi #26
 mov A B
 mvetq L18 @B-2
 jmp L4
 L18 mov @B-1 B
-wrr @B+13	; print valor real de temporal
+wrr @B+23	; print valor real de temporal
 wrl
 
 ;print
 ; Secuencia de llamada
-mov B @B+15
+mov B @B+28
 mov B A
-addi #16
+addi #29
 mov A B
 mvetq L19 @B-2
 jmp L5
 L19 mov @B-1 B
-wrr @B+13	; print valor real de temporal
+wrr @B+26	; print valor real de temporal
 wrl
 
 ;print
 ; Secuencia de llamada
-mov B @B+15
+mov B @B+31
 mov B A
-addi #16
+addi #32
 mov A B
 mvetq L20 @B-2
 jmp L6
 L20 mov @B-1 B
-wri @B+13	; print valor entero de temporal
+wri @B+29	; print valor entero de temporal
 wrl
 
 ;print
 ; Secuencia de llamada
-mov B @B+15
+mov B @B+34
 mov B A
-addi #16
+addi #35
 mov A B
 mvetq L21 @B-2
-jmp L13
+jmp L12
 L21 mov @B-1 B
-wri @B+13	; print valor entero de temporal
+wri @B+32	; print valor entero de temporal
 wrl
 
 ;print
-mov #117 @B+14		; guarda entero 117
-wri @B+14	; print valor entero de temporal
+mov #117 @B+35		; guarda entero 117
+wri @B+35	; print valor entero de temporal
 wrl
 halt

@@ -1,18 +1,69 @@
-class prfcorrecto3 {
 
-attributes:
 
-methods:
+class of04
+{
+	attributes:
+		int a[10];
+		float b;
+		float c[10];
 
- int factorial(int n)
- {
-  print(n);
-  if (n<=1) return 1;
-  else      return n*factorial(n-1);
- }
+	methods:
 
- int main()
- {
-  print(factorial(6));
- }
+		int t1()
+		{
+			print(b);
+			c[0] = 2.123;
+		}
+
+		int t2()
+		{
+			int a[5][5];
+
+			a[0][0] = 22;
+			a[0][1] = 33;
+			print(a[0][0]); //22
+			print(a[0][1]); /33
+			print(a[0][0]); /22
+
+			return a[0][0] - 9.9;
+		}
+
+		int t3()
+		{
+			print(this.a[0]); //5
+		}
+
+		float t4()
+		{
+			print(this.c[0]);
+			print(this.c[5]);
+			this.c[5] = 2.76;
+			print(this.c[5]);
+			this.a[5] = 54;
+
+			return this.a[0];
+		}
+
+		int main()
+		{
+			a[0] = 5;
+			b = 6;
+			c[5] = 7;
+
+			print(123); // 123
+			print(t1()); // 6.000
+			print(t2()); // 22,33,22
+			print(t3()); //5
+
+			print(this.c[5]); //7
+			print(this.a[0]); //5
+			print(t4()); //2.123,7,2.76 --> 5
+			print(this.a[0]); //5
+			print(this.a[5]); //54
+			print(this.c[5]); //2.76
+
+			
+
+			print(321);
+		}
 }

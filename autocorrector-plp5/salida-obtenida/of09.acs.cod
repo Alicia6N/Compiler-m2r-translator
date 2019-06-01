@@ -1,3 +1,51 @@
+;Guarda desde: 0
+;Actual empieza: 3
+;Hasta: 5
+;Guarda desde: 7
+;Actual empieza: 10
+;Hasta: 12
+;Guarda desde: 14
+;Actual empieza: 17
+;Hasta: 19
+;Guarda desde: 21
+;Actual empieza: 24
+;Hasta: 26
+;Guarda desde: 28
+;Actual empieza: 31
+;Hasta: 33
+;Guarda desde: 35
+;Actual empieza: 38
+;Hasta: 40
+;Guarda desde: 42
+;Actual empieza: 45
+;Hasta: 47
+;Guarda desde: 49
+;Actual empieza: 52
+;Hasta: 54
+;Guarda desde: 56
+;Actual empieza: 59
+;Hasta: 61
+;Guarda desde: 63
+;Actual empieza: 66
+;Hasta: 68
+;Guarda desde: 70
+;Actual empieza: 73
+;Hasta: 75
+;Guarda desde: 77
+;Actual empieza: 80
+;Hasta: 82
+;Guarda desde: 84
+;Actual empieza: 87
+;Hasta: 89
+;Guarda desde: 91
+;Actual empieza: 94
+;Hasta: 96
+;Guarda desde: 98
+;Actual empieza: 101
+;Hasta: 103
+;Guarda desde: 105
+;Actual empieza: 108
+;Hasta: 110
 mov #0 B
 jmp L5
 
@@ -69,290 +117,290 @@ jmp @A
 
 L5  
 ;print
-mov #4 @B+1		; guarda entero 4
-mov @B+1 @B+6	; asigna un param Par
-mov #6 @B+2		; guarda entero 6
-mov @B+2 @B+7	; asigna un param CPar
+mov #4 @B+6		; guarda entero 4
+mov @B+6 @B+4	; asigna un param Par
+mov #6 @B+7		; guarda entero 6
+mov @B+7 @B+5	; asigna un param CPar
 ; Secuencia de llamada
-mov B @B+4
+mov B @B+3
 mov B A
-addi #5
+addi #4
 mov A B
 mvetq L6 @B-2
 jmp L1
 L6 mov @B-1 B
-wri @B+2	; print valor entero de temporal
+wri @B+1	; print valor entero de temporal
 wrl
 
 ;print
-mov $4.9 @B+3		; guarda real 4.9
-mov @B+3 A
+mov $4.9 @B+13		; guarda real 4.9
+mov @B+13 A
 rtoi 
-mov A @B+8	; asigna un param Par | entero != real
-mov #6 @B+4		; guarda entero 6
-mov @B+4 @B+9	; asigna un param CPar
-; Secuencia de llamada
-mov B @B+6
-mov B A
-addi #7
-mov A B
-mvetq L7 @B-2
-jmp L1
-L7 mov @B-1 B
-wri @B+4	; print valor entero de temporal
-wrl
-
-;print
-mov #4 @B+5		; guarda entero 4
-mov @B+5 @B+10	; asigna un param Par
-mov $6.9 @B+6		; guarda real 6.9
-mov @B+6 A
-rtoi 
-mov A @B+11	; asigna un param CPar | entero != real
-; Secuencia de llamada
-mov B @B+8
-mov B A
-addi #9
-mov A B
-mvetq L8 @B-2
-jmp L1
-L8 mov @B-1 B
-wri @B+6	; print valor entero de temporal
-wrl
-
-;print
-mov $4.9 @B+7		; guarda real 4.9
-mov @B+7 A
-rtoi 
-mov A @B+12	; asigna un param Par | entero != real
-mov $6.9 @B+8		; guarda real 6.9
-mov @B+8 A
-rtoi 
-mov A @B+13	; asigna un param CPar | entero != real
+mov A @B+11	; asigna un param Par | entero != real
+mov #6 @B+14		; guarda entero 6
+mov @B+14 @B+12	; asigna un param CPar
 ; Secuencia de llamada
 mov B @B+10
 mov B A
 addi #11
 mov A B
-mvetq L9 @B-2
+mvetq L7 @B-2
 jmp L1
-L9 mov @B-1 B
+L7 mov @B-1 B
 wri @B+8	; print valor entero de temporal
 wrl
 
 ;print
-mov #4 @B+9		; guarda entero 4
-mov @B+9 @B+14	; asigna un param Par
-mov #6 @B+10		; guarda entero 6
-mov @B+10 @B+15	; asigna un param CPar
-; Secuencia de llamada
-mov B @B+12
-mov B A
-addi #13
-mov A B
-mvetq L10 @B-2
-jmp L2
-L10 mov @B-1 B
-wrr @B+10	; print valor real de temporal
-wrl
-
-;print
-mov $4.9 @B+11		; guarda real 4.9
-mov @B+11 A
-rtoi 
-mov A @B+16	; asigna un param Par | entero != real
-mov #6 @B+12		; guarda entero 6
-mov @B+12 @B+17	; asigna un param CPar
-; Secuencia de llamada
-mov B @B+14
-mov B A
-addi #15
-mov A B
-mvetq L11 @B-2
-jmp L2
-L11 mov @B-1 B
-wrr @B+12	; print valor real de temporal
-wrl
-
-;print
-mov #4 @B+13		; guarda entero 4
-mov @B+13 @B+18	; asigna un param Par
-mov $6.9 @B+14		; guarda real 6.9
-mov @B+14 A
+mov #4 @B+20		; guarda entero 4
+mov @B+20 @B+18	; asigna un param Par
+mov $6.9 @B+21		; guarda real 6.9
+mov @B+21 A
 rtoi 
 mov A @B+19	; asigna un param CPar | entero != real
 ; Secuencia de llamada
-mov B @B+16
+mov B @B+17
 mov B A
-addi #17
+addi #18
 mov A B
-mvetq L12 @B-2
-jmp L2
-L12 mov @B-1 B
-wrr @B+14	; print valor real de temporal
+mvetq L8 @B-2
+jmp L1
+L8 mov @B-1 B
+wri @B+15	; print valor entero de temporal
 wrl
 
 ;print
-mov $4.9 @B+15		; guarda real 4.9
-mov @B+15 A
+mov $4.9 @B+27		; guarda real 4.9
+mov @B+27 A
 rtoi 
-mov A @B+20	; asigna un param Par | entero != real
-mov $6.9 @B+16		; guarda real 6.9
-mov @B+16 A
+mov A @B+25	; asigna un param Par | entero != real
+mov $6.9 @B+28		; guarda real 6.9
+mov @B+28 A
 rtoi 
-mov A @B+21	; asigna un param CPar | entero != real
-; Secuencia de llamada
-mov B @B+18
-mov B A
-addi #19
-mov A B
-mvetq L13 @B-2
-jmp L2
-L13 mov @B-1 B
-wrr @B+16	; print valor real de temporal
-wrl
-
-;print
-mov $4.9 @B+17		; guarda real 4.9
-mov @B+17 @B+22	; asigna un param Par
-mov $6.9 @B+18		; guarda real 6.9
-mov @B+18 @B+23	; asigna un param CPar
-; Secuencia de llamada
-mov B @B+20
-mov B A
-addi #21
-mov A B
-mvetq L14 @B-2
-jmp L3
-L14 mov @B-1 B
-wri @B+18	; print valor entero de temporal
-wrl
-
-;print
-mov #4 @B+19		; guarda entero 4
-mov @B+19 A
-itor 
-mov A @B+24	; asigna un param Par | real != entero
-mov $6.9 @B+20		; guarda real 6.9
-mov @B+20 @B+25	; asigna un param CPar
-; Secuencia de llamada
-mov B @B+22
-mov B A
-addi #23
-mov A B
-mvetq L15 @B-2
-jmp L3
-L15 mov @B-1 B
-wri @B+20	; print valor entero de temporal
-wrl
-
-;print
-mov $4.9 @B+21		; guarda real 4.9
-mov @B+21 @B+26	; asigna un param Par
-mov #6 @B+22		; guarda entero 6
-mov @B+22 A
-itor 
-mov A @B+27	; asigna un param CPar | real != entero
+mov A @B+26	; asigna un param CPar | entero != real
 ; Secuencia de llamada
 mov B @B+24
 mov B A
 addi #25
 mov A B
-mvetq L16 @B-2
-jmp L3
-L16 mov @B-1 B
+mvetq L9 @B-2
+jmp L1
+L9 mov @B-1 B
 wri @B+22	; print valor entero de temporal
 wrl
 
 ;print
-mov #4 @B+23		; guarda entero 4
-mov @B+23 A
-itor 
-mov A @B+28	; asigna un param Par | real != entero
-mov #6 @B+24		; guarda entero 6
-mov @B+24 A
-itor 
-mov A @B+29	; asigna un param CPar | real != entero
+mov #4 @B+34		; guarda entero 4
+mov @B+34 @B+32	; asigna un param Par
+mov #6 @B+35		; guarda entero 6
+mov @B+35 @B+33	; asigna un param CPar
 ; Secuencia de llamada
-mov B @B+26
+mov B @B+31
 mov B A
-addi #27
+addi #32
+mov A B
+mvetq L10 @B-2
+jmp L2
+L10 mov @B-1 B
+wrr @B+29	; print valor real de temporal
+wrl
+
+;print
+mov $4.9 @B+41		; guarda real 4.9
+mov @B+41 A
+rtoi 
+mov A @B+39	; asigna un param Par | entero != real
+mov #6 @B+42		; guarda entero 6
+mov @B+42 @B+40	; asigna un param CPar
+; Secuencia de llamada
+mov B @B+38
+mov B A
+addi #39
+mov A B
+mvetq L11 @B-2
+jmp L2
+L11 mov @B-1 B
+wrr @B+36	; print valor real de temporal
+wrl
+
+;print
+mov #4 @B+48		; guarda entero 4
+mov @B+48 @B+46	; asigna un param Par
+mov $6.9 @B+49		; guarda real 6.9
+mov @B+49 A
+rtoi 
+mov A @B+47	; asigna un param CPar | entero != real
+; Secuencia de llamada
+mov B @B+45
+mov B A
+addi #46
+mov A B
+mvetq L12 @B-2
+jmp L2
+L12 mov @B-1 B
+wrr @B+43	; print valor real de temporal
+wrl
+
+;print
+mov $4.9 @B+55		; guarda real 4.9
+mov @B+55 A
+rtoi 
+mov A @B+53	; asigna un param Par | entero != real
+mov $6.9 @B+56		; guarda real 6.9
+mov @B+56 A
+rtoi 
+mov A @B+54	; asigna un param CPar | entero != real
+; Secuencia de llamada
+mov B @B+52
+mov B A
+addi #53
+mov A B
+mvetq L13 @B-2
+jmp L2
+L13 mov @B-1 B
+wrr @B+50	; print valor real de temporal
+wrl
+
+;print
+mov $4.9 @B+62		; guarda real 4.9
+mov @B+62 @B+60	; asigna un param Par
+mov $6.9 @B+63		; guarda real 6.9
+mov @B+63 @B+61	; asigna un param CPar
+; Secuencia de llamada
+mov B @B+59
+mov B A
+addi #60
+mov A B
+mvetq L14 @B-2
+jmp L3
+L14 mov @B-1 B
+wri @B+57	; print valor entero de temporal
+wrl
+
+;print
+mov #4 @B+69		; guarda entero 4
+mov @B+69 A
+itor 
+mov A @B+67	; asigna un param Par | real != entero
+mov $6.9 @B+70		; guarda real 6.9
+mov @B+70 @B+68	; asigna un param CPar
+; Secuencia de llamada
+mov B @B+66
+mov B A
+addi #67
+mov A B
+mvetq L15 @B-2
+jmp L3
+L15 mov @B-1 B
+wri @B+64	; print valor entero de temporal
+wrl
+
+;print
+mov $4.9 @B+76		; guarda real 4.9
+mov @B+76 @B+74	; asigna un param Par
+mov #6 @B+77		; guarda entero 6
+mov @B+77 A
+itor 
+mov A @B+75	; asigna un param CPar | real != entero
+; Secuencia de llamada
+mov B @B+73
+mov B A
+addi #74
+mov A B
+mvetq L16 @B-2
+jmp L3
+L16 mov @B-1 B
+wri @B+71	; print valor entero de temporal
+wrl
+
+;print
+mov #4 @B+83		; guarda entero 4
+mov @B+83 A
+itor 
+mov A @B+81	; asigna un param Par | real != entero
+mov #6 @B+84		; guarda entero 6
+mov @B+84 A
+itor 
+mov A @B+82	; asigna un param CPar | real != entero
+; Secuencia de llamada
+mov B @B+80
+mov B A
+addi #81
 mov A B
 mvetq L17 @B-2
 jmp L3
 L17 mov @B-1 B
-wri @B+24	; print valor entero de temporal
+wri @B+78	; print valor entero de temporal
 wrl
 
 ;print
-mov $4.9 @B+25		; guarda real 4.9
-mov @B+25 @B+30	; asigna un param Par
-mov $6.9 @B+26		; guarda real 6.9
-mov @B+26 @B+31	; asigna un param CPar
+mov $4.9 @B+90		; guarda real 4.9
+mov @B+90 @B+88	; asigna un param Par
+mov $6.9 @B+91		; guarda real 6.9
+mov @B+91 @B+89	; asigna un param CPar
 ; Secuencia de llamada
-mov B @B+28
+mov B @B+87
 mov B A
-addi #29
+addi #88
 mov A B
 mvetq L18 @B-2
 jmp L4
 L18 mov @B-1 B
-wrr @B+26	; print valor real de temporal
+wrr @B+85	; print valor real de temporal
 wrl
 
 ;print
-mov #4 @B+27		; guarda entero 4
-mov @B+27 A
+mov #4 @B+97		; guarda entero 4
+mov @B+97 A
 itor 
-mov A @B+32	; asigna un param Par | real != entero
-mov $6.9 @B+28		; guarda real 6.9
-mov @B+28 @B+33	; asigna un param CPar
+mov A @B+95	; asigna un param Par | real != entero
+mov $6.9 @B+98		; guarda real 6.9
+mov @B+98 @B+96	; asigna un param CPar
 ; Secuencia de llamada
-mov B @B+30
+mov B @B+94
 mov B A
-addi #31
+addi #95
 mov A B
 mvetq L19 @B-2
 jmp L4
 L19 mov @B-1 B
-wrr @B+28	; print valor real de temporal
+wrr @B+92	; print valor real de temporal
 wrl
 
 ;print
-mov $4.9 @B+29		; guarda real 4.9
-mov @B+29 @B+34	; asigna un param Par
-mov #6 @B+30		; guarda entero 6
-mov @B+30 A
+mov $4.9 @B+104		; guarda real 4.9
+mov @B+104 @B+102	; asigna un param Par
+mov #6 @B+105		; guarda entero 6
+mov @B+105 A
 itor 
-mov A @B+35	; asigna un param CPar | real != entero
+mov A @B+103	; asigna un param CPar | real != entero
 ; Secuencia de llamada
-mov B @B+32
+mov B @B+101
 mov B A
-addi #33
+addi #102
 mov A B
 mvetq L20 @B-2
 jmp L4
 L20 mov @B-1 B
-wrr @B+30	; print valor real de temporal
+wrr @B+99	; print valor real de temporal
 wrl
 
 ;print
-mov #4 @B+31		; guarda entero 4
-mov @B+31 A
+mov #4 @B+111		; guarda entero 4
+mov @B+111 A
 itor 
-mov A @B+36	; asigna un param Par | real != entero
-mov #6 @B+32		; guarda entero 6
-mov @B+32 A
+mov A @B+109	; asigna un param Par | real != entero
+mov #6 @B+112		; guarda entero 6
+mov @B+112 A
 itor 
-mov A @B+37	; asigna un param CPar | real != entero
+mov A @B+110	; asigna un param CPar | real != entero
 ; Secuencia de llamada
-mov B @B+34
+mov B @B+108
 mov B A
-addi #35
+addi #109
 mov A B
 mvetq L21 @B-2
 jmp L4
 L21 mov @B-1 B
-wrr @B+32	; print valor real de temporal
+wrr @B+106	; print valor real de temporal
 wrl
 halt

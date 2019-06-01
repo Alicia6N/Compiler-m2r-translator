@@ -1,3 +1,9 @@
+;Guarda desde: 7
+;Actual empieza: 10
+;Hasta: 12
+;Guarda desde: 26
+;Actual empieza: 29
+;Hasta: 31
 mov #12 B
 jmp L3
 
@@ -66,108 +72,108 @@ wrl
 mov @B+0 @B+7		; guarda id c
 wri @B+7	; print valor entero de temporal
 wrl
-mov @B+0 @B+8		; guarda id c
-mov @B+8 @B+13	; asigna un param Par
-mov 11 @B+9		; guarda id this.c
-mov @B+9 @B+14	; asigna un param CPar
+mov @B+0 @B+13		; guarda id c
+mov @B+13 @B+11	; asigna un param Par
+mov 11 @B+14		; guarda id this.c
+mov @B+14 @B+12	; asigna un param CPar
 ; Secuencia de llamada
-mov B @B+11
+mov B @B+10
 mov B A
-addi #12
+addi #11
 mov A B
 mvetq L4 @B-2
 jmp L1
 L4 mov @B-1 B
-mov @B+9 @B+1		; foo = @B+9; 
+mov @B+8 @B+1		; foo = @B+8; 
 
 ;print
-mov 11 @B+10		; guarda id this.c
-wri @B+10	; print valor entero de temporal
+mov 11 @B+15		; guarda id this.c
+wri @B+15	; print valor entero de temporal
 wrl
 
 ;print
-mov @B+0 @B+11		; guarda id c
-wri @B+11	; print valor entero de temporal
+mov @B+0 @B+16		; guarda id c
+wri @B+16	; print valor entero de temporal
 wrl
-mov #0 @B+12	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
-mov #0 @B+13		; guarda entero 0
-mov @B+12 A 	; hace recursivo de arrays en Ref
-muli #10
-addi @B+13	; fallo en este 
-mov A @B+14 
-mov $122.2 @B+15		; guarda real 122.2
-mov @B+14 A	; empieza arrays en Ref asig de: this.b
-muli #1 
-addi #1
-mov @B+15 @A	; acaba arrays en Ref asig
-mov #11 @B+16		; guarda entero 11
-mov @B+16 11		; this.c = @B+16; 
-
-;print
 mov #0 @B+17	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
 mov #0 @B+18		; guarda entero 0
 mov @B+17 A 	; hace recursivo de arrays en Ref
 muli #10
 addi @B+18	; fallo en este 
 mov A @B+19 
-mov #0 @B+19		; guarda 0 y empieza en Factor recursivo arrays de this.b
-mov @B+19 @B+20		; guarda id this.b
+mov $122.2 @B+20		; guarda real 122.2
+mov @B+19 A	; empieza arrays en Ref asig de: this.b
 muli #1 
 addi #1
-mov @A @B+20	;acaba array en Factor
-wrr @B+20	; print valor real de temporal
+mov @B+20 @A	; acaba arrays en Ref asig
+mov #11 @B+21		; guarda entero 11
+mov @B+21 11		; this.c = @B+21; 
+
+;print
+mov #0 @B+22	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
+mov #0 @B+23		; guarda entero 0
+mov @B+22 A 	; hace recursivo de arrays en Ref
+muli #10
+addi @B+23	; fallo en este 
+mov A @B+24 
+mov #0 @B+24		; guarda 0 y empieza en Factor recursivo arrays de this.b
+mov @B+24 @B+25		; guarda id this.b
+muli #1 
+addi #1
+mov @A @B+25	;acaba array en Factor
+wrr @B+25	; print valor real de temporal
 wrl
 
 ;print
-mov 11 @B+21		; guarda id this.c
-wri @B+21	; print valor entero de temporal
+mov 11 @B+26		; guarda id this.c
+wri @B+26	; print valor entero de temporal
 wrl
-mov 11 @B+22		; guarda id this.c
-mov @B+22 @B+27	; asigna un param Par
-mov #0 @B+23	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
-mov #0 @B+24		; guarda entero 0
-mov @B+23 A 	; hace recursivo de arrays en Ref
+mov 11 @B+32		; guarda id this.c
+mov @B+32 @B+30	; asigna un param Par
+mov #0 @B+33	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
+mov #0 @B+34		; guarda entero 0
+mov @B+33 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+24	; fallo en este 
-mov A @B+25 
-mov #0 @B+25		; guarda 0 y empieza en Factor recursivo arrays de this.b
-mov @B+25 @B+26		; guarda id this.b
+addi @B+34	; fallo en este 
+mov A @B+35 
+mov #0 @B+35		; guarda 0 y empieza en Factor recursivo arrays de this.b
+mov @B+35 @B+36		; guarda id this.b
 muli #1 
 addi #1
-mov @A @B+26	;acaba array en Factor
-mov @B+26 @B+31	; asigna un param CPar
+mov @A @B+36	;acaba array en Factor
+mov @B+36 @B+31	; asigna un param CPar
 ; Secuencia de llamada
-mov B @B+28
+mov B @B+29
 mov B A
-addi #26
+addi #30
 mov A B
 mvetq L5 @B-2
 jmp L2
 L5 mov @B-1 B
-mov @B+26 @B+1		; foo = @B+26; 
+mov @B+27 @B+1		; foo = @B+27; 
 
 ;print
-mov #0 @B+27	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
-mov #0 @B+28		; guarda entero 0
-mov @B+27 A 	; hace recursivo de arrays en Ref
+mov #0 @B+37	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
+mov #0 @B+38		; guarda entero 0
+mov @B+37 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+28	; fallo en este 
-mov A @B+29 
-mov #0 @B+29		; guarda 0 y empieza en Factor recursivo arrays de this.b
-mov @B+29 @B+30		; guarda id this.b
+addi @B+38	; fallo en este 
+mov A @B+39 
+mov #0 @B+39		; guarda 0 y empieza en Factor recursivo arrays de this.b
+mov @B+39 @B+40		; guarda id this.b
 muli #1 
 addi #1
-mov @A @B+30	;acaba array en Factor
-wrr @B+30	; print valor real de temporal
+mov @A @B+40	;acaba array en Factor
+wrr @B+40	; print valor real de temporal
 wrl
 
 ;print
-mov 11 @B+31		; guarda id this.c
-wri @B+31	; print valor entero de temporal
+mov 11 @B+41		; guarda id this.c
+wri @B+41	; print valor entero de temporal
 wrl
 
 ;print
-mov #321 @B+32		; guarda entero 321
-wri @B+32	; print valor entero de temporal
+mov #321 @B+42		; guarda entero 321
+wri @B+42	; print valor entero de temporal
 wrl
 halt

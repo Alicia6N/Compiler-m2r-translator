@@ -1,3 +1,12 @@
+;Guarda desde: 6
+;Actual empieza: 9
+;Hasta: 10
+;Guarda desde: 2
+;Actual empieza: 5
+;Hasta: 9
+;Guarda desde: 20
+;Actual empieza: 23
+;Hasta: 24
 mov #0 B
 jmp L5
 
@@ -28,99 +37,99 @@ mov @B-2 A
 jmp @A
 
 ; metodo: 'factorial'
-L4 mov @B+0 @B+2		; guarda id n
+L2 mov @B+0 @B+2		; guarda id n
 mov #1 @B+3		; guarda entero 1
 mov @B+2 A
 leqi @B+3	; Expr relop Esimple
 mov A @B+4	; guardar el resultado en temporal
 mov @B+4 A
-jz L2 	 ; if 
+jz L3 	 ; if 
  mov #1 @B+5		; guarda entero 1
 ; Secuencia de retorno
 mov @B+5 @B-3
 mov @B-2 A
 jmp @A
-L2 mov @B+0 @B+6		; guarda id n
-mov @B+0 @B+7		; guarda id n
-mov #1 @B+8		; guarda entero 1
-mov @B+7 A
-subi @B+8	; ENTERO - ENTERO
-mov A @B+9	; guardar el resultado en temporal
-mov @B+9 @B+14	; asigna un param Par
+L3 mov @B+0 @B+6		; guarda id n
+mov @B+0 @B+11		; guarda id n
+mov #1 @B+12		; guarda entero 1
+mov @B+11 A
+subi @B+12	; ENTERO - ENTERO
+mov A @B+13	; guardar el resultado en temporal
+mov @B+13 @B+10	; asigna un param Par
 ; Secuencia de llamada
-mov B @B+11
+mov B @B+9
 mov B A
 addi #10
 mov A B
-mvetq L3 @B-2
-jmp 
-L3 mov @B-1 B
+mvetq L4 @B-2
+jmp L2
+L4 mov @B-1 B
 mov @B+6 A
-muli @B+9	; ENTERO * ENTERO
-mov A @B+10
+muli @B+7	; ENTERO * ENTERO
+mov A @B+14
 ; Secuencia de retorno
-mov @B+10 @B-3
+mov @B+14 @B-3
 mov @B-2 A
 jmp @A
-; DIR USED = 11
+; DIR USED = 15
 mov #0 @B-3
 mov @B-2 A
 jmp @A
 
-L5  mov #321 @B+3		; guarda entero 321
-mov #5 @B+4		; guarda entero 5
-mov @B+3 A
-addi @B+4	; ENTERO + ENTERO
-mov A @B+5	; guardar el resultado en temporal
-mov #2 @B+6		; guarda entero 2
-mov @B+5 A
-addi @B+6	; ENTERO + ENTERO
-mov A @B+7	; guardar el resultado en temporal
-mov @B+7 @B+12	; asigna un param Par
-mov #1 @B+8		; guarda entero 1
-mov @B+8 @B+13	; asigna un param CPar
-mov #2 @B+9		; guarda entero 2
-mov @B+9 @B+14	; asigna un param CPar
-mov #3 @B+10		; guarda entero 3
-mov @B+10 @B+15	; asigna un param CPar
+L5  mov #321 @B+10		; guarda entero 321
+mov #5 @B+11		; guarda entero 5
+mov @B+10 A
+addi @B+11	; ENTERO + ENTERO
+mov A @B+12	; guardar el resultado en temporal
+mov #2 @B+13		; guarda entero 2
+mov @B+12 A
+addi @B+13	; ENTERO + ENTERO
+mov A @B+14	; guardar el resultado en temporal
+mov @B+14 @B+6	; asigna un param Par
+mov #1 @B+15		; guarda entero 1
+mov @B+15 @B+7	; asigna un param CPar
+mov #2 @B+16		; guarda entero 2
+mov @B+16 @B+8	; asigna un param CPar
+mov #3 @B+17		; guarda entero 3
+mov @B+17 @B+9	; asigna un param CPar
 ; Secuencia de llamada
-mov B @B+12
+mov B @B+5
 mov B A
-addi #9
+addi #6
 mov A B
 mvetq L6 @B-2
 jmp L1
 L6 mov @B-1 B
-mov @B+10 @B+0		; foo = @B+10; 
+mov @B+3 @B+0		; foo = @B+3; 
 
 ;print
-mov #123 @B+11		; guarda entero 123
-wri @B+11	; print valor entero de temporal
+mov #123 @B+18		; guarda entero 123
+wri @B+18	; print valor entero de temporal
 wrl
-mov #5 @B+12		; guarda entero 5
-mov @B+12 @B+1		; factorialn = @B+12; 
+mov #5 @B+19		; guarda entero 5
+mov @B+19 @B+1		; factorialn = @B+19; 
 
 ;print
-mov @B+1 @B+13		; guarda id factorialn
-wri @B+13	; print valor entero de temporal
+mov @B+1 @B+20		; guarda id factorialn
+wri @B+20	; print valor entero de temporal
 wrl
 
 ;print
-mov @B+1 @B+14		; guarda id factorialn
-mov @B+14 @B+19	; asigna un param Par
+mov @B+1 @B+25		; guarda id factorialn
+mov @B+25 @B+24	; asigna un param Par
 ; Secuencia de llamada
-mov B @B+16
+mov B @B+23
 mov B A
-addi #17
+addi #24
 mov A B
 mvetq L7 @B-2
-jmp L4
+jmp L2
 L7 mov @B-1 B
-wri @B+14	; print valor entero de temporal
+wri @B+21	; print valor entero de temporal
 wrl
 
 ;print
-mov @B+1 @B+15		; guarda id factorialn
-wri @B+15	; print valor entero de temporal
+mov @B+1 @B+26		; guarda id factorialn
+wri @B+26	; print valor entero de temporal
 wrl
 halt
