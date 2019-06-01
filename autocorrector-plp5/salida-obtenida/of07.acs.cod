@@ -1,12 +1,24 @@
+; Array a empieza en = @B+0
+; Array b empieza en = @B+1
+; Array c empieza en = @B+2
+; Array d empieza en = @B+3
+; Array n empieza en = @B+0
+; Array n empieza en = @B+0
 ;Guarda desde: 6
 ;Actual empieza: 9
 ;Hasta: 10
+; Array n empieza en = @B+0
+; Array foo empieza en = @B+0
 ;Guarda desde: 2
 ;Actual empieza: 5
 ;Hasta: 9
+; Array factorialn empieza en = @B+1
+; Array factorialn empieza en = @B+1
 ;Guarda desde: 20
 ;Actual empieza: 23
 ;Hasta: 24
+; Array factorialn empieza en = @B+1
+; Array factorialn empieza en = @B+1
 mov #0 B
 jmp L5
 

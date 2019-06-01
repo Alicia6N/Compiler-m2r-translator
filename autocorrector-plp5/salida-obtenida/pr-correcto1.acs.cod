@@ -1,3 +1,19 @@
+; Array a empieza en = @B+0
+; Array this.c empieza en = 2
+; Array a empieza en = @B+0
+; Array this.c empieza en = 2
+; Array a empieza en = @B+8
+; Array this.c empieza en = 2
+; Array this.a empieza en = 0
+; Array a empieza en = @B+8
+; Array b empieza en = @B+9
+; Array a empieza en = @B+8
+; Array b empieza en = @B+9
+; Array this.a empieza en = 0
+; Array a empieza en = @B+0
+; Array this.a empieza en = 0
+; Array a empieza en = @B+0
+; Array this.c empieza en = 2
 mov #3 B
 jmp L1
 

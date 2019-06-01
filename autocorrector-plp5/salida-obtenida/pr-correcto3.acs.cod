@@ -1,3 +1,38 @@
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array this.p empieza en = 3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array div empieza en = @B+27
+; Array i empieza en = @B+0
+; Array sumatotal empieza en = @B+26
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array sumafila empieza en = @B+25
+; Array j empieza en = @B+1
+; Array sumafila empieza en = @B+25
+; Array sumafila empieza en = @B+25
+; Array this.p empieza en = 3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array sumafila empieza en = @B+25
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array sumatotal empieza en = @B+26
+; Array sumatotal empieza en = @B+26
+; Array sumafila empieza en = @B+25
+; Array sumatotal empieza en = @B+26
+; Array div empieza en = @B+27
 mov #19 B
 jmp L1
 
@@ -21,7 +56,7 @@ mov A @B+10	; guardar el resultado en temporal
 	; WHILE
 mov @B+10 A
 jz L3	 ; if else
- mov #0 @B+11	; guarda 0 y empieza recursivo arrays de en Ref id this.p
+ mov #0 @B+11	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.p
 mov @B+0 @B+12		; guarda id i
 mov @B+11 A 	; hace recursivo de arrays en Ref
 muli #4
@@ -96,7 +131,7 @@ mov A @B+38	; guardar el resultado en temporal
 mov @B+38 A
 jz L7	 ; if else
  mov @B+25 @B+39		; guarda id sumafila
-mov #0 @B+40	; guarda 0 y empieza recursivo arrays de Ref thisthis.p
+mov #0 @B+40	; guarda 0 y empieza recursivo arrays de 'Ref this' this.p
 mov @B+0 @B+41		; guarda id i
 mov @B+40 A 	; hace recursivo de arrays en Ref
 muli #4

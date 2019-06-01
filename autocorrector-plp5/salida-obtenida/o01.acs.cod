@@ -1,3 +1,20 @@
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
 mov #0 B
 jmp L1
 

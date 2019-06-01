@@ -1,6 +1,9 @@
+; Array fact empieza en = @B+0
 ;Guarda desde: 5
 ;Actual empieza: 8
 ;Hasta: 9
+; Array fact empieza en = @B+0
+; Array fact empieza en = @B+0
 ;Guarda desde: 0
 ;Actual empieza: 3
 ;Hasta: 4
@@ -13,9 +16,12 @@
 ;Guarda desde: 16
 ;Actual empieza: 19
 ;Hasta: 20
+; Array fact empieza en = @B+21
 ;Guarda desde: 23
 ;Actual empieza: 26
 ;Hasta: 27
+; Array fact empieza en = @B+21
+; Array fact empieza en = @B+21
 mov #0 B
 jmp L4
 

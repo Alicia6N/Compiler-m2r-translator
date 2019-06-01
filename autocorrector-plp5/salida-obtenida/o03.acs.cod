@@ -1,3 +1,38 @@
+; Array a empieza en = @B+0
+; Array b empieza en = @B+1
+; Array b empieza en = @B+1
+; Array a empieza en = @B+0
+; Array this.b empieza en = 1
+; Array this.a empieza en = 0
+; Array a empieza en = @B+0
+; Array b empieza en = @B+1
+; Array this.a empieza en = 0
+; Array this.b empieza en = 1
+; Array this.b empieza en = 1
+; Array this.a empieza en = 0
+; Array a empieza en = @B+12
+; Array this.a empieza en = 0
+; Array a empieza en = @B+12
+; Array this.b empieza en = 1
+; Array this.b empieza en = 1
+; Array b empieza en = @B+13
+; Array b empieza en = @B+13
+; Array this.b empieza en = 1
+; Array this.b empieza en = 1
+; Array b empieza en = @B+24
+; Array b empieza en = @B+24
+; Array this.b empieza en = 1
+; Array a empieza en = @B+25
+; Array this.a empieza en = 0
+; Array a empieza en = @B+25
+; Array a empieza en = @B+12
+; Array b empieza en = @B+13
+; Array this.a empieza en = 0
+; Array this.b empieza en = 1
+; Array this.a empieza en = 0
+; Array this.b empieza en = 1
+; Array a empieza en = @B+0
+; Array b empieza en = @B+1
 mov #2 B
 jmp L1
 

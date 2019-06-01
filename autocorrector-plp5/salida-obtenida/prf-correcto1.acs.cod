@@ -1,9 +1,23 @@
+; Array res empieza en = @B+3
+; Array a empieza en = @B+0
+; Array b empieza en = @B+1
+; Array c empieza en = @B+2
+; Array res empieza en = @B+3
+; Array res empieza en = @B+3
+; Array a empieza en = @B+0
+; Array b empieza en = @B+1
+; Array c empieza en = @B+2
+; Array res empieza en = @B+3
+; Array this.f empieza en = 3
 ;Guarda desde: 0
 ;Actual empieza: 3
 ;Hasta: 6
+; Array this.f empieza en = 3
+; Array this.g empieza en = 4
 ;Guarda desde: 10
 ;Actual empieza: 13
 ;Hasta: 16
+; Array this.g empieza en = 4
 mov #5 B
 jmp L3
 

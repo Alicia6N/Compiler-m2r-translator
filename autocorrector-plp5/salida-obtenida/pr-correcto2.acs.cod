@@ -1,3 +1,171 @@
+; Array n empieza en = @B+2
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array n empieza en = @B+2
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array lon empieza en = @B+28
+; Array error empieza en = @B+29
+; Array salir empieza en = @B+30
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array error empieza en = @B+29
+; Array salir empieza en = @B+30
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array mov empieza en = @B+121
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array lon empieza en = @B+28
+; Array lon empieza en = @B+28
+; Array mov empieza en = @B+121
+; Array mov empieza en = @B+121
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array lon empieza en = @B+28
+; Array lon empieza en = @B+28
+; Array mov empieza en = @B+121
+; Array mov empieza en = @B+121
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array lon empieza en = @B+28
+; Array lon empieza en = @B+28
+; Array mov empieza en = @B+121
+; Array mov empieza en = @B+121
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array error empieza en = @B+29
+; Array salir empieza en = @B+30
+; Array error empieza en = @B+29
+; Array lon empieza en = @B+28
+; Array lon empieza en = @B+28
+; Array laberinto empieza en = @B+3
+; Array lon empieza en = @B+28
+; Array error empieza en = @B+29
+; Array salir empieza en = @B+30
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array error empieza en = @B+29
+; Array salir empieza en = @B+30
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array mov empieza en = @B+258
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array lon empieza en = @B+28
+; Array lon empieza en = @B+28
+; Array mov empieza en = @B+258
+; Array mov empieza en = @B+258
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array lon empieza en = @B+28
+; Array lon empieza en = @B+28
+; Array mov empieza en = @B+258
+; Array mov empieza en = @B+258
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array laberinto empieza en = @B+3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array lon empieza en = @B+28
+; Array lon empieza en = @B+28
+; Array mov empieza en = @B+258
+; Array mov empieza en = @B+258
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array n empieza en = @B+2
+; Array j empieza en = @B+1
+; Array n empieza en = @B+2
+; Array error empieza en = @B+29
+; Array salir empieza en = @B+30
+; Array error empieza en = @B+29
+; Array lon empieza en = @B+28
+; Array lon empieza en = @B+28
 mov #0 B
 jmp L1
 
@@ -23,7 +191,7 @@ mov A @B+40	; guardar el resultado en temporal
 	; WHILE
 mov @B+40 A
 jz L3	 ; if else
- mov #0 @B+41	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+ mov #0 @B+41	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+42		; guarda id i
 mov @B+41 A 	; hace recursivo de arrays en Ref
 muli #5
@@ -65,7 +233,7 @@ mov A @B+56	; guardar el resultado en temporal
 	; WHILE
 mov @B+56 A
 jz L7	 ; if else
- mov #0 @B+57	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+ mov #0 @B+57	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+58		; guarda id i
 mov @B+57 A 	; hace recursivo de arrays en Ref
 muli #5
@@ -99,7 +267,7 @@ mov A @B+69	; guardar el resultado en temporal
 	; WHILE
 mov @B+69 A
 jz L9	 ; if else
- mov #0 @B+70	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+ mov #0 @B+70	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+71		; guarda id i
 mov @B+70 A 	; hace recursivo de arrays en Ref
 muli #5
@@ -133,7 +301,7 @@ mov A @B+82	; guardar el resultado en temporal
 	; WHILE
 mov @B+82 A
 jz L11	 ; if else
- mov #0 @B+83	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+ mov #0 @B+83	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+2 @B+84		; guarda id n
 mov #1 @B+85		; guarda entero 1
 mov @B+84 A
@@ -217,7 +385,7 @@ mov A @B+115
 	; WHILE
 mov @B+115 A
 jz L24	 ; if else
- mov #0 @B+116	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+ mov #0 @B+116	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+117		; guarda id i
 mov @B+116 A 	; hace recursivo de arrays en Ref
 muli #5
@@ -262,7 +430,7 @@ muli @B+133	; ENTERO * ENTERO
 mov A @B+134
 mov @B+134 A
 jz L13 	 ; if 
- mov #0 @B+135	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+ mov #0 @B+135	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+136		; guarda id i
 mov #1 @B+137		; guarda entero 1
 mov @B+136 A
@@ -329,7 +497,7 @@ muli @B+162	; ENTERO * ENTERO
 mov A @B+163
 mov @B+163 A
 jz L15 	 ; if 
-mov #0 @B+164	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+mov #0 @B+164	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+165		; guarda id i
 mov #1 @B+166		; guarda entero 1
 mov @B+165 A
@@ -386,7 +554,7 @@ muli @B+186	; ENTERO * ENTERO
 mov A @B+187
 mov @B+187 A
 jz L17 	 ; if 
-mov #0 @B+188	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+mov #0 @B+188	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+189		; guarda id i
 mov @B+188 A 	; hace recursivo de arrays en Ref
 muli #5
@@ -486,7 +654,7 @@ L25
 mov @B+28 @B+224		; guarda id lon
 wri @B+224	; print valor entero de temporal
 wrl
-mov #0 @B+225	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+mov #0 @B+225	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov #1 @B+226		; guarda entero 1
 mov @B+225 A 	; hace recursivo de arrays en Ref
 muli #5
@@ -558,7 +726,7 @@ mov A @B+252
 	; WHILE
 mov @B+252 A
 jz L38	 ; if else
- mov #0 @B+253	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+ mov #0 @B+253	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+254		; guarda id i
 mov @B+253 A 	; hace recursivo de arrays en Ref
 muli #5
@@ -603,7 +771,7 @@ muli @B+270	; ENTERO * ENTERO
 mov A @B+271
 mov @B+271 A
 jz L27 	 ; if 
- mov #0 @B+272	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+ mov #0 @B+272	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+273		; guarda id i
 mov #1 @B+274		; guarda entero 1
 mov @B+273 A
@@ -670,7 +838,7 @@ muli @B+299	; ENTERO * ENTERO
 mov A @B+300
 mov @B+300 A
 jz L29 	 ; if 
-mov #0 @B+301	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+mov #0 @B+301	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+302		; guarda id i
 mov #1 @B+303		; guarda entero 1
 mov @B+302 A
@@ -727,7 +895,7 @@ muli @B+323	; ENTERO * ENTERO
 mov A @B+324
 mov @B+324 A
 jz L31 	 ; if 
-mov #0 @B+325	; guarda 0 y empieza recursivo arrays de en Ref id laberinto
+mov #0 @B+325	; guarda 0 y empieza recursivo arrays de en 'Ref id' laberinto
 mov @B+0 @B+326		; guarda id i
 mov @B+325 A 	; hace recursivo de arrays en Ref
 muli #5

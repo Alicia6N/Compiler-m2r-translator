@@ -1,9 +1,37 @@
+; Array a empieza en = @B+0
+; Array a empieza en = @B+0
+; Array b empieza en = @B+1
+; Array b empieza en = @B+1
+; Array c empieza en = @B+0
+; Array c empieza en = @B+0
+; Array b empieza en = @B+1
+; Array b empieza en = @B+1
+; Array c empieza en = @B+0
+; Array this.c empieza en = 11
+; Array this.c empieza en = 11
+; Array c empieza en = @B+0
+; Array this.c empieza en = 11
+; Array c empieza en = @B+0
+; Array foo empieza en = @B+1
 ;Guarda desde: 7
 ;Actual empieza: 10
 ;Hasta: 12
+; Array c empieza en = @B+0
+; Array this.c empieza en = 11
+; Array this.c empieza en = 11
+; Array c empieza en = @B+0
+; Array this.b empieza en = 1
+; Array this.c empieza en = 11
+; Array this.b empieza en = 1
+; Array this.c empieza en = 11
+; Array foo empieza en = @B+1
 ;Guarda desde: 26
 ;Actual empieza: 29
 ;Hasta: 31
+; Array this.c empieza en = 11
+; Array this.b empieza en = 1
+; Array this.b empieza en = 1
+; Array this.c empieza en = 11
 mov #12 B
 jmp L3
 
@@ -95,7 +123,7 @@ wrl
 mov @B+0 @B+16		; guarda id c
 wri @B+16	; print valor entero de temporal
 wrl
-mov #0 @B+17	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
+mov #0 @B+17	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #0 @B+18		; guarda entero 0
 mov @B+17 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -110,7 +138,7 @@ mov #11 @B+21		; guarda entero 11
 mov @B+21 11		; this.c = @B+21; 
 
 ;print
-mov #0 @B+22	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
+mov #0 @B+22	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #0 @B+23		; guarda entero 0
 mov @B+22 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -130,7 +158,7 @@ wri @B+26	; print valor entero de temporal
 wrl
 mov 11 @B+32		; guarda id this.c
 mov @B+32 @B+30	; asigna un param Par
-mov #0 @B+33	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
+mov #0 @B+33	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #0 @B+34		; guarda entero 0
 mov @B+33 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -153,7 +181,7 @@ L5 mov @B-1 B
 mov @B+27 @B+1		; foo = @B+27; 
 
 ;print
-mov #0 @B+37	; guarda 0 y empieza recursivo arrays de Ref thisthis.b
+mov #0 @B+37	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #0 @B+38		; guarda entero 0
 mov @B+37 A 	; hace recursivo de arrays en Ref
 muli #10

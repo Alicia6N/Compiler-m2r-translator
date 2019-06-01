@@ -1,7 +1,80 @@
+; Array p empieza en = @B+0
+; Array p2 empieza en = @B+6
+; Array a empieza en = @B+12
+; Array b empieza en = @B+13
+; Array p empieza en = @B+0
+; Array p2 empieza en = @B+6
+; Array a empieza en = @B+12
+; Array b empieza en = @B+13
+; Array p empieza en = @B+0
+; Array p2 empieza en = @B+6
+; Array a empieza en = @B+12
+; Array b empieza en = @B+13
+; Array p empieza en = @B+0
+; Array p2 empieza en = @B+6
+; Array a empieza en = @B+12
+; Array b empieza en = @B+13
+; Array p empieza en = @B+0
+; Array p2 empieza en = @B+6
+; Array a empieza en = @B+12
+; Array b empieza en = @B+13
+; Array p empieza en = @B+0
+; Array p2 empieza en = @B+6
+; Array a empieza en = @B+12
+; Array b empieza en = @B+13
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array p empieza en = @B+0
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array i empieza en = @B+167
+; Array p empieza en = @B+0
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array halo empieza en = @B+94
+; Array i empieza en = @B+167
+; Array p empieza en = @B+0
+; Array i empieza en = @B+167
+; Array halo empieza en = @B+94
+; Array p empieza en = @B+0
+; Array p empieza en = @B+0
+; Array i empieza en = @B+167
+; Array halo empieza en = @B+94
+; Array p empieza en = @B+0
+; Array p empieza en = @B+0
+; Array i empieza en = @B+167
+; Array i empieza en = @B+167
+; Array halo empieza en = @B+94
+; Array p empieza en = @B+0
+; Array i empieza en = @B+167
+; Array i empieza en = @B+167
+; Array p empieza en = @B+0
+; Array p empieza en = @B+0
+; Array p empieza en = @B+0
+; Array p empieza en = @B+0
+; Array halo empieza en = @B+94
+; Array p empieza en = @B+0
+; Array i empieza en = @B+167
+; Array i empieza en = @B+167
+; Array p empieza en = @B+0
+; Array p empieza en = @B+0
+; Array p empieza en = @B+0
+; Array halo empieza en = @B+94
+; Array i empieza en = @B+167
+; Array halo empieza en = @B+94
+; Array i empieza en = @B+167
 mov #0 B
 jmp L1
 
-L1  mov #0 @B+15	; guarda 0 y empieza recursivo arrays de en Ref id p
+L1  mov #0 @B+15	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+16		; guarda entero 0
 mov @B+15 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -17,7 +90,7 @@ mov @B+19 A	; empieza arrays en Ref asig de: p
 muli #1 
 addi #0
 mov @B+20 @A	; acaba arrays en Ref asig
-mov #0 @B+21	; guarda 0 y empieza recursivo arrays de en Ref id p2
+mov #0 @B+21	; guarda 0 y empieza recursivo arrays de en 'Ref id' p2
 mov #0 @B+22		; guarda entero 0
 mov @B+21 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -45,7 +118,7 @@ mov A @B+28
 mov @B+28 @B+13		; b = @B+28; 
 
 ;print
-mov #0 @B+29	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+29	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+30		; guarda entero 0
 mov @B+29 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -65,7 +138,7 @@ wri @B+34	; print valor entero de temporal
 wrl
 
 ;print
-mov #0 @B+35	; guarda 0 y empieza recursivo arrays de en Ref id p2
+mov #0 @B+35	; guarda 0 y empieza recursivo arrays de en 'Ref id' p2
 mov #0 @B+36		; guarda entero 0
 mov @B+35 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -93,7 +166,7 @@ wrl
 mov @B+13 @B+42		; guarda id b
 wrr @B+42	; print valor real de temporal
 wrl
-mov #0 @B+43	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+43	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+44		; guarda entero 0
 mov @B+43 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -112,7 +185,7 @@ addi #0
 rdi @B+48	; guardar valor entero en temporal
 mov @B+48 @A
 
-mov #0 @B+49	; guarda 0 y empieza recursivo arrays de en Ref id p2
+mov #0 @B+49	; guarda 0 y empieza recursivo arrays de en 'Ref id' p2
 mov #0 @B+50		; guarda entero 0
 mov @B+49 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -137,7 +210,7 @@ rdr @B+13	; guardar valor real en temporal
 
 
 ;print
-mov #0 @B+55	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+55	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+56		; guarda entero 0
 mov @B+55 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -157,7 +230,7 @@ wri @B+60	; print valor entero de temporal
 wrl
 
 ;print
-mov #0 @B+61	; guarda 0 y empieza recursivo arrays de en Ref id p2
+mov #0 @B+61	; guarda 0 y empieza recursivo arrays de en 'Ref id' p2
 mov #0 @B+62		; guarda entero 0
 mov @B+61 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -185,7 +258,7 @@ wrl
 mov @B+13 @B+68		; guarda id b
 wrr @B+68	; print valor real de temporal
 wrl
-mov #0 @B+69	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+69	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+70		; guarda entero 0
 mov @B+69 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -204,7 +277,7 @@ addi #0
 rdi @B+74	; guardar valor entero en temporal
 mov @B+74 @A
 
-mov #0 @B+75	; guarda 0 y empieza recursivo arrays de en Ref id p2
+mov #0 @B+75	; guarda 0 y empieza recursivo arrays de en 'Ref id' p2
 mov #0 @B+76		; guarda entero 0
 mov @B+75 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -229,7 +302,7 @@ rdr @B+13	; guardar valor real en temporal
 
 
 ;print
-mov #0 @B+81	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+81	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+82		; guarda entero 0
 mov @B+81 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -249,7 +322,7 @@ wri @B+86	; print valor entero de temporal
 wrl
 
 ;print
-mov #0 @B+87	; guarda 0 y empieza recursivo arrays de en Ref id p2
+mov #0 @B+87	; guarda 0 y empieza recursivo arrays de en 'Ref id' p2
 mov #0 @B+88		; guarda entero 0
 mov @B+87 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -277,7 +350,7 @@ wrl
 mov @B+13 @B+94		; guarda id b
 wrr @B+94	; print valor real de temporal
 wrl
- mov #0 @B+98	; guarda 0 y empieza recursivo arrays de en Ref id halo
+ mov #0 @B+98	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #1 @B+99		; guarda entero 1
 mov #1 @B+100		; guarda entero 1
 mov @B+99 A
@@ -295,7 +368,7 @@ addi #94
 rdr @B+103	; guardar valor real en temporal
 mov @B+103 @A
 
-mov #0 @B+104	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+104	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #2 @B+105		; guarda entero 2
 mov #1 @B+106		; guarda entero 1
 mov @B+105 A
@@ -313,7 +386,7 @@ addi #94
 rdr @B+109	; guardar valor real en temporal
 mov @B+109 @A
 
-mov #0 @B+110	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+110	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #3 @B+111		; guarda entero 3
 mov #1 @B+112		; guarda entero 1
 mov @B+111 A
@@ -333,7 +406,7 @@ mov @B+115 @A
 
 
 ;print
-mov #0 @B+116	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+116	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #1 @B+117		; guarda entero 1
 mov #1 @B+118		; guarda entero 1
 mov @B+117 A
@@ -352,7 +425,7 @@ wrr @B+121	; print valor real de temporal
 wrl
 
 ;print
-mov #0 @B+122	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+122	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #2 @B+123		; guarda entero 2
 mov #1 @B+124		; guarda entero 1
 mov @B+123 A
@@ -371,7 +444,7 @@ wrr @B+127	; print valor real de temporal
 wrl
 
 ;print
-mov #0 @B+128	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+128	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #3 @B+129		; guarda entero 3
 mov #1 @B+130		; guarda entero 1
 mov @B+129 A
@@ -390,7 +463,7 @@ wrr @B+133	; print valor real de temporal
 wrl
  
 ;print
-mov #0 @B+134	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+134	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+135		; guarda entero 0
 mov @B+134 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -410,7 +483,7 @@ mov @B+139 A
 itor 
 mov A @B+155 
 ; Factor -> pari Expr pard
-mov #0 @B+140	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+140	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #0 @B+141		; guarda entero 0
 mov @B+140 A 	; hace recursivo de arrays en Ref
 muli #3
@@ -422,7 +495,7 @@ muli #1
 addi #94
 mov @A @B+143	;acaba array en Factor
 ; Factor -> pari Expr pard
-mov #0 @B+144	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+144	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #1 @B+145		; guarda entero 1
 mov @B+144 A 	; hace recursivo de arrays en Ref
 muli #3
@@ -433,7 +506,7 @@ mov @B+146 @B+147		; guarda id halo
 muli #1 
 addi #94
 mov @A @B+147	;acaba array en Factor
-mov #0 @B+148	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+148	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #2 @B+149		; guarda entero 2
 mov @B+148 A 	; hace recursivo de arrays en Ref
 muli #3
@@ -455,7 +528,7 @@ addr @B+153	; ENTERO + REAL
 mov A @B+154	; guardar el resultado en temporal
 wrr @B+154	; print valor real de temporal
 wrl
-mov #0 @B+156	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+156	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #3 @B+157		; guarda entero 3
 mov #1 @B+158		; guarda entero 1
 mov @B+157 A
@@ -472,7 +545,7 @@ addi #94
 mov @B+161 @A	; acaba arrays en Ref asig
 
 ;print
-mov #0 @B+162	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+162	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #3 @B+163		; guarda entero 3
 mov #1 @B+164		; guarda entero 1
 mov @B+163 A
@@ -493,7 +566,7 @@ wrl
 mov @B+169 @B+167		; i = @B+169; 
 
 ;print
-mov #0 @B+170	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+170	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+171		; guarda entero 0
 mov @B+170 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -513,7 +586,7 @@ wri @B+175	; print valor entero de temporal
 wrl
 
 ;print
-mov #0 @B+176	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+176	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #2 @B+177		; guarda entero 2
 mov @B+176 A 	; hace recursivo de arrays en Ref
 muli #3
@@ -528,7 +601,7 @@ wrr @B+179	; print valor real de temporal
 wrl
 
 ;print
-mov #0 @B+180	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+180	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #1 @B+181		; guarda entero 1
 mov #1 @B+182		; guarda entero 1
 mov @B+181 A
@@ -547,7 +620,7 @@ wrr @B+185	; print valor real de temporal
 wrl
 
 ;print
-mov #0 @B+186	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+186	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #2 @B+187		; guarda entero 2
 mov #2 @B+188		; guarda entero 2
 mov @B+187 A
@@ -570,7 +643,7 @@ wrr @B+193	; print valor real de temporal
 wrl
 
 ;print
-mov #0 @B+194	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+194	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov @B+167 @B+195		; guarda id i
 mov #1 @B+196		; guarda entero 1
 mov @B+195 A
@@ -607,7 +680,7 @@ addi #94
 mov @A @B+209	;acaba array en Factor
 wrr @B+209	; print valor real de temporal
 wrl
-mov #0 @B+210	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+210	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+211		; guarda entero 0
 mov @B+210 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -629,8 +702,8 @@ addi #0
 mov @B+217 @A	; acaba arrays en Ref asig
 
 ;print
-mov #0 @B+218	; guarda 0 y empieza recursivo arrays de en Ref id halo
-mov #0 @B+219	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+218	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
+mov #0 @B+219	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+220		; guarda entero 0
 mov @B+219 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -657,7 +730,7 @@ addi #94
 mov @A @B+226	;acaba array en Factor
 wrr @B+226	; print valor real de temporal
 wrl
-mov #0 @B+227	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+227	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+228		; guarda entero 0
 mov @B+227 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -679,14 +752,14 @@ addi #0
 mov @B+234 @A	; acaba arrays en Ref asig
 
 ;print
-mov #0 @B+235	; guarda 0 y empieza recursivo arrays de en Ref id halo
-mov #0 @B+236	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+235	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
+mov #0 @B+236	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+237		; guarda entero 0
 mov @B+236 A 	; hace recursivo de arrays en Ref
 muli #2
 addi @B+237	; fallo en este 
 mov A @B+238 
-mov #0 @B+239	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+239	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov @B+167 @B+240		; guarda id i
 mov #2 @B+241		; guarda entero 2
 mov @B+240 A
@@ -736,9 +809,9 @@ mov #1 @B+253		; guarda entero 1
 mov @B+253 A
 itor 
 mov A @B+296
-mov #0 @B+254	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+254	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #0 @B+255		; guarda entero 0
-mov #0 @B+256	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+256	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov @B+167 @B+257		; guarda id i
 mov #2 @B+258		; guarda entero 2
 mov @B+257 A
@@ -765,7 +838,7 @@ mov @A @B+265	;acaba array en Factor
 mov @B+255 A
 muli @B+265	; ENTERO * ENTERO
 mov A @B+266
-mov #0 @B+267	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+267	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+268		; guarda entero 0
 mov @B+267 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -788,7 +861,7 @@ mov A @B+274
 mov @B+266 A
 addi @B+274	; ENTERO + ENTERO
 mov A @B+275	; guardar el resultado en temporal
-mov #0 @B+276	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+276	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+277		; guarda entero 0
 mov #0 @B+278		; guarda entero 0
 mov @B+277 A
@@ -847,7 +920,7 @@ mov @B+295 A
 mulr @B+299	; Term : REAL * ENTERO
 mov A @B+298
 mov #0 @B+300		; guarda entero 0
-mov #0 @B+301	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+301	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+302		; guarda entero 0
 mov @B+301 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -872,7 +945,7 @@ mov A @B+309
 mov @B+298 A
 subr @B+309	; REAL - REAL
 mov A @B+308	; guardar el resultado en temporal
-mov #0 @B+310	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+310	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+311		; guarda entero 0
 mov @B+310 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -900,9 +973,9 @@ addr @B+319	; REAL + REAL
 mov A @B+318	; guardar el resultado en temporal
 wrr @B+318	; print valor real de temporal
 wrl
-mov #0 @B+320	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+320	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov #0 @B+321		; guarda entero 0
-mov #0 @B+322	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+322	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 ; Factor -> pari Expr pard
 mov @B+167 @B+323		; guarda id i
 mov #2 @B+324		; guarda entero 2
@@ -947,7 +1020,7 @@ mov @A @B+339	;acaba array en Factor
 mov @B+321 A
 muli @B+339	; ENTERO * ENTERO
 mov A @B+340
-mov #0 @B+341	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+341	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+342		; guarda entero 0
 mov #0 @B+343		; guarda entero 0
 mov @B+342 A
@@ -991,7 +1064,7 @@ mov @B+340 A
 addi @B+358	; ENTERO + ENTERO
 mov A @B+359	; guardar el resultado en temporal
 mov #0 @B+360		; guarda entero 0
-mov #0 @B+361	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+361	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+362		; guarda entero 0
 mov @B+361 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -1013,7 +1086,7 @@ mov A @B+367
 mov @B+359 A
 subi @B+367	; ENTERO - ENTERO
 mov A @B+368	; guardar el resultado en temporal
-mov #0 @B+369	; guarda 0 y empieza recursivo arrays de en Ref id p
+mov #0 @B+369	; guarda 0 y empieza recursivo arrays de en 'Ref id' p
 mov #0 @B+370		; guarda entero 0
 mov @B+369 A 	; hace recursivo de arrays en Ref
 muli #2
@@ -1050,7 +1123,7 @@ mov @B+379 @A
 
 
 ;print
-mov #0 @B+380	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+380	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov @B+167 @B+381		; guarda id i
 mov #1 @B+382		; guarda entero 1
 mov @B+381 A
@@ -1074,7 +1147,7 @@ wrl
 
 ;print
 mov $2.5 @B+388		; guarda real 2.5
-mov #0 @B+389	; guarda 0 y empieza recursivo arrays de en Ref id halo
+mov #0 @B+389	; guarda 0 y empieza recursivo arrays de en 'Ref id' halo
 mov @B+167 @B+390		; guarda id i
 mov #1 @B+391		; guarda entero 1
 mov #1 @B+392		; guarda entero 1

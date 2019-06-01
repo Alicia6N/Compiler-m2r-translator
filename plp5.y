@@ -36,6 +36,7 @@ int VAR_MEM = 0;
 int ETIQ = 0;
 int REL_DIR = 0;
 string MAIN_LABEL;
+int ASCO;
 
 void deleteScope(TablaSimbolos* root);
 TablaSimbolos* createScope(TablaSimbolos* root);
@@ -64,6 +65,7 @@ void imprimir_simbolos(TablaSimbolos *root);
 %%
 S : _class id llavei attributes dosp BDecl 	{
 											$$.code = "mov #"+ to_string(REL_DIR) + " B\n";
+											ASCO = REL_DIR;
 											//cout << "---clase---" << endl;
 											//imprimir_simbolos(ts);
 											} methods dosp Metodos llaved   {
@@ -106,6 +108,7 @@ Variable : id { $$.size = 1; $$.tipo = $0.tipo; if(buscarAmbito(ts,$1.lexema))
 																											s.nombre = $1.lexema;
 																											s.index_tipo = $3.tipo;
 																											s.dir = to_string(REL_DIR);
+																											
 																											REL_DIR += $3.size;
 																											s.size = $3.size;
 																											s.exists = false;
@@ -153,17 +156,15 @@ Instr : pyc { $$.code = " ";  }
 																$$.code += "itor\n";
 																$$.code += "mov A " + $4.temp + "\n";
 															}
-
-															//cout << "id = " << $1.aux_lexema << endl;
-															
-															//if ($1.tipo == ARRAY){
 															if ($1.arrays == true) {
 																$$.code += "mov " + $1.temp + " A\t; empieza arrays en Ref asig de: " + $1.aux_lexema + "\n";	
 																$$.code += "muli #1 \n";
-																//if($1.dbase.find("@") != string::npos){
-																	//$$.code += "addi "+ $1.dbase + "\n";
-																//}
-																//else $$.code += "addi #"+ $1.dbase + "\n";
+																/*if($1.dbase.find("@") != string::npos){
+																	string temp1 = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
+																	$$.code += "mov " + $1.dbase + " @B+" + temp1 + "\n";
+																	$$.code += "addi @B+" + temp1 + "\n";
+																}
+																else $$.code += "addi #"+ $1.dbase + "\n";*/
 																$$.code += "addi #"+ $1.dbase + "\n";
 																$$.code += "mov " + $4.temp + " @A\t; acaba arrays en Ref asig\n";
 															}
@@ -173,11 +174,6 @@ Instr : pyc { $$.code = " ";  }
 														}
 	  | _print pari Expr pard pyc 						{
 		  													$$.code = "\n;print\n" + $3.code;
-
-															//cout << ";Imprime temp = " << $3.tipo << endl;
-															
-															//cout << "TIPO BASE = " << getTipoSimple($3.tipo) << endl;
-
 															if (getTipoSimple($3.tipo) == ENTERO){
 																$$.code += "wri " + $3.temp+ "\t; print valor entero de temporal\n";
 															}
@@ -256,9 +252,6 @@ Instr : pyc { $$.code = " ";  }
 
 Expr : 	Expr relop Esimple 							{
 														string temp_final = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-														/*if(($1.tipo == ARRAY || $3.tipo == ARRAY)){
-															msgError(ERR_NO_ATRIB,$2.nlin,$2.ncol,$2.lexema);
-														}*/
 														string op = $2.lexema;								
 														$$.code = $1.code;
 														$$.code += $3.code;
@@ -425,10 +418,12 @@ Factor :  Ref      		{
 								string temp = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
 								$$.code += "mov " + $1.temp + " @B+" + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
 								$$.code += "muli #1 \n";
-								//if($1.dbase.find("@") != string::npos){
-								//	$$.code += "addi "+ $1.dbase + "\n";
-								//}
-								//else $$.code += "addi #"+ $1.dbase + "\n";
+								/*if($1.dbase.find("@") != string::npos){
+									string temp1 = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
+								  	$$.code += "mov " + $1.dbase + " @B+" + temp1 + "\n";
+									$$.code += "addi @B+" + temp1 + "\n";
+								}
+								else $$.code += "addi #"+ $1.dbase + "\n";*/
 								$$.code += "addi #"+ $1.dbase + "\n";
 								$$.code += "mov @A @B+" + temp + "\t;acaba array en Factor\n";
 								$$.temp = "@B+" + temp;
@@ -471,9 +466,11 @@ Ref : _this punto id  			{
 										string aux = $3.lexema;
 										$$.aux_lexema = "this." + aux;
 
+										cout << "; Array " << $$.aux_lexema << " empieza en = " << s.dir << endl;
+
 										if(s.index_tipo >= ARRAY){
 											string temp = "@B+"+nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de Ref this" + $$.aux_lexema + "\n";
+											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de 'Ref this' " + $$.aux_lexema + "\n";
 											$$.temp = temp;
 										}
 									}
@@ -482,36 +479,31 @@ Ref : _this punto id  			{
 								}
 	| id 						{ 
 									Simbolo s = buscar(ts, $1.lexema);
-
-									//cout << "SIMBOLO = " << s.nombre << endl;
 									
 									if (s.exists){
 										s.exists = false;
 										$$.tipo = s.index_tipo;
 										$$.temp = "@B+"+s.dir;
-										//$$.dbase = "@B+"+s.dir;
-										$$.dbase = s.dir;
+										int var = ASCO + atoi(s.dir.c_str());
+										$$.dbase = to_string(var);
 										string aux = $1.lexema;
 										$$.aux_lexema = aux;
 
-										//if (ts->root == NULL) {
 										if (s.root == 1){
-											//cout << "entra con: " << aux << endl;;
 											$$.temp = s.dir;
 											$$.dbase = s.dir;
 											$$.aux_lexema = "this." + aux;
+											cout << "; Array " << $$.aux_lexema << " empieza en = " << s.dir << endl;
 										}
-										// CLASE : a b //ts->root = null
-										// int main(){
-											// int a; //aaa ts = ts-root; --->
-											// print(b); buscar(b)
-										//}
+										else{
+											cout << "; Array " << $$.aux_lexema << " empieza en = @B+" << s.dir << endl;
+										}
 
-
+										
 
 										if(s.index_tipo >= ARRAY){
 											string temp = "@B+"+nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de en Ref id " + $$.aux_lexema + "\n";
+											$$.code = "mov #0 "  + temp + "\t; guarda 0 y empieza recursivo arrays de en 'Ref id' " + $$.aux_lexema + "\n";
 											$$.temp = temp;
 										}
 									}
@@ -527,9 +519,6 @@ Ref : _this punto id  			{
 									$$.dbase = $1.dbase;
 									$$.tipo = getTbase($1.tipo);
 									$$.arrays = true;
-
-									//cout << "index tipos = " << $1.tipo << endl;
-
 									$$.temp = "@B+"+temporal;
 									$$.code = $1.code;
 									$$.code += $4.code;

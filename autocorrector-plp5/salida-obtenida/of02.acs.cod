@@ -1,18 +1,35 @@
+; Array a empieza en = @B+0
+; Array a empieza en = @B+0
+; Array a empieza en = @B+0
+; Array a empieza en = @B+0
 ;Guarda desde: 3
 ;Actual empieza: 6
 ;Hasta: 6
+; Array b empieza en = @B+1
+; Array this.a empieza en = 0
+; Array b empieza en = @B+1
+; Array this.a empieza en = 0
+; Array this.a empieza en = 0
+; Array a empieza en = @B+0
+; Array this.a empieza en = 0
+; Array a empieza en = @B+0
 ;Guarda desde: 11
 ;Actual empieza: 14
 ;Hasta: 14
+; Array b empieza en = @B+1
+; Array a empieza en = @B+0
 ;Guarda desde: 0
 ;Actual empieza: 3
 ;Hasta: 3
 ;Guarda desde: 6
 ;Actual empieza: 9
 ;Hasta: 9
+; Array this.a empieza en = 0
+; Array this.a empieza en = 0
 ;Guarda desde: 11
 ;Actual empieza: 14
 ;Hasta: 14
+; Array this.a empieza en = 0
 mov #1 B
 jmp L7
 

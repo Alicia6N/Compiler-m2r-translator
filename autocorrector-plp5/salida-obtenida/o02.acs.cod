@@ -1,3 +1,44 @@
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array this.p empieza en = 3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array this.p empieza en = 3
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array this.p empieza en = 3
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array this.p empieza en = 3
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array this.p empieza en = 3
+; Array i empieza en = @B+0
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array j empieza en = @B+1
+; Array i empieza en = @B+0
+; Array i empieza en = @B+0
 mov #19 B
 jmp L1
 
@@ -21,7 +62,7 @@ mov A @B+10	; guardar el resultado en temporal
 	; WHILE
 mov @B+10 A
 jz L3	 ; if else
- mov #0 @B+11	; guarda 0 y empieza recursivo arrays de en Ref id this.p
+ mov #0 @B+11	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.p
 mov @B+0 @B+12		; guarda id i
 mov @B+11 A 	; hace recursivo de arrays en Ref
 muli #4
@@ -78,7 +119,7 @@ mov @B+30 A
 jz L7	 ; if else
  
 ;print
-mov #0 @B+31	; guarda 0 y empieza recursivo arrays de en Ref id this.p
+mov #0 @B+31	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.p
 mov @B+1 @B+32		; guarda id j
 mov @B+31 A 	; hace recursivo de arrays en Ref
 muli #4
@@ -96,7 +137,7 @@ addi #3
 mov @A @B+36	;acaba array en Factor
 wri @B+36	; print valor entero de temporal
 wrl
-mov #0 @B+37	; guarda 0 y empieza recursivo arrays de en Ref id this.p
+mov #0 @B+37	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.p
 mov @B+1 @B+38		; guarda id j
 mov @B+37 A 	; hace recursivo de arrays en Ref
 muli #4
@@ -122,7 +163,7 @@ addi #3
 mov @B+46 @A	; acaba arrays en Ref asig
 
 ;print
-mov #0 @B+47	; guarda 0 y empieza recursivo arrays de en Ref id this.p
+mov #0 @B+47	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.p
 mov @B+1 @B+48		; guarda id j
 mov @B+47 A 	; hace recursivo de arrays en Ref
 muli #4
@@ -178,7 +219,7 @@ mov @B+66 A
 jz L11	 ; if else
  
 ;print
-mov #0 @B+67	; guarda 0 y empieza recursivo arrays de en Ref id this.p
+mov #0 @B+67	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.p
 mov @B+0 @B+68		; guarda id i
 mov @B+67 A 	; hace recursivo de arrays en Ref
 muli #4

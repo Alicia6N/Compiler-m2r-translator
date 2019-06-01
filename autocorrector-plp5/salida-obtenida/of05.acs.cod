@@ -1,15 +1,33 @@
+; Array this.a empieza en = 0
+; Array this.a empieza en = 0
+; Array this.d empieza en = 21
 ;Guarda desde: 0
 ;Actual empieza: 3
 ;Hasta: 3
+; Array this.b empieza en = 1
+; Array this.c empieza en = 11
+; Array this.b empieza en = 1
+; Array this.c empieza en = 11
+; Array this.c empieza en = 11
+; Array this.c empieza en = 11
 ;Guarda desde: 0
 ;Actual empieza: 3
 ;Hasta: 3
+; Array this.d empieza en = 21
+; Array this.d empieza en = 21
+; Array this.a empieza en = 0
+; Array this.a empieza en = 0
+; Array this.d empieza en = 21
 ;Guarda desde: 5
 ;Actual empieza: 8
 ;Hasta: 8
+; Array this.d empieza en = 21
+; Array this.a empieza en = 0
 ;Guarda desde: 10
 ;Actual empieza: 13
 ;Hasta: 13
+; Array this.b empieza en = 1
+; Array this.c empieza en = 11
 mov #22 B
 jmp L7
 
@@ -53,7 +71,7 @@ mov @B-2 A
 jmp @A
 
 ; metodo: 't3'
-L4 mov #0 @B+1	; guarda 0 y empieza recursivo arrays de en Ref id this.b
+L4 mov #0 @B+1	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.b
 mov #5 @B+2		; guarda entero 5
 mov @B+1 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -67,7 +85,7 @@ addi #1
 rdr @B+4	; guardar valor real en temporal
 mov @B+4 @A
 
-mov #0 @B+5	; guarda 0 y empieza recursivo arrays de en Ref id this.c
+mov #0 @B+5	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+6		; guarda entero 7
 mov @B+5 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -81,9 +99,9 @@ addi #11
 rdi @B+8	; guardar valor entero en temporal
 mov @B+8 @A
 
-mov #0 @B+9	; guarda 0 y empieza recursivo arrays de en Ref id this.b
+mov #0 @B+9	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.b
 mov #5 @B+10		; guarda entero 5
-mov #0 @B+11	; guarda 0 y empieza recursivo arrays de en Ref id this.c
+mov #0 @B+11	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+12		; guarda entero 7
 mov @B+11 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -94,7 +112,7 @@ mov @B+13 @B+14		; guarda id this.c
 muli #1 
 addi #11
 mov @A @B+14	;acaba array en Factor
-mov #0 @B+15	; guarda 0 y empieza recursivo arrays de en Ref id this.c
+mov #0 @B+15	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+16		; guarda entero 7
 mov @B+15 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -128,7 +146,7 @@ mov @B+25 @B+26		; guarda id this.b
 muli #1 
 addi #1
 mov @A @B+26	;acaba array en Factor
-mov #0 @B+27	; guarda 0 y empieza recursivo arrays de en Ref id this.c
+mov #0 @B+27	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+28		; guarda entero 7
 mov @B+27 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -236,7 +254,7 @@ wrr @B+11	; print valor real de temporal
 wrl
 
 ;print
-mov #0 @B+14	; guarda 0 y empieza recursivo arrays de en Ref id this.b
+mov #0 @B+14	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.b
 mov #5 @B+15		; guarda entero 5
 mov @B+14 A 	; hace recursivo de arrays en Ref
 muli #10
@@ -251,7 +269,7 @@ wrr @B+17	; print valor real de temporal
 wrl
 
 ;print
-mov #0 @B+18	; guarda 0 y empieza recursivo arrays de en Ref id this.c
+mov #0 @B+18	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+19		; guarda entero 7
 mov @B+18 A 	; hace recursivo de arrays en Ref
 muli #10

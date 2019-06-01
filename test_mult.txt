@@ -21,16 +21,16 @@ class of04
 
 			a[0][0] = 22;
 			a[0][1] = 33;
-			print(a[0][0]); //22
-			print(a[0][1]); /33
-			print(a[0][0]); /22
+			print(a[0][0]);
+			print(a[0][1]);
+			print(a[0][0]);
 
 			return a[0][0] - 9.9;
 		}
 
 		int t3()
 		{
-			print(this.a[0]); //5
+			print(this.a[0]);
 		}
 
 		float t4()
@@ -50,17 +50,17 @@ class of04
 			b = 6;
 			c[5] = 7;
 
-			print(123); // 123
-			print(t1()); // 6.000
-			print(t2()); // 22,33,22
-			print(t3()); //5
+			print(123);
+			print(t1());
+			print(t2());
+			print(t3());
 
-			print(this.c[5]); //7
-			print(this.a[0]); //5
-			print(t4()); //2.123,7,2.76 --> 5
-			print(this.a[0]); //5
-			print(this.a[5]); //54
-			print(this.c[5]); //2.76
+			print(this.c[5]);
+			print(this.a[0]);
+			print(t4());
+			print(this.a[0]);
+			print(this.a[5]);
+			print(this.c[5]);
 
 			
 

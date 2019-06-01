@@ -1,0 +1,4 @@
+; Array a empieza en = @B+0
+; Array b empieza en = @B+3
+; Array this.a empieza en = 0
+; Array b empieza en = @B+3
