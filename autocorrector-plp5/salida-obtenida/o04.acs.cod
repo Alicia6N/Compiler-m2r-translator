@@ -63,12 +63,12 @@ L1  mov #0 @B+92	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #4 @B+93		; guarda entero 4
 mov @B+92 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+93	; fallo en este 
+addi @B+93 
 mov A @B+94 
 mov #0 @B+95		; guarda entero 0
 mov @B+94 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+95	; fallo en este 
+addi @B+95 
 mov A @B+96 
 mov #2 @B+97		; guarda entero 2
 mov @B+96 A	; empieza arrays en Ref asig de: this.a
@@ -79,12 +79,12 @@ mov #0 @B+98	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+99		; guarda entero 0
 mov @B+98 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+99	; fallo en este 
+addi @B+99 
 mov A @B+100 
 mov #2 @B+101		; guarda entero 2
 mov @B+100 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+101	; fallo en este 
+addi @B+101 
 mov A @B+102 
 mov #3 @B+103		; guarda entero 3
 mov @B+102 A	; empieza arrays en Ref asig de: this.a
@@ -95,17 +95,17 @@ mov #0 @B+104	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+105		; guarda entero 0
 mov @B+104 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+105	; fallo en este 
+addi @B+105 
 mov A @B+106 
 mov #2 @B+107		; guarda entero 2
 mov @B+106 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+107	; fallo en este 
+addi @B+107 
 mov A @B+108 
 mov #0 @B+109		; guarda entero 0
 mov @B+108 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+109	; fallo en este 
+addi @B+109 
 mov A @B+110 
 mov #4 @B+111		; guarda entero 4
 mov @B+110 A	; empieza arrays en Ref asig de: a
@@ -116,17 +116,17 @@ mov #0 @B+112	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #1 @B+113		; guarda entero 1
 mov @B+112 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+113	; fallo en este 
+addi @B+113 
 mov A @B+114 
 mov #3 @B+115		; guarda entero 3
 mov @B+114 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+115	; fallo en este 
+addi @B+115 
 mov A @B+116 
 mov #8 @B+117		; guarda entero 8
 mov @B+116 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+117	; fallo en este 
+addi @B+117 
 mov A @B+118 
 mov #5 @B+119		; guarda entero 5
 mov @B+118 A	; empieza arrays en Ref asig de: a
@@ -139,12 +139,12 @@ mov #0 @B+120	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #4 @B+121		; guarda entero 4
 mov @B+120 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+121	; fallo en este 
+addi @B+121 
 mov A @B+122 
 mov #0 @B+123		; guarda entero 0
 mov @B+122 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+123	; fallo en este 
+addi @B+123 
 mov A @B+124 
 mov #0 @B+124		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+124 @B+125		; guarda id this.a
@@ -159,12 +159,12 @@ mov #0 @B+126	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+127		; guarda entero 0
 mov @B+126 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+127	; fallo en este 
+addi @B+127 
 mov A @B+128 
 mov #2 @B+129		; guarda entero 2
 mov @B+128 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+129	; fallo en este 
+addi @B+129 
 mov A @B+130 
 mov #0 @B+130		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+130 @B+131		; guarda id this.a
@@ -179,17 +179,17 @@ mov #0 @B+132	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+133		; guarda entero 0
 mov @B+132 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+133	; fallo en este 
+addi @B+133 
 mov A @B+134 
 mov #2 @B+135		; guarda entero 2
 mov @B+134 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+135	; fallo en este 
+addi @B+135 
 mov A @B+136 
 mov #0 @B+137		; guarda entero 0
 mov @B+136 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+137	; fallo en este 
+addi @B+137 
 mov A @B+138 
 mov #0 @B+138		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+138 @B+139		; guarda id a
@@ -204,17 +204,17 @@ mov #0 @B+140	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #1 @B+141		; guarda entero 1
 mov @B+140 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+141	; fallo en este 
+addi @B+141 
 mov A @B+142 
 mov #3 @B+143		; guarda entero 3
 mov @B+142 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+143	; fallo en este 
+addi @B+143 
 mov A @B+144 
 mov #8 @B+145		; guarda entero 8
 mov @B+144 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+145	; fallo en este 
+addi @B+145 
 mov A @B+146 
 mov #0 @B+146		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+146 @B+147		; guarda id a
@@ -230,12 +230,12 @@ mov #0 @B+149	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+150		; guarda entero 0
 mov @B+149 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+150	; fallo en este 
+addi @B+150 
 mov A @B+151 
 mov #2 @B+152		; guarda entero 2
 mov @B+151 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+152	; fallo en este 
+addi @B+152 
 mov A @B+153 
 mov #0 @B+153		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+153 @B+154		; guarda id this.a
@@ -253,12 +253,12 @@ mov #0 @B+156	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+157		; guarda entero 0
 mov @B+156 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+157	; fallo en este 
+addi @B+157 
 mov A @B+158 
 mov #2 @B+159		; guarda entero 2
 mov @B+158 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+159	; fallo en este 
+addi @B+159 
 mov A @B+160 
 mov #0 @B+160		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+160 @B+161		; guarda id this.a
@@ -278,12 +278,12 @@ mov #0 @B+165	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+166		; guarda entero 0
 mov @B+165 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+166	; fallo en este 
+addi @B+166 
 mov A @B+167 
 mov #2 @B+168		; guarda entero 2
 mov @B+167 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+168	; fallo en este 
+addi @B+168 
 mov A @B+169 
 mov #0 @B+169		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+169 @B+170		; guarda id this.a
@@ -305,12 +305,12 @@ mov #0 @B+174	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+175		; guarda entero 0
 mov @B+174 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+175	; fallo en este 
+addi @B+175 
 mov A @B+176 
 mov #2 @B+177		; guarda entero 2
 mov @B+176 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+177	; fallo en este 
+addi @B+177 
 mov A @B+178 
 mov #0 @B+178		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+178 @B+179		; guarda id this.a
@@ -338,17 +338,17 @@ mov #0 @B+187	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+188		; guarda entero 0
 mov @B+187 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+188	; fallo en este 
+addi @B+188 
 mov A @B+189 
 mov #2 @B+190		; guarda entero 2
 mov @B+189 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+190	; fallo en este 
+addi @B+190 
 mov A @B+191 
 mov #0 @B+192		; guarda entero 0
 mov @B+191 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+192	; fallo en este 
+addi @B+192 
 mov A @B+193 
 mov #0 @B+193		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+193 @B+194		; guarda id a
@@ -367,12 +367,12 @@ mov #0 @B+197	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+198		; guarda entero 0
 mov @B+197 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+198	; fallo en este 
+addi @B+198 
 mov A @B+199 
 mov #2 @B+200		; guarda entero 2
 mov @B+199 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+200	; fallo en este 
+addi @B+200 
 mov A @B+201 
 mov #0 @B+201		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+201 @B+202		; guarda id this.a
@@ -390,12 +390,12 @@ mov #0 @B+204	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+205		; guarda entero 0
 mov @B+204 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+205	; fallo en este 
+addi @B+205 
 mov A @B+206 
 mov #2 @B+207		; guarda entero 2
 mov @B+206 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+207	; fallo en este 
+addi @B+207 
 mov A @B+208 
 mov #0 @B+208		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+208 @B+209		; guarda id this.a
@@ -415,12 +415,12 @@ mov #0 @B+213	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+214		; guarda entero 0
 mov @B+213 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+214	; fallo en este 
+addi @B+214 
 mov A @B+215 
 mov #2 @B+216		; guarda entero 2
 mov @B+215 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+216	; fallo en este 
+addi @B+216 
 mov A @B+217 
 mov #0 @B+217		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+217 @B+218		; guarda id this.a
@@ -442,12 +442,12 @@ mov #0 @B+222	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+223		; guarda entero 0
 mov @B+222 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+223	; fallo en este 
+addi @B+223 
 mov A @B+224 
 mov #2 @B+225		; guarda entero 2
 mov @B+224 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+225	; fallo en este 
+addi @B+225 
 mov A @B+226 
 mov #0 @B+226		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+226 @B+227		; guarda id this.a
@@ -475,17 +475,17 @@ mov #0 @B+235	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+236		; guarda entero 0
 mov @B+235 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+236	; fallo en este 
+addi @B+236 
 mov A @B+237 
 mov #2 @B+238		; guarda entero 2
 mov @B+237 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+238	; fallo en este 
+addi @B+238 
 mov A @B+239 
 mov #0 @B+240		; guarda entero 0
 mov @B+239 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+240	; fallo en este 
+addi @B+240 
 mov A @B+241 
 mov #0 @B+241		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+241 @B+242		; guarda id a
@@ -504,12 +504,12 @@ mov #0 @B+245	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+246		; guarda entero 0
 mov @B+245 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+246	; fallo en este 
+addi @B+246 
 mov A @B+247 
 mov #2 @B+248		; guarda entero 2
 mov @B+247 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+248	; fallo en este 
+addi @B+248 
 mov A @B+249 
 mov #0 @B+249		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+249 @B+250		; guarda id this.a
@@ -530,12 +530,12 @@ mov #0 @B+253	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+254		; guarda entero 0
 mov @B+253 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+254	; fallo en este 
+addi @B+254 
 mov A @B+255 
 mov #2 @B+256		; guarda entero 2
 mov @B+255 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+256	; fallo en este 
+addi @B+256 
 mov A @B+257 
 mov #0 @B+257		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+257 @B+258		; guarda id this.a
@@ -558,12 +558,12 @@ mov #0 @B+263	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+264		; guarda entero 0
 mov @B+263 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+264	; fallo en este 
+addi @B+264 
 mov A @B+265 
 mov #2 @B+266		; guarda entero 2
 mov @B+265 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+266	; fallo en este 
+addi @B+266 
 mov A @B+267 
 mov #0 @B+267		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+267 @B+268		; guarda id this.a
@@ -588,12 +588,12 @@ mov #0 @B+273	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+274		; guarda entero 0
 mov @B+273 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+274	; fallo en este 
+addi @B+274 
 mov A @B+275 
 mov #2 @B+276		; guarda entero 2
 mov @B+275 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+276	; fallo en este 
+addi @B+276 
 mov A @B+277 
 mov #0 @B+277		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+277 @B+278		; guarda id this.a
@@ -627,17 +627,17 @@ mov #0 @B+288	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+289		; guarda entero 0
 mov @B+288 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+289	; fallo en este 
+addi @B+289 
 mov A @B+290 
 mov #2 @B+291		; guarda entero 2
 mov @B+290 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+291	; fallo en este 
+addi @B+291 
 mov A @B+292 
 mov #0 @B+293		; guarda entero 0
 mov @B+292 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+293	; fallo en este 
+addi @B+293 
 mov A @B+294 
 mov #0 @B+294		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+294 @B+295		; guarda id a
@@ -659,12 +659,12 @@ mov #0 @B+299	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+300		; guarda entero 0
 mov @B+299 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+300	; fallo en este 
+addi @B+300 
 mov A @B+301 
 mov #2 @B+302		; guarda entero 2
 mov @B+301 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+302	; fallo en este 
+addi @B+302 
 mov A @B+303 
 mov #0 @B+303		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+303 @B+304		; guarda id this.a
@@ -689,12 +689,12 @@ mov #0 @B+309	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+310		; guarda entero 0
 mov @B+309 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+310	; fallo en este 
+addi @B+310 
 mov A @B+311 
 mov #2 @B+312		; guarda entero 2
 mov @B+311 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+312	; fallo en este 
+addi @B+312 
 mov A @B+313 
 mov #0 @B+313		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+313 @B+314		; guarda id this.a
@@ -725,17 +725,17 @@ mov #0 @B+323	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+324		; guarda entero 0
 mov @B+323 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+324	; fallo en este 
+addi @B+324 
 mov A @B+325 
 mov #2 @B+326		; guarda entero 2
 mov @B+325 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+326	; fallo en este 
+addi @B+326 
 mov A @B+327 
 mov #0 @B+328		; guarda entero 0
 mov @B+327 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+328	; fallo en este 
+addi @B+328 
 mov A @B+329 
 mov #0 @B+329		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+329 @B+330		; guarda id a
@@ -760,12 +760,12 @@ mov #0 @B+335	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+336		; guarda entero 0
 mov @B+335 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+336	; fallo en este 
+addi @B+336 
 mov A @B+337 
 mov #2 @B+338		; guarda entero 2
 mov @B+337 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+338	; fallo en este 
+addi @B+338 
 mov A @B+339 
 mov #0 @B+339		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+339 @B+340		; guarda id this.a
@@ -793,12 +793,12 @@ mov #0 @B+346	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+347		; guarda entero 0
 mov @B+346 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+347	; fallo en este 
+addi @B+347 
 mov A @B+348 
 mov #2 @B+349		; guarda entero 2
 mov @B+348 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+349	; fallo en este 
+addi @B+349 
 mov A @B+350 
 mov #0 @B+350		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+350 @B+351		; guarda id this.a
@@ -835,17 +835,17 @@ mov #0 @B+362	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+363		; guarda entero 0
 mov @B+362 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+363	; fallo en este 
+addi @B+363 
 mov A @B+364 
 mov #2 @B+365		; guarda entero 2
 mov @B+364 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+365	; fallo en este 
+addi @B+365 
 mov A @B+366 
 mov #0 @B+367		; guarda entero 0
 mov @B+366 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+367	; fallo en este 
+addi @B+367 
 mov A @B+368 
 mov #0 @B+368		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+368 @B+369		; guarda id a
@@ -864,17 +864,17 @@ mov #0 @B+372	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+373		; guarda entero 0
 mov @B+372 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+373	; fallo en este 
+addi @B+373 
 mov A @B+374 
 mov #2 @B+375		; guarda entero 2
 mov @B+374 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+375	; fallo en este 
+addi @B+375 
 mov A @B+376 
 mov #0 @B+377		; guarda entero 0
 mov @B+376 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+377	; fallo en este 
+addi @B+377 
 mov A @B+378 
 mov $9.9 @B+379		; guarda real 9.9
 mov @B+379 A
@@ -888,12 +888,12 @@ mov #0 @B+380	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+381		; guarda entero 0
 mov @B+380 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+381	; fallo en este 
+addi @B+381 
 mov A @B+382 
 mov #2 @B+383		; guarda entero 2
 mov @B+382 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+383	; fallo en este 
+addi @B+383 
 mov A @B+384 
 mov $9.1 @B+385		; guarda real 9.1
 mov @B+385 A
@@ -910,12 +910,12 @@ mov #0 @B+387	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+388		; guarda entero 0
 mov @B+387 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+388	; fallo en este 
+addi @B+388 
 mov A @B+389 
 mov #2 @B+390		; guarda entero 2
 mov @B+389 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+390	; fallo en este 
+addi @B+390 
 mov A @B+391 
 mov #0 @B+391		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+391 @B+392		; guarda id this.a
@@ -933,12 +933,12 @@ mov #0 @B+394	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+395		; guarda entero 0
 mov @B+394 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+395	; fallo en este 
+addi @B+395 
 mov A @B+396 
 mov #2 @B+397		; guarda entero 2
 mov @B+396 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+397	; fallo en este 
+addi @B+397 
 mov A @B+398 
 mov #0 @B+398		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+398 @B+399		; guarda id this.a
@@ -958,12 +958,12 @@ mov #0 @B+403	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+404		; guarda entero 0
 mov @B+403 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+404	; fallo en este 
+addi @B+404 
 mov A @B+405 
 mov #2 @B+406		; guarda entero 2
 mov @B+405 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+406	; fallo en este 
+addi @B+406 
 mov A @B+407 
 mov #0 @B+407		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+407 @B+408		; guarda id this.a
@@ -985,12 +985,12 @@ mov #0 @B+412	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+413		; guarda entero 0
 mov @B+412 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+413	; fallo en este 
+addi @B+413 
 mov A @B+414 
 mov #2 @B+415		; guarda entero 2
 mov @B+414 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+415	; fallo en este 
+addi @B+415 
 mov A @B+416 
 mov #0 @B+416		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+416 @B+417		; guarda id this.a
@@ -1018,17 +1018,17 @@ mov #0 @B+425	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+426		; guarda entero 0
 mov @B+425 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+426	; fallo en este 
+addi @B+426 
 mov A @B+427 
 mov #2 @B+428		; guarda entero 2
 mov @B+427 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+428	; fallo en este 
+addi @B+428 
 mov A @B+429 
 mov #0 @B+430		; guarda entero 0
 mov @B+429 A 	; hace recursivo de arrays en Ref
 muli #9
-addi @B+430	; fallo en este 
+addi @B+430 
 mov A @B+431 
 mov #0 @B+431		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+431 @B+432		; guarda id a
@@ -1050,12 +1050,12 @@ mov #0 @B+438	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #0 @B+439		; guarda entero 0
 mov @B+438 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+439	; fallo en este 
+addi @B+439 
 mov A @B+440 
 mov #2 @B+441		; guarda entero 2
 mov @B+440 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+441	; fallo en este 
+addi @B+441 
 mov A @B+442 
 mov #0 @B+442		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+442 @B+443		; guarda id this.a
@@ -1070,12 +1070,12 @@ mov #0 @B+444	; guarda 0 y empieza recursivo arrays de 'Ref this' this.a
 mov #4 @B+445		; guarda entero 4
 mov @B+444 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+445	; fallo en este 
+addi @B+445 
 mov A @B+446 
 mov #0 @B+447		; guarda entero 0
 mov @B+446 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+447	; fallo en este 
+addi @B+447 
 mov A @B+448 
 mov #0 @B+448		; guarda 0 y empieza en Factor recursivo arrays de this.a
 mov @B+448 @B+449		; guarda id this.a
@@ -1098,17 +1098,17 @@ mov #0 @B+452	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #2 @B+453		; guarda entero 2
 mov @B+452 A 	; hace recursivo de arrays en Ref
 muli #3
-addi @B+453	; fallo en este 
+addi @B+453 
 mov A @B+454 
 mov #1 @B+455		; guarda entero 1
 mov @B+454 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+455	; fallo en este 
+addi @B+455 
 mov A @B+456 
 mov #0 @B+457		; guarda entero 0
 mov @B+456 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+457	; fallo en este 
+addi @B+457 
 mov A @B+458 
 mov $2.124 @B+459		; guarda real 2.124
 mov @B+458 A	; empieza arrays en Ref asig de: this.b
@@ -1121,17 +1121,17 @@ mov #0 @B+460	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #2 @B+461		; guarda entero 2
 mov @B+460 A 	; hace recursivo de arrays en Ref
 muli #3
-addi @B+461	; fallo en este 
+addi @B+461 
 mov A @B+462 
 mov #1 @B+463		; guarda entero 1
 mov @B+462 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+463	; fallo en este 
+addi @B+463 
 mov A @B+464 
 mov #0 @B+465		; guarda entero 0
 mov @B+464 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+465	; fallo en este 
+addi @B+465 
 mov A @B+466 
 mov #0 @B+466		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+466 @B+467		; guarda id this.b
@@ -1144,7 +1144,7 @@ wrl
 mov #0 @B+472		; guarda entero 0
 mov @B+471 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+472	; fallo en este 
+addi @B+472 
 mov A @B+473 
 mov #124 @B+474		; guarda entero 124
 mov @B+473 A	; empieza arrays en Ref asig de: b
@@ -1155,7 +1155,7 @@ mov #0 @B+475	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+476		; guarda entero 0
 mov @B+475 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+476	; fallo en este 
+addi @B+476 
 mov A @B+477 
 mov #2 @B+478		; guarda entero 2
 mov @B+478 A
@@ -1169,7 +1169,7 @@ mov #0 @B+479	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #1 @B+480		; guarda entero 1
 mov @B+479 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+480	; fallo en este 
+addi @B+480 
 mov A @B+481 
 mov #3 @B+482		; guarda entero 3
 mov @B+482 A
@@ -1185,7 +1185,7 @@ mov #0 @B+483	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #1 @B+484		; guarda entero 1
 mov @B+483 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+484	; fallo en este 
+addi @B+484 
 mov A @B+485 
 mov #0 @B+485		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+485 @B+486		; guarda id a
@@ -1196,7 +1196,7 @@ mov #0 @B+487	; guarda 0 y empieza recursivo arrays de en 'Ref id' b
 mov #0 @B+488		; guarda entero 0
 mov @B+487 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+488	; fallo en este 
+addi @B+488 
 mov A @B+489 
 mov #0 @B+489		; guarda 0 y empieza en Factor recursivo arrays de b
 mov @B+489 @B+490		; guarda id b
@@ -1213,7 +1213,7 @@ mov #0 @B+493	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+494		; guarda entero 0
 mov @B+493 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+494	; fallo en este 
+addi @B+494 
 mov A @B+495 
 mov #0 @B+495		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+495 @B+496		; guarda id a
@@ -1229,17 +1229,17 @@ wrl
 mov #2 @B+525		; guarda entero 2
 mov @B+524 A 	; hace recursivo de arrays en Ref
 muli #3
-addi @B+525	; fallo en este 
+addi @B+525 
 mov A @B+526 
 mov #1 @B+527		; guarda entero 1
 mov @B+526 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+527	; fallo en este 
+addi @B+527 
 mov A @B+528 
 mov #0 @B+529		; guarda entero 0
 mov @B+528 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+529	; fallo en este 
+addi @B+529 
 mov A @B+530 
 mov $5.2 @B+531		; guarda real 5.2
 mov @B+530 A	; empieza arrays en Ref asig de: b
@@ -1252,17 +1252,17 @@ mov #0 @B+532	; guarda 0 y empieza recursivo arrays de en 'Ref id' b
 mov #2 @B+533		; guarda entero 2
 mov @B+532 A 	; hace recursivo de arrays en Ref
 muli #3
-addi @B+533	; fallo en este 
+addi @B+533 
 mov A @B+534 
 mov #1 @B+535		; guarda entero 1
 mov @B+534 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+535	; fallo en este 
+addi @B+535 
 mov A @B+536 
 mov #0 @B+537		; guarda entero 0
 mov @B+536 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+537	; fallo en este 
+addi @B+537 
 mov A @B+538 
 mov #0 @B+538		; guarda 0 y empieza en Factor recursivo arrays de b
 mov @B+538 @B+539		; guarda id b
@@ -1273,17 +1273,17 @@ mov #0 @B+540	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #2 @B+541		; guarda entero 2
 mov @B+540 A 	; hace recursivo de arrays en Ref
 muli #3
-addi @B+541	; fallo en este 
+addi @B+541 
 mov A @B+542 
 mov #1 @B+543		; guarda entero 1
 mov @B+542 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+543	; fallo en este 
+addi @B+543 
 mov A @B+544 
 mov #0 @B+545		; guarda entero 0
 mov @B+544 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+545	; fallo en este 
+addi @B+545 
 mov A @B+546 
 mov #0 @B+546		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+546 @B+547		; guarda id this.b
@@ -1301,7 +1301,7 @@ mov #0 @B+523	; guarda 0 y empieza recursivo arrays de en 'Ref id' b
 mov #0 @B+524		; guarda entero 0
 mov @B+523 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+524	; fallo en este 
+addi @B+524 
 mov A @B+525 
 mov #0 @B+525		; guarda 0 y empieza en Factor recursivo arrays de b
 mov @B+525 @B+526		; guarda id b
@@ -1315,7 +1315,7 @@ mov #0 @B+527	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #0 @B+528		; guarda entero 0
 mov @B+527 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+528	; fallo en este 
+addi @B+528 
 mov A @B+529 
 mov #0 @B+529		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+529 @B+530		; guarda id a
@@ -1329,7 +1329,7 @@ mov #0 @B+533	; guarda 0 y empieza recursivo arrays de en 'Ref id' a
 mov #1 @B+534		; guarda entero 1
 mov @B+533 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+534	; fallo en este 
+addi @B+534 
 mov A @B+535 
 mov #0 @B+535		; guarda 0 y empieza en Factor recursivo arrays de a
 mov @B+535 @B+536		; guarda id a
@@ -1347,17 +1347,17 @@ mov #0 @B+538	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #2 @B+539		; guarda entero 2
 mov @B+538 A 	; hace recursivo de arrays en Ref
 muli #3
-addi @B+539	; fallo en este 
+addi @B+539 
 mov A @B+540 
 mov #1 @B+541		; guarda entero 1
 mov @B+540 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+541	; fallo en este 
+addi @B+541 
 mov A @B+542 
 mov #0 @B+543		; guarda entero 0
 mov @B+542 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+543	; fallo en este 
+addi @B+543 
 mov A @B+544 
 mov #0 @B+544		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+544 @B+545		; guarda id this.b
@@ -1372,17 +1372,17 @@ mov #0 @B+543	; guarda 0 y empieza recursivo arrays de 'Ref this' this.b
 mov #2 @B+544		; guarda entero 2
 mov @B+543 A 	; hace recursivo de arrays en Ref
 muli #3
-addi @B+544	; fallo en este 
+addi @B+544 
 mov A @B+545 
 mov #1 @B+546		; guarda entero 1
 mov @B+545 A 	; hace recursivo de arrays en Ref
 muli #2
-addi @B+546	; fallo en este 
+addi @B+546 
 mov A @B+547 
 mov #0 @B+548		; guarda entero 0
 mov @B+547 A 	; hace recursivo de arrays en Ref
 muli #1
-addi @B+548	; fallo en este 
+addi @B+548 
 mov A @B+549 
 mov #0 @B+549		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+549 @B+550		; guarda id this.b

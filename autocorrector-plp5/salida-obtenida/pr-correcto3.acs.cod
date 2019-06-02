@@ -60,12 +60,12 @@ jz L3	 ; if else
 mov @B+0 @B+12		; guarda id i
 mov @B+11 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+12	; fallo en este 
+addi @B+12 
 mov A @B+13 
 mov @B+1 @B+14		; guarda id j
 mov @B+13 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+14	; fallo en este 
+addi @B+14 
 mov A @B+15 
 
 ;scan
@@ -135,12 +135,12 @@ mov #0 @B+40	; guarda 0 y empieza recursivo arrays de 'Ref this' this.p
 mov @B+0 @B+41		; guarda id i
 mov @B+40 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+41	; fallo en este 
+addi @B+41 
 mov A @B+42 
 mov @B+1 @B+43		; guarda id j
 mov @B+42 A 	; hace recursivo de arrays en Ref
 muli #4
-addi @B+43	; fallo en este 
+addi @B+43 
 mov A @B+44 
 mov #0 @B+44		; guarda 0 y empieza en Factor recursivo arrays de this.p
 mov @B+44 @B+45		; guarda id this.p

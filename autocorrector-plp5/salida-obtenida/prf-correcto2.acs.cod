@@ -144,12 +144,12 @@ jz L3	 ; if else
 mov @B+1 @B+13		; guarda id i
 mov @B+12 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+13	; fallo en este 
+addi @B+13 
 mov A @B+14 
 mov @B+2 @B+15		; guarda id j
 mov @B+14 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+15	; fallo en este 
+addi @B+15 
 mov A @B+16 
 mov #0 @B+17		; guarda entero 0
 mov @B+16 A	; empieza arrays en Ref asig de: this.laberinto
@@ -197,12 +197,12 @@ jz L8	 ; if else
 mov @B+1 @B+9		; guarda id i
 mov @B+8 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+9	; fallo en este 
+addi @B+9 
 mov A @B+10 
 mov @B+1 @B+11		; guarda id i
 mov @B+10 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+11	; fallo en este 
+addi @B+11 
 mov A @B+12 
 mov #1 @B+13		; guarda entero 1
 mov @B+12 A	; empieza arrays en Ref asig de: this.laberinto
@@ -231,12 +231,12 @@ jz L10	 ; if else
 mov @B+1 @B+22		; guarda id i
 mov @B+21 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+22	; fallo en este 
+addi @B+22 
 mov A @B+23 
 mov #0 @B+24		; guarda entero 0
 mov @B+23 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+24	; fallo en este 
+addi @B+24 
 mov A @B+25 
 mov #1 @B+26		; guarda entero 1
 mov @B+25 A	; empieza arrays en Ref asig de: this.laberinto
@@ -269,12 +269,12 @@ subi @B+36	; ENTERO - ENTERO
 mov A @B+37	; guardar el resultado en temporal
 mov @B+34 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+37	; fallo en este 
+addi @B+37 
 mov A @B+38 
 mov @B+1 @B+39		; guarda id i
 mov @B+38 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+39	; fallo en este 
+addi @B+39 
 mov A @B+40 
 mov #1 @B+41		; guarda entero 1
 mov @B+40 A	; empieza arrays en Ref asig de: this.laberinto
@@ -360,12 +360,12 @@ jz L26	 ; if else
 mov @B+1 @B+30		; guarda id i
 mov @B+29 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+30	; fallo en este 
+addi @B+30 
 mov A @B+31 
 mov @B+2 @B+32		; guarda id j
 mov @B+31 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+32	; fallo en este 
+addi @B+32 
 mov A @B+33 
 mov #0 @B+33		; guarda 0 y empieza en Factor recursivo arrays de this.laberinto
 mov @B+33 @B+34		; guarda id this.laberinto
@@ -409,7 +409,7 @@ addi @B+50	; ENTERO + ENTERO
 mov A @B+51	; guardar el resultado en temporal
 mov @B+48 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+51	; fallo en este 
+addi @B+51 
 mov A @B+52 
 mov @B+2 @B+53		; guarda id j
 mov #1 @B+54		; guarda entero 1
@@ -418,7 +418,7 @@ addi @B+54	; ENTERO + ENTERO
 mov A @B+55	; guardar el resultado en temporal
 mov @B+52 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+55	; fallo en este 
+addi @B+55 
 mov A @B+56 
 mov #0 @B+56		; guarda 0 y empieza en Factor recursivo arrays de this.laberinto
 mov @B+56 @B+57		; guarda id this.laberinto
@@ -476,12 +476,12 @@ addi @B+79	; ENTERO + ENTERO
 mov A @B+80	; guardar el resultado en temporal
 mov @B+77 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+80	; fallo en este 
+addi @B+80 
 mov A @B+81 
 mov @B+2 @B+82		; guarda id j
 mov @B+81 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+82	; fallo en este 
+addi @B+82 
 mov A @B+83 
 mov #0 @B+83		; guarda 0 y empieza en Factor recursivo arrays de this.laberinto
 mov @B+83 @B+84		; guarda id this.laberinto
@@ -529,7 +529,7 @@ mov #0 @B+101	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.laberint
 mov @B+1 @B+102		; guarda id i
 mov @B+101 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+102	; fallo en este 
+addi @B+102 
 mov A @B+103 
 mov @B+2 @B+104		; guarda id j
 mov #1 @B+105		; guarda entero 1
@@ -538,7 +538,7 @@ addi @B+105	; ENTERO + ENTERO
 mov A @B+106	; guardar el resultado en temporal
 mov @B+103 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+106	; fallo en este 
+addi @B+106 
 mov A @B+107 
 mov #0 @B+107		; guarda 0 y empieza en Factor recursivo arrays de this.laberinto
 mov @B+107 @B+108		; guarda id this.laberinto
@@ -675,12 +675,12 @@ mov #0 @B+22	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.laberinto
 mov #1 @B+23		; guarda entero 1
 mov @B+22 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+23	; fallo en este 
+addi @B+23 
 mov A @B+24 
 mov #1 @B+25		; guarda entero 1
 mov @B+24 A 	; hace recursivo de arrays en Ref
 muli #5
-addi @B+25	; fallo en este 
+addi @B+25 
 mov A @B+26 
 mov #0 @B+27		; guarda entero 0
 mov @B+26 A	; empieza arrays en Ref asig de: this.laberinto

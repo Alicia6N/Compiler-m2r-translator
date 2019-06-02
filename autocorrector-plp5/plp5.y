@@ -28,23 +28,21 @@ extern char *yytext;
 extern FILE *yyin;
 int yyerror(char *s);
 const int MEM = 16384;
-const int MAX_VAR = 16000;
-const int MAX_TMP = 16384;
 int ACTUAL_MEM = 0;
-int TEMP_MEM = 16000;
-int VAR_MEM = 0;
 int ETIQ = 0;
 int REL_DIR = 0;
 string MAIN_LABEL;
-int ASCO;
+int ABSOLUTA;
 
-void deleteScope(TablaSimbolos* root);
-TablaSimbolos* createScope(TablaSimbolos* root);
-
+///TABLAS
 TablaSimbolos *ts = new TablaSimbolos(NULL,ACTUAL_MEM);
 TablaTipos* tp = new TablaTipos(); 
 TablaMetodos* tm = new TablaMetodos();
 
+
+//MÉTODOS
+void deleteScope(TablaSimbolos* root);
+TablaSimbolos* createScope(TablaSimbolos* root);
 Simbolo buscarClase(TablaSimbolos *root, string nombre);
 Simbolo buscar(TablaSimbolos *root, string nombre);
 bool anyadir(TablaSimbolos *t,Simbolo s);
@@ -65,9 +63,7 @@ void imprimir_simbolos(TablaSimbolos *root);
 %%
 S : _class id llavei attributes dosp BDecl 	{
 											$$.code = "mov #"+ to_string(REL_DIR) + " B\n";
-											ASCO = REL_DIR;
-											//cout << "---clase---" << endl;
-											//imprimir_simbolos(ts);
+											ABSOLUTA = REL_DIR;
 											} methods dosp Metodos llaved   {
 																				$$.code = $7.code;
 																				$$.code += "jmp " + MAIN_LABEL + "\n\n";
@@ -86,12 +82,10 @@ Metodos : _int _main pari pard { REL_DIR = 0; MAIN_LABEL = nuevaEtiq(); } Bloque
 Tipo 	: _int {$$.tipo = ENTERO; }
 	 	| _float {$$.tipo = REAL;};
 
-Bloque : llavei {ts = new TablaSimbolos(ts,REL_DIR); /*cout << ts->temp_dir << endl;*/} BDecl {$$.tipo_metodo = $0.tipo_metodo;} SeqInstr llaved {
+Bloque : llavei {ts = new TablaSimbolos(ts,REL_DIR);} BDecl {$$.tipo_metodo = $0.tipo_metodo;} SeqInstr llaved {
 																	 		$$.code = $3.code + $5.code;
 																	 		deleteScope(ts);
-																			//imprimir_simbolos(ts);
 																			ts = ts->root;
-																			 //REL_DIR = ts->temp_dir;
 																		};
 
 BDecl : BDecl DVar {$$.code = "";}
@@ -114,9 +108,7 @@ Variable : id { $$.size = 1; $$.tipo = $0.tipo; if(buscarAmbito(ts,$1.lexema))
 																											s.exists = false;
 																											s.root = 0;
 																											anyadir(ts,s);
-																											//cout << buscar(ts,s.nombre).nombre;
-																											//printTtipos();
-																											if (REL_DIR >= MAX_VAR)
+																											if (REL_DIR >= MEM)
 																												msgError(ERR_NOCABE,$1.nlin,$1.ncol,$1.lexema);       
 																										};
 
@@ -144,8 +136,8 @@ Instr : pyc { $$.code = " ";  }
 	  | Ref {if($1.tipo >= ARRAY){ msgError(ERRFALTAN, $1.nlin, $1.ncol, $1.lexema); }} asig Expr pyc { 	
 															$$.code = $1.code + $4.code;
 
-															int tipo_izq = getTipoSimple($1.tipo); //getTbase($1.tipo);
-															int tipo_der = getTipoSimple($4.tipo); //getTbase($3.tipo);
+															int tipo_izq = getTipoSimple($1.tipo);
+															int tipo_der = getTipoSimple($4.tipo);
 															if(tipo_izq == ENTERO && tipo_der == REAL){
 																$$.code += "mov " + $4.temp + " A\n";
 																$$.code += "rtoi\n";
@@ -159,12 +151,6 @@ Instr : pyc { $$.code = " ";  }
 															if ($1.arrays == true) {
 																$$.code += "mov " + $1.temp + " A\t; empieza arrays en Ref asig de: " + $1.aux_lexema + "\n";	
 																$$.code += "muli #1 \n";
-																/*if($1.dbase.find("@") != string::npos){
-																	string temp1 = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-																	$$.code += "mov " + $1.dbase + " @B+" + temp1 + "\n";
-																	$$.code += "addi @B+" + temp1 + "\n";
-																}
-																else $$.code += "addi #"+ $1.dbase + "\n";*/
 																$$.code += "addi #"+ $1.dbase + "\n";
 																$$.code += "mov " + $4.temp + " @A\t; acaba arrays en Ref asig\n";
 															}
@@ -191,11 +177,7 @@ Instr : pyc { $$.code = " ";  }
 																$$.code += "\n;scan\n";
 																$$.code += "mov " + $3.temp + " A\n";	
 																$$.code += "muli #1 \n";
-																/*if($3.dbase.find("@") != string::npos){
-																	$$.code += "addi "+ $3.dbase + "\n";
-																}
-																else*/
-																 $$.code += "addi #"+ $3.dbase + "\n";
+																$$.code += "addi #"+ $3.dbase + "\n";
 
 																if (tipo_tres == ENTERO){
 																	$$.code += "rdi @B+" + temporal +  "\t; guardar valor entero en temporal\n";
@@ -271,7 +253,7 @@ Expr : 	Expr relop Esimple 							{
 															$$.code += "itor \n";
 															$$.code += getRelop(op) + "r @B+" + temp1 + "\t; Expr relop Esimple\n";
 														}	
-														else { //reales
+														else {
 															$$.code += "mov " + $1.temp + " A\n";
 															$$.code += getRelop(op) + "r " + $3.temp + "\t; Expr relop Esimple\n";
 														}
@@ -295,14 +277,13 @@ Esimple : Esimple addop Term  	{
 									else 
 										op = "sub";
 
-									int tipo_izq = getTipoSimple($1.tipo); //getTbase($1.tipo);
-									int tipo_der = getTipoSimple($3.tipo); //getTbase($3.tipo);
+									int tipo_izq = getTipoSimple($1.tipo);
+									int tipo_der = getTipoSimple($3.tipo);
 
 									if(tipo_izq == ENTERO && tipo_der == ENTERO){
-										//$$.code = "; ENTEROS \n";
 										$$.code = $1.code;
 										$$.tipo = ENTERO;
-										$$.code += $3.code; //se mete en la A el resultado de Term
+										$$.code += $3.code;
 										$$.code += "mov " + $1.temp + " A\n";
 										$$.code += op + "i " + $3.temp + "\t; ENTERO "+ aux_impr + " ENTERO\n";
 									}
@@ -328,8 +309,7 @@ Esimple : Esimple addop Term  	{
 										$$.code += "mov " + $1.temp + " A\n";
 										$$.code += op +"r @B+" + temp1 + "\t; REAL " + aux_impr + " REAL\n";
 									}	
-									else { //reales
-										//$$.code = "; REALES \n";
+									else {
 										$$.code = $1.code;
 										$$.tipo = REAL;
 										$$.code += $3.code;
@@ -355,11 +335,10 @@ Term : Term mulop Factor   	{
 								else
 									op = "div";
 
-								int tipo_izq = getTipoSimple($1.tipo); //getTbase($1.tipo);
-								int tipo_der = getTipoSimple($3.tipo); //getTbase($3.tipo);
+								int tipo_izq = getTipoSimple($1.tipo);
+								int tipo_der = getTipoSimple($3.tipo);
 
 								if(tipo_izq == ENTERO && tipo_der == ENTERO){
-									//$$.code = "; ENTEROS \n";
 									$$.code = $1.code;
 									$$.tipo = ENTERO;
 									$$.code += $3.code;
@@ -368,7 +347,6 @@ Term : Term mulop Factor   	{
 								}
 								else if(tipo_izq == ENTERO && tipo_der == REAL){
 									$$.tipo = REAL;
-									//$$.code = "; ENTERO Y REAL \n";
 									$$.code = $1.code;
 									string temp1 = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
 									$$.code += "mov " + $1.temp + " A\n";
@@ -379,7 +357,6 @@ Term : Term mulop Factor   	{
 									$$.code += op + "r " + $3.temp + "\t; ENTERO " + aux_impr + " REAL\n";
 								}
 								else if(tipo_izq == REAL && tipo_der == ENTERO){
-									//$$.code = "; REAL y ENTERO \n";
 									$$.code = $1.code;
 									$$.tipo = REAL;
 									$$.code += $3.code;
@@ -390,8 +367,7 @@ Term : Term mulop Factor   	{
 									$$.code += "mov " + $1.temp + " A\n";
 									$$.code += op + "r @B+" + temp1 + "\t; Term : REAL " + aux_impr + " ENTERO\n";
 								}	
-								else { //reales
-									//$$.code = "; REALES \n";
+								else {
 									$$.code = $1.code;
 									$$.tipo = REAL;
 									$$.code += $3.code;
@@ -399,7 +375,7 @@ Term : Term mulop Factor   	{
 									$$.code += op + "r " + $3.temp + "\t; REAL " + aux_impr + " REAL\n";
 								}
 
-								$$.code += "mov A @B+" + temp_final +"\n";// "\t; guardar el resultado en temporal\n";
+								$$.code += "mov A @B+" + temp_final +"\n";
 						   	}
 	 | Factor  	{ 
 					$$.tipo = $1.tipo;
@@ -418,19 +394,13 @@ Factor :  Ref      		{
 								string temp = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
 								$$.code += "mov " + $1.temp + " @B+" + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
 								$$.code += "muli #1 \n";
-								/*if($1.dbase.find("@") != string::npos){
-									string temp1 = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-								  	$$.code += "mov " + $1.dbase + " @B+" + temp1 + "\n";
-									$$.code += "addi @B+" + temp1 + "\n";
-								}
-								else $$.code += "addi #"+ $1.dbase + "\n";*/
 								$$.code += "addi #"+ $1.dbase + "\n";
 								$$.code += "mov @A @B+" + temp + "\t;acaba array en Factor\n";
 								$$.temp = "@B+" + temp;
 							}
 							else{
 								string temp = nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
-								$$.code = "mov " + $1.temp + " @B+" + temp + "\t\t; guarda id " + $$.aux_lexema + "\n"; //Aquí.
+								$$.code = "mov " + $1.temp + " @B+" + temp + "\t\t; guarda id " + $$.aux_lexema + "\n";
 								$$.temp = "@B+" + temp;
 							}
 						}
@@ -484,8 +454,7 @@ Ref : _this punto id  			{
 										s.exists = false;
 										$$.tipo = s.index_tipo;
 										$$.temp = "@B+"+s.dir;
-										//$$.dbase = "@B+"+s.dir;
-										int var = ASCO + atoi(s.dir.c_str());
+										int var = ABSOLUTA + atoi(s.dir.c_str());
 										$$.dbase = to_string(var);
 										string aux = $1.lexema;
 										$$.aux_lexema = aux;
@@ -499,8 +468,6 @@ Ref : _this punto id  			{
 										else{
 											cout << "; Array " << $$.aux_lexema << " empieza en = @B+" << s.dir << endl;
 										}
-
-										
 
 										if(s.index_tipo >= ARRAY){
 											string temp = "@B+"+nuevoTemporal($1.nlin, $1.ncol, $1.lexema);
@@ -525,7 +492,7 @@ Ref : _this punto id  			{
 									$$.code += $4.code;
 									$$.code += "mov " + $1.temp + " A \t; hace recursivo de arrays en Ref\n";
 									$$.code += "muli #" + to_string(getDt($1.tipo)) +"\n";
-									$$.code += "addi " + $4.temp + "\t; fallo en este \n";
+									$$.code += "addi " + $4.temp + " \n";
 									$$.code += "mov A @B+" + temporal + " \n";
 
 									$$.nlin = $5.nlin;
@@ -546,14 +513,11 @@ Met : Tipo id 	{
 					m.tipo = $1.tipo;
 					m.id = aux_lex;
 					vector<Arg> aux_vector;
-					//m.arg = aux_vector;
 					tm->metodos.push_back(Metodo{$1.tipo, $2.lexema, aux_vector});
 					string etiqueta = nuevaEtiq();
 					tm->metodos[tm->metodos.size()-1].etiq = etiqueta;
-				} pari Arg pard {$$.tipo_metodo = $1.tipo;} Bloque 	{ 
-																		
+				} pari Arg pard {$$.tipo_metodo = $1.tipo;} Bloque 	{
 																		string aux_lex = $2.lexema;
-																		//cout << tm->metodos[tm->metodos.size()-1].id << endl;
 																		$$.code = "; metodo: '" + tm->metodos[tm->metodos.size()-1].id + "'\n";
 																		$$.code += tm->metodos[tm->metodos.size()-1].etiq + $8.code;
 																		tm->metodos[tm->metodos.size()-1].dirs = REL_DIR + 1;
@@ -580,7 +544,6 @@ CArg : Tipo id 	{
 					s.nombre = aux_lex; 
 					s.index_tipo = $1.tipo;
 					s.dir = to_string(REL_DIR++); //Primer argumento será pos 0 relativa de B
-					VAR_MEM += 1; 
 					s.size = 1; 
 					anyadir(ts,s);
 					tm->metodos[tm->metodos.size()-1].args.push_back(Arg{$1.tipo,aux_lex});
@@ -592,7 +555,6 @@ CArgp : coma Tipo id 	{
 							s.nombre = $3.lexema; 
 							s.index_tipo = $2.tipo;
 							s.dir = to_string(REL_DIR++); 
-							VAR_MEM += 1;
 							s.size = 1; 
 							anyadir(ts,s);
 							tm->metodos[tm->metodos.size()-1].args.push_back(Arg{$2.tipo,aux_lex});
@@ -601,7 +563,6 @@ CArgp : coma Tipo id 	{
 
 Instr : _return Expr pyc {
 							if(MAIN_LABEL!="") msgError(ERRFMAIN, $1.nlin, $1.ncol, $1.lexema);
-							//cout << "Codigo del método en return = " << $0.tipo_metodo << endl;
 							$$.code = $2.code;
 						 	$$.code += "; Secuencia de retorno\n";
 							if($0.tipo_metodo == ENTERO && $2.tipo == REAL){
@@ -634,7 +595,7 @@ Factor : id pari 	{
 						REL_DIR = REL_DIR + 3 + tm->metodos[index_func].args.size() - 1;
 						cout << ";Hasta: " << REL_DIR << endl;
 
-					} Par pard { //el error
+					} Par pard {
 							int index_func = buscarMetodo($1.lexema);
 							string prueba =  tm->metodos[index_func].etiq;
 							$$.code = $4.code;
@@ -642,7 +603,7 @@ Factor : id pari 	{
 							int op = ACTUAL_MEM;
 							int op2 = ACTUAL_MEM + 1;
 							$$.code += "mov B @B+" + to_string(op) +"\n"; 
-							$$.code += "mov B A\n"; //B+0... B+1(Valor), B+2(Direccion), B+3(b atnerior), B+4(Primer parámetro)						
+							$$.code += "mov B A\n";				
 							$$.code += "addi #" + to_string(op2) + "\n"; //valor a calcular
 							$$.code += "mov A B\n"; // Nueva B apunta al primer nuevo arg.
 							string etiq = nuevaEtiq();
@@ -662,8 +623,7 @@ Par : 			{
 				}
 	| Expr 		{ 
 					int pos_args;
-					pos_args = ACTUAL_MEM + $0.indice_args+1; //1 2
-					//cout << ";--> pos_args = " << pos_args << endl;
+					pos_args = ACTUAL_MEM + $0.indice_args+1;
 					int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo;
 
 					const char *id = tm->metodos[$0.indice_func].id.c_str();
@@ -705,7 +665,7 @@ CPar : 	{
 	 	| coma Expr 	{ 
 
 			 				int pos_args=0;
-							pos_args = ACTUAL_MEM + $0.indice_args+1; //1 2
+							pos_args = ACTUAL_MEM + $0.indice_args+1;
 			 				int tipo_arg = tm->metodos[$0.indice_func].args[$0.indice_args].tipo; 
 							const char *id = tm->metodos[$0.indice_func].id.c_str();
 							if(tipo_arg == -1){
@@ -731,7 +691,6 @@ CPar : 	{
 							}
 							$$.indice_args = $0.indice_args + 1;
 							$$.indice_func = $0.indice_func;
-						//	cout << pos_args << " " << REL_DIR << " " <<$0.indice_args;
 						} CPar	{ 
 									$$.code = $3.code + $4.code;
 								};
@@ -835,16 +794,14 @@ bool equalsIgnoreCase(string s1, char* lexema){
    return false;
 }
 string nuevoTemporal(int nlin, int ncol, const char *s){
-	REL_DIR++; // int 
+	REL_DIR++;
 	string aux_s = s;
-	//cout << "Error en: " << s << " con: " <<  << endl;
-	if ((REL_DIR + 1) >= MAX_TMP)
+	if ((REL_DIR + 1) >= MEM)
 		msgError(ERR_MAXTMP, nlin, ncol, s);
 	return to_string(REL_DIR);
 }
 string nuevaEtiq(){
 	ETIQ++;
-	//cout << "index etiqueta = " << ETIQ << endl;
 	return "L"+to_string(ETIQ);
 }
 int main(int argc, char *argv[]){
@@ -877,7 +834,7 @@ int buscarMetodo(string id){
 	return -1;
 }
 
-int getTbase(int tipo){ return tp->tipos[tipo].tbase; } //$3.tipo ==> ENTERO = 1 --> REAL
+int getTbase(int tipo){ return tp->tipos[tipo].tbase; }
 int getArg(int tipo){ return tp->tipos[tipo].tipo;}
 int getTipoSimple(int tipo){
 	if (tipo == ENTERO || tipo == REAL){
@@ -893,12 +850,6 @@ int getTipoSimple(int tipo){
 
 		i = tp->tipos[i].tbase;
 	}
-	
-	/*for (int i = tipo; i < tp->tipos.size(); --i){
-		if (tp->tipos[i].tipo == 0 || tp->tipos[i].tipo == 1){
-			return tp->tipos[i].tipo;
-		}
-	}*/
 }
 void printTtipos(){
 	cout << "Tipo Dim Tbase" << endl;
@@ -907,7 +858,7 @@ void printTtipos(){
 	}
 	cout << endl;
 }
-//int getTipo(int tipo){ return tp->tipos[tipo].tipo; }
+
 int getDt(int tipo){ return tp->tipos[tipo].dt; }
 /*****TABLA SIMBOLOS*********/
 bool buscarAmbito(TablaSimbolos *root,string nombre){

@@ -75,7 +75,7 @@ L4 mov #0 @B+1	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.b
 mov #5 @B+2		; guarda entero 5
 mov @B+1 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+2	; fallo en este 
+addi @B+2 
 mov A @B+3 
 
 ;scan
@@ -89,7 +89,7 @@ mov #0 @B+5	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+6		; guarda entero 7
 mov @B+5 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+6	; fallo en este 
+addi @B+6 
 mov A @B+7 
 
 ;scan
@@ -105,7 +105,7 @@ mov #0 @B+11	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+12		; guarda entero 7
 mov @B+11 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+12	; fallo en este 
+addi @B+12 
 mov A @B+13 
 mov #0 @B+13		; guarda 0 y empieza en Factor recursivo arrays de this.c
 mov @B+13 @B+14		; guarda id this.c
@@ -116,7 +116,7 @@ mov #0 @B+15	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+16		; guarda entero 7
 mov @B+15 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+16	; fallo en este 
+addi @B+16 
 mov A @B+17 
 mov #0 @B+17		; guarda 0 y empieza en Factor recursivo arrays de this.c
 mov @B+17 @B+18		; guarda id this.c
@@ -139,7 +139,7 @@ subi @B+23	; ENTERO - ENTERO
 mov A @B+24	; guardar el resultado en temporal
 mov @B+9 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+24	; fallo en este 
+addi @B+24 
 mov A @B+25 
 mov #0 @B+25		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+25 @B+26		; guarda id this.b
@@ -150,7 +150,7 @@ mov #0 @B+27	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+28		; guarda entero 7
 mov @B+27 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+28	; fallo en este 
+addi @B+28 
 mov A @B+29 
 mov #0 @B+29		; guarda 0 y empieza en Factor recursivo arrays de this.c
 mov @B+29 @B+30		; guarda id this.c
@@ -258,7 +258,7 @@ mov #0 @B+14	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.b
 mov #5 @B+15		; guarda entero 5
 mov @B+14 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+15	; fallo en este 
+addi @B+15 
 mov A @B+16 
 mov #0 @B+16		; guarda 0 y empieza en Factor recursivo arrays de this.b
 mov @B+16 @B+17		; guarda id this.b
@@ -273,7 +273,7 @@ mov #0 @B+18	; guarda 0 y empieza recursivo arrays de en 'Ref id' this.c
 mov #7 @B+19		; guarda entero 7
 mov @B+18 A 	; hace recursivo de arrays en Ref
 muli #10
-addi @B+19	; fallo en este 
+addi @B+19 
 mov A @B+20 
 mov #0 @B+20		; guarda 0 y empieza en Factor recursivo arrays de this.c
 mov @B+20 @B+21		; guarda id this.c
