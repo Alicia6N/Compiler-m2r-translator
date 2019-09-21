@@ -11,3 +11,7 @@ $ flex plp5.l
 $ bison -d plp5.y
 $ g++ -o plp5 plp5.tab.c lex.yy.c
 ```
+
+## Authors
+* **Tudor N. M.** - [TudorMN](https://github.com/tudorMN)
+* **Alicia N. A.** - [Alicia6N](https://github.com/alicia6n)
